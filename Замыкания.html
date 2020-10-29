@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<title></title>
+<meta name="" content="">
+</head>
+<body>
+<script>
+var q={r:1,toString:"qqq"};
+var z={w:3}
+var extend=(function(){//������,��������������������������������
+
+for(var p in {toString:null}) {
+//���������������������������,��������,������for/in������������������������
+//���������������������������������������������extend()
+return function extend(o) {
+for(var i = 1;i<arguments.length;i++){
+var source = arguments[i];
+for(var prop in source) {o[prop] = source[prop]; };
+}
+return o;
+};
+}
+var protoprops = ["toString", "valueOf", "constructor", "hasOwnProperty","isPrototypeOf", "propertyIsEnumerable", "toLocaleString"];
+return function patched_extend(o) {
+for(var i = 1; i < arguments.length; i++) {
+var source = arguments[i];
+//�����������������������������������������������
+for(var prop in source) o[prop] = source[prop];
+//�����������������������������������������������������
+for(var j = 0; j < protoprops.length; j++) {
+prop = protoprops[j];
+if (source.hasOwnProperty(prop)) o[prop] = source[prop];
+ }
+ }
+ return o;
+ };
+}(q,z));
+var u=extend(z,q);
+alert (u.toString);
+</script>
+
+</body>
+</html>
