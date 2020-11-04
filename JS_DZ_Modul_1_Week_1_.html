@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS_DZ_Modul_1_Week_1_</title>
+<script type="text/javascript">
+function hello () {
+     var userName = prompt("Как вас зовут?", "Введите ваше имя.");
+    if (userName) {
+    alert("Рад вас видеть, " + userName + "!");
+    }
+   }
+
+	 function age () {
+	      var userAge = prompt("Сколько вам лет?", "Введите количество полных лет.");
+				var p = /^[0-9]+$/g;
+				const YEAR = 2020;
+	       if (p.test(userAge)) {
+			        var userYear = Number(YEAR) - 	Number(userAge);
+	            alert("Вы родились в " + userYear + " году.");
+	           }
+			   else alert("Нам нужна только цифра, сэр!");
+	  }
+    function areaSquare () {
+          var sideSquare = prompt("Введите сторону квадрата, м:", "например   10");
+          var p = /^\d+(?:[\.,]\d+)?$/g;
+          if (p.test(sideSquare)) {
+              var Square = parseInt(sideSquare, 10)**2;
+              alert("площадь квадрата " + Square + " М2.");
+              }
+          else alert("Нам нужна только цифра, сэр!");
+      }
+    function desiredSpeed () {
+          var distance = prompt("Введите расстояние между городами, км:", "например   10");
+          var movingTime = prompt("Введите время пути, час:", "1");
+          var p = /^[0-9]+$/g;
+          var pr = /^[0-9]+$/g;
+          if (pr.test(movingTime) && p.test(distance)) {// не работает
+              var Speed =distance*movingTime;
+              alert("необходимая скорость " + Speed + " км/ч.");
+          }
+          else alert(p.test(distance)   + " Нам нужна только цифра, сэр! "+ pr.test(parseInt(movingTime, 10)) );
+      }
+
+      function areaCircle () {
+            var radiusCircle = prompt("Введите радиус окружности, м:", "например   10");
+            var p = /^\d+(?:[\.,]\d+)?$/g;
+            if (p.test(radiusCircle)) {
+                var Square = parseInt(radiusCircle, 10)**2*Math.PI;
+                alert("площадь окружности " + Square + " М2.");
+            }
+            else alert("Нам нужна только цифра, сэр!");
+        }
+      function сonverter () {
+            var dollar = prompt("Введите сумму, $:", "например   100");
+            const EURO = .8501492537313433;
+            var p = /^\d+(?:[\.,]\d+)?$/g;
+                //var p = /^[0-9]+\.?[0-9]*$/g; не работает
+            if (p.test(dollar)) {
+                var transferEuro = dollar*EURO;
+                alert("получается аж " + transferEuro.toFixed(2) + " евро");
+              }
+            else alert("Нам нужна только цифра, сэр!");
+        }
+      function сonverterDisk () {
+            var diskSpace = prompt("Введите емкость флешки, ГБ:", "например   32");
+            const GBINMb = 1024;
+            const MBSPACE = 850;
+            var p = /^[0-9]+$/g;
+            if (p.test(diskSpace)) {
+                var transferMB = diskSpace*GBINMb/MBSPACE;
+                alert("на вашу флешку запишется " + transferMB.toFixed() + " файлов размером 850МБ");
+              }
+            else alert("Нам нужна только цифра, сэр!");
+            }
+
+</script>
+<style media="screen">
+	button{
+		padding:5px 15px ;
+		font-size: 22px;
+	}
+	.main{
+		background:#b8d5e3;
+		padding:2vmin;
+		width:50%; margin-left:auto;
+		margin-right:auto;
+		margin-top:10vh;
+	}
+.short{ width: 300px;
+	 display: inline-block;
+	 font-size: 18px;
+ }
+</style>
+</head>
+<body >
+	<div class="main" >
+		<span class="short">Для знакомства нажмите кнопку:</span>
+		<button type="button" onclick="hello ();">нажать</button><br>
+		<span class="short">Продолжим знакомство:</span>
+		<button type="button" onclick="age ();">нажать</button><br>
+    <span class="short">Расчитаем площадь квадрата, введите сторону квадрата:</span>
+    <button type="button" onclick="areaSquare ();">нажать</button><br>
+    <span class="short">Расчитаем площадь окружности, введите радиус окружности:</span>
+    <button type="button" onclick="areaCircle ();">нажать</button><br>
+    <span class="short">Расчитаем необходимую скорость, введите данные:</span>
+    <button type="button" onclick="desiredSpeed ();">нажать</button><br>
+    <span class="short">Конвертер доллара в евро, введите данные:</span>
+    <button type="button" onclick="сonverter ();">нажать</button><br>
+    <span class="short">Проверим вашу флешку, введите данные:</span>
+    <button type="button" onclick="сonverterDisk ();">нажать</button><br>
+	</div>
+</body ">
+</html>
