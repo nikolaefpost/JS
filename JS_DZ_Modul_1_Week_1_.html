@@ -8,6 +8,7 @@ function hello () {
      var userName = prompt("Как вас зовут?", "Введите ваше имя.");
     if (userName) {
     alert("Рад вас видеть, " + userName + "!");
+    haispan.innerHTML = "Рады видеть вас " + userName ;
     }
    }
 
@@ -22,7 +23,7 @@ function hello () {
 			   else alert("Нам нужна только цифра, сэр!");
 	  }
     function areaSquare () {
-          var sideSquare = prompt("Введите сторону квадрата, м:", "например   10");
+          var sideSquare = prompt("Введите сторону квадрата, м:", "10");
           var p = /^\d+(?:[\.,]\d+)?$/g;
           if (p.test(sideSquare)) {
               var Square = parseInt(sideSquare, 10)**2;
@@ -31,19 +32,19 @@ function hello () {
           else alert("Нам нужна только цифра, сэр!");
       }
     function desiredSpeed () {
-          var distance = prompt("Введите расстояние между городами, км:", "например   10");
+          var distance = prompt("Введите расстояние между городами, км:", "10");
           var movingTime = prompt("Введите время пути, час:", "1");
           var p = /^[0-9]+$/g;
           var pr = /^[0-9]+$/g;
-          if (pr.test(movingTime) && p.test(distance)) {// не работает
-              var Speed =distance*movingTime;
+          if (pr.test(movingTime) && p.test(distance)) {
+              var Speed =distance/movingTime;
               alert("необходимая скорость " + Speed + " км/ч.");
           }
           else alert(p.test(distance)   + " Нам нужна только цифра, сэр! "+ pr.test(parseInt(movingTime, 10)) );
       }
 
       function areaCircle () {
-            var radiusCircle = prompt("Введите радиус окружности, м:", "например   10");
+            var radiusCircle = prompt("Введите радиус окружности, м:", "10");
             var p = /^\d+(?:[\.,]\d+)?$/g;
             if (p.test(radiusCircle)) {
                 var Square = parseInt(radiusCircle, 10)**2*Math.PI;
@@ -52,18 +53,18 @@ function hello () {
             else alert("Нам нужна только цифра, сэр!");
         }
       function сonverter () {
-            var dollar = prompt("Введите сумму, $:", "например   100");
+            var dollar = prompt("Введите сумму, $:", "100");
             const EURO = .8501492537313433;
             var p = /^\d+(?:[\.,]\d+)?$/g;
                 //var p = /^[0-9]+\.?[0-9]*$/g; не работает
             if (p.test(dollar)) {
                 var transferEuro = dollar*EURO;
-                alert("получается аж " + transferEuro.toFixed(2) + " евро");
+                alert("получается аж " + transferEuro.toFixed(2) + " евро" + typeof transferEuro);
               }
             else alert("Нам нужна только цифра, сэр!");
         }
       function сonverterDisk () {
-            var diskSpace = prompt("Введите емкость флешки, ГБ:", "например   32");
+            var diskSpace = prompt("Введите емкость флешки, ГБ:", "32");
             const GBINMb = 1024;
             const MBSPACE = 850;
             var p = /^[0-9]+$/g;
@@ -76,6 +77,13 @@ function hello () {
 
 </script>
 <style media="screen">
+h2{
+  text-align: center;
+}
+  #id{
+    color: red;
+    font-size: 2em;
+  }
 	button{
 		padding:5px 15px ;
 		font-size: 22px;
@@ -94,7 +102,9 @@ function hello () {
 </style>
 </head>
 <body >
+  <h2 class="" id="haispan"></h2>
 	<div class="main" >
+
 		<span class="short">Для знакомства нажмите кнопку:</span>
 		<button type="button" onclick="hello ();">нажать</button><br>
 		<span class="short">Продолжим знакомство:</span>
