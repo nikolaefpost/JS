@@ -13,67 +13,105 @@ function hello () {
    }
 
 	 function age () {
-	      var userAge = prompt("Сколько вам лет?", "Введите количество полных лет.");
-				var p = /^[0-9]+$/g;
+	      const userAge = prompt("Сколько вам лет?", "18");
+				const p = /^[0-9]+$/g;
 				const YEAR = 2020;
 	       if (p.test(userAge)) {
-			        var userYear = Number(YEAR) - 	Number(userAge);
+			        const userYear = Number(YEAR) - 	Number(userAge);
 	            alert("Вы родились в " + userYear + " году.");
 	           }
 			   else alert("Нам нужна только цифра, сэр!");
 	  }
     function areaSquare () {
-          var sideSquare = prompt("Введите сторону квадрата, м:", "10");
-          var p = /^\d+(?:[\.,]\d+)?$/g;
+          const sideSquare = prompt("Введите сторону квадрата, м:", "10");
+          const p = /^\d+(?:[\.,]\d+)?$/g;
           if (p.test(sideSquare)) {
-              var Square = parseInt(sideSquare, 10)**2;
+              const Square = parseInt(sideSquare, 10)**2;
               alert("площадь квадрата " + Square + " М2.");
               }
           else alert("Нам нужна только цифра, сэр!");
       }
     function desiredSpeed () {
-          var distance = prompt("Введите расстояние между городами, км:", "10");
-          var movingTime = prompt("Введите время пути, час:", "1");
-          var p = /^[0-9]+$/g;
-          var pr = /^[0-9]+$/g;
+          const distance = prompt("Введите расстояние между городами, км:", "10");
+          const movingTime = prompt("Введите время пути, час:", "1");
+          const p = /^[0-9]+$/g;
+          const pr = /^[0-9]+$/g;
           if (pr.test(movingTime) && p.test(distance)) {
-              var Speed =distance/movingTime;
+              const Speed =distance/movingTime;
               alert("необходимая скорость " + Speed + " км/ч.");
           }
           else alert(p.test(distance)   + " Нам нужна только цифра, сэр! "+ pr.test(parseInt(movingTime, 10)) );
       }
 
       function areaCircle () {
-            var radiusCircle = prompt("Введите радиус окружности, м:", "10");
-            var p = /^\d+(?:[\.,]\d+)?$/g;
+            const radiusCircle = prompt("Введите радиус окружности, м:", "10");
+            const p = /^\d+(?:[\.,]\d+)?$/g;
             if (p.test(radiusCircle)) {
-                var Square = parseInt(radiusCircle, 10)**2*Math.PI;
+                const Square = parseInt(radiusCircle, 10)**2*Math.PI;
                 alert("площадь окружности " + Square + " М2.");
             }
             else alert("Нам нужна только цифра, сэр!");
         }
       function сonverter () {
-            var dollar = prompt("Введите сумму, $:", "100");
+            const dollar = prompt("Введите сумму, $:", "100");
             const EURO = .8501492537313433;
-            var p = /^\d+(?:[\.,]\d+)?$/g;
+            const p = /^\d+(?:[\.,]\d+)?$/g;
                 //var p = /^[0-9]+\.?[0-9]*$/g; не работает
             if (p.test(dollar)) {
-                var transferEuro = dollar*EURO;
-                alert("получается аж " + transferEuro.toFixed(2) + " евро" + typeof transferEuro);
+                const transferEuro = dollar*EURO;
+                alert("получается аж " + transferEuro.toFixed(2) + " евро.");
               }
             else alert("Нам нужна только цифра, сэр!");
         }
       function сonverterDisk () {
-            var diskSpace = prompt("Введите емкость флешки, ГБ:", "32");
+            const diskSpace = prompt("Введите емкость флешки, ГБ:", "32");
             const GBINMb = 1024;
             const MBSPACE = 850;
-            var p = /^[0-9]+$/g;
+            const p = /^[0-9]+$/g;
             if (p.test(diskSpace)) {
-                var transferMB = diskSpace*GBINMb/MBSPACE;
+                const transferMB = diskSpace*GBINMb/MBSPACE;
                 alert("на вашу флешку запишется " + transferMB.toFixed() + " файлов размером 850МБ");
               }
             else alert("Нам нужна только цифра, сэр!");
             }
+      function buyСhocolate () {
+              const money_ = prompt("Введите сумму денег в кошельке, гр:", "99.99");
+              const сhocolate_ = prompt("Введите стоимость одной шоколадки, гр:", "9.99");
+              const p1 = /^\d+(?:[\.,]\d{1,2})?$/g;
+              const p2 = /^\d+(?:[\.,]\d{1,2})?$/g;
+              if (p1.test(money_) && p2.test(сhocolate_)) {
+                if (money_ < сhocolate_) alert('Увы, Вы не сможете ничего купить. У Вас всего '+ money_ +' гр.');
+                else {
+                  const amountСhocolate = Math.floor(money_/сhocolate_);
+                  const surrender = money_ % сhocolate_;
+                  console.log(amountСhocolate+' '+ surrender );
+                  alert("Вы сможете купить " + amountСhocolate + " шоколадок(ки). Ваша сдача " + surrender.toFixed(2) +' гр.');
+                }
+              }
+              else alert("Введите сумму денег цифрами, сэр!");
+              }
+        function reversNumber() {
+          let freeNumber = Math.abs(prompt("Введите произвольное целое  число: ", "123"));
+          const p = /^[0-9]{1,16}$/g;                        // работает только с разрядностью <=16
+          if (p.test(freeNumber)) {
+            let result_ = 0;
+            while (freeNumber>0) {                          // есть вариант намного проще
+              result_ = result_*10 + freeNumber%10;         // alert(freeNumber.split("").reverse().join(""));
+              freeNumber = Math.floor(freeNumber/10);
+            }
+            alert("Ваше число наоборот будет "+ result_);
+          }
+          else alert("Введите целое число, максимальный разряд 16,  сэр!");
+       }
+       function parityNumber(){
+         const freeNumber = Math.abs(prompt("Введите произвольное целое  число: ", "123"));
+         const p = /^[0-9]+$/g;
+         if (p.test(freeNumber)){
+            let result_ = ((freeNumber&1)==0) ? 'четное': 'нечетное';
+            alert("Ваше число "+ result_);
+         }
+         else alert("Введите целое число,  сэр!");
+       }
 
 </script>
 <style media="screen">
@@ -85,19 +123,26 @@ h2{
     font-size: 2em;
   }
 	button{
-		padding:5px 15px ;
+		padding:5px 35px ;
 		font-size: 22px;
+    margin-bottom: 10px;
+    float: right;
 	}
+
+  br{
+    clear: both;
+  }
 	.main{
 		background:#b8d5e3;
-		padding:2vmin;
+		padding:2vmin 4vmin;
 		width:50%; margin-left:auto;
 		margin-right:auto;
 		margin-top:10vh;
 	}
-.short{ width: 300px;
+.short{ width: 600px;
 	 display: inline-block;
 	 font-size: 18px;
+
  }
 </style>
 </head>
@@ -119,6 +164,12 @@ h2{
     <button type="button" onclick="сonverter ();">нажать</button><br>
     <span class="short">Проверим вашу флешку, введите данные:</span>
     <button type="button" onclick="сonverterDisk ();">нажать</button><br>
+    <span class="short">Как на счёт шоколадки, введите данные:</span>
+    <button type="button" onclick="buyСhocolate ();">нажать</button><br>
+    <span class="short">А теперь фокус с цифрами, могу "превернуть" ваше число:</span>
+    <button type="button" onclick="reversNumber();">нажать</button><br>
+    <span class="short">Проверка на четность:</span>
+    <button type="button" onclick="parityNumber();">нажать</button><br>
 	</div>
 </body ">
 </html>
