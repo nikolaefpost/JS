@@ -17,7 +17,7 @@ function hello () {
 				const p = /^[0-9]+$/g;
 				const YEAR = 2020;
 	       if (p.test(userAge)) {
-			        const userYear = Number(YEAR) - 	Number(userAge);
+			        const userYear = YEAR - 	userAge;
 	            alert("Вы родились в " + userYear + " году.");
 	           }
 			   else alert("Нам нужна только цифра, сэр!");
