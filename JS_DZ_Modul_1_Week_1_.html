@@ -40,7 +40,7 @@ function hello () {
               const Speed =distance/movingTime;
               alert("необходимая скорость " + Speed + " км/ч.");
           }
-          else alert(p.test(distance)   + " Нам нужна только цифра, сэр! "+ pr.test(parseInt(movingTime, 10)) );
+          else alert(p.test(distance)   + " Нам нужна только цифра, сэр! ");
       }
 
       function areaCircle () {
@@ -112,6 +112,16 @@ function hello () {
          }
          else alert("Введите целое число,  сэр!");
        }
+       function test(){
+         let a = [1];
+         let b = a.valueOf();
+
+
+
+
+         console.log( b);
+
+       }
 
 </script>
 <style media="screen">
@@ -170,6 +180,8 @@ h2{
     <button type="button" onclick="reversNumber();">нажать</button><br>
     <span class="short">Проверка на четность:</span>
     <button type="button" onclick="parityNumber();">нажать</button><br>
+    <span class="short">Test:</span>
+    <button type="button" onclick="test();">нажать</button><br>
 	</div>
 </body ">
 </html>

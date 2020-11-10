@@ -1,0 +1,137 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS_DZ_Modul_1_Week_1_</title>
+<script type="text/javascript">
+
+	 function age () {
+	      const userAge = prompt("Введите ваш возраст цифрами:", "25");
+				const p = /^[0-9]+$/g;
+
+	       if (p.test(userAge)) {
+			       if(userAge >= 0 && userAge<12) alert('Вы ещё ребенок.');
+             if(userAge >= 12 && userAge<18) alert('Вы уже подросток.');
+             if(userAge >= 18 && userAge<60) alert('Вы взрослый человек.');
+             if(userAge >= 60) alert('Жизнь только начинается, вы пенсионер!');
+	           }
+			   else alert("Нам нужна только цифра, сэр!");
+	  }
+    function specialSymbol (){
+      const buttonNumber = document.getElementById("FormButton").options.selectedIndex;
+      switch (buttonNumber) {
+        case 0:
+          alert( 'Ваш символ _)_' );
+          break;
+        case 1:
+          alert( 'Ваш символ _!_' );
+          break;
+        case 2:
+          alert( 'Ваш символ _@_' );
+          break;
+        case 3:
+          alert( 'Ваш символ _#_' );
+          break;
+        case 4:
+          alert( 'Ваш символ _$_' );
+          break;
+        case 5:
+          alert( 'Ваш символ _%_' );
+          break;
+        case 6:
+          alert( 'Ваш символ _^_' );
+          break;
+        case 7:
+          alert( 'Ваш символ _&_' );
+          break;
+        case 8:
+          alert( 'Ваш символ _*_' );
+          break;
+        case 9:
+          alert( 'Ваш символ _(_' );
+          break;
+        default:
+          alert( "Нужно выбрать клавишу от 0 до 9" );
+      }
+    }
+
+</script>
+<style media="screen">
+h2{
+  text-align: center;
+}
+  #id{
+    color: red;
+    font-size: 2em;
+  }
+  #FormButton{
+    float: right;
+    padding:5px 10px ;
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+	button{
+		padding:5px 35px ;
+		font-size: 22px;
+    margin-bottom: 10px;
+    float: right;
+	}
+
+  br{
+    clear: both;
+  }
+	.main{
+		background:#b8d5e3;
+		padding:2vmin 4vmin;
+		width:50%; margin-left:auto;
+		margin-right:auto;
+		margin-top:10vh;
+	}
+.short{ width: 600px;
+	 display: inline-block;
+	 font-size: 18px;
+   margin-top: 10px;
+
+ }
+</style>
+</head>
+<body >
+  <h2 class="" id="haispan"></h2>
+	<div class="main" >
+
+
+		<span class="short">Сколько вам лет?</span>
+		<button type="button" onclick="age ();">нажать</button><br>
+    <span class="short">Расчитаем площадь квадрата, введите сторону квадрата:</span>
+    <SELECT name="FormButton" id="FormButton" onchange="specialSymbol ()">
+        <option  VALUE="0">клавиша 0 </option>
+        <option  VALUE="1">клавиша 1</option>
+        <option VALUE="2">клавиша 2</option>
+        <option VALUE="3">клавиша 3</option>
+        <option VALUE="4">клавиша 4</option>
+        <option VALUE="5">клавиша 5</option>
+        <option VALUE="6">клавиша 6</option>
+        <option VALUE="7">клавиша 7</option>
+        <option VALUE="8">клавиша 8</option>
+        <option VALUE="9">клавиша 9</option>
+        <option selected VALUE="11">выбираем клавишу: </option>
+    </SELECT><br>
+    <span class="short">Расчитаем площадь окружности, введите радиус окружности:</span>
+    <button type="button" onclick="areaCircle ();">нажать</button><br>
+    <span class="short">Расчитаем необходимую скорость, введите данные:</span>
+    <button type="button" onclick="desiredSpeed ();">нажать</button><br>
+    <span class="short">Конвертер доллара в евро, введите данные:</span>
+    <button type="button" onclick="сonverter ();">нажать</button><br>
+    <span class="short">Проверим вашу флешку, введите данные:</span>
+    <button type="button" onclick="сonverterDisk ();">нажать</button><br>
+    <span class="short">Как на счёт шоколадки, введите данные:</span>
+    <button type="button" onclick="buyСhocolate ();">нажать</button><br>
+    <span class="short">А теперь фокус с цифрами, могу "превернуть" ваше число:</span>
+    <button type="button" onclick="reversNumber();">нажать</button><br>
+    <span class="short">Проверка на четность:</span>
+    <button type="button" onclick="parityNumber();">нажать</button><br>
+    <span class="short">Test:</span>
+    <button type="button" onclick="test();">нажать</button><br>
+	</div>
+</body ">
+</html>
