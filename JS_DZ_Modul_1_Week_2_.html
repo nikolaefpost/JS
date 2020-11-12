@@ -5,7 +5,7 @@
 <title>JS_DZ_Modul_1_Week_1_</title>
 <script type="text/javascript">
 
-	 function age () {
+		function age () {
 	      const userAge = prompt("Введите ваш возраст цифрами:", "25");
 				const p = /^[0-9]+$/g;
 
@@ -17,7 +17,8 @@
 	           }
 			   else alert("Нам нужна только цифра, сэр!");
 	  }
-    function specialSymbol (){
+
+		function specialSymbol (){
       const buttonNumber = document.getElementById("FormButton").options.selectedIndex;
       switch (buttonNumber) {
         case 0:
@@ -55,8 +56,61 @@
       }
     }
 
+		function sameNumbers() {
+			const userNumber = prompt("Введите любое число:", "123678943");
+			nuberArea.innerHTML= 'В числе: '+ userNumber;
+			const p = /^[0-9]+$/g;
+			 if (p.test(userNumber)){
+				 for (let i = 0; i < userNumber.length; i++){
+         let j=i, k=0;
+				 while (j>=0 ) {
+					 j =	userNumber.indexOf(userNumber[i], ++j);
+					if	(j>=0)  nuberArea.innerHTML+= ', число '+ userNumber[i] + ' повторяется.';
+				 }
+				 //j =	userNumber.indexOf(userNumber[i], i+1);
+				 //(j>=0) && (nuberArea.innerHTML+= ', число '+ userNumber[i] + ' повторяется.');
+				//if ((i==userNumber.length-1) && (j<0))  {nuberArea.innerHTML+= 'числа не повторяются '};
+				 }
+			 }
+		 }
+
+
+		 function leapYear () {
+			 const userYear = prompt("Введите ваш возраст цифрами:", "2020");
+			 const p = /^[0-9]{4,4}$/g;
+
+		 	if (p.test(userYear)) {
+				 if(( userYear % 4 == 0  && userYear % 100 == 0 && userYear % 400 == 0) || (userYear % 4 == 0  && userYear % 100 != 0)) yearArea.innerHTML=userYear +' -этот год высокосный';
+				 else yearArea.innerHTML=userYear +' -этот год не высокосный';
+				 }
+			else alert("Нам нужна только 4х значная цифра, сэр!");
+	}
+
+	function Palindrome () {
+			const userNumber = prompt("Введите любое число:", "123678943");
+			let i=0;
+		if	(isPalindrome(userNumber,i))  nuberArea2.innerHTML= 'Число '+ userNumber + ' является палиндромом.';
+		else nuberArea2.innerHTML= 'Число '+ userNumber + ' не является палиндромом.';
+		function isPalindrome(s,i) {
+		return (i=i||0)<0||i>=s.length>>1||s[i]==s[s.length-1-i]&&isPalindrome(s,++i);
+		}
+	}
+
+	 function currencyExchange () {
+    let amountMoney = document.getElementById('amount').value;
+		const EURO = .8501492537313433;
+		let rezult_=0;
+		if (document.getElementById('r1').checked)  rezult_=amountMoney*EURO;
+		if (document.getElementById('r2').checked)  rezult_=amountMoney*EURO;
+		if (document.getElementById('r3').checked)  rezult_=amountMoney*EURO;
+
+
+
+    field.innerHTML="Вы ввели: "+rezult_;
+}
 </script>
 <style media="screen">
+
 h2{
   text-align: center;
 }
@@ -91,7 +145,15 @@ h2{
 	 display: inline-block;
 	 font-size: 18px;
    margin-top: 10px;
+ }
 
+ .text{
+	 text-align: left;
+ }
+
+ .divFlex{
+	 display: flex;
+	 justify-content: space-between;
  }
 </style>
 </head>
@@ -102,7 +164,7 @@ h2{
 
 		<span class="short">Сколько вам лет?</span>
 		<button type="button" onclick="age ();">нажать</button><br>
-    <span class="short">Расчитаем площадь квадрата, введите сторону квадрата:</span>
+    <span class="short">Выведем спецсивлолы клавиш:</span>
     <SELECT name="FormButton" id="FormButton" onchange="specialSymbol ()">
         <option  VALUE="0">клавиша 0 </option>
         <option  VALUE="1">клавиша 1</option>
@@ -116,22 +178,34 @@ h2{
         <option VALUE="9">клавиша 9</option>
         <option selected VALUE="11">выбираем клавишу: </option>
     </SELECT><br>
-    <span class="short">Расчитаем площадь окружности, введите радиус окружности:</span>
-    <button type="button" onclick="areaCircle ();">нажать</button><br>
-    <span class="short">Расчитаем необходимую скорость, введите данные:</span>
-    <button type="button" onclick="desiredSpeed ();">нажать</button><br>
-    <span class="short">Конвертер доллара в евро, введите данные:</span>
-    <button type="button" onclick="сonverter ();">нажать</button><br>
-    <span class="short">Проверим вашу флешку, введите данные:</span>
-    <button type="button" onclick="сonverterDisk ();">нажать</button><br>
-    <span class="short">Как на счёт шоколадки, введите данные:</span>
-    <button type="button" onclick="buyСhocolate ();">нажать</button><br>
-    <span class="short">А теперь фокус с цифрами, могу "превернуть" ваше число:</span>
-    <button type="button" onclick="reversNumber();">нажать</button><br>
-    <span class="short">Проверка на четность:</span>
-    <button type="button" onclick="parityNumber();">нажать</button><br>
-    <span class="short">Test:</span>
-    <button type="button" onclick="test();">нажать</button><br>
+		<div class="divFlex">
+			<span class="short">Найдем одинаковые числа:</span><span class="text" id="nuberArea" ></span>
+			<button type="button" onclick="sameNumbers();">нажать</button>
+		</div>
+		<div class="divFlex">
+			<span class="short">Проверим год на высокосность:</span><span class="text"  id="yearArea" ></span>
+			<button type="button" onclick="leapYear ();">нажать</button>
+		</div>
+		<div class="divFlex">
+			<span class="short">Проверим является ли строка палиндромом:</span><span class="text"  id="nuberArea2" ></span>
+			<button type="button" onclick="Palindrome ();">нажать</button>
+		</div>
+    <h3>Конвертор валют</h3>
+		<form name="test" method="post" action="#" class="divFlex">
+  <p><b>Введите сумму, $:</b><br>
+   <input type="text" size="20" id="amount">
+  </p>
+  <p><b>В какую валюту хотите перевести:</b><Br>
+   <input type="radio" name="browser" id="r1"> EUR<Br>
+   <input type="radio" name="browser" id="r2"> UAN<Br>
+   <input type="radio" name="browser" id="r3"> AZN<Br>
+  </p>
+  <p>Результат<Br>
+   <span id="field"></span></p>
+  <p><input type="button" value="Расчитать" onclick="currencyExchange();">
+   <input type="reset" value="Очистить"></p>
+ </form>
+
 	</div>
 </body ">
 </html>
