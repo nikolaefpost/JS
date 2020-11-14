@@ -59,23 +59,23 @@
 			const userNumber = prompt("Введите любое число:", "123678943");
 			nuberArea.innerHTML= 'В числе: '+ userNumber;
 			var arrayOfStrings = userNumber.split('');
-         let m=0;
-				 for (let i = 0; i < arrayOfStrings.length; i++){
-         		let j=i, k=0;
-				 		while (j>=0 ) {
-					 		j =	arrayOfStrings.indexOf(arrayOfStrings[i], ++j);
-					 		if (arrayOfStrings[i] && j>=0) {
-					 		arrayOfStrings[j]=null;
+				let m=0;
+				for (let i = 0; i < arrayOfStrings.length; i++){
+					let j=i, k=0;
+					while (j>=0 ) {
+						j =	arrayOfStrings.indexOf(arrayOfStrings[i], ++j);
+						if (arrayOfStrings[i] && j>=0) {
+							arrayOfStrings[j]=null;
 							k++;
-					 		}
-							if	(j==-1 && k>0)  {
-								nuberArea.innerHTML+= ', число '+ arrayOfStrings[i] + ' повторяется ' + k +' раз(а)';
-								m++
-							}
-				 		}
-				 }
-				 if (m<=0) nuberArea.innerHTML+= ', числа не повторяются.';
-		 }
+						}
+						if	(j==-1 && k>0)  {
+							nuberArea.innerHTML+= ', число '+ arrayOfStrings[i] + ' повторяется ' + k +' раз(а)';
+							m++
+						}
+					}
+				}
+				if (m<=0) nuberArea.innerHTML+= ', числа не повторяются.';
+			}
 
 
 		 function leapYear () {
