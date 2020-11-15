@@ -1,0 +1,120 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JS_DZ_Modul_1_Week_2_</title>
+<script type="text/javascript"></script>
+<script src="JS_DZ_Modul_1_Week_2(2).js"></script>
+<link rel="stylesheet" media="screen" href="style.css">
+<style media="screen"></style>
+</head>
+<body >
+	<div class="main" >
+
+		<div class="divFlex">
+			<span class="short">Сколько вам лет?</span><span class="text" id="nuberArea0" ></span>
+			<button class="button" type="button" onclick="age ();">нажать</button>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Выведем спецсивлолы клавиш:</span><span class="text" id="nuberArea1" ></span>
+			<select class="button" name="FormButton" id="FormButton" onchange="specialSymbol ()">
+				<option  VALUE="0">клавиша 0 </option>
+				<option  VALUE="1">клавиша 1</option>
+				<option VALUE="2">клавиша 2</option>
+				<option VALUE="3">клавиша 3</option>
+				<option VALUE="4">клавиша 4</option>
+				<option VALUE="5">клавиша 5</option>
+				<option VALUE="6">клавиша 6</option>
+				<option VALUE="7">клавиша 7</option>
+				<option VALUE="8">клавиша 8</option>
+				<option VALUE="9">клавиша 9</option>
+				<option selected VALUE="11">ваш выбор:</option>
+			</select>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Найдем одинаковые числа:</span><span class="text" id="nuberArea" ></span>
+			<button class="button" type="button" onclick="sameNumbers();">нажать</button>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Проверим год на высокосность:</span><span class="text"  id="yearArea" ></span>
+			<button class="button" type="button" onclick="leapYear ();">нажать</button>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Проверим является ли строка палиндромом:</span><span class="text"  id="nuberArea2" ></span>
+			<button class="button" type="button" onclick="Palindrome ();">нажать</button>
+		</div>
+
+		<h3>Конвертор валют</h3>
+		<form name="test" method="post" action="#" class="divFlex">
+			<p><b>Введите сумму, $:</b><br>
+				<input type="text" size="20"  id="amount">
+			</p>
+			<p><b>Выберете валюту, текущийй курс:</b><Br>
+				<input type="radio" name="browser" id="r1"> EUR - 0.85015<Br>
+				<input type="radio" name="browser" id="r2"> UAN - 28.1963<Br>
+				<input type="radio" name="browser" id="r3"> RUB - 77.1148<Br>
+			</p>
+			<p>Результат<Br>
+				<span id="field"></span>
+			</p>
+			<p style="flex: 0 0 200px;"><button class="button" type="button"  onclick="currencyExchange();">расчитать</button><br>
+				<button class="button" type="reset" >очистить</button>
+			</p>
+		</form>
+
+		<div class="divFlex">
+			<span class="short">Проверим сумму скидки за покупку :</span><span class="text"  id="nuberArea3" ></span>
+			<button class="button" type="button" onclick="discountBuy ();">нажать</button>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Геометрические вычисления:</span><span class="text"  id="nuberArea4" ></span>
+			<button class="button" type="button" onclick="geometricСalculations ();">нажать</button>
+		</div>
+
+
+		<div class="divFlex">
+			<h3>Пройдем тестирование:</h3>
+			<p>
+				<span id="field5"></span>
+			</p>
+			<p style="flex: 0 0 200px;">
+				<button class="button broad " type="button"  onclick="TestD ();">нажать после ответа</button>
+			</p>
+		</div>
+		<div class="divFlex">
+			<form name="test" method="post" action="#" class="">
+				<p style="flex: 0 1 23%;"><b class="m_b">Вопрос 1: JS является языком:</b><Br><Br>
+					<input type="radio" name="browser" id="rr1">Компилируемым<Br>
+					<input type="radio" name="browser" id="rr2">Интерпретируемым<Br>
+					<input type="radio" name="browser" id="rr3">Байткод-языком<Br>
+				</p>
+			</form>
+			<form name="test" method="post" action="#" class="">
+				<p style="flex: 0 1 37%;"><b id="nuberTest">Вопрос 2: Какой размер пременной типа number в js</b><Br><Br>
+					<input type="radio" name="browser" id="pp1">32 bit<Br>
+					<input type="radio" name="browser" id="pp2">16 bit<Br>
+					<input type="radio" name="browser" id="pp3">64 bit<Br>
+				</p>
+			</form>
+			<form name="test" method="post" action="#" class="">
+				<p style="flex: 0 1 40%;"><b id="nuberTest">Вопрос 3: Как можно исползывать выражение :x&1==0</b><Br><Br>
+					<input type="radio" name="browser" id="ss1">Проверка на четность числа<Br>
+					<input type="radio" name="browser" id="ss2">Битовый сдвиг вправо<Br>
+					<input type="radio" name="browser" id="ss3">Целочисленное деление на 2<Br>
+				</p>
+			</form>
+		</div>
+
+		<div class="divFlex">
+			<span class="short">Увеличим произвольную дату на один день:</span><span class="text"  id="nuberArea6" ></span>
+			<button class="button" type="button" onclick="nextDay ();">нажать</button>
+		</div>
+
+	</div>
+</body>
+</html>
