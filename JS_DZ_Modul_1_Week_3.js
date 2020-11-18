@@ -80,3 +80,14 @@
     }
     nuberArea4.innerHTML='В массиве чисел: '+arrayOfStrings.toString()+'--- четных чисел: '+c+', не четных: '+nc+', положительных:'+k+', отрицательных:'+l+', равных нулю:'+lo ;
   }
+
+  function arrayNumbers (){
+    do {
+      let userNumbers = prompt("Введите  числа, через пробел, допускается ввод отрицательных чисел, вещественных чисел через точку и ноль", "18 30 -12 456 0 -45 75 876.5 -1 23");
+      var arrayOfStrings = userNumbers.split(' ');
+
+} while (userNumbers);
+
+
+    nuberArea4.innerHTML='В массиве чисел: '+arrayOfStrings.toString()+'--- четных чисел: '+c+', не четных: '+nc+', положительных:'+k+', отрицательных:'+l+', равных нулю:'+lo ;
+  }
