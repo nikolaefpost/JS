@@ -50,9 +50,9 @@
   }
 
   function numberLength(someNumbers) {
-    let i=0;
+    let i=0, j=someNumbers;
     while (someNumbers>0) {
-      j =  Math.floor(someNumbers/10);
+      someNumbers =  Math.floor(someNumbers/10);
       ++i;
     }
     return i;
@@ -98,7 +98,7 @@
   }
 
   function numberShift() {
-    let userNumbers = prompt("Введите целое число и число сдвига цифр через запятую", "23455677888, 5"); //  Не исползуя(почти) свойсва строк и массивов JS)
+    let userNumbers = prompt("Введите целое число и число сдвига цифр через запятую", "23455677888, 5"); //  Не исползуя(почти) свойсва строк и массивов JS
     if (!userNumbers) return false;
     let arrayOfStrings = userNumbers.split(',');
     let i =numberLength(arrayOfStrings[0]);
