@@ -50,9 +50,9 @@
   }
 
   function numberLength(someNumbers) {
-    let i=0, j=someNumbers;
-    while (j>0) {
-      j =  Math.floor(j/10);
+    let i=0;
+    while (someNumbers>0) {
+      j =  Math.floor(someNumbers/10);
       ++i;
     }
     return i;
