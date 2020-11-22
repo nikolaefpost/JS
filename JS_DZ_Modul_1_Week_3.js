@@ -122,3 +122,43 @@
     }
     nuberArea7.innerHTML='Ваше число ' + arrayOfStrings[0] +' сдвинутое на '+ arrayOfStrings[1] + ' знаков = '+ arrayNumber.join('');
   }
+
+  function loopDay (userDate = new Date()){
+    let weekDay = ['Воскресенье','Понедельник','Вторник','Среда','Четверг','Пятница','Суббота'];
+    do {
+      var userActions = prompt('Сегодня '+ weekDay[userDate.getDay()]+ ', xотите увидеть следующий день?','yes');
+      if(userActions) {
+        userDate.setDate(userDate.getDate() + 1);
+      }
+    } while (userActions);
+    nuberArea8.innerHTML='Цикл остановлен:). ' + 'Текущий день недели: '+ weekDay[userDate.getDay()];
+  }
+
+  function multiplicationTable (){
+    let nuberArea = [,,'area2','area3','area4','area5','area6','area7','area8','area9'];
+    for (var i = 1, j=2; i < 10; i++) {
+      eval(nuberArea[j]).innerHTML +=' '+ j  +' * '+i+' = ' +j*i + '<br>';
+      if (i==9 && j<9) {i=0; j++;}
+    }
+  }
+
+  function guessNumber (){
+    let min=0;
+    let max = 100;
+    let rezalt_=50;
+    confirm('загадайте число от 0 до 100');
+    do {
+      let userActions = confirm('загаданное число '+rezalt_+' ?');
+      if (userActions) break;
+      userNumbers = confirm('загаданное число больше '+rezalt_+' ?');
+      if (userNumbers) {
+        min = rezalt_;
+        rezalt_ = rezalt_ +Math.round((max-min)>>1)
+      }
+      else {
+        max = rezalt_;
+        rezalt_ = rezalt_ - Math.round((max-min)>>1);
+      }
+    } while (true);
+    nuberArea9.innerHTML='загаданное число:  ' +rezalt_;
+  }
