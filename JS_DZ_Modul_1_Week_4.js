@@ -62,12 +62,8 @@
   function perfectNumber(s) {
     let rezultArray = [], j=0, a=[];
     for (var i = 0; i < s; i++) {
-      if (s%i==0) {
-        rezultArray[j++] = i;
-      }
+      if (s%i==0) rezultArray[j++] = i;
     }
-    //a[0]='У числа '+s+' следущие делители: '+rezultArray.toString();
-    //a[1] = (rezultArray.reduce(function(x,y) { return x+y; })==s);
     return rezultArray;
   }
 
@@ -79,7 +75,7 @@
       nuberArea4.innerHTML= 'Нужно ввести целое число, сэр!';
       return false;
     }
-    q = perfectNumber(userNumbers);                                 // Замыкание ???
+    q = perfectNumber(userNumbers);                                 //   строка 62 Замыкание ???
     nuberArea4.innerHTML='У числа '+userNumbers+' следущие делители: '+q.toString();
     if (q.reduce(function(x,y) { return x+y; })==userNumbers) nuberArea4.innerHTML+=' это число СОВЕРШЕННОЕ!!!';
     else nuberArea4.innerHTML+=' это число НЕ совершенное!!!';
@@ -95,10 +91,9 @@
     }
     let i =Number(arrayOfStrings[0]), tempArr=[];
     while (i<=arrayOfStrings[1]) {
-      q = perfectNumber(i);
-      console.log(q);                          //if (q.reduce(function(x,y) { return x+y; })==i) tempArr.push(i);
-      let sum=0;                               // не работает с диапазоном больше 100.
-      for (let i = 0; i < q.length; i++) sum+=q[i];
+      q = perfectNumber(i);                               // строка 62
+      let sum=0;                                         // //if (q.reduce(function(x,y) { return x+y; })==i) tempArr.push(i);
+      for (let i = 0; i < q.length; i++) sum+=q[i];     //не работает с диапазоном  больше 100.
       if (sum==i) tempArr.push(i);
       i++;
     }
