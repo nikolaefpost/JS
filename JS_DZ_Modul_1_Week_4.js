@@ -66,9 +66,9 @@
         rezultArray[j++] = i;
       }
     }
-    a[0]='У числа '+s+' следущие делители: '+rezultArray.toString();
-    a[1] = (rezultArray.reduce(function(x,y) { return x+y; })==s);
-    return a;
+    //a[0]='У числа '+s+' следущие делители: '+rezultArray.toString();
+    //a[1] = (rezultArray.reduce(function(x,y) { return x+y; })==s);
+    return rezultArray;
   }
 
   function isPerfectNumber (){
@@ -80,9 +80,9 @@
       return false;
     }
     q = perfectNumber(userNumbers);                                 // Замыкание ???
-    nuberArea4.innerHTML='У числа '+userNumbers+' следущие делители: '+q[0];
-    if (q[1]) nuberArea4.innerHTML=q[0]+' это число СОВЕРШЕННОЕ!!!';
-    else nuberArea4.innerHTML=q[0]+' это число НЕ совершенное!!!';
+    nuberArea4.innerHTML='У числа '+userNumbers+' следущие делители: '+q.toString();
+    if (q.reduce(function(x,y) { return x+y; })==userNumbers) nuberArea4.innerHTML+=' это число СОВЕРШЕННОЕ!!!';
+    else nuberArea4.innerHTML+=' это число НЕ совершенное!!!';
   }
 
   function isPerfectNumberArea (){
@@ -96,8 +96,10 @@
     let i =Number(arrayOfStrings[0]), tempArr=[];
     while (i<=arrayOfStrings[1]) {
       q = perfectNumber(i);
-      console.log(q);
-      if (q[1]) tempArr.push(i);
+      console.log(q);                          //if (q.reduce(function(x,y) { return x+y; })==i) tempArr.push(i);
+      let sum=0;                               // не работает с диапазоном больше 100.
+      for (let i = 0; i < q.length; i++) sum+=q[i];
+      if (sum==i) tempArr.push(i);
       i++;
     }
     nuberArea5.innerHTML='В диапазоне от '+arrayOfStrings[0]+' до '+arrayOfStrings[1]+ ' находятся следущие совершенные числа: ' + tempArr.join() ;
