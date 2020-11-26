@@ -27,9 +27,10 @@ br{clear: both;}
 .main{
   background:#b8d5e3;
   padding:2vmin 4vmin;
-  width:50%; margin-left:auto;
+  width:50%;
+  margin-left:auto;
   margin-right:auto;
-  margin-top:10vh;
+  margin-top:5vh;
 }
 .short{ width: 350px;
   display: inline-block;
@@ -44,4 +45,16 @@ br{clear: both;}
 .divFlex{
   display: flex;
   justify-content: space-between;
+}
+#nuberArea7 {
+  padding: 15px;
+  background: #b8d5e3;
+  color: white;
+
+  font-weight: bold;
+  border-radius: 4px;
+  margin-left:auto;
+  margin-right:auto;
+  width:10%;
+  margin-top:5vh;
 }

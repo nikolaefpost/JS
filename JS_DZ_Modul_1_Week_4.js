@@ -99,3 +99,17 @@
     }
     nuberArea5.innerHTML='В диапазоне от '+arrayOfStrings[0]+' до '+arrayOfStrings[1]+ ' находятся следущие совершенные числа: ' + tempArr.join() ;
   }
+
+  function setUserTime() {
+    let tempTime = prompt("Введите время в формате: час,мин,сек", "15,30,00");
+    tempTime = tempTime.split(",");
+    let UserTime = new Date;
+    UserTime.setHours(tempTime[0], tempTime[1], tempTime[2] );
+    if ((UserTime.getHours() == tempTime[0]) && (UserTime.getMinutes() == tempTime[1]) && (UserTime.getSeconds() == tempTime[2])) nuberArea6.innerHTML=UserTime.toLocaleTimeString();
+    else nuberArea6.innerHTML="Введено некорректное время!";
+  }
+
+  function setUserTime1() {
+    nuberArea7.innerHTML='Текущее время: '+(new Date).toLocaleTimeString();
+}
+  setInterval(setUserTime1, 1000  );
