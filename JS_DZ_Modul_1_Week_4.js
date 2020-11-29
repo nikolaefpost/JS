@@ -100,14 +100,59 @@
     nuberArea5.innerHTML='В диапазоне от '+arrayOfStrings[0]+' до '+arrayOfStrings[1]+ ' находятся следущие совершенные числа: ' + tempArr.join() ;
   }
 
-  function setUserTime() {
+  function setUserTime(arr) {
+    let UserTime = new Date;
+    UserTime.setHours(arr[0], arr[1], arr[2] );
+    if ((UserTime.getHours() == arr[0]) && (UserTime.getMinutes() == arr[1]) && (UserTime.getSeconds() == arr[2])) return UserTime;
+    else return false;
+  }
+
+  function innerTime() {
     let tempTime = prompt("Введите время в формате: час,мин,сек", "15,30,00");
     tempTime = tempTime.split(",");
-    let UserTime = new Date;
-    UserTime.setHours(tempTime[0], tempTime[1], tempTime[2] );
-    if ((UserTime.getHours() == tempTime[0]) && (UserTime.getMinutes() == tempTime[1]) && (UserTime.getSeconds() == tempTime[2])) nuberArea6.innerHTML=UserTime.toLocaleTimeString();
+    tempTime[1] ? tempTime[1] : tempTime[1]=0;                         // если минуты не введены утанавливаем 00;
+    tempTime[2] ? tempTime[2] : tempTime[2]=0;                        // если секунды не введены утанавливаем 00;
+    if (setUserTime(tempTime)) nuberArea6.innerHTML=setUserTime(tempTime).toLocaleTimeString();
     else nuberArea6.innerHTML="Введено некорректное время!";
   }
+
+
+
+
+  function getUserSeconds(arr1,arr2) {
+    arr2 ? arr2 : arr2=[0,0,0];
+    let UserTime = new Date;
+    UserTime.setHours(arr1[0], arr1[1], arr1[2] );
+    let nullTime = new Date;
+    nullTime.setHours(arr2[0], arr2[1], arr2[2] );
+    if ((UserTime.getHours() == arr1[0]) && (UserTime.getMinutes() == arr1[1]) && (UserTime.getSeconds() == arr1[2])){
+      let rezalt_= (UserTime.getTime() - nullTime.getTime())/1000;
+      return rezalt_;
+    } else return false;
+  }
+
+  function innerSeconds() {
+    let tempTime = prompt("Введите время в формате: час,мин,сек", "09,30,00");
+    tempTime ? tempTime = tempTime.split(","): tempTime = [0,0,0];
+    if (getUserSeconds(tempTime)) nuberArea8.innerHTML='С начала суток прошло: '+  getUserSeconds(tempTime)+' секунд';
+    else nuberArea8.innerHTML="Введено некорректное время!";
+  }
+
+function getUserTime(cek1,cek2) {
+  cek2 ? cek2 : cek2=0;
+  let rezalt_=cek1-cek2;
+  let UserTime = new Date;
+  UserTime.setHours(0, 0, rezalt_ );
+  console.log(UserTime.toLocaleTimeString());
+  return UserTime.toLocaleTimeString();
+}
+
+function innerSecondstoHour() {
+  let tempTime = prompt("Введите время в сек", "1200");
+  tempTime ? tempTime: tempTime = 0;
+  nuberArea9.innerHTML= tempTime +'  секунд составляет: '+  getUserTime(tempTime)+' час,мин,сек';
+}
+
 
   function setUserTime1() {
     nuberArea7.innerHTML='Текущее время: '+(new Date).toLocaleTimeString();
