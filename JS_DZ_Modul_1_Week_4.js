@@ -125,7 +125,7 @@
     UserTime.setHours(arr1[0], arr1[1], arr1[2] );
     let nullTime = new Date;
     nullTime.setHours(arr2[0], arr2[1], arr2[2] );
-    if ((UserTime.getHours() == arr1[0]) && (UserTime.getMinutes() == arr1[1]) && (UserTime.getSeconds() == arr1[2])){
+    if ((UserTime.getHours() == arr1[0]) && (UserTime.getMinutes() == arr1[1]) && (UserTime.getSeconds() == arr1[2]) && (nullTime.getHours() == arr2[0]) && (nullTime.getMinutes() == arr2[1]) && (nullTime.getSeconds() == arr2[2])){
       let rezalt_= (UserTime.getTime() - nullTime.getTime())/1000;
       return rezalt_;
     } else return false;
@@ -143,18 +143,26 @@ function getUserTime(cek1,cek2) {
   let rezalt_=cek1-cek2;
   let UserTime = new Date;
   UserTime.setHours(0, 0, rezalt_ );
-  console.log(UserTime.toLocaleTimeString());
   return UserTime.toLocaleTimeString();
 }
 
-function innerSecondstoHour() {
-  let tempTime = prompt("Введите время в сек", "1200");
-  tempTime ? tempTime: tempTime = 0;
-  nuberArea9.innerHTML= tempTime +'  секунд составляет: '+  getUserTime(tempTime)+' час,мин,сек';
-}
+  function innerSecondstoHour() {
+    let tempTime = prompt("Введите время в сек", "1200");
+    tempTime ? tempTime: tempTime = 0;
+    nuberArea9.innerHTML= tempTime +'  секунд составляет: '+  getUserTime(tempTime)+' час,мин,сек';
+  }
 
+  function innertimeComparison() {
+    let tempTime = prompt("Введите два значения  времени в формате: час,мин,сек", " 09:14:00 ,21:33:56 ");
+    tempTime ? tempTime = tempTime.split(","): tempTime = [[0,0,0], [0,0,0]];
+    if(tempTime[0]<tempTime[1]); tempTime.reverse()
+    let UserTime1 = tempTime[0].split(":");
+    let UserTime2 = tempTime[1].split(":");
+    nuberArea10.innerHTML='Разница во времени между :'+tempTime[0]+' и: '+tempTime[1]+' составляет: '+getUserTime(getUserSeconds(UserTime1,UserTime2));
+  }
 
   function setUserTime1() {
     nuberArea7.innerHTML='Текущее время: '+(new Date).toLocaleTimeString();
-}
-  setInterval(setUserTime1, 1000  );
+    setInterval(setUserTime1, 1000  );
+  }
+  window.onload = setUserTime1;
