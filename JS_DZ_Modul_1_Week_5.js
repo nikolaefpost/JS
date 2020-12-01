@@ -4,13 +4,13 @@
   }
 
   function z(a,b) {
-    if (a!=0 && b!=0)
+    if (a!=0 && b!=0) {
       console.log(a,b);
         if (a>b) z(a%b,b);
         console.log(a,b);
         if (b>a) z(a,b%a);
         console.log(a,b);
-    
+    }
   else     false;
   return (a+' '+b);
   }
