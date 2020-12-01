@@ -4,15 +4,15 @@
   }
 
   function z(a,b) {
-
+    if (a!=0 && b!=0)
       console.log(a,b);
-        if ((a>b)&&(a==0 || b==0)) z(a%b,b);
+        if (a>b) z(a%b,b);
         console.log(a,b);
-        if ((b>a)&&(a==0 || b==0)) z(a,b%a);
+        if (b>a) z(a,b%a);
         console.log(a,b);
-   return (a+' '+b);
-
-
+    
+  else     false;
+  return (a+' '+b);
   }
 
 
