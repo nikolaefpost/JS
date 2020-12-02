@@ -3,18 +3,25 @@
     return (n != 0) ? x * expoRecursion(x,n - 1) : 1;
   }
 
-  function z(a,b) {
-    if (a!=0 && b!=0) {
-      console.log(a,b);
-        if (a>b) z(a%b,b);
-        console.log(a,b);
-        if (b>a) z(a,b%a);
-        console.log(a,b);
-    }
-  else     false;
-  return (a+' '+b);
+  function grComFactor(a,b) {
+    if (a<0)
+    (a>b) ? a=a%b : b=b%a;
+    return (a>0 && b>0) ? grComFactor(a,b) : a+b;
   }
 
+function maxNumber(str) {
+  let max , i;
+  i ? i=1 : i;
+  max ? max=str[0] : max;
+console.log(i,max);
+
+    if (str[i]>max) max=str[i];
+    i++;
+    console.log(i,max);
+    //i++;
+    return (i<str.length) ? maxNumber(str) : max;
+
+}
 
 
 
@@ -24,7 +31,7 @@
 
 
 function functionName() {
-  alert(z(30,18));
+  nuberArea11.innerHTML=maxNumber('123456');
 }
 
 

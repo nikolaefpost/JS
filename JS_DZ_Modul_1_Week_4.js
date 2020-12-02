@@ -165,4 +165,4 @@ function getUserTime(cek1,cek2) {
     nuberArea7.innerHTML='Текущее время: '+(new Date).toLocaleTimeString();
     setInterval(setUserTime1, 1000  );
   }
-  window.onload = setUserTime1;
+//  window.onload = setUserTime1;
