@@ -20,9 +20,33 @@
 
 function functionName() {
 //  nuberArea11.innerHTML=expoRecursion(5,3);
-  nuberArea11.innerHTML=grComFactor(30,18)
+//  nuberArea11.innerHTML=grComFactor(30,18)
 //  nuberArea11.innerHTML=maxNumber('123456789876554');
-//  nuberArea11.innerHTML=primeNumber(997);
-
+//nuberArea11.innerHTML=primeNumber(997);
+nuberArea11.innerHTML=reversNumber1(String(123456).split(''));
 
 }
+
+function outputNumbers1(x,y,i=y) {
+  return (x<y) ? outputNumbers(x,--y) +', '+ i: i;
+}
+
+function outputNumbers2(x,y,i=x) {
+  return (x<y) ? outputNumbers2(++x,y) +', '+ i: i;
+}
+
+  function reversNumber1(arr, i=0, m) {                               //  решение с помощью массива
+    m=arr[i];
+    arr[i]=arr[(arr.length-1)-i];
+    arr[(arr.length-1)-i]=m;
+    //arr[i] = arr[i] ^ arr[(arr.length-1)-i];                        // используя побитовый обмен значений переменных
+    //arr[(arr.length-1)-i] = arr[i] ^ arr[(arr.length-1)-i];
+    //arr[i] = arr[i] ^ arr[(arr.length-1)-i];
+    return  (i<(arr.length/2-1)) ? reversNumber1(arr,++i, m) : arr.join('');
+  }
+
+  function reversNumber2(n, result_=0) {
+    result_ = result_*10 + n%10;         //
+    n = Math.floor(n/10);
+    return  (n>0) ? reversNumber2(n, result_) : result_;
+  }
