@@ -23,8 +23,9 @@ function functionName() {
 //  nuberArea11.innerHTML=grComFactor(30,18)
 //  nuberArea11.innerHTML=maxNumber('123456789876554');
 //nuberArea11.innerHTML=primeNumber(997);
-nuberArea11.innerHTML=reversNumber1(String(123456).split(''));
-
+//nuberArea11.innerHTML=reversNumber1(String(123456).split(''));
+//nuberArea11.innerHTML=reversNumber2(1234567);
+nuberArea11.innerHTML=sumNumbers(1234)
 }
 
 function outputNumbers1(x,y,i=y) {
@@ -45,8 +46,14 @@ function outputNumbers2(x,y,i=x) {
     return  (i<(arr.length/2-1)) ? reversNumber1(arr,++i, m) : arr.join('');
   }
 
-  function reversNumber2(n, result_=0) {
-    result_ = result_*10 + n%10;         //
+  function reversNumber2(n, result_=0) {            sumNumbers                  // с помощью арефметических вычислений
+    result_ +=  + n%10;
     n = Math.floor(n/10);
     return  (n>0) ? reversNumber2(n, result_) : result_;
+  }
+
+  function sumNumbers(n, result_=0) {
+    result_ +=  n%10;
+    n = Math.floor(n/10);
+    return  (n>0) ? sumNumbers(n, result_) : result_;
   }
