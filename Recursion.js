@@ -23,38 +23,20 @@
     return  (n!=1) ? numberFactors(n,result,++i) : result;
   }
 
+  function  outputFibonacci(n) {                      // функция
+    return (n>2) ? outputFibonacci(n-1) +  outputFibonacci(n-2) : 1;
+  }
 
 
 
-
-/*  function getMultipliers(number: int): vector<int>
-        // сюда складываем множители
-        result = vector<int>
-        // число, у которого осталось найти множители
-        curNum = number
-         // число, на которое пытаемся делить
-        probe = 2
-        while curNum ≠ 1
-            if curNum mod probe ≠0
-                // проверены все множители из [2; probe]
-                probe++
-            else
-                // делим пока делится
-                curNum /= probe
-                result += [probe]
-         return result
-*/
 
 function functionName() {
 //  nuberArea11.innerHTML=expoRecursion(5,3);
 //  nuberArea11.innerHTML=grComFactor(30,18)
 //  nuberArea11.innerHTML=maxNumber('123456789876554');
 //nuberArea11.innerHTML=primeNumber(997);
-nuberArea11.innerHTML=numberFactors(74);
-
-
-
-
+//nuberArea11.innerHTML=numberFactors(74);
+nuberArea11.innerHTML=outputFibonacci(7);
 
 //nuberArea11.innerHTML=reversNumber1(String(123456).split(''));
 //nuberArea11.innerHTML=reversNumber2(1234567);
