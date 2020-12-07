@@ -30,7 +30,7 @@
 
 
 
-function functionName() {
+/*function functionName() {
   var val = document.getElementById('input_').value.split(' ');
   console.log(val);
 
@@ -42,10 +42,10 @@ function functionName() {
 //nuberArea11.innerHTML=outputFibonacci(7);
 
 //nuberArea11.innerHTML=reversNumber1(val);
-nuberArea11.innerHTML=reversNumber2(val[0]);
+//nuberArea11.innerHTML=reversNumber2(val[0]);
 //nuberArea11.innerHTML=sumNumbers(1234);
 //nuberArea11.innerHTML=outputParenthesis1(10);
-}
+}*/
 
 //  ПРАКТИЧЕСКАЯ РАБОТА
 
@@ -67,8 +67,7 @@ nuberArea11.innerHTML=reversNumber2(val[0]);
     return  (i<(arr.length/2-1)) ? reversNumber1(arr,++i, m) : arr.join('');
   }
 
-  function reversNumber2(n, result_=0) {
-    console.log(n);                          // с помощью арифметических вычислений
+  function reversNumber2(n, result_=0) {                          // с помощью арифметических вычислений
     result_ =result_*10  + n%10;
     n = Math.floor(n/10);
     return  (n>0) ? reversNumber2(n, result_) : result_;
