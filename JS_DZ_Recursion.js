@@ -31,12 +31,12 @@
 
 
 function functionName() {
-//  nuberArea11.innerHTML=expoRecursion(5,3);
+  nuberArea11.innerHTML=expoRecursion(3,9);
 //  nuberArea11.innerHTML=grComFactor(30,18)
 //  nuberArea11.innerHTML=maxNumber('123456789876554');
 //nuberArea11.innerHTML=primeNumber(997);
 //nuberArea11.innerHTML=numberFactors(74);
-nuberArea11.innerHTML=outputFibonacci(7);
+//nuberArea11.innerHTML=outputFibonacci(7);
 
 //nuberArea11.innerHTML=reversNumber1(String(123456).split(''));
 //nuberArea11.innerHTML=reversNumber2(1234567);
