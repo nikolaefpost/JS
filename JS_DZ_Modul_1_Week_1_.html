@@ -1,187 +1,63 @@
 <!doctype html>
 <html>
-<head>
-<meta charset="utf-8">
-<title>JS_DZ_Modul_1_Week_1_</title>
-<script type="text/javascript">
-function hello () {
-     var userName = prompt("Как вас зовут?", "Введите ваше имя.");
-    if (userName) {
-    alert("Рад вас видеть, " + userName + "!");
-    haispan.innerHTML = "Рады видеть вас " + userName ;
+  <head>
+    <meta charset="utf-8">
+    <title>JS_DZ_Modul_1_Week_1_</title>
+    <script src="JS_DZ_Modul_1_Week_1_.js"></script>
+    <style media="screen">
+    h2{
+      text-align: center;
     }
-   }
-
-	 function age () {
-	      const userAge = prompt("Сколько вам лет?", "18");
-				const p = /^[0-9]+$/g;
-				const YEAR = 2020;
-	       if (p.test(userAge)) {
-			        const userYear = YEAR - 	userAge;
-	            alert("Вы родились в " + userYear + " году.");
-	           }
-			   else alert("Нам нужна только цифра, сэр!");
-	  }
-    function areaSquare () {
-          const sideSquare = prompt("Введите сторону квадрата, м:", "10");
-          const p = /^\d+(?:[\.,]\d+)?$/g;
-          if (p.test(sideSquare)) {
-              const Square = parseInt(sideSquare, 10)**2;
-              alert("площадь квадрата " + Square + " М2.");
-              }
-          else alert("Нам нужна только цифра, сэр!");
-      }
-    function desiredSpeed () {
-          const distance = prompt("Введите расстояние между городами, км:", "10");
-          const movingTime = prompt("Введите время пути, час:", "1");
-          const p = /^[0-9]+$/g;
-          const pr = /^[0-9]+$/g;
-          if (pr.test(movingTime) && p.test(distance)) {
-              const Speed =distance/movingTime;
-              alert("необходимая скорость " + Speed + " км/ч.");
-          }
-          else alert(p.test(distance)   + " Нам нужна только цифра, сэр! ");
-      }
-
-      function areaCircle () {
-            const radiusCircle = prompt("Введите радиус окружности, м:", "10");
-            const p = /^\d+(?:[\.,]\d+)?$/g;
-            if (p.test(radiusCircle)) {
-                const Square = parseInt(radiusCircle, 10)**2*Math.PI;
-                alert("площадь окружности " + Square + " М2.");
-            }
-            else alert("Нам нужна только цифра, сэр!");
-        }
-      function сonverter () {
-            const dollar = prompt("Введите сумму, $:", "100");
-            const EURO = .8501492537313433;
-            const p = /^\d+(?:[\.,]\d+)?$/g;
-                //var p = /^[0-9]+\.?[0-9]*$/g; не работает
-            if (p.test(dollar)) {
-                const transferEuro = dollar*EURO;
-                alert("получается аж " + transferEuro.toFixed(2) + " евро.");
-              }
-            else alert("Нам нужна только цифра, сэр!");
-        }
-      function сonverterDisk () {
-            const diskSpace = prompt("Введите емкость флешки, ГБ:", "32");
-            const GBINMb = 1024;
-            const MBSPACE = 850;
-            const p = /^[0-9]+$/g;
-            if (p.test(diskSpace)) {
-                const transferMB = diskSpace*GBINMb/MBSPACE;
-                alert("на вашу флешку запишется " + transferMB.toFixed() + " файлов размером 850МБ");
-              }
-            else alert("Нам нужна только цифра, сэр!");
-            }
-      function buyСhocolate () {
-              const money_ = prompt("Введите сумму денег в кошельке, гр:", "99.99");
-              const сhocolate_ = prompt("Введите стоимость одной шоколадки, гр:", "9.99");
-              const p1 = /^\d+(?:[\.,]\d{1,2})?$/g;
-              const p2 = /^\d+(?:[\.,]\d{1,2})?$/g;
-              if (p1.test(money_) && p2.test(сhocolate_)) {
-                if (money_ < сhocolate_) alert('Увы, Вы не сможете ничего купить. У Вас всего '+ money_ +' гр.');
-                else {
-                  const amountСhocolate = Math.floor(money_/сhocolate_);
-                  const surrender = money_ % сhocolate_;
-                  console.log(amountСhocolate+' '+ surrender );
-                  alert("Вы сможете купить " + amountСhocolate + " шоколадок(ки). Ваша сдача " + surrender.toFixed(2) +' гр.');
-                }
-              }
-              else alert("Введите сумму денег цифрами, сэр!");
-              }
-        function reversNumber() {
-          let freeNumber = Math.abs(prompt("Введите произвольное целое  число: ", "123"));
-          const p = /^[0-9]{1,16}$/g;                        // работает только с разрядностью <=16
-          if (p.test(freeNumber)) {
-            let result_ = 0;
-            while (freeNumber>0) {                          // есть вариант намного проще
-              result_ = result_*10 + freeNumber%10;         // alert(freeNumber.split("").reverse().join(""));
-              freeNumber = Math.floor(freeNumber/10);
-            }
-            alert("Ваше число наоборот будет "+ result_);
-          }
-          else alert("Введите целое число, максимальный разряд 16,  сэр!");
-       }
-       function parityNumber(){
-         const freeNumber = Math.abs(prompt("Введите произвольное целое  число: ", "123"));
-         const p = /^[0-9]+$/g;
-         if (p.test(freeNumber)){
-            let result_ = ((freeNumber&1)==0) ? 'четное': 'нечетное';
-            alert("Ваше число "+ result_);
-         }
-         else alert("Введите целое число,  сэр!");
-       }
-       function test(){
-         let a = [1];
-         let b = a.valueOf();
-
-
-
-
-         console.log( b);
-
-       }
-
-</script>
-<style media="screen">
-h2{
-  text-align: center;
-}
-  #id{
-    color: red;
-    font-size: 2em;
-  }
-	button{
-		padding:5px 35px ;
-		font-size: 22px;
-    margin-bottom: 10px;
-    float: right;
-	}
-
-  br{
-    clear: both;
-  }
-	.main{
-		background:#b8d5e3;
-		padding:2vmin 4vmin;
-		width:50%; margin-left:auto;
-		margin-right:auto;
-		margin-top:10vh;
-	}
-.short{ width: 600px;
-	 display: inline-block;
-	 font-size: 18px;
-
- }
-</style>
-</head>
-<body >
-  <h2 class="" id="haispan"></h2>
-	<div class="main" >
-
-		<span class="short">Для знакомства нажмите кнопку:</span>
-		<button type="button" onclick="hello ();">нажать</button><br>
-		<span class="short">Продолжим знакомство:</span>
-		<button type="button" onclick="age ();">нажать</button><br>
-    <span class="short">Расчитаем площадь квадрата, введите сторону квадрата:</span>
-    <button type="button" onclick="areaSquare ();">нажать</button><br>
-    <span class="short">Расчитаем площадь окружности, введите радиус окружности:</span>
-    <button type="button" onclick="areaCircle ();">нажать</button><br>
-    <span class="short">Расчитаем необходимую скорость, введите данные:</span>
-    <button type="button" onclick="desiredSpeed ();">нажать</button><br>
-    <span class="short">Конвертер доллара в евро, введите данные:</span>
-    <button type="button" onclick="сonverter ();">нажать</button><br>
-    <span class="short">Проверим вашу флешку, введите данные:</span>
-    <button type="button" onclick="сonverterDisk ();">нажать</button><br>
-    <span class="short">Как на счёт шоколадки, введите данные:</span>
-    <button type="button" onclick="buyСhocolate ();">нажать</button><br>
-    <span class="short">А теперь фокус с цифрами, могу "превернуть" ваше число:</span>
-    <button type="button" onclick="reversNumber();">нажать</button><br>
-    <span class="short">Проверка на четность:</span>
-    <button type="button" onclick="parityNumber();">нажать</button><br>
-    <span class="short">Test:</span>
-    <button type="button" onclick="test();">нажать</button><br>
-	</div>
-</body ">
+    #id{
+      color: red;
+      font-size: 2em;
+    }
+    button{
+      padding:5px 35px ;
+      font-size: 22px;
+      margin-bottom: 10px;
+      float: right;
+    }
+    br{
+      clear: both;
+    }
+    .main{
+      background:#b8d5e3;
+      padding:2vmin 4vmin;
+      width:50%; margin-left:auto;
+      margin-right:auto;
+      margin-top:10vh;
+    }
+    .short{
+      width: 600px;
+      display: inline-block;
+      font-size: 18px;
+    }
+  </style>
+  </head>
+  <body>
+    <h2 class="" id="haispan"></h2>
+    <div class="main">
+      <span class="short">Для знакомства нажмите кнопку:</span>
+      <button type="button" onclick="hello ();">нажать</button><br>
+      <span class="short">Продолжим знакомство:</span>
+      <button type="button" onclick="age ();">нажать</button><br>
+      <span class="short">Расчитаем площадь квадрата, введите сторону квадрата:</span>
+      <button type="button" onclick="areaSquare ();">нажать</button><br>
+      <span class="short">Расчитаем площадь окружности, введите радиус окружности:</span>
+      <button type="button" onclick="areaCircle ();">нажать</button><br>
+      <span class="short">Расчитаем необходимую скорость, введите данные:</span>
+      <button type="button" onclick="desiredSpeed ();">нажать</button><br>
+      <span class="short">Конвертер доллара в евро, введите данные:</span>
+      <button type="button" onclick="сonverter ();">нажать</button><br>
+      <span class="short">Проверим вашу флешку, введите данные:</span>
+      <button type="button" onclick="сonverterDisk ();">нажать</button><br>
+      <span class="short">Как на счёт шоколадки, введите данные:</span>
+      <button type="button" onclick="buyСhocolate ();">нажать</button><br>
+      <span class="short">А теперь фокус с цифрами, могу "превернуть" ваше число:</span>
+      <button type="button" onclick="reversNumber();">нажать</button><br>
+      <span class="short">Проверка на четность:</span>
+      <button type="button" onclick="parityNumber();">нажать</button><br>
+    </div>
+  </body>
 </html>
