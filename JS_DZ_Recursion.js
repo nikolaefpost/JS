@@ -19,7 +19,7 @@
   }
 
   function numberFactors(n,result='',i=2) {            // функция вывода всех множителей
-    if (n%i==0) {result+=i; n=n/i;}
+    if (n%i==0) {result+=i+','; n=n/i;}
     return  (n!=1) ? numberFactors(n,result,++i) : result;
   }
 

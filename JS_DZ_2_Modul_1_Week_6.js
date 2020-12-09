@@ -6,7 +6,7 @@
     this.speed = speed;
 
     this.info = function() {
-      let str = 'Автомобиль: '+this.brand+' '+this.model+', год выпуска: '+this.made+' года, средняя скорость: '+this.speed;
+      let str = 'Автомобиль: '+this.brand+' '+this.model+', год выпуска: '+this.made+', средняя скорость: '+this.speed+' км/ч.';
       return str;
     };
 
@@ -20,15 +20,67 @@
         rezalt_=s/this.speed;
       }
       rezalt_=getUserTime(Math.floor(rezalt_*3600));
-      return 'Ваш автомобиль проедет '+s+ ' км за: '+ rezalt_+' чч:мм:сс';
+      return  rezalt_;
     };
   }
 
-  let myCar= new Car('Chevrolet', 'lacetti', 2009, 90);
+  let myCar= new Car('Chevrolet', 'Lacetti', 2009, 90);
+
+
+
+  function CommonFractions([numerator1,denominator1], [numerator2,denominator2]) {
+    this.x = [numerator1,denominator1];
+    this.y = [numerator2,denominator2];
+    this.z = [0,0];
+    this.nok = (Math.abs(this.x[1] * this.y[1])/grComFactor(this.x[1],this.y[1]));
+
+    this.properFraction = function(){
+      if (this.z[0]>this.z[1]) {
+        console.log(Math.floor(this.z[0]/this.z[1]));
+        return Math.floor(this.z[0]/this.z[1]) +'*'+ (this.z[0]-Math.floor(this.z[0]/this.z[1])*this.z[1]) + '/'+ this.z[1];
+      }else {
+        console.log(Math.floor(this.z[0]/this.z[1]));
+        return  this.z[0]+ '/'+ this.z[1];
+
+      }
+    }
+
+    this.additionFractions = function() {
+      let numerator = +this.nok/this.x[1]*this.x[0] + this.nok/this.y[1]*this.y[0];
+      let nod = grComFactor(numerator,this.nok);
+      this.z[0] = numerator/nod;
+      this.z[1] = this.nok/nod;
+      return this.properFraction();
+    }  //console.log(this.z[0],this.z[1]);
+
+
+    this.subtractionFractions = function() {
+      let numerator = Math.abs(+this.nok/this.x[1]*this.x[0] - this.nok/this.y[1]*this.y[0]);
+      let nod = grComFactor(numerator,this.nok);
+      this.z[0] = numerator/nod;
+      this.z[1] = this.nok/nod;
+      if (this.x[0]/this.x[1]<this.y[0]/this.x[1]) return '-'+ this.properFraction() ;
+      console.log(this.z[0],this.z[1]);
+      return this.properFraction() ;
+      //
+    }
+  }
+
+  let r = new CommonFractions([3,5],[12,5]);
+  r.additionFractions();
+  console.log(r.subtractionFractions());
+
+
+
+
+
+
+
+
 
 
 
 function functionName() {
   let s = document.getElementById('input_').value;
-  ww.innerHTML=myCar.info()+'<br>'+myCar.travelTime(s);
+  ww.innerHTML=myCar.info()+'<br>' + 'Это расстояние ваш автомобиль проедет за: '+ myCar.travelTime(s) +' чч:мм:сс';
 }
