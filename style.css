@@ -10,38 +10,32 @@
     margin-bottom: 10px;
   }
   .button{
-    padding:5px 35px ;
+    padding:7px 35px ;
     font-size: 22px;
-    margin-bottom: 10px;
     float: right;
     width: 200px;
-    flex: 0 0 200px;
-  }
-
-  .button{
-    padding:5px 35px ;
-    font-size: 22px;
-    margin-bottom: 10px;
-    float: right;
-    width: 200px;
-    flex: 0 0 200px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    align-self: flex-end;
   }
 
   .input_field{
-    padding:5px 35px ;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     font-size: 18px;
-    margin-bottom: 10px;
     width: 300px;
     flex: 0 0 300px;
   }
 
-  input{
-    padding:15px 25px ;
+  #input1, #input2{
+    padding:5px 15px ;
     font-size: 22px;
-  }
-
-  .field_text{
-    padding-bottom: 18px;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    margin-top: 10px;
+    border: none;
   }
 
   .broad {
@@ -61,16 +55,17 @@
   .short{ width: 350px;
     display: inline-block;
     font-size: 18px;
-    margin-top: 40px;
+    align-items: baseline;
     flex: 0 0 350px;
   }
   .text{
     text-align: left;
-    margin-top: 40px;
+
   }
   .divFlex{
     display: flex;
     justify-content: space-between;
+    align-items:center;
   }
   #nuberArea7 {
     padding: 15px;
@@ -82,4 +77,30 @@
     margin-right:auto;
     width:10%;
     margin-top:5vh;
+  }
+  .button_field {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .fraction,.fraction_out{
+    font-size: 22px;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 60px;
+    border: none;
+    box-shadow: 10px 5px 5px grey;
+  }
+
+  .fraction_out{
+    width: 100px;
+    padding:5px 15px ;
+    background: white;
+  }
+
+  hr{
+    width: 70px;
+    margin-left: -5px;
+    background-color: black;
   }

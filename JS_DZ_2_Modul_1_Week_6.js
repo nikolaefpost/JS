@@ -24,10 +24,6 @@
     };
   }
 
-  let myCar= new Car('Chevrolet', 'Lacetti', 2009, 90);
-
-
-
   function CommonFractions([numerator1,denominator1], [numerator2,denominator2]) {
     this.x = [numerator1,denominator1];
     this.y = [numerator2,denominator2];
@@ -47,6 +43,7 @@
       let nod = grComFactor(numerator,this.nok);
       this.z[0] = numerator/nod;
       this.z[1] = this.nok/nod;
+      console.log(this.properFraction());
       return this.properFraction();
     }
 
@@ -56,27 +53,57 @@
       let nod = grComFactor(numerator,this.nok);
       this.z[0] = numerator/nod;
       this.z[1] = this.nok/nod;
-      if (this.x[0]/this.x[1]<this.y[0]/this.x[1]) return '-'+ this.properFraction() ;
+      if (this.x[0]/this.x[1]<this.y[0]/this.x[1]) return '-'+ this.properFraction();
+      return this.properFraction();
+    }
 
+    this.multFractions = function() {
+      this.z[0] = this.x[0]*this.y[0];
+      this.z[1] = this.x[1]*this.y[1];
+      let nod=grComFactor(this.z[0],this.z[1]);
+      this.z=this.z.map((a)=>{return a/nod})
+      return this.properFraction();
+    }
+
+    this.divFractions = function() {
+      this.z[0] = this.x[0]*this.y[1];
+      this.z[1] = this.x[1]*this.y[0];
+      let nod=grComFactor(this.z[0],this.z[1]);
+      this.z=this.z.map((a)=>{return a/nod})
       return this.properFraction();
     }
   }
 
-  let r = new CommonFractions([2,4],[4,8]);
-  r.additionFractions();
-  console.log(r.subtractionFractions());
 
 
+  let myCar= new Car('Chevrolet', 'Lacetti', 2009, 90);
 
+  function outputFunction0() {
+    let s = document.getElementById('input1').value;
+    output_field0.innerHTML=myCar.info()+'<br>' + 'Это расстояние ваш автомобиль проедет за: '+ myCar.travelTime(s) +' чч:мм:сс';
+  }
 
-
-
-
-
-
-
-
-function functionName() {
-  let s = document.getElementById('input_').value;
-  ww.innerHTML=myCar.info()+'<br>' + 'Это расстояние ваш автомобиль проедет за: '+ myCar.travelTime(s) +' чч:мм:сс';
-}
+  function outputFunction1() {
+    let a1 = Number(document.getElementById('input3').value);
+    let b1 = Number(document.getElementById('input4').value);
+    let a2 = Number(document.getElementById('input5').value);
+    let b2 = Number(document.getElementById('input6').value);
+    let sign = document.getElementById('input7').value;
+    let r = new CommonFractions([a1,b1],[a2,b2]);
+    switch (sign) {
+      case '+':
+      out.innerHTML = ' = '+r.additionFractions();
+      break;
+      case '-':
+      out.innerHTML = ' = '+r.subtractionFractions();
+      break;
+      case '*':
+      out.innerHTML = ' = '+r.multFractions();
+      break;
+      case '/':
+      out.innerHTML = ' = '+r.divFractions();
+      break;
+      default:
+      out.innerHTML = 'введите одно из 4х действий: [+] [-] [*] [/]';
+    }
+  }
