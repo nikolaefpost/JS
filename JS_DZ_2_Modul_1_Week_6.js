@@ -106,3 +106,102 @@
       out.innerHTML = 'введите одно из 4х действий: [+] [-] [*] [/]';
     }
   }
+
+
+/************ ПРАКТИЧЕСКОЕ ЗАДАНИЕ *****************************************************/
+
+
+  let rectangle = {
+    x1:0,
+    y1:0,
+    x2:0,
+    y2:0,
+    get coordRect() {
+      return 'x1='+this.x1+ ', y1='+this.y1+ '; x2='+this.x2+ ', y2='+this.y2+';';
+    },
+
+    set coordRect(arr) {
+      if (Array.isArray(arr) && arr.length==4 && Number.isInteger(arr[0])&& Number.isInteger(arr[1])&& Number.isInteger(arr[2])&& Number.isInteger(arr[3])) {
+        this.x1 = arr[0];
+        this.y1 = arr[1];
+        this.x2 = arr[2];
+        this.y2 = arr[3];
+      }else {
+        alert('ERROR');
+      }
+    }
+  }
+
+  rectangle.width = function() {
+    return Math.abs(this.x1-this.x2);
+  }
+
+  rectangle.height = function() {
+    return Math.abs(this.y1-this.y2);
+  }
+
+  rectangle.square = function() {
+    return this.height()*this.width() ;
+  }
+
+  rectangle.perimeter = function() {
+    return (this.height()+this.width())*2 ;
+  }
+
+  rectangle.changeW = function(a) {
+    if (this.x1>this.x2) this.x1 = this.x1 + a;
+    else this.x2 = this.x2 + a;
+  }
+
+  rectangle.changeH = function(b) {
+    if (this.y1>this.y2) this.y1 = this.y1 + b;
+    else this.y2 = this.y2 + b;
+  }
+
+  rectangle.changeAll = function(a,b) {
+    this.changeW(a);
+    this.changeH(b);
+  }
+
+  rectangle.shiftX = function(a) {
+    this.x1 = this.x1 + a;
+    this.x2 = this.x2 + a;
+  }
+
+  rectangle.shiftY = function(b) {
+    this.y1 = this.y1 + b;
+    this.y2 = this.y2 + b;
+  }
+
+  rectangle.shiftAll = function(a,b) {
+    this.shiftX(a);
+    this.shiftY(b);
+  }
+
+  rectangle.test = function(a,b) {
+    let xArea;
+    let yArea;
+    if (this.x1<this.x2) {
+      if (this.x1<=a && a<=this.x2) xArea=true;
+      else xArea=false;
+    }else {
+      if (this.x2<=a && a<=this.x1) xArea=true;
+      else xArea=false;
+    }
+    if (this.y1<this.y2) {console.log();
+      if (this.y1<=b && b<=this.y2)  yArea=true;
+      else yArea=false;
+    }else {
+      if (this.y2<=b && b<=this.y1) yArea=true;
+      else yArea=false;
+    }
+    if (xArea&&yArea) return true;
+    else return false;
+  }
+
+rectangle.coordRect=[3,4,1,2];
+console.log(rectangle.coordRect);
+console.log(rectangle.height());
+rectangle.shiftAll(6,6);
+console.log(rectangle.coordRect);
+console.log(rectangle.test(8,10));
