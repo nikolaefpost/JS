@@ -28,11 +28,11 @@
     this.x = [numerator1,denominator1];
     this.y = [numerator2,denominator2];
     this.z = [0,0];
-    this.nok = (Math.abs(this.x[1] * this.y[1])/grComFactor(this.x[1],this.y[1]));
+    this.nok = (Math.abs(this.x[1] * this.y[1])/grComFactor(this.x[1],this.y[1]));                      // grComFactor(a,b)   функция нахождения НОД из JS_DZ_Recursion.js
 
-    this.properFraction = function(){
+    this.properFraction = function(){                                                                   // метод формирует правильную дробь из не правильной и выдает строку
       if (this.z[0]>this.z[1]) {
-        return Math.floor(this.z[0]/this.z[1]) +'*'+ (this.z[0]-Math.floor(this.z[0]/this.z[1])*this.z[1]) + '/'+ this.z[1];
+        return Math.floor(this.z[0]/this.z[1]) +'*'+ (this.z[0] - Math.floor(this.z[0]/this.z[1])*this.z[1]) +'/'+ this.z[1];
       }else {
         return  this.z[0]+ '/'+ this.z[1];
       }
@@ -43,7 +43,6 @@
       let nod = grComFactor(numerator,this.nok);
       this.z[0] = numerator/nod;
       this.z[1] = this.nok/nod;
-      console.log(this.properFraction());
       return this.properFraction();
     }
 
