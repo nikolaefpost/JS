@@ -107,6 +107,90 @@
     }
   }
 
+  let userTime = new Date;
+
+  userTime.show = function() {
+    return this.toLocaleTimeString();
+  }
+
+  userTime.setMySec = function(s) {
+    this.s = new Date(Date.parse(this)+s*1000);
+    return this.show.call(this.s);
+  }
+
+  userTime.setMyMin = function(m) {
+    return this.setMySec(m*60);
+  }
+
+  userTime.setMyHour = function(h) {
+    return this.setMySec(h*3600);
+  }
+
+  //console.log(userTime.show());
+  //console.log(userTime.setMySec(120));
+  //console.log(userTime.setMyMin(3));
+  //console.log(userTime.setMyHour(1));
+  //console.log(userTime.s);
+
+  let timeObj = {                                       //  альтернативная реализация объекта, описывающего время
+    myTime:[0,0,0],
+    get timesout (){
+      for (var i = 0; i < 3; i++) {
+        if (this.myTime[i]<10) {
+          this.myTime[i] = '0'+this.myTime[i];
+        }
+      }
+      return this.myTime[0] +':'+ this.myTime[1] +':'+ this.myTime[2];
+    },
+    set timesout(str){
+      str = str.split(':');
+      str[0]=Number(str[0]);
+      if (str[0]<=23 && str[0]>0) {
+        this.myTime[0] = str[0];
+      }else {return console.log('ERROR');}
+      for (var i = 1; i < 3; i++) {
+        str[i]=Number(str[i]);
+        if (str[i]<60 && str[i]>=0) {
+          this.myTime[i] = str[i];
+        }else {return console.log('ERROR');}
+      }
+    }
+  }
+
+  timeObj.setMyHour1 = function (h){
+    if (Number.isInteger(h)) {
+      this.myTime[0]+=h;
+      (this.myTime[0]>23) ? this.myTime[0]=this.myTime[0]%24: 0 ;
+    } else {return console.log('ERROR');}
+  }
+
+  timeObj.setMyMin1 = function (m) {
+    if (Number.isInteger(m)) {
+      this.myTime[1]+=m;
+      if (this.myTime[1]>59) {
+        this.setMyHour1(Math.floor(m/60));
+        this.myTime[1]=this.myTime[1]%60;
+      }
+    }
+  }
+
+  timeObj.setMySec1 = function (s) {
+    if (Number.isInteger(s)) {
+      this.myTime[2]+=s;
+      if (this.myTime[2]>59) {
+        this.setMyMin1(Math.floor(s/60));
+        this.myTime[2]=this.myTime[2]%60;
+      }
+    }
+  }
+
+
+  timeObj.timesout='23:59:0';
+  timeObj.setMySec1(3600);
+  console.log(timeObj.timesout);
+
+
+
 
 /************ ПРАКТИЧЕСКОЕ ЗАДАНИЕ *****************************************************/
 
@@ -199,9 +283,9 @@
     else return false;
   }
 
-rectangle.coordRect=[3,4,1,2];
-console.log(rectangle.coordRect);
-console.log(rectangle.height());
-rectangle.shiftAll(6,6);
-console.log(rectangle.coordRect);
-console.log(rectangle.test(8,10));
+  //rectangle.coordRect=[3,4,1,2];
+  //console.log(rectangle.coordRect);
+  //console.log(rectangle.height());
+  //rectangle.shiftAll(6,6);
+  //console.log(rectangle.coordRect);
+  //console.log(rectangle.test(8,10));
