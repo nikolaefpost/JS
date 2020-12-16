@@ -31,7 +31,7 @@
   Shop_.prototype.addProduct = function (name_, quantity) {
     let k=0;
     for (var i = 0; i < this.list.length; i++) {
-      if (this.list[i].name_==name_) {
+      if (this.list[i].name_==name_ && this.list[i].statusShop !='&#10004;') {
         this.list[i].quantity+=+quantity;
         k++;
       }
@@ -59,10 +59,10 @@
   function outputFunction1() {
     let p1 = document.getElementById('input8').value;
     let p2 = Number(document.getElementById('input9').value);
-    if ((typeof p1)=='string' && p2>0) {
+    if ((typeof p1)=='string' && p2>0) {                              // выполнится если оба параметра заполнены первый строка второй число >0                   -            добавим продукт в список
       out1.innerHTML=shop.addProduct(p1,p2).showList();
     }
-    if ((typeof p1)=='string' && p2=='') {
+    if ((typeof p1)=='string' && p2=='') {                           // выполнится если один параметр заполнен  строкой второй пропущен (без значения)           -            купим продукт
       out1.innerHTML=shop.buyProduct(p1).showList();
     }
   }
