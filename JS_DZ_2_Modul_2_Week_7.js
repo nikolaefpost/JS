@@ -14,9 +14,12 @@
 
 
   let shoppingList = [shop1, shop2, shop3, shop4];
-  let shop = { list:shoppingList };
+  function Shop_(arr) {
+    this.list = arr;
+  }
+  let shop = new Shop_(shoppingList);
 
-  shop.showList = function () {
+  Shop_.prototype.showList = function () {
     this.list.sort((a,b) => {if (a.statusShop > b.statusShop) return 1; else  return -1; } );
     let str='Список покупок:<br>';
     for (var i = 0; i < this.list.length; i++) {
@@ -25,7 +28,7 @@
     return str
   }
 
-  shop.addProduct = function (name_, quantity) {
+  Shop_.prototype.addProduct = function (name_, quantity) {
     let k=0;
     for (var i = 0; i < this.list.length; i++) {
       if (this.list[i].name_==name_) {
@@ -40,7 +43,7 @@
     }
   }
 
-  shop.buyProduct = function (name_) {
+  Shop_.prototype.buyProduct = function (name_) {
     let k=0;
     for (var i = 0; i < this.list.length; i++) {
       if (this.list[i].name_==name_ && this.list[i].statusShop=='&#10066;') {
@@ -56,4 +59,5 @@
   function outputFunction1() {
 
     out1.innerHTML=shop.addProduct('сыр ',1).buyProduct('пиво ').showList();
+    console.log(shop.list[0].name_);
   }
