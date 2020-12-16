@@ -7,10 +7,10 @@
     this.statusShop = statusShop;
   }
 
-  let shop1 = new Product('мука ', 1, '&#10004;');
-  let shop2 = new Product('яйца ', 20, '&#10066;');
+  let shop1 = new Product('мука', 1, '&#10004;');
+  let shop2 = new Product('яйца', 20, '&#10066;');
   let shop3 = new Product('масло', 2, '&#10004;');
-  let shop4 = new Product('пиво ', 1, '&#10066;');
+  let shop4 = new Product('пиво', 1, '&#10066;');
 
 
   let shoppingList = [shop1, shop2, shop3, shop4];
@@ -57,7 +57,12 @@
 
 
   function outputFunction1() {
-
-    out1.innerHTML=shop.addProduct('сыр ',1).buyProduct('пиво ').showList();
-    console.log(shop.list[0].name_);
+    let p1 = document.getElementById('input8').value;
+    let p2 = document.getElementById('input9').value;
+    if ((typeof p1)=='string' && p2>0) {
+      out1.innerHTML=shop.addProduct(p1,p2).showList();
+    }
+    if ((typeof p1)=='string' && p2=='') {
+      out1.innerHTML=shop.buyProduct(p1).showList();
+    }
   }
