@@ -1,49 +1,50 @@
 
 
 
-  function Shopping(name_, quantity, statusShop) {
+  function Product(name_, quantity, statusShop) {
     this.name_ = name_;
     this.quantity = quantity;
     this.statusShop = statusShop;
   }
 
-  let shop1 = new Shopping('мука ', 1, '&#10004;');
-  let shop2 = new Shopping('яйца ', 20, '&#10066;');
-  let shop3 = new Shopping('масло', 2, '&#10004;');
-  let shop4 = new Shopping('пиво ', 1, '&#10066;');
+  let shop1 = new Product('мука ', 1, '&#10004;');
+  let shop2 = new Product('яйца ', 20, '&#10066;');
+  let shop3 = new Product('масло', 2, '&#10004;');
+  let shop4 = new Product('пиво ', 1, '&#10066;');
 
 
   let shoppingList = [shop1, shop2, shop3, shop4];
+  let shop = { list:shoppingList };
 
-  Array.prototype.showList = function () {
-    this.sort((a,b) => {if (a.statusShop > b.statusShop) return 1; else  return -1; } );
+  shop.showList = function () {
+    this.list.sort((a,b) => {if (a.statusShop > b.statusShop) return 1; else  return -1; } );
     let str='Список покупок:<br>';
-    for (var i = 0; i < this.length; i++) {
-      str +=this[i].name_+'-' +this[i].quantity+'-' +this[i].statusShop+'<br>'
+    for (var i = 0; i < this.list.length; i++) {
+      str +=this.list[i].name_+'-' +this.list[i].quantity+'-' +this.list[i].statusShop+'<br>'
     }
     return str
   }
 
-  Array.prototype.addProduct = function (name_, quantity) {
+  shop.addProduct = function (name_, quantity) {
     let k=0;
-    for (var i = 0; i < this.length; i++) {
-      if (this[i].name_==name_) {
-        this[i].quantity+=quantity;
+    for (var i = 0; i < this.list.length; i++) {
+      if (this.list[i].name_==name_) {
+        this.list[i].quantity+=quantity;
         k++;
       }
     }
     if (k>0) { return this;}
     else {
-      this[this.length]=new Shopping(name_, quantity, '&#10066;');
+      this.list[this.list.length]=new Product(name_, quantity, '&#10066;');
       return this;
     }
   }
 
-  Array.prototype.buyProduct = function (name_) {
+  shop.buyProduct = function (name_) {
     let k=0;
-    for (var i = 0; i < this.length; i++) {
-      if (this[i].name_==name_ && this[i].statusShop=='&#10066;') {
-        this[i].statusShop='&#10004;';
+    for (var i = 0; i < this.list.length; i++) {
+      if (this.list[i].name_==name_ && this.list[i].statusShop=='&#10066;') {
+        this.list[i].statusShop='&#10004;';
         k++;
       }
     }
@@ -54,5 +55,5 @@
 
   function outputFunction1() {
 
-    out1.innerHTML=shoppingList.addProduct('водка',20).buyProduct('пиво ').showList();
+    out1.innerHTML=shop.addProduct('сыр ',1).buyProduct('пиво ').showList();
   }
