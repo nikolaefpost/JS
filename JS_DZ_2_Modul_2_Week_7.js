@@ -20,7 +20,7 @@
   let shop = new Shop_(shoppingList);
 
   Shop_.prototype.showList = function () {
-    this.list.sort((a,b) => {if (a.statusShop > b.statusShop) return 1; else  return -1; } );
+    this.list.sort((a,b) => {if (a.statusShop > b.statusShop) return 1; if (a.statusShop < b.statusShop) return -1; else  return 0; } );
     let str='Список покупок:<br>';
     for (var i = 0; i < this.list.length; i++) {
       str +=this.list[i].name_+'-' +this.list[i].quantity+'-' +this.list[i].statusShop+'<br>'
@@ -32,7 +32,7 @@
     let k=0;
     for (var i = 0; i < this.list.length; i++) {
       if (this.list[i].name_==name_) {
-        this.list[i].quantity+=quantity;
+        this.list[i].quantity+=+quantity;
         k++;
       }
     }
@@ -58,7 +58,7 @@
 
   function outputFunction1() {
     let p1 = document.getElementById('input8').value;
-    let p2 = document.getElementById('input9').value;
+    let p2 = Number(document.getElementById('input9').value);
     if ((typeof p1)=='string' && p2>0) {
       out1.innerHTML=shop.addProduct(p1,p2).showList();
     }
