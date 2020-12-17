@@ -56,7 +56,7 @@
   }
 
 
-  function outputFunction1() {
+  function outputFunction2() {
     let p1 = document.getElementById('input8').value;
     let p2 = Number(document.getElementById('input9').value);
     if ((typeof p1)=='string' && p2>0) {                              // выполнится если оба параметра заполнены первый строка второй число >0                   -            добавим продукт в список
@@ -90,7 +90,7 @@
   let store = new Store_(storeCheck);
 
   Store_.prototype.showList = function () {
-    let str='Чек магазина:<br>';
+    this.str='Чек магазина:<br>';
     for (var i = 0; i < this.list.length; i++) {
       this.str +=(i+1)+'. '+ this.list[i].name_ +'-'+ this.list[i].quantity +'шт.-'+ this.list[i].productPrice +'гр.----'+ this.list[i].productSum +'гр.<br>';
     }
@@ -122,3 +122,42 @@
     this.str +=this.sum/this.list.length+' гр.';
     return this;
   }
+
+//----------------------------------------------------------------------------------   3е ЗАДАНИЕ  ----------------------------------------------------------------------------------
+
+
+  function StyleElement(name_, value) {
+    this.name_ = name_;
+    this.quantity = value;
+  }
+
+  style_color = new StyleElement('color', 'red');
+  style_font = new StyleElement('font-size', '22px');
+  style_align = new StyleElement('text-align', 'center');
+  style_dec = new StyleElement('text-decoration', 'underline');
+  style_weight = new StyleElement('font-weight', 'bold');
+
+  let styleList = [style_color, style_font, style_align, style_dec, style_weight];
+
+  function StyleObj(arr) {
+    this.list = arr;
+    this.str = '';
+  }
+  style_obj = new StyleObj(styleList);
+  console.log(style_obj.list[0].quantity);
+
+  StyleObj.prototype.formation = function () {
+    this.str += 'style="';
+    for (var i = 0; i < this.list.length; i++) {
+      this.str +=this.list[i].name_+':'+this.list[i].quantity+'; '
+    }
+    this.str +='"';
+    return this;
+  }
+
+  StyleObj.prototype.show = function (text) {
+    text='<p '+this.str+'>'+text+'</p>'
+    document.write(text);
+  }
+  let userText ='Это третье домашнее задание JS_DZ_2_Modul_2_Week_7.js. &#160; Текст должен быть жирным, красным, подчеркнутым, размером 22 пикселя и выровнен по центру.'
+  style_obj.formation().show(userText);
