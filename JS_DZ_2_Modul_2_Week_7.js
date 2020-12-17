@@ -66,3 +66,59 @@
       out1.innerHTML=shop.buyProduct(p1).showList();
     }
   }
+//----------------------------------------------------------------------------------   2е ЗАДАНИЕ  ----------------------------------------------------------------------------------
+
+  function ProductSale(name_, quantity, productPrice) {
+    this.name_ = name_;
+    this.quantity = quantity;
+    this.productPrice = productPrice;
+    this.productSum = this.quantity*this.productPrice;
+  }
+
+  let checkEl1 = new ProductSale('мука', 1, 30);
+  let checkEl2 = new ProductSale('яйца', 20, 2);
+  let checkEl3 = new ProductSale('масло', 2, 40);
+  let checkEl4 = new ProductSale('пиво', 1, 20);
+
+
+  let storeCheck = [checkEl1, checkEl2, checkEl3, checkEl4];
+  function Store_(arr) {
+    this.list = arr;
+    this.str = '';
+    this.sum = 0;
+  }
+  let store = new Store_(storeCheck);
+
+  Store_.prototype.showList = function () {
+    let str='Чек магазина:<br>';
+    for (var i = 0; i < this.list.length; i++) {
+      this.str +=(i+1)+'. '+ this.list[i].name_ +'-'+ this.list[i].quantity +'шт.-'+ this.list[i].productPrice +'гр.----'+ this.list[i].productSum +'гр.<br>';
+    }
+    return this;
+  }
+
+  Store_.prototype.calcProductSum = function () {
+    this.sum=0;
+    this.str += '<hr><br>Итого по чеку: ';
+    for (var i = 0; i < this.list.length; i++) {
+      this.sum += this.list[i].productSum
+    }
+    this.str +=this.sum+' гр.';
+    return this;
+  }
+
+  Store_.prototype.maxProductSum = function () {
+    this.list.sort((a, b) => b.productSum - a.productSum);
+    this.str +='<hr>самая дорогая покупка:<br>'+this.list[0].name_ +'-'+ this.list[0].quantity +'шт.-'+ this.list[0].productPrice +'гр.----'+ this.list[0].productSum +'гр.<br>';
+    return this;
+  }
+
+  Store_.prototype.averageCheck = function () {
+    this.str += '<hr>средняя стоимость одного товара в чеке: ';
+    this.sum=0;
+    for (var i = 0; i < this.list.length; i++) {
+      this.sum += this.list[i].productSum
+    }
+    this.str +=this.sum/this.list.length+' гр.';
+    return this;
+  }
