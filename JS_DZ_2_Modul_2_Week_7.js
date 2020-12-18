@@ -123,6 +123,14 @@
     return this;
   }
 
+  window.onload = function () {
+    click1.onclick = function () {out2.innerHTML=store.showList().str;}
+    click2.onclick = function () {out2.innerHTML=store.calcProductSum().str;}
+    click3.onclick = function () {out2.innerHTML=store.maxProductSum().str;}
+    click4.onclick = function () {out2.innerHTML=store.averageCheck().str;}
+  }
+
+
 //----------------------------------------------------------------------------------   3е ЗАДАНИЕ  ----------------------------------------------------------------------------------
 
 
