@@ -221,7 +221,11 @@
     }
 
     sortGroupSeats(){
-      this.list.sort((a,b) => {if (a.number > b.number) return 1; if (a.number < b.number) return -1; else  return 0; } );
+      this.list.sort((a,b) => {if (a.seats < b.seats) return 1; if (a.seats > b.seats) return -1; else  return 0; } );
+      return this;
+    }
+    sortNameFaculty(){
+      this.list.sort((a,b) => {if (a.faculty > b.faculty) return 1; if (a.faculty < b.faculty) return -1; else  return 0; } );
       return this;
     }
 
@@ -250,6 +254,6 @@
       out3.innerHTML=audienceObj_.showList(p1).str;
     }
     click7.onclick = function () {out3.innerHTML=audienceObj_.showGroup(front_end).str;}
-    click8.onclick = function () {out3.innerHTML=audienceObj_.sortGroupSeats().showList().str;;}
-
+    click8.onclick = function () {out3.innerHTML=audienceObj_.sortGroupSeats().showList().str;}
+    click9.onclick = function () {out3.innerHTML=audienceObj_.sortNameFaculty().showList().str;}
   }
