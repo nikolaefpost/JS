@@ -202,7 +202,6 @@
     showList(faculty) {
       this.str='Список аудиторий:<br>';
       for (var i = 0; i < this.list.length; i++) {
-        console.log(faculty);
         if(faculty&&this.list[i].faculty!=faculty) {continue;}
         this.str +=(i+1)+'. аудитория: '+ this.list[i].number +'- кол-во мест: '+ this.list[i].seats +' факультет: '+ this.list[i].faculty +'<br>';
       }
@@ -212,7 +211,6 @@
     showGroup(obj) {
       this.str='Список аудиторий для группы-'+obj.name_+': <br>';
       for (var i = 0; i < this.list.length; i++) {
-        console.log(this.list[i].faculty!=obj.faculty && this.list[i].seats<obj.students);
         if(this.list[i].faculty==obj.faculty && this.list[i].seats>obj.students) {
           this.str +=(i+1)+'. аудитория: '+ this.list[i].number +'- кол-во мест: '+ this.list[i].seats +' факультет: '+ this.list[i].faculty +'<br>';
         }
@@ -224,11 +222,11 @@
       this.list.sort((a,b) => {if (a.seats < b.seats) return 1; if (a.seats > b.seats) return -1; else  return 0; } );
       return this;
     }
+
     sortNameFaculty(){
       this.list.sort((a,b) => {if (a.faculty > b.faculty) return 1; if (a.faculty < b.faculty) return -1; else  return 0; } );
       return this;
     }
-
   }
 
   class Group  {
