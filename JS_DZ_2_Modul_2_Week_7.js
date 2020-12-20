@@ -169,3 +169,17 @@
   }
   let userText ='Это третье домашнее задание JS_DZ_2_Modul_2_Week_7.js. &#160; Текст должен быть жирным, красным, подчеркнутым, размером 22 пикселя и выровнен по центру.'
   style_obj.formation().show(userText);
+
+  //----------------------------------------------------------------------------------   4е ЗАДАНИЕ  ----------------------------------------------------------------------------------
+
+
+  class Audience {
+    constructor(number, seats, faculty) {
+    this.number = number;
+    this.seats = seats;
+    this.faculty = faculty;
+    }
+  }
+
+  audience1 = new Audience('№1',15 ,'front-end');
+  console.log(audience1.faculty);

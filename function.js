@@ -26,14 +26,16 @@
     console.log(this.surname);
   }
 
+//*****************************  пример обьекта лифт **********************************************
+
   function Elevator(cargo) {
     this.cargo = cargo;
     this.floor = 1;
-    this.doors = false;                                             //   false  -  открыта
+    this.doors = false;                                                         //   false  -  открыта
   }
   let elevator_ = new Elevator(300);
 
-  Elevator.prototype.moove = function (buttonFloor, weight) {            //  buttonFloor - кнопка выбора этажа
+  Elevator.prototype.moove = function (buttonFloor, weight) {                   // метод движения лифта  buttonFloor - кнопка выбора этажа
     this.doors = true;
     if (this.doors && weight<this.cargo) {
       while (this.floor!=buttonFloor) {
@@ -46,7 +48,7 @@
     setTimeout(this.closingDoors(), 30000);
   }
 
-  Elevator.prototype.call = function (buttonCall) {                 //  buttonCall - кнопка вызова на этаже (номер этажа)
+  Elevator.prototype.call = function (buttonCall) {                              // метод вызова лифта buttonCall - кнопка вызова на этаже (номер этажа)
     if(this.doors == false && this.floor != buttonCall) this.doors = true;
     while (this.floor!=buttonCall) {
     (buttonCall>this.floor) ? this.floor++ : this.floor--;
@@ -56,10 +58,11 @@
     setTimeout(this.closingDoors(), 30000);
   }
 
-  Elevator.prototype.closingDoors = function () {this.doors = true;}
+  Elevator.prototype.closingDoors = function () {if(!this.doors) this.doors = true;}
   setInterval(elevator_.closingDoors(), 30000);
 
 
   elevator_.moove(5,290);
   elevator_.call(3);
+  elevator_.moove(9,290);
   console.log(elevator_.floor,elevator_.doors);
