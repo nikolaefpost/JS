@@ -123,12 +123,12 @@
     return this;
   }
 
-  window.onload = function () {
+  /*window.onload = function () {
     click1.onclick = function () {out2.innerHTML=store.showList().str;}
     click2.onclick = function () {out2.innerHTML=store.calcProductSum().str;}
     click3.onclick = function () {out2.innerHTML=store.maxProductSum().str;}
     click4.onclick = function () {out2.innerHTML=store.averageCheck().str;}
-  }
+  }*/
 
 
 //----------------------------------------------------------------------------------   3е ЗАДАНИЕ  ----------------------------------------------------------------------------------
@@ -181,5 +181,75 @@
     }
   }
 
-  audience1 = new Audience('№1',15 ,'front-end');
-  console.log(audience1.faculty);
+  audience1 = new Audience('№1',16 ,'front-end');
+  audience2 = new Audience('№2',8 ,'front-end');
+  audience3 = new Audience('№3',6 ,'front-end');
+  audience4 = new Audience('№4',20 ,'back-end');
+  audience5 = new Audience('№5',12 ,'back-end');
+  audience6 = new Audience('№6',6 ,'back-end');
+  audience7 = new Audience('№7',18 ,'design');
+  audience8 = new Audience('№8',10 ,'design');
+  audience9 = new Audience('№9',12 ,'design');
+
+  let audienceList = [audience1, audience2, audience3, audience4, audience5, audience6, audience7, audience8, audience9];
+
+  class AudienceObj {
+    constructor(arr) {
+      this.list = arr;
+      this.str = '';
+    }
+
+    showList(faculty) {
+      this.str='Список аудиторий:<br>';
+      for (var i = 0; i < this.list.length; i++) {
+        console.log(faculty);
+        if(faculty&&this.list[i].faculty!=faculty) {continue;}
+        this.str +=(i+1)+'. аудитория: '+ this.list[i].number +'- кол-во мест: '+ this.list[i].seats +' факультет: '+ this.list[i].faculty +'<br>';
+      }
+      return this;
+    }
+
+    showGroup(obj) {
+      this.str='Список аудиторий для группы-'+obj.name_+': <br>';
+      for (var i = 0; i < this.list.length; i++) {
+        console.log(this.list[i].faculty!=obj.faculty && this.list[i].seats<obj.students);
+        if(this.list[i].faculty==obj.faculty && this.list[i].seats>obj.students) {
+          this.str +=(i+1)+'. аудитория: '+ this.list[i].number +'- кол-во мест: '+ this.list[i].seats +' факультет: '+ this.list[i].faculty +'<br>';
+        }
+      }
+      return this;
+    }
+
+    sortGroupSeats(){
+      this.list.sort((a,b) => {if (a.number > b.number) return 1; if (a.number < b.number) return -1; else  return 0; } );
+      return this;
+    }
+
+  }
+
+  class Group  {
+    constructor(name_, students, faculty) {
+      this.name_ = name_;
+      this.students = students;
+      this.faculty = faculty;
+    }
+  }
+  let front_end = new Group('F02',7,'front-end' )
+  let audienceObj_ = new AudienceObj (audienceList);
+
+  window.onload = function () {
+    click1.onclick = function () {out2.innerHTML=store.showList().str;}
+    click2.onclick = function () {out2.innerHTML=store.calcProductSum().str;}
+    click3.onclick = function () {out2.innerHTML=store.maxProductSum().str;}
+    click4.onclick = function () {out2.innerHTML=store.averageCheck().str;}
+
+    click5.onclick = function () {out3.innerHTML=audienceObj_.showList().str;}
+    click6.onclick = function () {
+      let p1 = 0;
+      if (document.getElementById('input41').value) p1 = document.getElementById('input41').value;
+      out3.innerHTML=audienceObj_.showList(p1).str;
+    }
+    click7.onclick = function () {out3.innerHTML=audienceObj_.showGroup(front_end).str;}
+    click8.onclick = function () {out3.innerHTML=audienceObj_.sortGroupSeats().showList().str;;}
+
+  }
