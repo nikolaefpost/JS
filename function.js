@@ -54,7 +54,6 @@
     (buttonCall>this.floor) ? this.floor++ : this.floor--;
     }
     this.doors = false;
-    console.log(this.doors);
     setTimeout(this.closingDoors(), 30000);
   }
 
@@ -65,4 +64,16 @@
   elevator_.moove(5,290);
   elevator_.call(3);
   elevator_.moove(9,290);
-  console.log(elevator_.floor,elevator_.doors);
+  //console.log(elevator_.floor,elevator_.doors);
+
+  //***********************************************************************************************
+
+  class MyArray extends Array {
+  // при использовании таких методов, как map(), который возвращает конструктор по умолчанию, возвращает родительский объект Array вместо объекта MyArray.
+  static get [Symbol.species]() { return Array; }
+}
+var a = new MyArray(1,2,3);
+var mapped = a.map(x => x * x);
+
+console.log(mapped instanceof MyArray); // false
+console.log(mapped instanceof Array);   // true
