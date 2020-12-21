@@ -66,14 +66,14 @@
   elevator_.moove(9,290);
   //console.log(elevator_.floor,elevator_.doors);
 
-  //***********************************************************************************************
+  //******************************** переопределение конструктора Array**********************************
 
   class MyArray extends Array {
   // при использовании таких методов, как map(), который возвращает конструктор по умолчанию, возвращает родительский объект Array вместо объекта MyArray.
   static get [Symbol.species]() { return Array; }
 }
-var a = new MyArray(1,2,3);
-var mapped = a.map(x => x * x);
+//var a = new MyArray(1,2,3);
+//var mapped = a.map(x => x * x);
 
-console.log(mapped instanceof MyArray); // false
-console.log(mapped instanceof Array);   // true
+//console.log(mapped instanceof MyArray); // false
+//console.log(mapped instanceof Array);   // true
