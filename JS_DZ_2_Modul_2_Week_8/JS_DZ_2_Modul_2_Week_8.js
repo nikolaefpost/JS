@@ -52,6 +52,28 @@
       }
       return this;
     }
+
+    replaceHyphen(){
+      for (var i = 0; i < this.str.length; i++) {
+        if(this.str[i]=='-') {
+          i++;
+          this.rezalt+=this.str[i].toUpperCase();
+        }else {
+          this.rezalt += this.str[i];
+        }
+      }
+      return this;
+    }
+
+    abbreviation(){
+      if (this.str[0]!=' ') {
+        this.rezalt+=this.str[0].toUpperCase();
+      }
+      for (var i = 0; i < this.str.length; i++) {
+        if (this.str[i]==' ') this.rezalt+=this.str[i+1].toUpperCase();
+      }
+      return this;
+    }
   }
 
 window.onload = function () {
@@ -73,6 +95,17 @@ window.onload = function () {
     out83.innerHTML= strObj_.replaceStr().rezalt;
   }
 
+  click84.onclick = function () {
+    let str = document.getElementById('input84').value;
+    let strObj_ = new StringObj(str);
+    out84.innerHTML= strObj_.replaceHyphen().rezalt;
+  }
+
+  click85.onclick = function () {
+    let str = document.getElementById('input85').value;
+    let strObj_ = new StringObj(str);
+    out85.innerHTML= strObj_.abbreviation().rezalt;
+  }
 }
 
 
