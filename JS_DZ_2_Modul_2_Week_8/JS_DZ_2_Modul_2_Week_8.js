@@ -5,7 +5,7 @@
       this.rezalt ="";
     }
 
-    showInfo(){
+    showInfo(){                                                                 // метод вывода информации о строке
       let k=0, l=0, m=0;
       for (var i = 0; i < this.str.length; i++) {
         if(Number(this.str[i])) k++;
@@ -19,7 +19,7 @@
       return this;
     }
 
-    numberToText(){
+    numberToText(){                                                             // метод преобразования числа из цифры в слова
       if (this.str.length>3 || !(Number(this.str)) ) {this.rezalt='Введите число не болбше 3х знаков!'; return this;}
       if (this.str.length==2) this.str='0'+ this.str;
       if (this.str.length==1) this.str='00'+ this.str;
@@ -34,7 +34,7 @@
       return this;
     }
 
-    replaceStr(){
+    replaceStr(){                                             //метод заменяет числа на нижнее подчеркивание, заглавные буквы преобразует в строчные и на оборот
       for (var i = 0; i < this.str.length; i++) {
         if (this.str.charCodeAt(i)>64&&this.str.charCodeAt(i)<91 || this.str.charCodeAt(i)>1039 &&this.str.charCodeAt(i)<1104 || this.str.charCodeAt(i)==1025){
           this.rezalt+=this.str[i].toLowerCase();
@@ -53,7 +53,7 @@
       return this;
     }
 
-    replaceHyphen(){
+    replaceHyphen(){                                                            // метод преобразует названия css стилей с дефисом в название в СamelСase стиле
       for (var i = 0; i < this.str.length; i++) {
         if(this.str[i]=='-') {
           i++;
@@ -65,7 +65,7 @@
       return this;
     }
 
-    abbreviation(){
+    abbreviation(){                                                             // метод  который принимает словосочетаниеи превращает его в аббревиатуру
       if (this.str[0]!=' ') {
         this.rezalt+=this.str[0].toUpperCase();
       }
@@ -107,13 +107,3 @@ window.onload = function () {
     out85.innerHTML= strObj_.abbreviation().rezalt;
   }
 }
-
-
-//str = '363'
-//let strObj_ = new StringObj(str);
-//console.log(strObj_.numberToText());
- //function out() {
-//  let str = document.getElementById('input81').value;
-//  let strObj_ = new StringObj(str);
-//  out81.innerHTML=strObj_.showInfo();
-//}
