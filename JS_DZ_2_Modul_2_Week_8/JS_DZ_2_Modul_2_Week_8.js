@@ -74,40 +74,59 @@
       }
       return this;
     }
+
+    concatStr(...arg){                                                          //метод принимает любое количество строк, объединяет их в одну длинную строку ивозвращает ее
+      for (var i = 0; i < arguments.length; i++) {                              //this.str += Array.prototype.slice.call(arguments).reduce((acc, cur) =>acc+=cur ); альтернативный вариант.
+        this.str+=arguments[i];
+      }
+    return this.str;
+    }
+
+    calculator(){
+      this.sign = ['+','-','*','/'];
+      this.rezalt = this.sign.reduce((acc, cur) => this.str.indexOf(cur)!=-1 ? acc=this.str.indexOf(cur) : acc, '');
+
+    }
   }
 
-window.onload = function () {
 
-  click81.onclick = function () {
-    let str = document.getElementById('input81').value;
-    let strObj_ = new StringObj(str);
-    out81.innerHTML= strObj_.showInfo().rezalt;
-  }
-  click82.onclick = function () {
-    let str = document.getElementById('input82').value;
-    let strObj_ = new StringObj(str);
-    out82.innerHTML= strObj_.numberToText().rezalt;
+  window.onload = function () {
+
+    click81.onclick = function () {
+      let str = document.getElementById('input81').value;
+      let strObj_ = new StringObj(str);
+      out81.innerHTML= strObj_.showInfo().rezalt;
+    }
+    click82.onclick = function () {
+      let str = document.getElementById('input82').value;
+      let strObj_ = new StringObj(str);
+      out82.innerHTML= strObj_.numberToText().rezalt;
+    }
+
+    click83.onclick = function () {
+      let str = document.getElementById('input83').value;
+      let strObj_ = new StringObj(str);
+      out83.innerHTML= strObj_.replaceStr().rezalt;
+    }
+
+    click84.onclick = function () {
+      let str = document.getElementById('input84').value;
+      let strObj_ = new StringObj(str);
+      out84.innerHTML= strObj_.replaceHyphen().rezalt;
+    }
+
+    click85.onclick = function () {
+      let str = document.getElementById('input85').value;
+      let strObj_ = new StringObj(str);
+      out85.innerHTML= strObj_.abbreviation().rezalt;
+    }
   }
 
-  click83.onclick = function () {
-    let str = document.getElementById('input83').value;
-    let strObj_ = new StringObj(str);
-    out83.innerHTML= strObj_.replaceStr().rezalt;
-  }
-
-  click84.onclick = function () {
-    let str = document.getElementById('input84').value;
-    let strObj_ = new StringObj(str);
-    out84.innerHTML= strObj_.replaceHyphen().rezalt;
-  }
-
-  click85.onclick = function () {
-    let str = document.getElementById('input85').value;
-    let strObj_ = new StringObj(str);
-    out85.innerHTML= strObj_.abbreviation().rezalt;
-  }
-}
-
+  //let q = new StringObj('dgblkoEdflk');
+  //console.log(q.concatStr('100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx')); // проверка 6-го задания
+  let q = new StringObj(' 523 + 45 ');
+  q.calculator();
+  console.log(q.rezalt);
 
 //************************************** Практическое задание *****************************************************
 
@@ -147,8 +166,7 @@ window.onload = function () {
   }
   //let a = 'ldgblkdflk';
 //  let b = 'ldgblkdflk';
-  let q = new StringObj('100% Бесплатно dgblkoEdflk не удаляйте');
-//  let q1 = new StringObj('ldgblkdflk');
+  //let q = new StringObj('100% Бесплатно dgblkoEdflk не удаляйте');
+  //let q1 = new StringObj('ldgblkdflk');
   //console.log(q.vowelSearch().k);
-  q.filterSpam();
-  console.log(q.rezalt);
+  //q.concatStr(q,q1);
