@@ -2,7 +2,7 @@
   class StringObj {
     constructor(str) {
       this.str = str;
-      this.rezalt ="";
+      this.rezalt ='';
     }
 
     showInfo(){                                                                 // метод вывода информации о строке
@@ -107,3 +107,48 @@ window.onload = function () {
     out85.innerHTML= strObj_.abbreviation().rezalt;
   }
 }
+
+
+//************************************** Практическое задание *****************************************************
+
+  StringObj.prototype.comparison = function (str) {                             // сравнение двух строк
+    if (this.str.length>str.length) return 1;
+    if (this.str.length<str.length) return -1;
+    if (this.str.length==str.length) return 0;
+  }
+
+  StringObj.prototype.firstUp = function () {                                   // первая буква заглавная
+    for (var i = 0; i < this.str.length; i++) {
+      if(this.str[i]!=' ') {
+        this.str = this.str[i].toUpperCase() +this.str.slice(i+1);
+        break;
+      }
+    }
+    return this;
+  }
+
+  StringObj.prototype.vowelSearch = function () {
+    this.vowel = 'аеёиоуыэюяeyuioa';
+    this.k = (this.str.toLowerCase().split('').reduce((acc, cur) => this.vowel.includes(cur) ? acc += cur : acc, '')).length;
+    return this;
+  }
+
+  StringObj.prototype.filterSpam = function () {
+    this.spam = ['100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx'];
+    this.rezalt = this.spam.reduce((acc, cur) => this.str.toLowerCase().indexOf(cur) !=-1 ? acc+=', '+cur : acc, '');
+    if (this.rezalt !='') console.log('Это спам');
+    else console.log('Строка прошла проверку');
+  /*  for (var i = 0; i < this.spam.length; i++) {                             альтернативный вариант
+      this.rezalt = this.str.toLowerCase().indexOf(this.spam[i]);
+      if(this.rezalt>=0) { console.log('Это спам'); break;}
+    }
+    if (this.rezalt==-1) console.log('Строка прошла проверку');*/
+    return this;
+  }
+  //let a = 'ldgblkdflk';
+//  let b = 'ldgblkdflk';
+  let q = new StringObj('100% Бесплатно dgblkoEdflk не удаляйте');
+//  let q1 = new StringObj('ldgblkdflk');
+  //console.log(q.vowelSearch().k);
+  q.filterSpam();
+  console.log(q.rezalt);
