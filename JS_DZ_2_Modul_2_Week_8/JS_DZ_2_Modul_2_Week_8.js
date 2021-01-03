@@ -136,9 +136,9 @@
     return this;
   }
 
-  templateStr(){
-    this.createSplit(',');
-    this.template = this.rezalt[0];
+  templateStr(){                                                                // метод принимает первым параметром шаблон, в тексте которого должен использоваться %,
+    this.createSplit(',');                                                      // после символа % указывается индекс входного параметра. При выводе вместо %индекс
+    this.template = this.rezalt[0];                                             // выводится значение соответствующего входного параметра.
     for (var i = 1; i < this.rezalt.length; i++) {
       this.template=this.template.replace(('%'+i), this.rezalt[i]);
     }
