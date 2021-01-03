@@ -70,7 +70,7 @@
         this.rezalt+=this.str[0].toUpperCase();
       }
       for (var i = 0; i < this.str.length; i++) {
-        if (this.str[i]==' ') this.rezalt+=this.str[i+1].toUpperCase();
+        if ((this.str[i]==' ')&&(this.str[i+1]!=' ')) this.rezalt+=this.str[i+1].toUpperCase();
       }
       return this;
     }
@@ -82,13 +82,90 @@
     return this.str;
     }
 
-    calculator(){
-      this.sign = ['+','-','*','/'];
-      this.rezalt = this.sign.reduce((acc, cur) => this.str.indexOf(cur)!=-1 ? acc=this.str.indexOf(cur) : acc, '');
 
+  calculator(){                                                                 // метод принимает строку с примером, определяет, какие действие необходимо выполнить
+    this.sign = ['+','-','*','/'];                                              // (+ - * /), переводит операнды в числа, решает пример и возвращает результат,
+    this.rezalt=0;                                                              // если строку невозможно перевести в число генерирует ошибку
+    let m=0;
+    for (var i = 0; i < this.str.length; i++) {
+      if (this.sign.indexOf(this.str[i])!=-1) {
+        if (parseFloat(this.str.slice(m,i))) {
+          this.rezalt+= parseFloat(this.str.slice(m,i));
+          this.rezalt+= this.str[i];
+          m=i+1;
+        } else {
+          alert('Ошибка ввода данных!');
+          this.rezalt='ERROR';
+          return this;
+        }
+      }
     }
+    if (parseFloat(this.str.slice(m))) {
+      this.rezalt+= parseFloat(this.str.slice(m));
+      this.rezalt = eval(this.rezalt);
+    } else {
+      alert('Ошибка ввода данных!');
+      this.rezalt='ERROR';
+    }
+    return this;
   }
 
+  // parseUrl(){                                                                // используя конструктор URL
+  //   this.url = new URL(this.str);                                            // метод получает url и выводит  информацию о нем
+  //   this.rezalt = `Разбор url:<br> протокол - ${this.url.protocol}, <br>  домен - ${this.url.hostname}, <br> путь -  ${this.url.pathname} `;
+  //   return this;
+  // }
+
+  parseUrl(){                                                                   // метод получает url и выводит  информацию о нем
+    let m,n=0;
+    m = this.str.indexOf('//');
+    if (m!=-1) this.rezalt= 'протокол: '+ this.str.slice(0,m)+'<br>';
+    n = this.str.indexOf('/',m+2);
+    if (m!=-1) this.rezalt+= 'домен: '+ this.str.slice(m+2,n)+'<br>'+'путь: '+ this.str.slice(n+1);
+    return this;
+  }
+
+  createSplit(sign){                                                            // метод имитируем метод Array.prototype.split
+    this.rezalt=[];                                                             // принимает разделитель sign
+    let subStr='';                                                              // не использует Array.prototype.slice
+    for (var i = 0; i < this.str.length; i++) {
+      if (this.str[i]!=sign) subStr+=this.str[i];
+      if (this.str[i]==sign) {this.rezalt.push(subStr); subStr='';}
+    }
+    this.rezalt.push(subStr);
+    return this;
+  }
+
+  templateStr(){
+    this.createSplit(',');
+    this.template = this.rezalt[0];
+    for (var i = 1; i < this.rezalt.length; i++) {
+      this.template=this.template.replace(('%'+i), this.rezalt[i]);
+    }
+    return this;
+  }
+  }
+
+
+
+  /*calculator1(){
+    this.sign = ['+','-','*','/'];
+    this.mass = [];
+    this.rezalt=0;
+    let m=0;
+    for (var i = 0; i < this.str.length; i++) {
+    if (this.sign.indexOf(this.str[i])!=-1) {
+      this.mass.push(parseInt(this.str.slice(m,i-1)));
+      this.mass.push(this.str[i]);
+      m=i+1;
+    }
+  }
+  this.mass.push(parseInt(this.str.slice(m)));
+  for (var i = 0; i < this.mass.length; i++) {
+    this.rezalt+= this.mass[i];
+  }
+  this.rezalt = eval(this.rezalt);
+}*/
 
   window.onload = function () {
 
@@ -120,13 +197,37 @@
       let strObj_ = new StringObj(str);
       out85.innerHTML= strObj_.abbreviation().rezalt;
     }
+
+    click87.onclick = function () {
+      let str = document.getElementById('input87').value;
+      let strObj_ = new StringObj(str);
+      out87.innerHTML=strObj_.calculator().str+' = '+ strObj_.calculator().rezalt;
+    }
+
+    click88.onclick = function () {
+      let str = document.getElementById('input88').value;
+      let strObj_ = new StringObj(str);
+      out88.innerHTML=strObj_.parseUrl().rezalt;
+    }
+
+    click89.onclick = function () {
+      let str = document.getElementById('input891').value;
+      let sign = document.getElementById('input892').value;
+      let strObj_ = new StringObj(str);
+      out89.innerHTML=strObj_.createSplit(sign).rezalt;
+    }
+
+    click810.onclick = function () {
+      let str = document.getElementById('input810').value;
+      let strObj_ = new StringObj(str);
+      out810.innerHTML=strObj_.templateStr().template;
+    }
   }
 
-  //let q = new StringObj('dgblkoEdflk');
+  let q = new StringObj('Today is %1 %2.%3.%4”, “Monday”, 10,8,2020');
+  q.templateStr();
   //console.log(q.concatStr('100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx')); // проверка 6-го задания
-  let q = new StringObj(' 523 + 45 ');
-  q.calculator();
-  console.log(q.rezalt);
+
 
 //************************************** Практическое задание *****************************************************
 
