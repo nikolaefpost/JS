@@ -213,7 +213,7 @@
     click87.onclick = function () {
       let str = document.getElementById('input87').value;
       let strObj_ = new StringObj(str);
-      out87.innerHTML=strObj_.calculator().str+' = '+ strObj_.calculator().rezalt;
+      out87.innerHTML=strObj_.calculator().str+' = '+ strObj_.rezalt;
     }
 
     click88.onclick = function () {
