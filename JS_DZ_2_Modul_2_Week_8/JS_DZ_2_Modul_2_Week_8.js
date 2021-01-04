@@ -116,13 +116,25 @@
   //   return this;
   // }
 
-  parseUrl(){                                                                   // метод получает url и выводит  информацию о нем
-    let m,n=0;
+  parseUrl(){                                                                   // метод получает url и выводит  информацию о нем +'путь: '+ this.str.slice(n+1);
+    let m,n,k,h=0;
     m = this.str.indexOf('//');
-    if (m!=-1) this.rezalt= 'протокол: '+ this.str.slice(0,m)+'<br>';
-    n = this.str.indexOf('/',m+2);
-    if (m!=-1) this.rezalt+= 'домен: '+ this.str.slice(m+2,n)+'<br>'+'путь: '+ this.str.slice(n+1);
-    return this;
+    if (m!=-1) {
+      this.rezalt= 'протокол: '+ this.str.slice(0,m)+'<br>';
+      n = this.str.indexOf('/',m+2);
+      k = this.str.indexOf('?',n+1);
+      h = this.str.indexOf('#',k+1);
+      if (n!=-1) {
+        this.rezalt+= 'домен: '+ this.str.slice(m+2,n)+'<br>';
+          if (k!=-1) {
+            this.rezalt += 'путь: '+ this.str.slice(n+1,k)+'<br>';
+              if (h!=-1) {
+                this.rezalt += 'запрос: '+ this.str.slice(k+1,h)+'<br>' +'хеш: '+ this.str.slice(h+1);
+              } else { this.rezalt+= 'запрос: '+ this.str.slice(k+1);}
+          }else { this.rezalt+= 'путь: '+ this.str.slice(n+1);}
+      } else { this.rezalt+= 'домен: '+ this.str.slice(m+2);}
+  } else { this.rezalt+= 'эта строка не url!';}
+  return this;
   }
 
   createSplit(sign){                                                            // метод имитируем метод Array.prototype.split
