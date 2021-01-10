@@ -110,6 +110,32 @@
     return this;
   }
 
+  calculator2(){                                                                 //   отличается НЕ ИСПОЛЬЗУЕТ EVAL
+    this.sign = ['+','-','*','/'];                                              //    не определяет приритеты операций
+    this.rezalt='';
+    let m=0;
+    for (var i = 0; i < this.str.length; i++) {
+      if (this.sign.indexOf(this.str[i])!=-1) {
+        if (parseFloat(this.str.slice(m,i))&&parseFloat(this.str.slice(i+1))) {
+          this.rezalt ? this.rezalt : this.rezalt=parseFloat(this.str.slice(0,i));
+          m=i+1;
+          switch (this.str[i]) {
+            case '+': this.rezalt += parseFloat(this.str.slice(m)); break;
+            case '-': this.rezalt -= parseFloat(this.str.slice(m)); break;
+            case '*': this.rezalt *= parseFloat(this.str.slice(m)); break;
+            case '/': this.rezalt /= parseFloat(this.str.slice(m)); break;
+          }
+        } else {
+          alert('Ошибка ввода данных!');
+          this.rezalt='ERROR';
+          return this;
+        }
+      }
+    }
+
+    return this;
+  }
+
   // parseUrl(){                                                                // используя конструктор URL
   //   this.url = new URL(this.str);                                            // метод получает url и выводит  информацию о нем
   //   this.rezalt = `Разбор url:<br> протокол - ${this.url.protocol}, <br>  домен - ${this.url.hostname}, <br> путь -  ${this.url.pathname} `;
@@ -137,7 +163,7 @@
   return this;
   }
 
-  createSplit(sign){                                                            // метод имитируем метод Array.prototype.split
+  createSplit(sign){                                                            // метод имитирует метод Array.prototype.split
     this.rezalt=[];                                                             // принимает разделитель sign
     let subStr='';                                                              // не использует Array.prototype.slice
     for (var i = 0; i < this.str.length; i++) {
@@ -213,7 +239,7 @@
     click87.onclick = function () {
       let str = document.getElementById('input87').value;
       let strObj_ = new StringObj(str);
-      out87.innerHTML=strObj_.calculator().str+' = '+ strObj_.rezalt;
+      out87.innerHTML=strObj_.calculator2().str+' = '+ strObj_.rezalt;
     }
 
     click88.onclick = function () {
