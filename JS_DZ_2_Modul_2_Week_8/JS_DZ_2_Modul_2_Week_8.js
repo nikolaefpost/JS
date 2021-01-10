@@ -2,7 +2,7 @@
   class StringObj {
     constructor(str) {
       this.str = str;
-      this.rezalt ='';
+      this.rezalt =[];
     }
 
     showInfo(){                                                                 // метод вывода информации о строке
@@ -142,7 +142,7 @@
   //   return this;
   // }
 
-  parseUrl(){                                                                   // метод получает url и выводит  информацию о нем +'путь: '+ this.str.slice(n+1);
+  parseUrl(){                                                                   // метод получает url и выводит  информацию о нем
     let m,n,k,h=0;
     m = this.str.indexOf('//');
     if (m!=-1) {
@@ -184,26 +184,6 @@
   }
   }
 
-
-
-  /*calculator1(){
-    this.sign = ['+','-','*','/'];
-    this.mass = [];
-    this.rezalt=0;
-    let m=0;
-    for (var i = 0; i < this.str.length; i++) {
-    if (this.sign.indexOf(this.str[i])!=-1) {
-      this.mass.push(parseInt(this.str.slice(m,i-1)));
-      this.mass.push(this.str[i]);
-      m=i+1;
-    }
-  }
-  this.mass.push(parseInt(this.str.slice(m)));
-  for (var i = 0; i < this.mass.length; i++) {
-    this.rezalt+= this.mass[i];
-  }
-  this.rezalt = eval(this.rezalt);
-}*/
 
   window.onload = function () {
 
@@ -262,8 +242,7 @@
     }
   }
 
-  let q = new StringObj('Today is %1 %2.%3.%4”, “Monday”, 10,8,2020');
-  q.templateStr();
+  //let q = new StringObj('Today is %1 %2.%3.%4”, “Monday”, 10,8,2020');
   //console.log(q.concatStr('100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx')); // проверка 6-го задания
 
 
@@ -285,13 +264,13 @@
     return this;
   }
 
-  StringObj.prototype.vowelSearch = function () {
+  StringObj.prototype.vowelSearch = function () {                               // нахождение гласных
     this.vowel = 'аеёиоуыэюяeyuioa';
     this.k = (this.str.toLowerCase().split('').reduce((acc, cur) => this.vowel.includes(cur) ? acc += cur : acc, '')).length;
     return this;
   }
 
-  StringObj.prototype.filterSpam = function () {
+  StringObj.prototype.filterSpam = function () {                                // поиск спама в строке
     this.spam = ['100% бесплатно', 'увеличение продаж', 'только сегодня', 'не удаляйте', 'xxx'];
     this.rezalt = this.spam.reduce((acc, cur) => this.str.toLowerCase().indexOf(cur) !=-1 ? acc+=', '+cur : acc, '');
     if (this.rezalt !='') console.log('Это спам');
@@ -303,9 +282,59 @@
     if (this.rezalt==-1) console.log('Строка прошла проверку');*/
     return this;
   }
-  //let a = 'ldgblkdflk';
-//  let b = 'ldgblkdflk';
-  //let q = new StringObj('100% Бесплатно dgblkoEdflk не удаляйте');
-  //let q1 = new StringObj('ldgblkdflk');
-  //console.log(q.vowelSearch().k);
-  //q.concatStr(q,q1);
+
+  StringObj.prototype.lineShortening = function (str,n) {                       // принимает строку и ее максимальную длину, если длина строки больше, чем максимальная,
+    str.length>n ? this.rezalt = str.slice(0,n-1)+'...' : this.rezalt = str;    // то отбросываются лишние символы и добавляются вместо них троеточие.
+    return this;
+  }
+
+  StringObj.prototype.isPolindrom = function () {                               // проверяет, является ли переданная строка палиндромом.
+    for (var i = 0; i <= this.str.length/2; i++) { if (this.str[i]!=this.str[(this.str.length-1)-i])  {this.rezalt='no'; return this;}}
+    this.rezalt='yes'
+    return this;
+  }
+
+  StringObj.prototype.wordCount = function () {                                 // считает количество слов в предложении
+    this.createSplit(' ');
+    this.rezalt = this.rezalt.length;
+    return this;
+  }
+
+  StringObj.prototype.wordMax = function () {                                   // возвращает самое длинное слово из предложения.
+    this.createSplit(' ');
+    this.rezalt.sort((a, b) => b.length - a.length);
+    this.rezalt=this.rezalt[0];
+    return this;
+  }
+
+  StringObj.prototype.wordAverage = function () {                               // возвращает среднюю длину слова из предложения.
+    this.createSplit(' ');
+    this.rezalt = this.rezalt.reduce((acc, cur) => {return acc+=cur.length},0)/this.rezalt.length;
+    //this.rezalt = this.rezalt.map((num) =>num=num.length ).reduce((acc, cur) => acc+=cur)/this.rezalt.length;;
+    return this;
+  }
+
+  StringObj.prototype.searchSign = function (sign){                             // принимает строку при создании обьекта и символ аргументом метода
+    this.rezalt=[];                                                             // и выводит индексы, по которым находится этот символ в строке в виде массива
+    for (var i = 0; i < this.str.length; i++) {
+      if (this.str[i]==sign) this.rezalt.push(i);
+    }
+    return this;
+  }
+
+  StringObj.prototype.searchSign1 = function (sign){
+    //this.rezalt=[];
+    let m=-1;
+    do {
+      m = this.str.indexOf(sign,++m);
+      console.log(m);
+      if(m!=-1) this.rezalt.push(m);
+    } while (m!=-1);
+
+    return this;
+  }
+
+
+
+  let q = new StringObj('ьпринимает строку и ее максимальную длину, если длина строки больше, чем максимальная');
+  console.log(q.wordAverage().rezalt);
