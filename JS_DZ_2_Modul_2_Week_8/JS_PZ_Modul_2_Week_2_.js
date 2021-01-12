@@ -42,4 +42,4 @@
 
  q = new ArrObj('12 13 6 78 23 89 67 23 09 66 44');
  //q.stringToArr='12 12 34 67 77';
-console.log( q.deleteNumbers(4).arr);
+console.log( q.deleteNumbers(0).arr);

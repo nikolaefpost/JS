@@ -323,18 +323,15 @@
   }
 
   StringObj.prototype.searchSign1 = function (sign){
-    //this.rezalt=[];
     let m=-1;
     do {
       m = this.str.indexOf(sign,++m);
-      console.log(m);
       if(m!=-1) this.rezalt.push(m);
     } while (m!=-1);
-
     return this;
   }
 
 
 
-  let q = new StringObj('ьпринимает строку и ее максимальную длину, если длина строки больше, чем максимальная');
-  console.log(q.wordAverage().rezalt);
+  //let q = new StringObj('ьпринимает строку и ее максимальную длину, если длина строки больше, чем максимальная');
+  //console.log(q.wordAverage().rezalt);
