@@ -53,11 +53,11 @@
     margin-right:auto;
     margin-top:5vh;
   }
-  .short{ width: 350px;
+  .short{
     display: inline-block;
     font-size: 18px;
     align-items: baseline;
-    flex: 0 0 350px;
+
   }
   .text{
     text-align: left;
