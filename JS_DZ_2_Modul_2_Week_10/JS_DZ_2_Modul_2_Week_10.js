@@ -31,8 +31,7 @@
       'px; overflow: hidden; width: '+this.diameter+'px; height:'+this.diameter +
       'px;">-------------------------------</p> Радиус окружности: R= '+this.radius+'px; <br>'+
       'Диаметр окружности: D= ' + this.diameter + 'px; <br> Площадь окружности: S= ' + this.areaCircle()+
-       'px2; <br> Длинна окружности: L= ' + this.circumFerence()+ 'px;';
-       
+      'px2; <br> Длинна окружности: L= ' + this.circumFerence()+ 'px;';
     }
   }
 // --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
@@ -109,5 +108,29 @@
       let divS = new HtmlElement('div',false);          divS.settingStyle('width','300px').settingStyle('margin','10px').endtAttach(h3).endtAttach(img).endtAttach(p);
       let divF = new HtmlElement('div',false);          divF.settingAttribute('id','wrapper').settingStyle('display','flex').endtAttach(divS).endtAttach(divS);
       out102.innerHTML=divF.getHtml();
+    }
+
+    click101p.onclick = function () {
+      let inputStyle = document.getElementById('input101p1').value.split(',')
+      let str = document.getElementById('input101p2').value;
+      let userText = new PrintMaсhine(inputStyle);
+
+      console.log(userText.print(str));
+      outp1.innerHTML=userText.print(str);
+    }
+  }
+
+  //************************************** Практическое задание *****************************************************
+
+  class PrintMaсhine {
+    constructor([font_size, font_colors, font_family]) {
+      this.font_size = font_size;
+      this.font_colors = font_colors;
+      this.font_family = font_family;
+      this.str = '';
+    }
+
+    print(str){
+      return this.str ='<span style=" font-size:' + this.font_size +'; color:' + this.font_colors+'; font-family:' + this.font_family+';">' + str + '</span>';
     }
   }
