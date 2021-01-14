@@ -131,7 +131,7 @@
   }
 
   //************************************** Практическое задание *****************************************************
-
+// --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------
   class PrintMaсhine {
     constructor([font_size, font_colors, font_family]) {
       this.font_size = font_size;
@@ -144,7 +144,7 @@
       return this.str ='<span style=" font-size:' + this.font_size +'; color:' + this.font_colors+'; font-family:' + this.font_family+';">' + str + '</span>';
     }
   }
-
+// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
   class NewsArticle {
     constructor(heading, publication_date, text, tag) {
       this.heading = heading;
@@ -172,7 +172,7 @@
        return this.str = '<div style="padding:20px;"><h3>'+this.heading+'</h3><small>'+this.date_+'</small><br><p>'+this.text+'<br><br><span>' + this.tag_ + '</span></p></div>';
      }
   }
-
+// --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
   class NewsFeed {
     constructor() {
       this.news=[];
@@ -193,12 +193,10 @@
 
     deleteNews(heading){
       if (!heading) {
-        console.log('eee');
         this.news.pop();
       }else {
         let n = this.news.length;
         for (var i = 0; i < n; i++) {
-          console.log(this.news[i].heading==heading);
           if(this.news[i].heading==heading){
              delete this.news[i];
              for (var j = i; j < n; j++) {
