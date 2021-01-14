@@ -114,9 +114,19 @@
       let inputStyle = document.getElementById('input101p1').value.split(',')
       let str = document.getElementById('input101p2').value;
       let userText = new PrintMaсhine(inputStyle);
-
-      console.log(userText.print(str));
       outp1.innerHTML=userText.print(str);
+    }
+
+    click102p.onclick = function () {
+      let art1 = new NewsArticle('Уважаемые студенты!', '1,01,2021', 'С 11.01 все занятия в Академия проводятся онлайн. В таком же режиме, как мы работали ранее в период карантина.  У кого возникают трудности с подключениям в Microsoft Teams - сообщите преподавателю или в учебную часть.', ['mystat','itstep']);
+      let art2 = new NewsArticle('eee', '4,01,2021', 'ffffffffff С 11.01 все занятия в ', ['mystat','itstep']);
+      let art3 = new NewsArticle('sss', '3,01,2021', 'sssssssssss С 11.01 все занятия в ', ['ddd','itstep']);
+      let myFeed = new NewsFeed();
+      myFeed.addNews(art1).addNews(art2).addNews(art3);
+      //myFeed.deleteNews('eee');
+
+      //outp2.innerHTML=myFeed.news[1].print();
+      outp2.innerHTML=myFeed.sortNews().showNews();
     }
   }
 
@@ -132,5 +142,85 @@
 
     print(str){
       return this.str ='<span style=" font-size:' + this.font_size +'; color:' + this.font_colors+'; font-family:' + this.font_family+';">' + str + '</span>';
+    }
+  }
+
+  class NewsArticle {
+    constructor(heading, publication_date, text, tag) {
+      this.heading = heading;
+      this.text = text;
+      this.publication_date =new Date (publication_date.split(',').reverse().join(','));
+      this.tag = tag;
+    }
+
+    get date_(){
+      let now_date = (new Date()-this.publication_date)/86400000;
+      if (now_date<1) return this.publication_date='сегодня';
+      if (now_date<7) return this.publication_date=Math.floor(now_date)+' дней назад';
+      else return this.publication_date.toLocaleDateString();
+    }
+
+    get tag_(){
+      let tag_str=''
+      for (var i = 0; i < this.tag.length; i++) {
+        tag_str+='#'+this.tag[i]+' ';
+      }
+      return tag_str;
+    }
+
+     print(){
+       return this.str = '<div style="padding:20px;"><h3>'+this.heading+'</h3><small>'+this.date_+'</small><br><p>'+this.text+'<br><br><span>' + this.tag_ + '</span></p></div>';
+     }
+  }
+
+  class NewsFeed {
+    constructor() {
+      this.news=[];
+    }
+
+    get feed_length(){
+      return this.news.length;
+    }
+
+    showNews(){
+    return  this.rezalt = this.news.reduce((acc, cur) => {return acc+=cur.print()},'');
+    }
+
+    addNews(articl){
+      this.news.push(articl);
+      return this;
+    }
+
+    deleteNews(heading){
+      if (!heading) {
+        console.log('eee');
+        this.news.pop();
+      }else {
+        let n = this.news.length;
+        for (var i = 0; i < n; i++) {
+          console.log(this.news[i].heading==heading);
+          if(this.news[i].heading==heading){
+             delete this.news[i];
+             for (var j = i; j < n; j++) {
+               this.news[j] = this.news[j+1]
+             }
+             this.news.length = this.news.length-1
+             return this;
+           }
+        }
+      }
+    }
+
+    searchNews(tag){
+      for (var i = 0; i < this.news.length; i++) {
+        for (var j = 0; j < this.news[i].tag.length; j++) {
+            if(this.news[i].tag[j]==tag) return this.news[i].print();
+        }
+      }
+    }
+
+    sortNews(){
+      this.news.sort((a, b) =>  {return b.publication_date - a.publication_date});
+      return this;
     }
   }
