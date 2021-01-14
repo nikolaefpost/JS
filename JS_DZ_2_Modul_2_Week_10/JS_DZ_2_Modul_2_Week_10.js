@@ -146,11 +146,11 @@
   }
 // --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
   class NewsArticle {
-    constructor(heading, publication_date, text, tag) {
+    constructor(heading, publication_date, text, arrTag) {
       this.heading = heading;
       this.text = text;
       this.publication_date =new Date (publication_date.split(',').reverse().join(','));
-      this.tag = tag;
+      this.tag = arrTag;
     }
 
     get date_(){
