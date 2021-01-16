@@ -25,14 +25,6 @@
     circumFerence(){
       return Math.PI*this._radius*2;
     }
-
-    showInfo(){
-      return  this.str = '<p style="border-radius: 50%; border: 1px solid black; line-height:'+this.diameter+
-      'px; overflow: hidden; width: '+this.diameter+'px; height:'+this.diameter +
-      'px;">-------------------------------</p> Радиус окружности: R= '+this.radius+'px; <br>'+
-      'Диаметр окружности: D= ' + this.diameter + 'px; <br> Площадь окружности: S= ' + this.areaCircle()+
-      'px2; <br> Длинна окружности: L= ' + this.circumFerence()+ 'px;';
-    }
   }
 // --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
   class HtmlElement {
@@ -94,7 +86,12 @@
       let userCircle = new Circle();
       let inputvalue = document.getElementById('input101').value;
       userCircle.radius = inputvalue;
-      out101.innerHTML=userCircle.showInfo();
+      let str =  '<p style="border-radius: 50%; border: 1px solid black; line-height:'+userCircle.diameter+
+      'px; overflow: hidden; width: '+userCircle.diameter+'px; height:'+userCircle.diameter +
+      'px;">-------------------------------</p> Радиус окружности: R= '+userCircle.radius+'px; <br>'+
+      'Диаметр окружности: D= ' + userCircle.diameter + 'px; <br> Площадь окружности: S= ' + userCircle.areaCircle()+
+      'px2; <br> Длинна окружности: L= ' + userCircle.circumFerence()+ 'px;';
+      out101.innerHTML=str;
     }
 
     click102.onclick = function () {
@@ -126,7 +123,7 @@
       //myFeed.deleteNews('eee');
 
       //outp2.innerHTML=myFeed.news[1].print();
-      outp2.innerHTML=myFeed.sortNews().showNews();
+      outp2.innerHTML=myFeed.sortNews().deleteNews1('eee').showNews();
     }
   }
 
@@ -137,7 +134,6 @@
       this.font_size = font_size;
       this.font_colors = font_colors;
       this.font_family = font_family;
-      this.str = '';
     }
 
     print(str){
@@ -209,12 +205,23 @@
       }
     }
 
+    deleteNews1(heading){
+      if (!heading)  this.news.pop();
+      else this.news = this.news.filter(function(art) {return art.heading!=heading});
+      return this;
+    }
+
     searchNews(tag){
       for (var i = 0; i < this.news.length; i++) {
         for (var j = 0; j < this.news[i].tag.length; j++) {
             if(this.news[i].tag[j]==tag) return this.news[i].print();
         }
       }
+    }
+
+    searchNews1(tag){
+      this.news = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
+      return this;
     }
 
     sortNews(){
