@@ -59,7 +59,7 @@
       return this;
     }
 
-    endtAttach(tagObj){
+    endAttach(tagObj){
       this.attachment.push(tagObj);
       return this;
     }
@@ -99,11 +99,11 @@
       let p = new HtmlElement('p',false,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'+
        'Etiam sodales lectus eget dictum fringilla. Cras euismod sapien ullamcorper tortor euismod'+
        'suscipit. Sed lobortis magna ut posuere faucibus. Etiam risus eros, elementum eu dolor quis,'+
-       'pellentesque pharetra tellus. Curabitur tortor risus, fringilla ut faucibus sagittis, efficitur eget dui.'); p.settingStyle('text-align','justify').endtAttach(a);
+       'pellentesque pharetra tellus. Curabitur tortor risus, fringilla ut faucibus sagittis, efficitur eget dui.'); p.settingStyle('text-align','justify').endAttach(a);
       let h3 = new HtmlElement('h3',false,'What is Lorem Ipsum?');
       let img = new HtmlElement('img',true);            img.settingStyle('width','100%').settingAttribute('src','lorem-ipsum-fi-2.png').settingAttribute('alt','Lorem ipsum');
-      let divS = new HtmlElement('div',false);          divS.settingStyle('width','300px').settingStyle('margin','10px').endtAttach(h3).endtAttach(img).endtAttach(p);
-      let divF = new HtmlElement('div',false);          divF.settingAttribute('id','wrapper').settingStyle('display','flex').endtAttach(divS).endtAttach(divS);
+      let divS = new HtmlElement('div',false);          divS.settingStyle('width','300px').settingStyle('margin','10px').endAttach(h3).endAttach(img).endAttach(p);
+      let divF = new HtmlElement('div',false);          divF.settingAttribute('id','wrapper').settingStyle('display','flex').endAttach(divS).endAttach(divS);
       out102.innerHTML=divF.getHtml();
     }
 
@@ -187,7 +187,13 @@
       return this;
     }
 
-    deleteNews(heading){
+    deleteNews1(heading){
+      if (!heading)  this.news.pop();
+      else this.news = this.news.filter(function(art) {return art.heading!=heading});
+      return this;
+    }
+
+    deleteNews2(heading){
       if (!heading) {
         this.news.pop();
       }else {
@@ -205,23 +211,17 @@
       }
     }
 
-    deleteNews1(heading){
-      if (!heading)  this.news.pop();
-      else this.news = this.news.filter(function(art) {return art.heading!=heading});
+    searchNews1(tag){
+      this.news = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
       return this;
     }
 
-    searchNews(tag){
+    searchNews2(tag){
       for (var i = 0; i < this.news.length; i++) {
         for (var j = 0; j < this.news[i].tag.length; j++) {
             if(this.news[i].tag[j]==tag) return this.news[i].print();
         }
       }
-    }
-
-    searchNews1(tag){
-      this.news = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
-      return this;
     }
 
     sortNews(){
