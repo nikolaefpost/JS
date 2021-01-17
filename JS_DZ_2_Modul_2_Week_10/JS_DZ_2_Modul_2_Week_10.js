@@ -108,9 +108,36 @@
       this.str = this.name_ + '{ ';
       this._style.forEach((value, key)=> this.str+= key + ':' + value+ '; ');
       this.str +='}';
+      console.log(this._style.keys());
       return this.str;
     }
   }
+
+  class ClassCss3 {                                                             // класс ClassCss1 имитирует CSS класс
+    constructor(name_) {                                                        // реализация с помощью Set()
+      this.name_ = name_;
+      this._style = new Set();
+    }
+
+    set_style(key, value){
+      this._style.add(key + ':' + value+'; ');
+      return this;
+    }
+
+    delete_style(key){
+        this._style.forEach((style)=> {if (style.indexOf(key)!=-1) this._style.delete(style)});
+      return this;
+    }
+
+    getCss(){
+      this.str = this.name_ + '{ ';
+      this._style.forEach((style)=> this.str+= style);
+      this.str +='}';
+      return this.str;
+    }
+
+  }
+
 
   class ClassCss2 {                                                             // класс ClassCss1 имитирует CSS класс
     constructor(name_) {                                                        // реализация с помощью массива
@@ -137,9 +164,9 @@
 
 
 
-  let a = new ClassCss1('.button_field');
-  a.set_style('width', '70px').set_style('color', 'white').delete_style();
-  console.log(a._style);
+  let a = new ClassCss3('.button_field');
+  a.set_style('width', '70px').set_style('color', 'white').getCss();
+  console.log(a.str);
 
 
   window.onload = function () {
