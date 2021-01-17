@@ -98,14 +98,14 @@
     }
 
     getCss1(){
-      this.str = this.name_ + '{ ';
+      this.str ='.'+ this.name_ + '{ ';
       for (var [key, value] of this._style) this.str += key + ':' + value+'; ';
       this.str +='}';
       return this.str;
     }
 
     getCss2(){
-      this.str = this.name_ + '{ ';
+      this.str ='.'+ this.name_ + '{ ';
       this._style.forEach((value, key)=> this.str+= key + ':' + value+ '; ');
       this.str +='}';
       console.log(this._style.keys());
@@ -130,7 +130,7 @@
     }
 
     getCss(){
-      this.str = this.name_ + '{ ';
+      this.str ='.'+ this.name_ + '{ ';
       this._style.forEach((style)=> this.str+= style);
       this.str +='}';
       return this.str;
@@ -156,14 +156,14 @@
     }
 
     getCss1(){
-      this.str = this.name_ + '{ ' + this._style.reduce((acc, cur) => {return acc+=cur}) + '}';
+      this.str ='.'+ this.name_ + '{ ' + this._style.reduce((acc, cur) => {return acc+=cur}) + '}';
       return this.str;
     }
   }
 
 
 
-  let a = new ClassCss2('.button_field');
+  let a = new ClassCss2('button_field');
   a.set_style('width', '70px').set_style('color', 'white').getCss();
   console.log(a.str);
 
