@@ -82,7 +82,7 @@
 // --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
 
   class ClassCss1 {                                                             // класс ClassCss1 имитирует CSS класс
-    constructor(name_) {                                                        // реализация с помощью Map
+    constructor(name_) {                                                        // реализация с помощью Map()
       this.name_ = name_;
       this._style = new Map();
     }
@@ -113,7 +113,7 @@
     }
   }
 
-  class ClassCss3 {                                                             // класс ClassCss1 имитирует CSS класс
+  class ClassCss2 {                                                             // класс ClassCss2 имитирует CSS класс
     constructor(name_) {                                                        // реализация с помощью Set()
       this.name_ = name_;
       this._style = new Set();
@@ -135,11 +135,10 @@
       this.str +='}';
       return this.str;
     }
-
   }
 
 
-  class ClassCss2 {                                                             // класс ClassCss1 имитирует CSS класс
+  class ClassCss3 {                                                             // класс ClassCss3 имитирует CSS класс
     constructor(name_) {                                                        // реализация с помощью массива
       this.name_ = name_;
       this._style = [];
@@ -164,7 +163,7 @@
 
 
 
-  let a = new ClassCss3('.button_field');
+  let a = new ClassCss2('.button_field');
   a.set_style('width', '70px').set_style('color', 'white').getCss();
   console.log(a.str);
 
