@@ -79,6 +79,68 @@
     }
   }
 
+// --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
+
+  class ClassCss1 {                                                             // класс ClassCss1 имитирует CSS класс
+    constructor(name_) {                                                        // реализация с помощью Map
+      this.name_ = name_;
+      this._style = new Map();
+    }
+
+    set_style(key, value){
+      this._style.set(key, value);
+      return this;
+    }
+
+    delete_style(key){
+      this._style.delete(key);
+      return this;
+    }
+
+    getCss1(){
+      this.str = this.name_ + '{ ';
+      for (var [key, value] of this._style) this.str += key + ':' + value+'; ';
+      this.str +='}';
+      return this.str;
+    }
+
+    getCss2(){
+      this.str = this.name_ + '{ ';
+      this._style.forEach((value, key)=> this.str+= key + ':' + value+ '; ');
+      this.str +='}';
+      return this.str;
+    }
+  }
+
+  class ClassCss2 {                                                             // класс ClassCss1 имитирует CSS класс
+    constructor(name_) {                                                        // реализация с помощью массива
+      this.name_ = name_;
+      this._style = [];
+    }
+
+    set_style(key, value){
+      this._style.push(key + ':' + value+'; ');
+      return this;
+    }
+
+    delete_style(key){
+      if (!key)  this._style.pop();
+      else this._style = this._style.filter((style)=> {return style.indexOf(key)==-1});
+      return this;
+    }
+
+    getCss1(){
+      this.str = this.name_ + '{ ' + this._style.reduce((acc, cur) => {return acc+=cur}) + '}';
+      return this.str;
+    }
+  }
+
+
+
+  let a = new ClassCss1('.button_field');
+  a.set_style('width', '70px').set_style('color', 'white').delete_style();
+  console.log(a._style);
+
 
   window.onload = function () {
 
