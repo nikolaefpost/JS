@@ -170,7 +170,7 @@
     }
 
     getCode(){
-      if ((this.objRootHtml instanceof HtmlElement )&&(!this.classCss.some(css => !(css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
+      if ((this.objRootHtml instanceof HtmlElement )&&(this.classCss.every(css => (css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
       return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.objRootHtml.getHtml();
       else return 'data entry is not correct, classes do not match the declared';
     }
@@ -241,7 +241,7 @@
       //myFeed.deleteNews('eee');
 
       //outp2.innerHTML=myFeed.news[1].print();
-      outp2.innerHTML=myFeed.sortNews().searchNews1('ddd').showNews();
+      outp2.innerHTML=myFeed.sortNews().searchNews1('mystat').showNews();
     }
   }
 
@@ -330,12 +330,13 @@
     }
 
     searchNews1(tag){
-      this.news = this.news.filter(function(art) {return art.tag.some(() =>{return  !(art.tag.indexOf(tag))})});
+
+      this.news = this.news.filter(function(art) { return art.tag.some(() =>{ return  (art.tag.indexOf(tag))!=-1 }) });
       return this;
     }
 
     searchNews2(tag){
-      this.news = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
+      this.news = this.news.filter(function(art) { return art.tag.reduce(() =>{ return  art.tag.indexOf(tag) }) !=-1; });
       return this;
     }
 
