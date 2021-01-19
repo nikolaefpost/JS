@@ -169,8 +169,14 @@
       this.str =null;
     }
 
-    getCode(){
+    getCode1(){
       if ((this.objRootHtml instanceof HtmlElement )&&(this.classCss.every(css => (css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
+      return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.objRootHtml.getHtml();
+      else return 'data entry is not correct, classes do not match the declared';
+    }
+
+    getCode2(){
+      if ((this.objRootHtml instanceof HtmlElement )&&(!this.classCss.find(css => !(css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
       return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.objRootHtml.getHtml();
       else return 'data entry is not correct, classes do not match the declared';
     }
@@ -222,7 +228,7 @@
       let divS = new HtmlElement('div',false).settingAttribute('class', 'block').endAttach(h3).endAttach(img).endAttach(p);
       let divF = new HtmlElement('div',false).settingAttribute('id','wrapper').settingAttribute('class', 'wrap').endAttach(divS).endAttach(divS);
 
-      out104.innerHTML = new HtmlBlock([wrap, block, imgCss, text], divF).getCode();
+      out104.innerHTML = new HtmlBlock([wrap, block, imgCss, text], divF).getCode1();
     }
 
     click101p.onclick = function () {
@@ -245,7 +251,7 @@
     }
   }
 
-  //************************************** Практическое задание *****************************************************
+  //************************************** Практическое задание №4 *****************************************************
 // --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------
   class PrintMaсhine {
     constructor([font_size, font_colors, font_family]) {
@@ -355,3 +361,105 @@
       return this;
     }
   }
+
+  //************************************** Практическое задание №5 *****************************************************
+// --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------
+
+  class Button {
+    constructor(width, height, text) {
+      this.width = width;
+      this.height = height;
+      this.text = text;
+    }
+
+    showBtn(){
+      this.str = '<button style=" width:'+this.width+'; height:'+this.height+';">'+this.text+ '</button>';
+      document.write(this.str);
+    }
+  }
+
+  class BootstrapButton extends Button {
+    constructor(width, height, text, color) {
+      super(width, height, text);
+      this.background = color;
+    }
+    showBtn(){
+      this.str = '<button style=" width:'+this.width+'; height:'+this.height+'; background:'+this.background+';">'+this.text+ '</button>';
+      document.write(this.str);
+    }
+  }
+
+//let btn = new BootstrapButton('200px', '50px', 'www', '#b8d5e3');
+//btn.showBtn();
+
+// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
+
+  class GeometricFigure {
+    constructor(name_, a, b) {
+      this.name_ = name_;
+      this.a = a;
+      this.b = b;
+    }
+
+    get figure(){
+      return this.name_;
+    }
+
+    showField(){
+      return  this.str = `Фигура-${this.name_},  стороны a:${this.a}см и b:${this.b}см.`
+    }
+
+    square(){
+      return  this.square = this.a*this.b;
+    }
+
+    perimeter(){
+      return  this.perimeter = (this.a+this.b)*2;
+    }
+  }
+
+  class Rectangle extends  GeometricFigure {
+    showField(){
+      super.showField();
+      return  this.str += ` Площадь S=${this.square()}см2, периметр L=${this.perimeter()}см.<br>`
+    }
+  }
+
+  class SquareLike extends  GeometricFigure {
+    square(){
+      return  this.square = this.a**2;
+    }
+
+    showField(){
+      super.showField();
+      return  this.str += ` Площадь S=${this.square()}см2, периметр L=${this.perimeter()}см.<br>`
+    }
+  }
+
+  class Triangle extends  GeometricFigure {
+    constructor(name_, a, b, angle) {
+      super(name_, a, b);
+      this.angle = angle;
+    }
+    square(){
+      return  this.square = this.a*this.b/2*Math.sin(this.angle*Math.PI/180);
+    }
+
+    perimeter(){
+      this.c= Math.sqrt(this.a**2+this.b**2-2*this.a*this.b*Math.cos(this.angle*Math.PI/180));
+      return  this.perimeter = this.a+this.b + this.c;
+    }
+
+    showField(){
+      super.showField();
+      return  this.str += ` Площадь S=${this.square()}см2, периметр L=${this.perimeter()}см.<br>`
+    }
+  }
+
+  let fig1 = new Rectangle('прямоуголник', 20, 40);
+  let fig2 = new SquareLike('квадрат', 20, 20);
+  let fig3 = new Triangle('треуголник', 20, 50, 30);
+  let arrFig = [fig1, fig2, fig3]
+  arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
+  //console.log(fig.showField());
+  //document.write(fig.showField());
