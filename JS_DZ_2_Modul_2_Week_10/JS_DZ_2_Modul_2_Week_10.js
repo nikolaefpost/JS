@@ -65,17 +65,17 @@
     }
 
     getHtml(){
-      let str = '<'+this.name_ +' '
-      if(this.attribute.length>0) str+= this.attribute.join(' ')+' ';
-      if(this.style.length>2) str+= this.style.join(' ');
-      str+='>'+this.text;
-      if (this.attachment.length>0){
-        for (var i = 0; i < this.attachment.length; i++) {
-          str+=this.attachment[i].getHtml();
+        let str = '<'+this.name_ +' '
+        if(this.attribute.length>0) str+= this.attribute.join(' ')+' ';
+        if(this.style.length>2) str+= this.style.join(' ');
+        str+='>'+this.text;
+        if (this.attachment.length>0){
+          for (var i = 0; i < this.attachment.length; i++) {
+            str+=this.attachment[i].getHtml();
+          }
         }
-      }
-      if(!this.self_сlosing) str+='</'+this.name_+'>'
-      return str;
+        if(!this.self_сlosing) str+='</'+this.name_+'>'
+        return str;
     }
   }
 
@@ -108,7 +108,6 @@
       this.str ='.'+ this.name_ + '{ ';
       this._style.forEach((value, key)=> this.str+= key + ':' + value+ '; ');
       this.str +='}';
-      console.log(this._style.keys());
       return this.str;
     }
   }
@@ -161,11 +160,23 @@
     }
   }
 
+// --------------------------------------------------------------------- 4-e задание --------------------------------------------------------------------------
+
+  class HtmlBlock {
+    constructor(arrObj, objRootHtml) {
+      this.classCss = arrObj;
+      this.rootElementHtml = objRootHtml ;
+      this.str =null;
+    }
+
+    getCode(){
+      if ((this.rootElementHtml instanceof HtmlElement )&&(this.classCss.filter(css => !(css instanceof  ClassCss1)).length==0))
+      return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.rootElementHtml.getHtml();
+      else return 'data entry is not correct, classes do not match the declared';
+    }
+  }
 
 
-  let a = new ClassCss2('button_field');
-  a.set_style('width', '70px').set_style('color', 'white').getCss();
-  console.log(a.str);
 
 
   window.onload = function () {
@@ -183,16 +194,35 @@
     }
 
     click102.onclick = function () {
-      let a = new HtmlElement('a',false,'More...');     a.settingAttribute('href','https://www.lipsum.com/').settingAttribute('target','_blank');
+      let a = new HtmlElement('a',false,'More...').settingAttribute('href','https://www.lipsum.com/').settingAttribute('target','_blank');
       let p = new HtmlElement('p',false,'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'+
        'Etiam sodales lectus eget dictum fringilla. Cras euismod sapien ullamcorper tortor euismod'+
        'suscipit. Sed lobortis magna ut posuere faucibus. Etiam risus eros, elementum eu dolor quis,'+
-       'pellentesque pharetra tellus. Curabitur tortor risus, fringilla ut faucibus sagittis, efficitur eget dui.'); p.settingStyle('text-align','justify').endAttach(a);
+       'pellentesque pharetra tellus. Curabitur tortor risus, fringilla ut faucibus sagittis, efficitur eget dui.').settingStyle('text-align','justify').endAttach(a);
       let h3 = new HtmlElement('h3',false,'What is Lorem Ipsum?');
-      let img = new HtmlElement('img',true);            img.settingStyle('width','100%').settingAttribute('src','lorem-ipsum-fi-2.png').settingAttribute('alt','Lorem ipsum');
-      let divS = new HtmlElement('div',false);          divS.settingStyle('width','300px').settingStyle('margin','10px').endAttach(h3).endAttach(img).endAttach(p);
-      let divF = new HtmlElement('div',false);          divF.settingAttribute('id','wrapper').settingStyle('display','flex').endAttach(divS).endAttach(divS);
+      let img = new HtmlElement('img',true).settingStyle('width','100%').settingAttribute('src','lorem-ipsum-fi-2.png').settingAttribute('alt','Lorem ipsum');
+      let divS = new HtmlElement('div',false).settingStyle('width','300px').settingStyle('margin','10px').endAttach(h3).endAttach(img).endAttach(p);
+      let divF = new HtmlElement('div',false).settingAttribute('id','wrapper').settingStyle('display','flex').endAttach(divS).endAttach(divS);
       out102.innerHTML=divF.getHtml();
+    }
+
+    click104.onclick = function () {
+      let wrap = new ClassCss1('wrap').set_style('display', 'flex');
+      let block = new ClassCss1('block').set_style('width', '300px').set_style('margin', '10px');
+      let imgCss = new ClassCss1('img').set_style('width', '100%');
+      let text = new ClassCss1('text').set_style('text-align','justify');
+
+      let a = new HtmlElement('a',false,'More...').settingAttribute('href','https://www.lipsum.com/').settingAttribute('target','_blank');
+      let p = new HtmlElement('p',false,'Lorem ipsum dolor sit amet, consectetur adipiscing elit. suscipit.'+
+       'Etiam sodales lectus eget dictum fringilla. Cras euismod sapien ullamcorper tortor euismod  Sed lobortis'+
+       ' magna ut posuere faucibus. Etiam risus eros, elementum eu dolor quis, pellentesque pharetra tellus.'+
+       ' Curabitur tortor risus, fringilla ut faucibus sagittis, efficitur eget dui.').settingAttribute('class', 'text').endAttach(a);
+      let h3 = new HtmlElement('h3',false,'What is Lorem Ipsum?');
+      let img = new HtmlElement('img',true).settingAttribute('class', 'img').settingAttribute('src','lorem-ipsum-fi-2.png').settingAttribute('alt','Lorem ipsum');
+      let divS = new HtmlElement('div',false).settingAttribute('class', 'block').endAttach(h3).endAttach(img).endAttach(p);
+      let divF = new HtmlElement('div',false).settingAttribute('id','wrapper').settingAttribute('class', 'wrap').endAttach(divS).endAttach(divS);
+
+      out104.innerHTML = new HtmlBlock([wrap, block, imgCss, text], divF).getCode();
     }
 
     click101p.onclick = function () {
@@ -300,7 +330,7 @@
     }
 
     searchNews1(tag){
-      this.news = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
+      this.rezalt = this.news.filter(function(art) {return art.tag.reduce(() =>{return  art.tag.indexOf(tag)}) !=-1;});
       return this;
     }
 

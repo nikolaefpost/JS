@@ -43,3 +43,29 @@
  q = new ArrObj('12 13 6 78 23 89 67 23 09 66 44');
  //q.stringToArr='12 12 34 67 77';
 console.log( q.deleteNumbers(0).arr);
+
+  class Button {
+    constructor(width, height, text) {
+      this.width = width;
+      this.height = height;
+      this.text = text;
+    }
+
+    showBtn(){
+      this.str = '<button style=" width:'+this.width+'; height:'+this.height+';">'+this.text+ '</button>';
+      document.write(this.str);
+    }
+  }
+
+  class BootstrapButton extends Button {
+    constructor(width, height, text, color) {
+      super(width, height, text);
+      this.color = color;
+    }
+    showBtn(){
+      this.str = '<button style=" width:'+this.width+'; height:'+this.height+'; color:'+this.color+';">'+this.text+ '</button>';
+      document.write(this.str);
+    }
+  }
+
+  let r = new Button('30px', '30px', 'wwwwwwwww' );
