@@ -170,13 +170,13 @@
     }
 
     getCode1(){
-      if ((this.objRootHtml instanceof HtmlElement )&&(this.classCss.every(css => (css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
+      if ((this.objRootHtml instanceof HtmlElement )&&(this.classCss.every(css => (css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам испльзуется метод every()
       return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.objRootHtml.getHtml();
       else return 'data entry is not correct, classes do not match the declared';
     }
 
     getCode2(){
-      if ((this.objRootHtml instanceof HtmlElement )&&(!this.classCss.find(css => !(css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам
+      if ((this.objRootHtml instanceof HtmlElement )&&(!this.classCss.find(css => !(css instanceof  ClassCss1))))           //  проверка обьектов на соответствие классам испльзуется метод find()
       return  this.str = '<style>' + this.classCss.reduce((acc, cur) => {return acc+=cur.getCss2()},'') + '</style>' + this.objRootHtml.getHtml();
       else return 'data entry is not correct, classes do not match the declared';
     }
@@ -437,17 +437,17 @@
   }
 
   class Triangle extends  GeometricFigure {
-    constructor(name_, a, b, angle) {
+    constructor(name_, a, b, angle) {                                           // angle = угол между сторонами a и b, в градусах
       super(name_, a, b);
       this.angle = angle;
     }
     square(){
-      return  this.square = this.a*this.b/2*Math.sin(this.angle*Math.PI/180);
+      return  Math.floor(this.square = this.a*this.b/2*Math.sin(this.angle*Math.PI/180));
     }
 
     perimeter(){
       this.c= Math.sqrt(this.a**2+this.b**2-2*this.a*this.b*Math.cos(this.angle*Math.PI/180));
-      return  this.perimeter = this.a+this.b + this.c;
+      return  this.perimeter = Math.floor(this.a+this.b + this.c);
     }
 
     showField(){
@@ -456,11 +456,11 @@
     }
   }
 
-  // let fig1 = new Rectangle('прямоуголник', 20, 40);
-  // let fig2 = new SquareLike('квадрат', 20, 20);
-  // let fig3 = new Triangle('треуголник', 20, 50, 30);
-  // let arrFig = [fig1, fig2, fig3]
-  // arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
+  let fig1 = new Rectangle('прямоуголник', 20, 40);
+  let fig2 = new SquareLike('квадрат', 20, 20);
+  let fig3 = new Triangle('треуголник', 20, 50, 30);
+  let arrFig = [fig1, fig2, fig3]
+  arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
 // --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
 
   class ExtentedArray extends  Array {
