@@ -471,11 +471,11 @@
 
     getHtml(tagName){
       this.str =  this.reduce((acc, cur) => {return acc+= '<' + tagName+'>' + cur +'</' + tagName+'>'},'');
-      (tagName=='li'||tagName=='Li') ? this.str ='<ul>'+this.str+'</ul>' : this.str;
+      if (tagName=='li'||tagName=='Li')  this.str ='<ul>'+this.str+'</ul>';
       return this.str;
     }
   }
 
-  let q = new ExtentedArray('aaa', 'bbb', 'ccc', 'ddd').getHtml('p');
-  document.write(q);
-  console.log(q);
+  // let q = new ExtentedArray('aaa', 'bbb', 'ccc', 'ddd').getHtml('p');
+  // document.write(q);
+  // console.log(q);
