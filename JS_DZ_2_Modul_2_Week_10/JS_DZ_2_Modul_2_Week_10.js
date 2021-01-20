@@ -394,7 +394,7 @@
 
 // --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
 
-  class GeometricFigure {
+  class GeometricFigure {                                                       // без проверок, только логика
     constructor(name_, a, b) {
       this.name_ = name_;
       this.a = a;
@@ -406,7 +406,7 @@
     }
 
     showField(){
-      return  this.str = `Фигура-${this.name_},  стороны a:${this.a}см и b:${this.b}см.`
+      return  this.str = `Фигура-${this.figure},  стороны a:${this.a}см и b:${this.b}см.`
     }
 
     square(){
@@ -456,10 +456,26 @@
     }
   }
 
-  let fig1 = new Rectangle('прямоуголник', 20, 40);
-  let fig2 = new SquareLike('квадрат', 20, 20);
-  let fig3 = new Triangle('треуголник', 20, 50, 30);
-  let arrFig = [fig1, fig2, fig3]
-  arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
-  //console.log(fig.showField());
-  //document.write(fig.showField());
+  // let fig1 = new Rectangle('прямоуголник', 20, 40);
+  // let fig2 = new SquareLike('квадрат', 20, 20);
+  // let fig3 = new Triangle('треуголник', 20, 50, 30);
+  // let arrFig = [fig1, fig2, fig3]
+  // arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
+// --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
+
+  class ExtentedArray extends  Array {
+
+    getString(separator){
+      return this.str =  this.join(separator);
+    }
+
+    getHtml(tagName){
+      this.str =  this.reduce((acc, cur) => {return acc+= '<' + tagName+'>' + cur +'</' + tagName+'>'},'');
+      (tagName=='li'||tagName=='Li') ? this.str ='<ul>'+this.str+'</ul>' : this.str;
+      return this.str;
+    }
+  }
+
+  let q = new ExtentedArray('aaa', 'bbb', 'ccc', 'ddd').getHtml('p');
+  document.write(q);
+  console.log(q);
