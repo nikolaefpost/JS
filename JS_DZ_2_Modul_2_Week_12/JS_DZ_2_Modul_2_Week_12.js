@@ -35,11 +35,13 @@
     }
 
 
-    resumeWrite(){                                                              //
-      this.text = '';
-      let str = this.temp[0];
-      this.temp[0] = '';
-      if(this._ink>0) this.markerWrite1(str);
+    resumeWrite(){
+      if(this._ink>0) {                                                         //
+        this.text = '';
+        let str = this.temp[0];
+        this.temp[0] = '';
+        this.markerWrite1(str);
+     }
       return this;
     }
 
