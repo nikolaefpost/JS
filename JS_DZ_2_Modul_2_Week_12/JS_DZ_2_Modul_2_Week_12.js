@@ -4,30 +4,29 @@
     constructor(color) {
       this.color = color;
       this._ink = 100;
-      this.text = ''
-      this.temp = [''];
+      this.text = '';                                                           // поле для текста, который будет напечатан
+      this.temp = [''];                                                         // поле для ненапечатанной части строки: this.temp.[0]- сама часть строки   this.temp.[1] - необходимое количество чернил
     }
 
-    markerWrite1(str){
+    markerWrite1(str){                                                          // метод готовит строку доступную к печати
       for (var i = 0; i < str.length; i++) {
-
         (this._ink > 0) ?  this.text += str[i]  : this.temp[0] += str[i];
         if (str[i] != ' ') this._ink -=0.5;
       }
-      if (this._ink < 0) {this.temp[1] = this._ink; this._ink=0;}
+      if (this._ink < 0) {this.temp[1] = this._ink; this._ink = 0;}             //и сохраняет информацию о ненапечатаной части строки
       return this;
     }
 
-    markerWrite2(str){
-      this.text = str.split('').reduce((acc, cur) => {
-        if (this._ink > 0 )  {
-          acc+= cur;
-          if (cur!=' ') this._ink -=0.5;
-        } return acc;
-      },'');
-      this.text = '<p style = "margin-left:15px; color:' + this.color + ';">' + this.text + '</p>';
-      return this;
-    }
+    // markerWrite2(str){
+    //   this.text = str.split('').reduce((acc, cur) => {
+    //     if (this._ink > 0 )  {
+    //       acc+= cur;
+    //       if (cur!=' ') this._ink -=0.5;
+    //     } return acc;
+    //   },'');
+    //   this.text = '<p style = "margin-left:15px; color:' + this.color + ';">' + this.text + '</p>';
+    //   return this;
+    // }
 
     writeStatus(){
       if (this.temp.length > 1) this.text += '<small> Закончились чернила! Чтобы допечатать оставшийся текст необходимо заправить маркер на'+ this.temp[1] +' едениц.</small><br>';
@@ -36,7 +35,7 @@
     }
 
 
-    resumeWrite(){
+    resumeWrite(){                                                              //
       this.text = '';
       let str = this.temp[0];
       this.temp[0] = '';
@@ -66,13 +65,6 @@
   }
 
 
-
-  //let q = new Marker('red').markerWrite('');refueling marker
-  //console.log(q.text);
-
-
-
-
   window.onload = function () {
 
     click101.onclick = function () {
@@ -85,7 +77,7 @@
       q.resumeWrite().print().writeStatus();
       out101.innerHTML+=q.text;
 
-      q.ink = 6;                                                               // дозаправка чернил
+      q.ink = 500;                                                               // дозаправка чернил
       q.resumeWrite().print().writeStatus();
       out101.innerHTML+=q.text;
       console.log(q);
