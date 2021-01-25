@@ -72,15 +72,14 @@
       let str = document.getElementById('input101').value;
       let color = document.getElementById('input102').value;
       let q = new RefuelingMarker(color).markerWrite1(str);
-      // out101.innerHTML=q.print();
-      // console.log(q, q.temp);
+       out101.innerHTML=q.print();
+      console.log(q, q.temp);
 
       q.ink = 26;                                                               // дозаправка чернил
       out101.innerHTML=q.print();
       console.log(q, q.temp);
 
-      q.ink = 500;                                                               // дозаправка чернил
-      out101.innerHTML=q.print();
+      q.ink = 99;                                                               // дозаправка чернил
       console.log(q, q.temp);
     }
   }
