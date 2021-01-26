@@ -14,7 +14,7 @@
         if (str[i] != ' ') this._ink -=0.5;
       }
       if (this._ink < 0) {this.temp[2] = this._ink; this._ink = 0;}             // сохраняются данные о необходимом количестве чернил
-      this.writeStatus()
+      this.writeStatus();
       return this;
     }
 
@@ -64,6 +64,57 @@
       return this;
     }
   }
+
+// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
+class ExtentedDate extends Date {
+
+  numberToText1(objDate){                                                        // метод преобразования числа из цифры в слова
+    let str=[];
+    if (objDate instanceof Date )  str.push(objDate.getDate().toString(), objDate.getMonth());                 // проверка является ли аргумент обьектом Date
+    else { this.rezalt = ' Некорректный ввод данных'; return this; }
+    if (str[0].length>2 || !(Number(str[0])) ) {this.rezalt='Введите число не болбше 2х знаков!'; return this;}
+    if (str[0].length==1) str[0] ='0'+ str[0];
+    let units1 = [
+      ['',' первое',' второе',' третье',' четвертое',' пятое',' шестое',' семдьмое',' восьмое',' девятое'],
+      [' десятое',' одиннадцатое',' двенадцатое',' тринадцатое',' четырнадцатое',' пятнадцатое',' шестнадцатое',' семнадцатое',' восемнадцатое',' девятнадцатое'],
+      ['','',' двадцать(oe)',' тридцать(oe)']
+    ];
+    let units2 = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября', 'ноября', 'декабря'];
+     (9 < (str[0] % 100) && (str[0] % 100) < 20) ? this.rezalt = units1[1][str[0][1]] : this.rezalt = units1[2][str[0][0]] + units1[0][str[0][1]];
+     this.rezalt+=' '+units2[str[1]];
+    return this;
+  }
+
+  numberToText2(){                                                        // метод преобразования числа из цифры в слова
+    this.str=[];
+    this.str.push(this.getDate().toString(), this.getMonth());
+    if (this.str[0].length==1) this.str[0] ='0'+ this.str[0];
+    let units1 = [
+      ['',' первое',' второе',' третье',' четвертое',' пятое',' шестое',' семдьмое',' восьмое',' девятое'],
+      [' десятое',' одиннадцатое',' двенадцатое',' тринадцатое',' четырнадцатое',' пятнадцатое',' шестнадцатое',' семнадцатое',' восемнадцатое',' девятнадцатое'],
+      ['','',' двадцать(oe)',' тридцать(oe)']
+    ];
+    let units2 = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября', 'ноября', 'декабря'];
+     (9 < (this.str[0] % 100) && (this.str[0] % 100) < 20) ? this.rezalt = units1[1][this.str[0][1]] : this.rezalt = units1[2][this.str[0][0]] + units1[0][this.str[0][1]];
+     this.rezalt+=' '+units2[this.str[1]];
+    return this;
+  }
+}
+
+
+let objDate = new ExtentedDate().numberToText2();
+//let w = new ExtentedDate().numberToText(objDate);
+console.log(objDate.rezalt);
+
+
+
+
+
+
+
+
+
+
 
 
   window.onload = function () {
