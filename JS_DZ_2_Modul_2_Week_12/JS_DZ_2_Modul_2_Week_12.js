@@ -98,10 +98,24 @@ class ExtentedDate extends Date {
   }
 }
 
+// --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
 
+  class Employee {
+    constructor(name, departmen, specialty, employment_date ) {
+      this._name = name;
+      this.departmen = departmen;
+      this.specialty = specialty;
+      this.employment_date = employment_date;
+    }
+  }
 
+  let employee1 = new Employee('Иванов И.', 'Юридическое управление', 'Юрисконсульт', '01.01.2020');
+  let employee2 = new Employee('Горбунов Г.', 'Бухгалтерия', 'Бухгалтер', '01.06.2020');
+  let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
+  let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
 
-
+ let arrEmployee = [employee1, employee2, employee3, employee4];
+console.log(arrEmployee[1]);
 
 
   window.onload = function () {
