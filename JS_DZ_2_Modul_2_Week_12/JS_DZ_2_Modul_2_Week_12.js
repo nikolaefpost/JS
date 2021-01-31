@@ -65,8 +65,6 @@
     drawsMarker(marker){
       return '<p style = "margin-left:15px; color:' + marker.color + ';">' + marker.text + '</p>' + marker.temp[1];
     }
-
-
     refillsMarker(marker){
       marker.ink = 100;
       return this;
@@ -146,8 +144,7 @@ class ExtentedDate extends Date {
       out101.innerHTML=vasya.drawsMarker(q);
      console.log(q, q.temp);
 
-     // vasya.refillsMarker(q);                                                               // дозаправка чернил
-     out101.innerHTML=vasya.refillsMarker(q).drawsMarker(q);
+     out101.innerHTML=vasya.refillsMarker(q).drawsMarker(q);                    // дозаправка чернил
      console.log(q, q.temp);
    }
 
@@ -172,4 +169,34 @@ class ExtentedDate extends Date {
       let userTab = new EmpTable(arrEmployee);
       out301.innerHTML = userTab.getHtml();
     }
+
+
+    click1p01.onclick = function () {
+      let robot = new Autobots('Оптимус', 'Прайм', 'Модуль «Оптимус»');
+
+      out1p01.innerHTML  = robot.start().getHtml();
+
+    }
   }
+
+
+// --------------------------------------------------------------------- Практическое задание --------------------------------------------------------------------------
+  //                                                                       Декоратор класса
+
+  class Autobots {
+    constructor(name, clan, armament) {
+      this._name = name;
+      this.clan = clan;
+      this.armament = armament;
+      this.str = '';
+    }
+    start(){
+    return  this.img = new HtmlElement('img',true).settingStyle('width','3%').settingStyle('position','absolute').settingStyle('top','39%').settingStyle('left','30%').settingAttribute('src','unnamed.png').settingStyle('transform','translateX(300px)').settingStyle('animation-delay','2s');
+    }
+
+    move(){
+
+      this.img.settingStyle('transform','translate3D(100px, -100px, 0)')
+      }
+
+    }
