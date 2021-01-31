@@ -460,7 +460,7 @@
   let fig2 = new SquareLike('квадрат', 20, 20);
   let fig3 = new Triangle('треуголник', 20, 50, 30);
   let arrFig = [fig1, fig2, fig3]
-  arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
+//  arrFig.reduce((acc, cur) => {return acc+=document.write(cur.showField())},'') ;
 // --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
 
   class ExtentedArray extends  Array {

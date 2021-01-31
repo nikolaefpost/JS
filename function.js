@@ -77,3 +77,61 @@
 
 //console.log(mapped instanceof MyArray); // false
 //console.log(mapped instanceof Array);   // true
+
+// --------------------------------------------------------- Создаём собственный итератор  ---------------------------------------------
+
+  class IterableObject1 extends Object {
+    constructor(object) {
+        super();
+        Object.assign(this, object);
+    }
+    [Symbol.iterator]() {
+        const entries = Object.entries(this);
+        let index = 0;
+        return {
+            next() {
+                const result = {
+                    value: entries[index],
+                    done: index >= entries.length
+                };
+                index++;
+                return result;
+            }
+        }
+    }
+  }
+
+  class IterableObject2 extends Object {
+    constructor(object) {
+        super();
+        Object.assign(this, object);
+      }
+    [Symbol.iterator]() {
+        const entries = Object.entries(this);
+        let index = -1;
+        return {
+            next() {
+                index++;
+                return {
+                    value: entries[index],
+                    done: index >= entries.length
+                }
+            }
+        }
+    }
+}
+  // let o = Object.create(Object.prototype);
+  // o['1'] = 'a';
+  // o['2'] = 'b';
+  // o['3'] = 'c';
+
+
+  const ourArray = [1, 2, 3];
+
+const iterator = ourArray[Symbol.iterator]();
+
+const secondIterator = iterator[Symbol.iterator]();
+
+for (let element of secondIterator) {
+    console.log(element);
+}

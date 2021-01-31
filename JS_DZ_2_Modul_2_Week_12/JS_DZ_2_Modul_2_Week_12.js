@@ -1,6 +1,6 @@
 
 // --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------
-  class Marker {
+  class Marker_printer {
     constructor(color) {
       this.color = color;
       this._ink = 100;
@@ -43,13 +43,9 @@
       }
       return this;
     }
-
-    print(){
-      return '<p style = "margin-left:15px; color:' + this.color + ';">' + this.text + '</p>' + this.temp[1];
-    }
   }
 
-  class RefuelingMarker extends Marker  {
+  class RefuelingMarker extends Marker_printer  {
     get ink() {
       return this._ink;
     }
@@ -61,6 +57,18 @@
         if (this._ink>100) this._ink = 100;
       }
       if (this.temp[0].length > 0) this.resumeWrite();
+      return this;
+    }
+  }
+
+  class Human {
+    drawsMarker(marker){
+      return '<p style = "margin-left:15px; color:' + marker.color + ';">' + marker.text + '</p>' + marker.temp[1];
+    }
+
+
+    refillsMarker(marker){
+      marker.ink = 100;
       return this;
     }
   }
@@ -109,13 +117,23 @@ class ExtentedDate extends Date {
     }
   }
 
-  let employee1 = new Employee('Иванов И.', 'Юридическое управление', 'Юрисконсульт', '01.01.2020');
-  let employee2 = new Employee('Горбунов Г.', 'Бухгалтерия', 'Бухгалтер', '01.06.2020');
-  let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
-  let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
+ class EmpTable  {
+   constructor(arrEmployee) {
+     this.Employee = arrEmployee;
+     this.str = '';
+   }
 
- let arrEmployee = [employee1, employee2, employee3, employee4];
-console.log(arrEmployee[1]);
+   getHtml(){
+       this.str = '<table border="1"><caption>Список работников банка</caption><tr><th>ФИО</th><th>Подразделение'+
+       '</th><th>Должность</th><th>Дата приема на работу</th></tr>';
+       for (var i = 0; i < this.Employee.length; i++) {
+         this.str += '<tr><td>'+this.Employee[i]._name + '</td><td>' + this.Employee[i].departmen + '</td><td>'
+          + this.Employee[i].specialty + '</td><td>' + this.Employee[i].employment_date + '</td></tr>';
+       }
+       this.str += '</table>';
+       return this.str;
+     }
+ }
 
 
   window.onload = function () {
@@ -124,14 +142,12 @@ console.log(arrEmployee[1]);
      let str = document.getElementById('input101').value;
      let color = document.getElementById('input102').value;
      let q = new RefuelingMarker(color).markerWrite1(str);
-      out101.innerHTML=q.print();
+     let vasya = new Human();
+      out101.innerHTML=vasya.drawsMarker(q);
      console.log(q, q.temp);
 
-     q.ink = 26;                                                               // дозаправка чернил
-     out101.innerHTML=q.print();
-     console.log(q, q.temp);
-
-     q.ink = 99;                                                               // дозаправка чернил
+     // vasya.refillsMarker(q);                                                               // дозаправка чернил
+     out101.innerHTML=vasya.refillsMarker(q).drawsMarker(q);
      console.log(q, q.temp);
    }
 
@@ -143,5 +159,17 @@ console.log(arrEmployee[1]);
       out201.innerHTML+='является ли дата будущим? - ' + objDate.testTime() +'<br>';;
       out201.innerHTML+='является ли данный год высокосным? - ' + objDate.testLeapYear() + '<br>';
       out201.innerHTML+='следущаяя дата будет - ' + objDate.nextDate() +' '+ objDate.nextDate();
+    }
+
+    click301.onclick = function () {
+      let employee1  = new Employee('Иванов И.', 'Юридическое управление', 'Юрисконсульт', '01.01.2020');
+      let employee2 = new Employee('Горбунов Г.', 'Бухгалтерия', 'Бухгалтер', '01.06.2020');
+      let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
+      let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
+
+      let arrEmployee = [employee1, employee2, employee3, employee4];
+
+      let userTab = new EmpTable(arrEmployee);
+      out301.innerHTML = userTab.getHtml();
     }
   }
