@@ -148,6 +148,13 @@ class StyledEmpTable extends EmpTable{
     return this.str += this.styles ? this.styles : '';
   }
 
+  getHtml1(){
+    super.getHtml();
+    let head = document.getElementsByTagName('head')[0];
+    head.innerHTML += this.styles ? this.styles : '';
+    return this.str;
+  }
+
 }
 
 class tegStyle {
@@ -221,6 +228,7 @@ class tegStyle {
       let tr = new tegStyle('tr').set_style('background', 'white').getCss();
 
       //head.innerHTML += userTab.getStyles([tbl, cpt, th, td, tr]).styles;
+      //out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
       out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
       out301.innerHTML = '';
     }
