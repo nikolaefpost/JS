@@ -117,22 +117,62 @@ class ExtentedDate extends Date {
 
  class EmpTable  {
    constructor(arrEmployee) {
-     this.Employee = arrEmployee;
+     this.employee = arrEmployee;
      this.str = '';
    }
 
    getHtml(){
-       this.str = '<table border="1"><caption>Список работников банка</caption><tr><th>ФИО</th><th>Подразделение'+
+       this.str = '<table border="1" ><caption>Список работников банка</caption><tr><th>ФИО</th><th>Подразделение'+
        '</th><th>Должность</th><th>Дата приема на работу</th></tr>';
-       for (var i = 0; i < this.Employee.length; i++) {
-         this.str += '<tr><td>'+this.Employee[i]._name + '</td><td>' + this.Employee[i].departmen + '</td><td>'
-          + this.Employee[i].specialty + '</td><td>' + this.Employee[i].employment_date + '</td></tr>';
+       for (var i = 0; i < this.employee.length; i++) {
+         this.str += '<tr><td>'+this.employee[i]._name + '</td><td>' + this.employee[i].departmen + '</td><td>'
+          + this.employee[i].specialty + '</td><td>' + this.employee[i].employment_date + '</td></tr>';
        }
        this.str += '</table>';
        return this.str;
      }
  }
 
+// --------------------------------------------------------------------- 4-e задание --------------------------------------------------------------------------
+
+class StyledEmpTable extends EmpTable{
+
+  getStyles(arrTegStr){
+    this.styles = '<style>';
+    this.styles += arrTegStr.reduce((acc, cur) => {return acc+=cur},'');
+    this.styles += '</style>';
+    return this;
+  }
+  getHtml(){
+    super.getHtml();
+    return this.str += this.styles ? this.styles : '';
+  }
+
+}
+
+class tegStyle {
+  constructor(name_) {                                                        // реализация с помощью Map()
+    this.name_ = name_;
+    this._style = new Map();
+  }
+
+  set_style(key, value){
+    this._style.set(key, value);
+    return this;
+  }
+
+  delete_style(key){
+    this._style.delete(key);
+    return this;
+  }
+
+  getCss(){
+    this.str =this.name_ + ' { ';
+    for (var [key, value] of this._style) this.str += key + ':' + value+'; ';
+    this.str +='}';
+    return this.str;
+  }
+}
 
   window.onload = function () {
 
@@ -158,18 +198,29 @@ class ExtentedDate extends Date {
       out201.innerHTML+='следущаяя дата будет - ' + objDate.nextDate() +' '+ objDate.nextDate();
     }
 
+
+    let employee1  = new Employee('Иванов И.', 'Юридическое управление', 'Юрисконсульт', '01.01.2020');
+    let employee2 = new Employee('Горбунов Г.', 'Бухгалтерия', 'Бухгалтер', '01.06.2020');
+    let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
+    let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
+    let arrEmployee = [employee1, employee2, employee3, employee4];
+
     click301.onclick = function () {
-      let employee1  = new Employee('Иванов И.', 'Юридическое управление', 'Юрисконсульт', '01.01.2020');
-      let employee2 = new Employee('Горбунов Г.', 'Бухгалтерия', 'Бухгалтер', '01.06.2020');
-      let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
-      let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
-
-      let arrEmployee = [employee1, employee2, employee3, employee4];
-
       let userTab = new EmpTable(arrEmployee);
       out301.innerHTML = userTab.getHtml();
+      out401.innerHTML = '';
     }
 
+    click401.onclick = function () {
+      let userTab = new StyledEmpTable(arrEmployee);
+      let tbl = new tegStyle('table').set_style('border-bottom-right-radius', '5px').set_style('box-shadow', '10px 5px 5px grey').set_style('border', 'none').getCss();
+      let cpt = new tegStyle('caption').set_style('padding', '10px').set_style('color', 'white').set_style('background', '#4682B4').set_style('border-top-right-radius', '5px').set_style('font-weight', 'bold').getCss();
+      let th = new tegStyle('th').set_style('border-bottom', '3px solid #B9B29F').set_style('padding', '10px').set_style('text-align', 'left').getCss();
+      let td = new tegStyle('td').set_style('padding', '10px').set_style('border-top-right-radius', '5px').getCss();
+      let tr = new tegStyle('tr').set_style('background', 'white').getCss();
+      out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
+      out301.innerHTML = '';
+    }
 
     click1p01.onclick = function () {
       let robot = new Autobots('Оптимус', 'Прайм', 'Модуль «Оптимус»');
