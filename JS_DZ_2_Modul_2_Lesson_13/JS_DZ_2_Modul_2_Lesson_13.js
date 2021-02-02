@@ -7,34 +7,32 @@
       this.surname = '';
       this.age = 0;
       this.weight = 0;
-      this.err = '';
     }
 
-   setAge(age){
+    setAge(age){
       if (Number.isInteger(age))  this.age = age;
       else this.err = 'введите целое число!';
-      console.log(this);
       return this;
     }
 
     setWeight(weight){
-        if (Number(weight))  this.weight = weight;
-        else this.err = 'введите число!';
-        return this;
-      }
+      if (Number(weight))  this.weight = weight;
+      else this.err = 'введите число!';
+      return this;
+    }
 
-      setName(name){
-         if (name)  this._name = name;
-         else this.err = 'введите целое число!';
-         return this;
-       }
+    setName(name){
+      if (name)  this._name = name;
+      else this.err = 'введите целое число!';
+      return this;
+    }
 
-       setSurname(surname){
-          if (surname)  this.surname = surname;
-          else this.err = 'введите целое число!';
-          return this;
-        }
-   }
+    setSurname(surname){
+      if (surname)  this.surname = surname;
+      else this.err = 'введите целое число!';
+      return this;
+    }
+  }
 
 
   function boundFieldDecorator(fnc, start, end) {
@@ -48,27 +46,31 @@
   function checkField(fnc, fncCheck) {
     return function () {
      let [a] = [...arguments]
-     console.log(isValidLastFirstName(a));
       if (!isValidLastFirstName(a)) return alert( `имя и фамилия не может быть короче 2х букв!`);
       return fnc.apply(this, arguments);
     }
   }
 
   function isValidLastFirstName(name) {
-    console.log((typeof name)=='string');
-    console.log(typeof name);
     return ((typeof name)=='string' && name.length>=2)
   }
 
 
-  User.prototype.setAge = boundFieldDecorator(User.prototype.setAge, 0, 120);
-  User.prototype.setWeight = boundFieldDecorator(User.prototype.setWeight, 35, 270);
-  User.prototype.setName = checkField(User.prototype.setName, isValidLastFirstName);
-  User.prototype.setSurname = checkField(User.prototype.setSurname, isValidLastFirstName);
-  let q = new User();
-  q.setAge(14);
-  q.setWeight(120);
-  q.setName('Bob');
-  q.setSurname('Li');
 
-  console.log(q.err, q);
+
+
+  window.onload = function () {
+
+    click101.onclick = function () {
+      User.prototype.setAge = boundFieldDecorator(User.prototype.setAge, 0, 120);
+      User.prototype.setWeight = boundFieldDecorator(User.prototype.setWeight, 35, 270);
+      User.prototype.setName = checkField(User.prototype.setName, isValidLastFirstName);
+      User.prototype.setSurname = checkField(User.prototype.setSurname, isValidLastFirstName);
+      let q = new User();
+      q.setAge(14);
+      q.setWeight(120);
+      q.setName('Bob');
+      q.setSurname('Li');
+     out101.innerHTML = q;
+    }
+  }
