@@ -204,6 +204,7 @@ class tegStyle {
     let employee3 = new Employee('Кобзар Ж.', 'Управление безопасности и контроля', 'Начальник отдела безопасности', '01.05.2016');
     let employee4 = new Employee('Легойда А.', 'Пиар (PR) и реклама.', 'Начальник отдела развития', '06.09.2018');
     let arrEmployee = [employee1, employee2, employee3, employee4];
+    // let head = document.getElementsByTagName('head')[0];
 
     click301.onclick = function () {
       let userTab = new EmpTable(arrEmployee);
@@ -218,6 +219,8 @@ class tegStyle {
       let th = new tegStyle('th').set_style('border-bottom', '3px solid #B9B29F').set_style('padding', '10px').set_style('text-align', 'left').getCss();
       let td = new tegStyle('td').set_style('padding', '10px').set_style('border-top-right-radius', '5px').getCss();
       let tr = new tegStyle('tr').set_style('background', 'white').getCss();
+
+      //head.innerHTML += userTab.getStyles([tbl, cpt, th, td, tr]).styles;
       out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
       out301.innerHTML = '';
     }
