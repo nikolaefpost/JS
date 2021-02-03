@@ -58,8 +58,10 @@
 
 
 
-
   window.onload = function () {
+
+
+
 
     click101.onclick = function () {
       User.prototype.setAge = boundFieldDecorator(User.prototype.setAge, 0, 120);
@@ -71,6 +73,15 @@
       q.setWeight(120);
       q.setName('Bob');
       q.setSurname('Li');
-     out101.innerHTML = q;
+      out101.innerHTML = 'qwertyuu'
+     // out101.style.color = "blue";
+     // out101.style.fontWeight = "bold";
+     // for (var key in out101.style) {
+     //   console.log(key);
+     // }
+
+     console.log(out101.style.cssText);
+
+
     }
   }
