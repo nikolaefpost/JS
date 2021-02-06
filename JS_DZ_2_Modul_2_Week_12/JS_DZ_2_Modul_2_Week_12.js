@@ -259,7 +259,7 @@ class tegStyle {
         if (distance <1000) {
           e.style.left = distance + "px";
           distance += distance;
-          if (distance >1000 && self.src) {e.setAttribute('src', self.src); e.style.left =  "80%"; }
+          if (distance >900 && self.src) {e.setAttribute('src', self.src); e.style.left =  "80%"; }
           setTimeout(animate, 50);
         }
         setTimeout(()=>{e.style = self.originalStyle; e.setAttribute('src', 'unnamed.png')}, 2000);

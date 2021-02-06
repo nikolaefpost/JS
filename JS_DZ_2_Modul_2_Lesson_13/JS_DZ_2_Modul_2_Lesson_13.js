@@ -81,7 +81,69 @@
      // }
 
      console.log(out101.style.cssText);
+    }
 
-
+    click1p01.onclick = function () {
+      let decRobot = robotDecorator(Autobots, 'explosion.png')('Оптимус', 'Прайм', 'Модуль «Оптимус»');
+       decRobot.move(robotId);
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // --------------------------------------------------------------------- Практическое задание --------------------------------------------------------------------------
+    //                                                                       Декоратор класса
+
+    class Autobots {
+      constructor(name, clan, armament) {
+        this._name = name;
+        this.clan = clan;
+        this.armament = armament;
+        this.str = '';
+      }
+
+      move(e, distance = 1){
+        this.originalStyle = e.style;
+        e.style.position = "relative";
+        let self = this;
+        (function animate() {
+          if (distance <1000) {
+            e.style.left = distance + "px";
+            distance += distance;
+            if (distance >900 && self.src) {e.setAttribute('src', self.src); e.style.left =  "80%"; }
+            setTimeout(animate, 50);
+          }
+          setTimeout(()=>{e.style = self.originalStyle; e.setAttribute('src', 'unnamed.png')}, 2000);
+        })();
+      }
+    }
+
+
+    function robotDecorator(fnc, srcExp) {
+      return function () {
+       let s = new fnc( ...arguments);
+       s.src = srcExp;
+       // s.move = function (e) {
+       //     fnc.prototype.move(e)
+       // }
+       return  s;
+      }
+    }
