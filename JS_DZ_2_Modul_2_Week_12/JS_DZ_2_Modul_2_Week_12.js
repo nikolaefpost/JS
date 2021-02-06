@@ -234,12 +234,8 @@ class tegStyle {
     }
 
     click1p01.onclick = function () {
-      let robot = new Autobots('Оптимус', 'Прайм', 'Модуль «Оптимус»');
-
-      robot.move(robotId);
-      // out1p01.innerHTML = 'www'
-      // out1p01.style.border = "1px";
-      // shake(out1p01, undefined, 100, 1000);
+      let decRobot = robotDecorator(Autobots, 'explosion.png')('Оптимус', 'Прайм', 'Модуль «Оптимус»');
+       decRobot.move(robotId);
     }
   }
 
@@ -254,26 +250,76 @@ class tegStyle {
       this.armament = armament;
       this.str = '';
     }
-    // start(){
-    // return  this.img = new HtmlElement('img',true).settingStyle('width','3%').settingStyle('position','absolute').settingStyle('top','80%').settingStyle('left','30%').settingAttribute('src','unnamed.png').settingStyle('transform','translateX(300px)').settingStyle('animation-delay','2s').settingAttribute('id','robot');
-    // }
 
-    move(e, time = 500, distance = 25){
-      this.originalStyle = e.style.cssText;
+    move(e, distance = 1){
+      this.originalStyle = e.style;
       e.style.position = "relative";
-      let start = (new Date()).getTime();
-      animate();
-      function animate() {
-    		let now = (new Date()).getTime();
-    		if ((now - start) < time) {
-    			e.style.left = distance + "px";
+      let self = this;
+      (function animate() {
+        if (distance <1000) {
+          e.style.left = distance + "px";
           distance += distance;
-    			setTimeout(animate, 100);
-    		}
-    		 else e.setAttribute('src', 'explosion.jpg');
-      }
+          if (distance >1000 && self.src) {e.setAttribute('src', self.src); e.style.left =  "80%"; }
+          setTimeout(animate, 50);
+        }
+        setTimeout(()=>{e.style = self.originalStyle; e.setAttribute('src', 'unnamed.png')}, 2000);
+      })();
     }
   }
+
+
+  function robotDecorator(fnc, srcExp) {
+    return function () {
+     let s = new fnc( ...arguments);
+     s.src = srcExp;
+     // s.move = function (e) {
+     //     fnc.prototype.move(e)
+     // }
+     return  s;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     function shake(e, oncomplete, distance, time) {
 	// Обработка аргументов
