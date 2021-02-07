@@ -1,4 +1,4 @@
-<html onclick="clickCoord(event)">
+<html >
 	<head>
 		<meta charset="utf-8">
 		<title>JS_DZ_Modul_3_Lesson_1</title>
@@ -7,8 +7,16 @@
 		<link rel="stylesheet" media="screen" href="../style.css">
 		<style media="screen"></style>
 	</head>
-	<body >
-		<div class="main">
+	<body onclick="clickCoord(event)">
+
+
+		<div  id="out201" class="modal" style="display: none;">
+			<span class="modal_text">Hello from Modal Windows!</span>
+			<button class="modal_button" type="button"  id="click202" style="align-self: center;" >Close</button>
+		</div>
+
+
+		<div class="main" id="m001">
 
 				<div class="divFlex">
 					<span class="short">Задание №1:</span>
@@ -16,10 +24,22 @@
 					</div>
 					<div class="input_field">
 						<span class="field_text" style="text-align:right;">Enter your name <br> (name can't contain digits)</span>
-						<input class="button" type="text" size="15" id="input101" value="">
+						<input class="button" type="text" size="15" id="input101" value="" onkeypress="letterCheck(event)">
 					</div>
 					<div class="input_field">
 						<button class="button" type="button"  id="click101" style="align-self: center;" >вывод</button>
+					</div>
+				</div><br><br>
+
+				<div class="divFlex">
+					<span class="short">Задание №2:</span>
+					<div  id="" class="" style="display: none;">
+						<span class="">Hello from Modal Windows!</span>
+						<button class="" type="button"  id="" style="align-self: center;" >Close</button>
+					</div>
+
+					<div class="input_field">
+						<button class="button" type="button"  id="click201" style="align-self: center;" >open modal</button>
 					</div>
 				</div><br><br>
 
@@ -60,16 +80,19 @@
 					</div>
 				</div><br><br>
 
-				<div style="display:flex; border:3px solid #4682B4; height: 150px; box-shadow: 10px 5px 5px grey; border-radius: 5px;">
+				<div style="display:flex; border:3px solid #4682B4; height: 150px; box-shadow: 10px 5px 5px grey; border-radius: 5px;" onclick="tabs(event)">
 					<div style="background:#4682B4; color: white; flex: 1 1 10%; display:flex; flex-direction: column; justify-content: space-around; align-items: center;">
-						<span id="tab1" class="short1" onclick="tabs(event)">Click  </span>
-						<span id="tab2" class="short1" onclick="tabs(event)">Click  </span>
-						<span id="tab3" class="short1" onclick="tabs(event)">Click  </span>
+						<span id="tab1" class="short1" >HTML</span>
+						<span id="tab2" class="short1" >CSS</span>
+						<span id="tab3" class="short1" >JS</span>
 					</div>
-					<div style="; flex: 1 1 90%;">
+					<div style="; flex: 1 1 90%;" id="outArea">
 
 					</div>
 				</div><br><br>
 		</div>
+
+
+
 	</body>
 </html>

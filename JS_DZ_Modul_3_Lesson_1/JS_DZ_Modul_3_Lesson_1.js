@@ -1,13 +1,33 @@
 
-// --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------letter check
+// --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------
+  function letterCheck(e){
+    if(!(e.charCode>64&&e.charCode<91 || e.charCode>96 && e.charCode<123 ||
+    e.charCode>1039 && e.charCode<1104 || e.charCode==1025 || e.charCode==1105 )) {
+      event.preventDefault();
+    }
+  }
 
 
-
-// --------------------------------------------------------------------- 1-e задание --------------------------------------------------------------------------letter check
+// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
 
   window.onload = function () {
 
-    
+    outArea.innerHTML =tab1;
+
+    click101.onclick = function () {
+      let str = input101.value;
+      out101.innerHTML = `Здравствуйте  ${str}!`;
+    }
+
+    click201.onclick = function (e) {
+     out201.style.display = 'flex';
+     m001.className = 'main hystmodal__opened';
+    }
+
+    click202.onclick = function (e) {
+     out201.style.display = 'none';
+     m001.className = 'main';
+    }
 
     // click0p01.onclick = function () {
     //   let decRobot = robotDecorator(Autobots, 'explosion.png')('Оптимус', 'Прайм', 'Модуль «Оптимус»');
@@ -15,10 +35,10 @@
     // }
 
     click0p01.onclick = function () {
-      let decRobot = robotDecorator(Autobots, 'explosion.png');
+      let decRobot = robotDecorator(Autobots, 'explosion.png', move);
       let e = new  decRobot('Оптимус', 'Прайм', 'Модуль «Оптимус»');
       console.log(e);
-        e.prototype.move(robotId);
+        e.move(robotId);
     }
 
     click1p01.onclick = function () { // --------------- Практическое задание №1-------------------------------------
@@ -47,39 +67,17 @@
 
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // --------------------------------------------------------------------- Практическое задание --------------------------------------------------------------------------
     //                                                                       Декоратор класса
 
     function Autobots(name, clan, armament) {
-
         this._name = name;
         this.clan = clan;
         this.armament = armament;
         this.str = '';
-
     }
 
-    Autobots.prototype.move = function (e, distance = 1) {
+      function move(e, distance = 1) {
       this.originalStyle = e.style;
       e.style.position = "relative";
       let self = this;
@@ -94,26 +92,16 @@
       })();
     }
 
-    // function robotDecorator(fnc, srcExp) {
-    //   return function () {
-    //    let s = new fnc( ...arguments);
-    //    s.src = srcExp;
-    //    // s.move = function (e) {
-    //    //     fnc.prototype.move(e)
-    //    // }
-    //    return  s;
-    //   }
-    // }
 
-    function robotDecorator(fnc, src) {
-    return function () {
-     this.src = src;
-     console.log(this.__proto__.constructor);
-      this.__proto__.constructor = fnc;
-      this.move = Autobots.prototype.move;
-     fnc.apply(this, arguments);
+    function robotDecorator(fnc, src, move) {
+      let wrapper = function () {
+        this.src = src;
+        fnc.prototype.move = move;                                              // Можно ли динамически определять метод?
+        fnc.apply(this, arguments);                                             // типа fnc.prototype[move] , но чтоб работал)
+      }
+      wrapper.prototype = fnc.prototype;
+      return wrapper;
     }
-  }
 // --------------------------------------------------------------------- Практическое задание №2 --------------------------------------------------------------------------
 
 function clickCoord(e) {
@@ -121,11 +109,14 @@ function clickCoord(e) {
 }
 
 // --------------------------------------------------------------------- Практическое задание №4 --------------------------------------------------------------------------
-
+let tab1 = 'Hypertext Markup Language (HTML) is the standard markup language for documents designed to be displayed in a web browser. It can be assisted by technologies such as Cascading Style Sheets (CSS) and scripting languages such as JavaScript. Web browsers receive HTML documents from a web server or from local storage and render the documents into multimedia web pages. HTML describes the structure of a web page semantically and originally included cues for the appearance of the document.'
+let tab2 = 'CSS is designed to enable the separation of presentation and content, including layout, colors, and fonts.[3] This separation can improve content accessibility, provide more flexibility and control in the specification of presentation characteristics, enable multiple web pages to share formatting by specifying the relevant CSS in a separate .css file which reduces complexity and repetition in the structural content as well as enabling the .css file to be cached to improve the page. '
+let tab3 = 'JavaScript (JS) is a lightweight, interpreted, or just-in-time compiled programming language with first-class functions. While it is most well-known as the scripting language for Web pages, many non-browser  use it, such as Node.js, Apache CouchDB and Adobe Acrobat. JavaScript is a prototype-based, multi-paradigm, single-threaded, dynamic language, supporting object-oriented, imperative, and declarative (e.g. functional programming) styles. Read more about JavaScript.'
   function tabs(e) {
-    console.log(e.target.id);
+    switch (e.target.id) {
+      case 'tab1': outArea.innerHTML =tab1 ;  break;
+      case 'tab2': outArea.innerHTML =tab2 ;  break;
+      case 'tab3': outArea.innerHTML =tab3; break;
+      default: outArea.innerHTML =tab1; break;
+    }
   }
-
-  let ww= [1,1,1,1];
-  let qq = ww[Symbol.iterator]();
-  console.log(qq);
