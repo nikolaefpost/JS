@@ -19,7 +19,6 @@
     click201.onclick = function (e) {
      out201.style.display = 'flex';
      m001.className = 'main hystmodal__opened';
-     m001.setAttribute('disabled', 'disabled');
     }
 
     click202.onclick = function (e) {
@@ -86,7 +85,7 @@
     function robotDecorator(fnc, src, someMethod) {
       let wrapper = function () {
         this.src = src;
-        fnc.prototype.move = move;                                              // Можно ли динамически определять метод?
+        fnc.prototype.move = someMethod;                                              // Можно ли динамически определять метод?
         fnc.apply(this, arguments);                                             // типа fnc.prototype[move] , но чтоб работал)
       }
       wrapper.prototype = fnc.prototype;
