@@ -7,9 +7,6 @@
     }
   }
 
-
-// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
-
   window.onload = function () {
 
     outArea.innerHTML =tab1;
@@ -18,10 +15,11 @@
       let str = input101.value;
       out101.innerHTML = `Здравствуйте  ${str}!`;
     }
-
+// --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
     click201.onclick = function (e) {
      out201.style.display = 'flex';
      m001.className = 'main hystmodal__opened';
+     m001.setAttribute('disabled', 'disabled');
     }
 
     click202.onclick = function (e) {
@@ -29,16 +27,11 @@
      m001.className = 'main';
     }
 
-    // click0p01.onclick = function () {
-    //   let decRobot = robotDecorator(Autobots, 'explosion.png')('Оптимус', 'Прайм', 'Модуль «Оптимус»');
-    //    decRobot.move(robotId);
-    // }
-
+// --------------------------------------------------------------------- Практическое задание robotDecorator ----------------------------------------------------------------
     click0p01.onclick = function () {
       let decRobot = robotDecorator(Autobots, 'explosion.png', move);
       let e = new  decRobot('Оптимус', 'Прайм', 'Модуль «Оптимус»');
-      console.log(e);
-        e.move(robotId);
+      e.move(robotId);
     }
 
     click1p01.onclick = function () { // --------------- Практическое задание №1-------------------------------------
@@ -48,27 +41,24 @@
     }
 
     click2p01.onclick = function (e) { // --------------- Практическое задание №2-------------------------------------
-
       out2p01.innerHTML = clickCoord(e);
     }
 
     click3p01.onclick = function (e) { // --------------- Практическое задание №3-------------------------------------
-
       out3p01.style.marginLeft = '30px';
       out3p01.innerHTML = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam a felis ullamcorper dui vehicula rhoncus.'+
        'Donec molestie nec libero vel porta. Nulla viverra lacus quis eros hendrerit, ac luctus lacus molestie. Praesent in risus'+
-        'eros. Aenean porttitor ut erat quis sollicitudin. Fusce ac scelerisque erat. Mauris eu dolor vel libero gravida commodo ac'+
-         'eu dui. Duis luctus varius sollicitudin. Donec dignissim mollis condimentum. Integer sed quam ut mi sagittis ullamcorper'+
-          'quis in nisl.';
-        out3p01.style.display == '' ?  out3p01.style.display = 'none' : out3p01.style.display = '';
-          console.log(out3p01.style.display);
+       'eros. Aenean porttitor ut erat quis sollicitudin. Fusce ac scelerisque erat. Mauris eu dolor vel libero gravida commodo ac'+
+       'eu dui. Duis luctus varius sollicitudin. Donec dignissim mollis condimentum. Integer sed quam ut mi sagittis ullamcorper'+
+       'quis in nisl.';
+       out3p01.style.display == '' ?  out3p01.style.display = 'none' : out3p01.style.display = '';
     }
 
 
   }
 
-  // --------------------------------------------------------------------- Практическое задание --------------------------------------------------------------------------
-    //                                                                       Декоратор класса
+// --------------------------------------------------------------------- Практическое задание --------------------------------------------------------------------------
+//                                                                       Декоратор класса
 
     function Autobots(name, clan, armament) {
         this._name = name;
@@ -93,7 +83,7 @@
     }
 
 
-    function robotDecorator(fnc, src, move) {
+    function robotDecorator(fnc, src, someMethod) {
       let wrapper = function () {
         this.src = src;
         fnc.prototype.move = move;                                              // Можно ли динамически определять метод?
@@ -120,3 +110,15 @@ let tab3 = 'JavaScript (JS) is a lightweight, interpreted, or just-in-time compi
       default: outArea.innerHTML =tab1; break;
     }
   }
+
+// --------------------------------------------------------------------- Практическое задание №5 --------------------------------------------------------------------------
+
+  function deleteNews(e) {
+    e.path[2].style.display = 'none';
+  }
+
+// --------------------------------------------------------------------- Практическое задание №6 --------------------------------------------------------------------------
+function addProgress(e) {
+  let q = parseInt(pr.style.width);
+  if (q < 100)  pr.style.width = (q+5)+'%';
+}

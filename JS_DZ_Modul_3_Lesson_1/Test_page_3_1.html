@@ -27,7 +27,7 @@
 						<input class="button" type="text" size="15" id="input101" value="" onkeypress="letterCheck(event)">
 					</div>
 					<div class="input_field">
-						<button class="button" type="button"  id="click101" style="align-self: center;" >вывод</button>
+						<button class="button" type="button"  id="click101" style="align-self: center;" >Action</button>
 					</div>
 				</div><br><br>
 
@@ -49,7 +49,7 @@
 						<img id="robotId" width="15%" src="unnamed.png">
 					</div>
 					<div class="input_field">
-						<button class="button" type="button"  id="click0p01" style="align-self: center;" >вывод</button>
+						<button class="button" type="button"  id="click0p01" style="align-self: center;" >Action</button>
 					</div>
 				</div><br><br>
 
@@ -73,7 +73,7 @@
 
 				<div class="divFlex">
 					<span class="short">Show/Hide text: </span>
-					<div  id="out3p01" class="ww" >
+					<div  id="out3p01" class="ww" style="display:none;">
 					</div>
 					<div class="input_field">
 						<button class="button" type="button"  id="click3p01" style="align-self: center;" >Action</button>
@@ -87,12 +87,57 @@
 						<span id="tab3" class="short1" >JS</span>
 					</div>
 					<div style="; flex: 1 1 90%;" id="outArea">
-
 					</div>
 				</div><br><br>
+
+				<div>
+					<div id="news_block1" >
+						<div class="header">
+							<h3>Lorem ipsum dolor sit amet</h3>
+							<button class="" type="button"  id="click1" style="align-self: center;" onclick="deleteNews(event)" >X [remove]</button>
+						</div>
+						<div class="main_block">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. In non leo vel dolor placerat eleifend. Sed facilisis lectus felis, a dignissim eros
+							 interdum sagittis. Praesent ac quam nec erat euismod condimentum nec et augue. Donec et eros tempor ligula pulvinar dapibus. Nulla eu tincidunt
+							  augue. Nullam fringilla, leo ut imperdiet ornare, eros lacus interdum dui, ornare sodales lorem turpis at mauris. Nam vitae felis et ligula
+								 pretium tristique eu sit amet mi. Fusce sed consectetur nulla, in laoreet ex. Maecenas vehicula est luctus, suscipit sapien ut, cursus libero.
+								  Sed est massa, condimentum vitae sem a, volutpat molestie enim. Aliquam porta imperdiet neque, vel fermentum purus lacinia sit amet.
+						</div>
+					</div>
+
+					<div id="news_block2">
+						<div class="header">
+							<h3>Donec malesuada vulputate ante</h3>
+							<button class="" type="button"  id="click2" style="align-self: center;" onclick="deleteNews(event)">X [remove]</button>
+						</div>
+						<div class="main_block">
+							Donec malesuada vulputate ante, volutpat mattis sapien dictum ac. Vestibulum tempus massa ac felis lobortis vehicula et a massa. Praesent dapibus
+							 aliquam malesuada. Aenean nec sagittis nunc. Duis vitae arcu a ipsum varius imperdiet. Sed non porta velit. Maecenas condimentum fringilla neque,
+							  et pretium risus elementum non. Sed in elit lectus. Nam odio nulla, ultricies eu nisi id, finibus elementum eros.
+						</div>
+					</div>
+
+					<div id="news_block3">
+						<div class="header">
+							<h3>Integer fermentum orci vitae magna</h3>
+							<button class="" type="button"  id="click3" style="align-self: center;" onclick="deleteNews(event)">X [remove]</button>
+						</div>
+						<div class="main_block">
+							Integer fermentum orci vitae magna euismod, pulvinar aliquam augue rhoncus. In quis aliquet nisi. Vivamus libero sapien, suscipit ac scelerisque at,
+							 posuere sed ante. Vestibulum tincidunt congue dolor, nec cursus enim lacinia non. Sed in tellus quis dolor fermentum pulvinar. Donec auctor est
+							  nulla, luctus bibendum tortor eleifend vitae. Duis dignissim orci quis diam sodales, sit amet euismod orci tempus. Phasellus dolor lorem, posuere
+								 ac neque eget, egestas tincidunt augue.
+						</div>
+					</div>
+				</div>
+
+				<div style="display: flex; flex-direction: column; align-items:center; margin:5vh 0;">
+					<div class="pr_bar">
+						<div class="progress" id="pr" style="width: 5%;">
+						</div>
+					</div>
+					<button class="pr_button" type="button"   style="align-self: center;" onclick="addProgress()">Add 5 percent</button>
+				</div>
 		</div>
-
-
-
 	</body>
 </html>

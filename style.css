@@ -75,7 +75,7 @@
     text-align: left;
 
   }
-  .divFlex{
+  .divFlex, .header{
     display: flex;
     justify-content: space-between;
     align-items:center;
@@ -171,4 +171,43 @@
     padding: 10px;
     font-size: 20px;
     text-indent: 1.5em;
+    text-align:justify;
+  }
+
+  #news_block1, #news_block2, #news_block3{
+    border-bottom: 1px solid grey;
+    padding:0 1em 1.5em 1em;
+    margin-bottom: 10px;
+    box-shadow: 10px 5px 5px grey;
+    border-radius: 5px;
+  }
+
+  .main_block{
+    text-align:justify;
+    text-indent: 1.5em;
+  }
+
+  .pr_bar{
+    width: 30vw;
+    border:2px solid #4682B4;
+    text-align: left;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+  }
+
+  .progress{
+    
+    height: 50px;
+    background:#4682B4;
+    box-shadow: 5px 0px 5px grey;
+  }
+
+  .pr_button{
+    margin-top: 30px;
+    width: 30vw;
+    font-size: 22px;
+    padding: .5em 0;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    border: none;
   }
