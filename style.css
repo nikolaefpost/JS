@@ -196,7 +196,7 @@
   }
 
   .progress{
-    
+
     height: 50px;
     background:#4682B4;
     box-shadow: 5px 0px 5px grey;
@@ -210,4 +210,28 @@
     border-radius: 5px;
     box-shadow: 10px 5px 5px grey;
     border: none;
+  }
+
+  .football{
+    position: relative;
+    background: url("JS_DZ_Modul_3_Lesson_1/field.jpg") no-repeat;
+    background-size: 100% 100% ;
+    width: 85vw;
+    height:45vw;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    margin: 100px;
+    padding: 50px;
+  }
+
+  .ball{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    transition: all 1s;
+  }
+
+  #field_{
+    width: 100%;
+    height:100%;
   }

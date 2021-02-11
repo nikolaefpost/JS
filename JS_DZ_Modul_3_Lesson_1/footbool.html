@@ -1,0 +1,40 @@
+<html >
+	<head>
+		<meta charset="utf-8">
+		<title>JS_DZ_Modul_3_Lesson_1</title>
+		<link rel="stylesheet" media="screen" href="../style.css">
+		<style media="screen"></style>
+
+	</head>
+	<body style="margin:0px;">
+		<div class="football"  >
+			<div id="field_">
+					<img src="football_PNG52797.png" alt="" width="100px" height="100px" class="ball"  id="ball" >
+			</div>
+
+
+		</div>
+		<script type="text/javascript">
+
+		// field_.onclick = function(e) {
+		// 		let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
+		// 		ball.style.left = ballCoords.left + 'px';
+		// 		ball.style.top = ballCoords.top + 'px';
+		// }
+
+
+		class FootballEvents {
+    handleEvent(e) {
+			let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
+			ball.style.left = ballCoords.left + 'px';
+			ball.style.top = ballCoords.top + 'px';
+    }
+  }
+	let elem = document.getElementById('field_');
+	let menu = new FootballEvents();
+	elem.addEventListener('click', menu);
+	elem.addEventListener('mousemove', menu);
+		</script>
+
+	</body>
+</html>

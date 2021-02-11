@@ -7,9 +7,10 @@
     }
   }
 
-  window.onload = function () {
+// --------------------------------------------------------------------- 3-e задание --------------------------------------------------------------------------
 
-    outArea.innerHTML =tab1;
+  window.onload = function () {
+    let elements = m001.querySelectorAll('button');
 
     click101.onclick = function () {
       let str = input101.value;
@@ -18,13 +19,20 @@
 // --------------------------------------------------------------------- 2-e задание --------------------------------------------------------------------------
     click201.onclick = function (e) {
      out201.style.display = 'flex';
+     for (let x of elements) x.setAttribute("disabled", "true");
+     input101.setAttribute("disabled", "true");
      m001.className = 'main hystmodal__opened';
     }
 
     click202.onclick = function (e) {
      out201.style.display = 'none';
+     for (let x of elements) x.removeAttribute("disabled");
+     input101.removeAttribute("disabled");
      m001.className = 'main';
     }
+
+
+
 
 // --------------------------------------------------------------------- Практическое задание robotDecorator ----------------------------------------------------------------
     click0p01.onclick = function () {
@@ -95,6 +103,10 @@
 
 function clickCoord(e) {
   out2p01.innerHTML = ('X= ' +  e.x + 'px' +'<br>'+'Y= ' +e.y + 'px');
+  console.log(e.layerY);
+  // if (e.y > 1250 && e.y) {
+  //
+  // }
 }
 
 // --------------------------------------------------------------------- Практическое задание №4 --------------------------------------------------------------------------
@@ -121,3 +133,107 @@ function addProgress(e) {
   let q = parseInt(pr.style.width);
   if (q < 100)  pr.style.width = (q+5)+'%';
 }
+
+// ---------------------------------------------------------------------Самостоятельное практическое задание  --------------------------------------------------------------------------
+
+  class IterableObject extends Object {
+    constructor(object) {
+        super();
+        Object.assign(this, object);
+    }
+
+    *[Symbol.iterator]() {
+        const entries = Object.entries(this);
+        for (var i = 0; i < entries.length; i++) {
+        yield  entries[i]
+        }
+
+    }
+  }
+
+const iterableObject = new IterableObject({
+    1: 'a',
+    2: 'b',
+    3: 'c'
+});
+
+for (let element of iterableObject) {
+    console.log(element);
+}
+
+
+function* generateEven() {
+  for (let i = 0; true; i+=2) yield i;
+}
+
+function* generateOdd() {
+  for (let i = 1; true; i+=2) yield i;
+}
+
+function* generatePasswordCodes() {
+
+  while(true) {
+    let i = 0;
+        i++
+    console.log(i);
+    if (i%2==0) {
+      console.log(i);
+      yield* generateEven();
+    }else {
+      console.log(i);
+      yield* generateOdd();
+    }
+
+  }
+
+
+}
+
+let t = generatePasswordCodes();
+// t.next();
+// t.next();
+t.next(1);
+t.next(1);
+console.log(t.next());
+
+let range = {
+  from: 1,
+  to: 5,
+  [Symbol.iterator]() {
+    return {
+      start: this.from,
+      end: this.to,
+      next() {
+        if (this.start <= this.end) {
+          return { done: false, value: this.start++ };
+        } else {
+          return { done: true };
+        }
+      }
+    };
+  }
+};
+console.log([...range]);
+
+  let obj = {
+    arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    [Symbol.iterator](a, b){
+      return {
+        a: this.arr,
+        i:a,
+        next(){
+          if (this.i <= b) return {done: false, value: this.a[this.i++]};
+          else return {done: true};
+        }
+      }
+    }
+  }
+
+  const iterator = obj[Symbol.iterator](2,6);
+  let result = iterator.next();
+console.log(result);
+  while (!result.done) {
+      const element = result.value;
+      console.log(element);
+      result = iterator.next();
+  }
