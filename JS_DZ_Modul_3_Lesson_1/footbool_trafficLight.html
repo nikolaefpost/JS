@@ -1,0 +1,67 @@
+<html >
+	<head>
+		<meta charset="utf-8">
+		<title>JS_DZ_Modul_3_Lesson_1</title>
+		<link rel="stylesheet" media="screen" href="../style.css">
+		<style media="screen"></style>
+
+	</head>
+	<body style="margin:0px;">
+		<div class="football"  >
+			<div id="field_">
+					<img src="football_PNG52797.png" alt="" width="100px" height="100px" class="ball"  id="ball" onmousemove="event.stopPropagation()">
+			</div>
+		</div>
+
+		<div class="traffic_light_block">
+			<div class="traffic_light">
+				<p class="light" id="red"></p>
+				<p class="light" id="orange"></p>
+				<p class="light" id="green"></p>
+			</div>
+			<div class="button_next" id="next">
+				NEXT
+			</div>
+
+		</div>
+		<script type="text/javascript">
+		let elem1 = document.getElementById('field_');
+
+		// elem1.onclick = function(e) {
+		// 		let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
+		// 		ball.style.left = ballCoords.left + 'px';
+		// 		ball.style.top = ballCoords.top + 'px';
+		// }
+
+		class FootballEvents {
+			handleEvent(e) {
+				let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
+				ball.style.left = ballCoords.left + 'px';
+				ball.style.top = ballCoords.top + 'px';
+			}
+		}
+
+		let 	objEvents = new FootballEvents();
+		elem1.addEventListener('click', objEvents);
+		elem1.addEventListener('mousemove', objEvents);
+
+//------------------------------------------ 2e задание ------------------------------------------------------------traffic light
+
+		let elem2 = document.getElementById('next');
+		let gen = generator();
+
+		function* generator() {
+			let i = 0;
+			while (true) { yield i;	i++; if	(i > 2) i=0; }
+		}
+
+		elem2.onclick =	function () {
+			let i = gen.next().value;
+			let arr = ['red', 'orange', 'green'];
+			let lamp = [red, orange, green];
+			lamp[i].style.background = arr[i];
+			lamp[i-1] ?	lamp[i-1].style.background = 'grey' : lamp[i+2].style.background = 'grey';
+		}
+		</script>
+	</body>
+</html>
