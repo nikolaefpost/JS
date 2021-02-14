@@ -215,7 +215,7 @@ let range = {
 };
 console.log([...range]);
 
-  let obj = {
+  let obj1 = {
     arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
     [Symbol.iterator](a, b){
       return {
@@ -229,7 +229,16 @@ console.log([...range]);
     }
   }
 
-  const iterator = obj[Symbol.iterator](2,6);
+  let obj2 = {
+    arr: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
+    *[Symbol.iterator](a, b){
+      for (; a < b;   b--) {
+        yield this.arr[b];
+      }
+    }
+  }
+
+  const iterator = obj2[Symbol.iterator](2,6);
   let result = iterator.next();
 console.log(result);
   while (!result.done) {
@@ -237,3 +246,72 @@ console.log(result);
       console.log(element);
       result = iterator.next();
   }
+
+  // const iterator = obj[Symbol.iterator](2,6);
+  // do {
+  //   let result = iterator.next();
+  //   if (result.done) break;
+  //   console.log(result.value);
+  // } while (true);
+
+  function* generate1() {
+    yield 1;
+		yield 3
+    yield 5;
+		}
+
+		function* generate2() {
+      yield 0;
+      yield 2
+      yield 4;
+		}
+
+		let generator1 = generate1();
+		let generator2 = generate2();
+
+		function* generatePasswordCodes(a) {
+			for (let i=0; i<a; i++ ){
+        console.log(i);
+			if(i%2==0) yield* generator2;
+			else yield* generator1;
+			}
+		}
+		let sequence1 = [ ...generatePasswordCodes(6)];
+
+
+		console.log(sequence1);
+
+
+
+
+
+
+    function* gen() {
+      let rezalt = 0;
+      let ask1 = yield "2 + 2 = ?";
+      if (ask1 == 4) {console.log('true'); rezalt++}
+      else console.log('false');
+
+      let ask2 = yield "3 * 3 = ?"
+      if (ask2 == 9) {console.log('true'); rezalt++}
+      else console.log('false');
+
+      let ask3 = yield "4 * 4 = ?"
+      if (ask3 == 16) {console.log('true'); rezalt++}
+      else console.log('false');
+
+      yield rezalt;
+    }
+    let generator = gen();
+    console.log( generator.next().value );
+    console.log( generator.next(8).value );
+    console.log( generator.next(9).value );
+    console.log( generator.next(16).value );
+    console.log( generator.next().value );
+
+
+    function* generate3(modulus, a, c, seed) {
+  			  while(true)
+          seed = (a * seed + c) % modulus;
+  				yield seed;
+  		}

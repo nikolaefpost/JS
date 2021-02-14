@@ -21,6 +21,18 @@
     margin-left: 10px;
   }
 
+  .button1{
+    padding:7px 35px ;
+    font-size: 22px;
+    margin-top: 10vh;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 10px 5px 5px grey;
+    align-self: flex-end;
+    margin-left: 10px;
+  }
+
   .input_field{
     display: flex;
     flex-direction: column;
@@ -274,3 +286,19 @@
     user-select: none;
     margin-left: 30px;
   }
+
+  .onclick_list li{
+    margin: 5px;
+    font-size: 18;
+  }
+
+  .tooltip {
+      position: fixed;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-align: center;
+      font: italic 12px sans-serif;
+      color: white;
+      background: rgb(223, 184, 227);
+      box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+    }
