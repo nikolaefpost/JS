@@ -7,9 +7,9 @@
 
 	</head>
 	<body style="margin:0px;">
-		<div class="football"  >
-			<div id="field_">
-					<img src="football_PNG52797.png" alt="" width="100px" height="100px" class="ball"  id="ball" onmousemove="event.stopPropagation()">
+		<div class="football"  id="field_">
+			<div >
+					<img src="football_PNG52797.png" alt="" width="100px" height="100px" class="ball"  id="ball" onclick="event.stopPropagation()">
 			</div>
 		</div>
 
@@ -35,15 +35,26 @@
 
 		class FootballEvents {
 			handleEvent(e) {
-				let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
-				ball.style.left = ballCoords.left + 'px';
-				ball.style.top = ballCoords.top + 'px';
+
+				let coords = e.target.getBoundingClientRect();													//let ballCoords = {top: e.layerY - 50 ,left: e.layerX -50}
+				let left, top;
+
+				if (e.clientX < coords.left+100 ) left = 50;
+				else if (e.clientX > coords.right-100 ) left = coords.right-250;
+				else left = e.layerX - 50;
+				console.log(coords);
+				if (e.clientY < coords.top+100 ) {top = 50; console.log('x');}
+				else if (e.clientY > coords.top + coords.height -100 ) {top = coords.top + coords.height -225; console.log(coords.top + coords.height, e.clientY);}
+				else {top = e.layerY - 50;console.log('x');}
+
+				ball.style.left = left + 'px';
+				ball.style.top = top + 'px';
 			}
 		}
 
 		let 	objEvents = new FootballEvents();
 		elem1.addEventListener('click', objEvents);
-		elem1.addEventListener('mousemove', objEvents);
+		// elem1.addEventListener('mousemove', objEvents);
 
 //------------------------------------------ 2e задание ------------------------------------------------------------traffic light
 
