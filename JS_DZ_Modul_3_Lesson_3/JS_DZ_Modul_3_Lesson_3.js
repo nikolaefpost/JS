@@ -1,10 +1,13 @@
 
   window.onload = function () {
 //------------------------------------------------------------------------------1е задание --------------------------------------------------------------------
-    let matches = document.querySelectorAll('li');
+    let selectedEl;
+    // let matches = document.querySelectorAll('li');
     onclick_list.onclick = function (e) {
-      for (var elem of matches) { if(elem.style)  elem.style = null;}
+      // for (var elem of matches) { if(elem.style)  elem.style = null;}
+      if(selectedEl) selectedEl.style = null;
       e.target.style.background='rgb(223, 184, 227)';
+      selectedEl = e.target;
     }
 
     // onclick_list.onmouseout = function (e) {
@@ -39,3 +42,25 @@
       }
     }
   }
+
+// function sum() {
+//   let sum=0;
+//   for (var i = 0; i < 1e4; i++) {
+//     sum +=i;
+//     console.log(sum);
+//   }
+// }
+
+// sum();
+let sum=0;
+let timerId = setTimeout(function sum(a) {
+
+
+  if (a<0) clearTimeout(timerId);
+  for (var i = 0; i < 1e3; i++) {
+    sum +=i;
+    console.log(sum);}
+    a--;
+  timerId = setTimeout(sum, 1);
+}, 2000);
+console.log(sum);

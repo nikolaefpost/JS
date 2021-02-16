@@ -135,13 +135,13 @@ class ExtentedDate extends Date {
 
 // --------------------------------------------------------------------- 4-e задание --------------------------------------------------------------------------
 
-class StyledEmpTable extends EmpTable{
+class StyledEmpTable extends EmpTable{ //Метод getStyles() должен был возвращать строку со стилями, в Вашем случае он возвращает объект класса StyledEmpTable. Оба метода getHtml() не совсем верны, по заданию этот метод должен был возвращать строковое представление таблицы в html со стилями. Это можно просто реализовать вернув строку через super.getHtml() и затем дополнив её стилями через метод getStyles() и регулярные выражения и затем вернуть её. В Вашем случае в первом просто вызывается метод super.getHtml() и затем возвращаться строка со стилями, во втором случае изменяется DOM, что очень опасно, это похоже на работу с глобальными переменными, изменения должны быть локальными.
 
   getStyles(arrTegStr){
     this.styles = '<style>';
     this.styles += arrTegStr.reduce((acc, cur) => {return acc+=cur},'');
     this.styles += '</style>';
-    return this;
+    return this.styles;
   }
   getHtml(){
     super.getHtml();
@@ -229,7 +229,8 @@ class tegStyle {
 
       //head.innerHTML += userTab.getStyles([tbl, cpt, th, td, tr]).styles;
       //out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
-      out401.innerHTML = userTab.getStyles([tbl, cpt, th, td, tr]).getHtml();
+      userTab.getStyles([tbl, cpt, th, td, tr]);
+      out401.innerHTML = userTab.getHtml();
       out301.innerHTML = '';
     }
 
