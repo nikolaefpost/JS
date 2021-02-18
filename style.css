@@ -289,13 +289,14 @@
     font-size: 18;
   }
 
-  .hovered:hover{
+  li:hover{
   font-weight : 700;
   }
 
-  .hovered:hover li{
-  font-weight : normal;
+  ul{
+    font-weight : normal;
   }
+
 
   .tooltip {
       position: fixed;
