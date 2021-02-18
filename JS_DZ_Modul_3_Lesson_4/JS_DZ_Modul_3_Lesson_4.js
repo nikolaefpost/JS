@@ -1,14 +1,17 @@
 
   window.onload = function () {
-    function dottedLink() {
+    (function () {
       let matches = document.querySelectorAll('a');
       for (var elem of matches){
-        if (elem.href.indexOf('https:')!=-1){
+        if (elem.href.includes('://')){
           elem.style.textDecoration = 'none';
           elem.className = 'dotted';
         }
       }
-    }
-    dottedLink();
+    })();
 
+
+    list.onclick = function () {
+      for (z of event.target.children) { (z.style.display) ? z.style.display = '' : z.style.display = 'none';}
+    }
   }

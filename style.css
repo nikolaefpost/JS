@@ -289,6 +289,14 @@
     font-size: 18;
   }
 
+  .hovered:hover{
+  font-weight : 700;
+  }
+
+  .hovered:hover li{
+  font-weight : normal;
+  }
+
   .tooltip {
       position: fixed;
       padding: 10px 20px;
