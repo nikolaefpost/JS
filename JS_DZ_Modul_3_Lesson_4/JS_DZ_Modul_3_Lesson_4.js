@@ -19,7 +19,7 @@
     // }
 
 
-    for (elem of document.querySelectorAll('li')){                              //оборачиывем все li в span для более четкого позиционирования
+    for (elem of list.querySelectorAll('li')){                              //оборачиывем все li в span для более четкого позиционирования
       let span = document.createElement('span');
       elem.prepend(span);
       span.append(span.nextSibling);
