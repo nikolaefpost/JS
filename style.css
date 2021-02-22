@@ -307,3 +307,7 @@
     .dotted{
       border-bottom: 2px dotted blue;
     }
+
+    .selected{
+      background: orange;
+    }

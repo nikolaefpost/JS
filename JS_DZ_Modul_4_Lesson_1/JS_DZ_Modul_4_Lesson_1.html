@@ -1,0 +1,55 @@
+<html >
+	<head>
+		<meta charset="utf-8">
+		<title>JS_DZ_Modul_4_Lesson_1</title>
+		<script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
+		<script src="JS_DZ_Modul_4_Lesson_1.js"></script>
+		<link rel="stylesheet" media="screen" href="../style.css">
+		<style media="screen"></style>
+    <style>
+ iframe{
+ border:1px solid navy;
+ height:300px;
+ margin:30px;
+ width:300px;
+ }
+
+ button{
+ margin:10px 150px;
+ }
+ </style>
+	</head>
+	<body>
+		<div class="main" id="main">
+      <div class="">
+				<h2 style="text-align: center;">Список, с изменяемым фоном</h2>
+				<ol class="onclick_list" id="onclick_list">
+					<li>JavaScript Object Programming by Rinehart, Martin.<i>italic</i></li>
+					<li>Object Oriented JavaScript, 3rd Edition.</li>
+					<li>Beginning Functional JavaScript.</li>
+					<li>Introducing Regular Expressions.</li>
+					<li>JavaScript Recipes.</li>
+					<li>Pro HTML5 with CSS, JavaScript, and Multimediat.</li>
+			  </ol>
+			</div>
+
+		</div>
+    <div class="">
+      <iframe src="about:blank"></iframe>
+ <iframe src="about:blank"></iframe>
+ <iframe src="about:blank" name="frame3"></iframe>
+ <button onclick="window.frames[0].
+ location='https://itstep.org'">
+ IT Step
+ </button>
+ <button onclick="window.frames[1].
+ location='https://mystat.itstep.org'">
+ Mystat
+ </button>
+ <button onclick="window.frames.frame3.
+ location='https://quiz.itstep.org'">
+ Quizes
+ </button>
+    </div>
+	</body>
+</html>
