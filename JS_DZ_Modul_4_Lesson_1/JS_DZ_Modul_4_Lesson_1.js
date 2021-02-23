@@ -45,32 +45,32 @@ console.log(e.target.parentNode.children[0].marker);
 
 
   function paintOrange1 (e) {
+    if (event.target.tagName != "LI") return;
+    let matches = onclick_list.children;
+    for (let i = 0; i < matches.length; i++) {
+      matches[i].setAttribute('index', i);
+    }
 
-    if (e.type == 'click' && !(e.ctrlKey || e.shiftKey)) {
-     if(selectedEl) selectedEl.classList.remove('selected');
+    if (e.type == 'click' && !(e.ctrlKey || e.shiftKey)) {                      //орабатываем 'click'  выделение одного элемента
+     if(selectedEl) for (var elem of matches) { if(elem.classList)  elem.classList.remove('selected');}
      e.target.classList.add('selected');
      selectedEl = e.target;
     }
 
-    if (e.ctrlKey) {
-      if (event.target.tagName != "LI") return;
-        e.target.classList.toggle('selected');
-        }
+    if (e.ctrlKey) {e.target.classList.toggle('selected'); }                    //орабатываем 'ctrlKey'  выделение  нескольких элементов
 
-
-      // if (e.shiftKey){
-      //   if (e.type == 'click') {
-      //
-      //     e.target.style.background='orange'
-      //     for(el of e.target.parentElement){
-      //       if(el.style.background == 'orange' )
-      //     }
-      //     }
-      //   }
-
-}
+    if (e.shiftKey){                                                            //орабатываем 'shiftKey' выделение диапазона элементов
+      if(!selectedEl) selectedEl = onclick_list.children[0];
+      let a = selectedEl.getAttribute('index');
+      let b = event.target.getAttribute('index');
+      if (a>b) [a, b]=[b, a];
+      for (a; a <= b; ++a) {
+        onclick_list.children[a].classList.add('selected');
+      }
+    }
+  }
 
 
 onclick_list.addEventListener('click', paintOrange1) ;
-document.body.addEventListener('keydown', paintOrange1) ;
+// document.body.addEventListener('keydown', paintOrange1) ;
 }
