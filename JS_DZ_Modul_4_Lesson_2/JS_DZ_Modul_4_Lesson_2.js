@@ -9,9 +9,10 @@
       let i = e.target.getAttribute('index');
       console.log(i);
       matches.sort((a, b)=>{
-        console.log(a.cells[i]);
-        if (a.cells[i]>b.cells[i]) return true;
+        console.log(a.cells[i].innerHTML);
+        if (a.cells[i].innerHTML>b.cells[i].innerHTML) return 1 ;
       })
+      sorting.tBodies[i].append(...matches);
     }
     Firstname.addEventListener('click', sortString) ;
   }
