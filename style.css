@@ -318,3 +318,34 @@
       height:100px;
       text-align:justify;
     }
+
+    .sorting{
+      box-shadow: 10px 5px 5px grey;
+      border: none;
+      border-bottom-right-radius :5px;
+    }
+
+    .sorting_caption{
+      padding: 10px;
+      color: white;
+      background: #4682B4;
+      border-top-right-radius: 5px;
+      font-weight: bold;
+    }
+
+    .sorting  th{
+      border-bottom: 3px solid #B9B29F;
+      padding: 10px;
+      text-align: left;
+      text-align: left;
+    }
+
+    .sorting  td{
+      padding: 10px 30px;
+      border-top-right-radius: 5px;
+    }
+
+    .sorting  tr{
+      padding: 10px;
+      background: white
+    }
