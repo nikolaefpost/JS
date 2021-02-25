@@ -58,31 +58,64 @@ window.onload = function () {
 onclick_list.addEventListener('click', paintOrange()) ;
 //------------------------------------------------------------------------------2е задание --------------------------------------------------------------------
 
-  function editText(e){
-    let text, text_area,p_block;
-    return function (e) {
-      if (e.ctrlKey && e.code == 'KeyE'){
-        p_block = div_block.querySelector('p');
-        if(!p_block) return;
-        text_area = document.createElement('textarea');
-        text_area.classList.add('edit_text');
-        text_area.textContent = p_block.textContent;
-        p_block.remove();
-        p_block = null;
-        div_block.append(text_area);
-        e.preventDefault();
-      }
+  // function editText(e){
+  //   let text, text_area, p_block;
+  //   return function (e) {
+  //     if (e.ctrlKey && e.code == 'KeyE'){
+  //       p_block = div_block.querySelector('p');
+  //       if(!p_block) return;
+  //       text_area = document.createElement('textarea');
+  //       text_area.classList.add('edit_text');
+  //       text_area.value = p_block.firstChild.data;
+  //       text_area.setAttribute('autofocus', true);
+  //       p_block.remove();
+  //       p_block = null;
+  //       div_block.append(text_area);
+  //       e.preventDefault();
+  //     }
+  //
+  //     if (e.ctrlKey && e.code == 'KeyS'){
+  //       if(!text_area||p_block) return;
+  //       p_block = document.createElement('p');
+  //       p_block.textContent = text_area.value;
+  //       text_area.remove();
+  //       div_block.append(p_block);
+  //       e.preventDefault();
+  //     }
+  //   }
+  //
+  // }
 
-      if (e.ctrlKey && e.code == 'KeyS'){
-        if(!text_area||p_block) return;
-        p_block = document.createElement('p');
-        p_block.textContent = text_area.value;
-        text_area.remove();
-        div_block.append(p_block);
-        e.preventDefault();
-      }
-    }
-
+  function createArea(e) {                                                      // Подскажите какое оформление предпочтительней?
+    p_block = div_block.querySelector('p');
+    if(!p_block) return;
+    text_area = document.createElement('textarea');
+    text_area.classList.add('edit_text');
+    text_area.value = p_block.firstChild.data;
+    text_area.setAttribute('autofocus', true);
+    p_block.remove();
+    p_block = null;
+    div_block.append(text_area);
+    e.preventDefault();
   }
+
+
+  function createP(e) {
+    if(!text_area||p_block) return;
+    p_block = document.createElement('p');
+    p_block.textContent = text_area.value;
+    text_area.remove();
+    div_block.append(p_block);
+    e.preventDefault();
+  }
+
+  function editText(e){
+    let text, text_area, p_block;
+    return function (e) {
+      if (e.ctrlKey && e.code == 'KeyE') createArea(e);
+      if (e.ctrlKey && e.code == 'KeyS') createP(e)
+    }
+  }
+
   document.body.addEventListener('keydown', editText()) ;
 }

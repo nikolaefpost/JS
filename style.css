@@ -316,4 +316,5 @@
     .edit_text{
       width: 100%;
       height:100px;
+      text-align:justify;
     }
