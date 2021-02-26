@@ -1,18 +1,30 @@
 
   window.onload = function () {
-    // let matches = Array.from(document.body.getElementsByTagName('tr'));
-    let matches = Array.from(sorting.rows);
-    matches.shift();
-    console.log(matches[0]);
-
-    function sortString(e) {
-      let i = e.target.getAttribute('index');
-      console.log(i);
-      matches.sort((a, b)=>{
-        console.log(a.cells[i].innerHTML);
-        if (a.cells[i].innerHTML>b.cells[i].innerHTML) return 1 ;
-      })
-      sorting.tBodies[i].append(...matches);
+//------------------------------------------------------------------------------1е задание --------------------------------------------------------------------
+  headTab.addEventListener('click', sortRows()) ;
+    function sortRows(e) {
+      // let matches = Array.from(document.body.getElementsByTagName('tr'));
+      let matches = Array.from(sorting.rows).slice(1);
+      let indexed = Array.from(headTab.children);
+      for (let i = 0; i < indexed.length; i++) { indexed[i].setAttribute('index', i);}
+      return function (e) {
+        let i = e.target.getAttribute('index');
+        matches.sort((a, b) => a.cells[i].innerHTML > b.cells[i].innerHTML ? 1 : -1);
+        sorting.tBodies[0].firstChild.after(...matches);
+      }
     }
-    Firstname.addEventListener('click', sortString) ;
+//------------------------------------------------------------------------------2е задание --------------------------------------------------------------------
+
+  function pushBlock(e) {
+    console.log(e.type == 'mousedown');
+    if (e.type == 'mousedown') {
+      let block = document.getElementById('block');
+      let coord = {left:e.layerX, top:e.layerY};
+      block.style.width = coord.left + 'px';
+      block.style.height = coord.top + 'px';
+    }
+
+  }
+  block.addEventListener('mousemove', pushBlock) ;
+  block.addEventListener('mousedown', pushBlock)
   }

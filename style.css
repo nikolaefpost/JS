@@ -349,3 +349,30 @@
       padding: 10px;
       background: white
     }
+
+    .block {
+    border-radius: 10px;
+    border-bottom-right-radius: 0;
+    padding: 20px;
+    position: relative;
+    color: #fff;
+    background: #4682B4;
+    box-shadow: 10px 5px 5px grey;
+   }
+   .block::after {
+    content: '';
+    position: absolute;
+    right: 0px; bottom: 0px;
+    border: 10px solid transparent;
+    border-right: 10px solid white;
+    border-bottom: 10px solid white;
+   }
+
+   #pushed{
+     position: absolute;
+     right: 0px; bottom: 0px;
+     width: 20px;
+     height: 20px;
+     margin: 0;
+     z-index: 100;
+   }
