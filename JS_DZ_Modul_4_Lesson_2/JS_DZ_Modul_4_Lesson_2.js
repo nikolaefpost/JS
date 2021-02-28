@@ -17,14 +17,17 @@
 
   function pushBlock(e) {
     console.log(e.type == 'mousedown');
-    if (e.type == 'mousedown') {
-      let block = document.getElementById('block');
-      let coord = {left:e.layerX, top:e.layerY};
-      block.style.width = coord.left + 'px';
-      block.style.height = coord.top + 'px';
-    }
+    let block = document.getElementById('block');
+    let coord = {left:e.layerX, top:e.layerY};
+    block.style.width = coord.left -20+ 'px';
+    block.style.height = coord.top -20+ 'px';
 
   }
-  block.addEventListener('mousemove', pushBlock) ;
-  block.addEventListener('mousedown', pushBlock)
+
+  function clickableD(e) {
+    console.log(e);
+    if(e.type == 'mousemove') block.addEventListener('mousemove', pushBlock) ;
+  }
+
+  pushed.addEventListener('mousedown', clickableD) ;
   }
