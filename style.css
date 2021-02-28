@@ -59,7 +59,7 @@
 
   .main{
     background:#b8d5e3;
-    padding:2vmin 4vmin;
+    padding:2vmin 40px;
     width:70%;
     margin-left:auto;
     margin-right:auto;
@@ -368,11 +368,29 @@
     border-bottom: 10px solid white;
    }
 
-   #pushed{
+   #target_block{
      position: absolute;
      right: 0px; bottom: 0px;
      width: 20px;
      height: 20px;
      margin: 0;
      z-index: 100;
+   }
+
+   .axis{
+     background: white;
+     height: 10px;
+     border-radius: 5px;
+     position: relative;
+   }
+
+   #pushed{
+     position: absolute;
+     height: 50px;
+     width: 100px;
+     background: #4682B4;
+     border-radius: 5px;
+     box-shadow: 10px 5px 5px grey;
+     top: -40px;
+
    }
