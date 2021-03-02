@@ -76,6 +76,32 @@
 
   //------------------------------------------------------------------------------3е задание --------------------------------------------------------------------
 
+  function calendar() {
+    let month = Number(input4301.value)-1;                                      // без проверок на валидность данных
+    let year = Number(input4302.value);
+    let user_date = new Date(year, month);
+    let day = (user_date.getDay()==0)? 6: user_date.getDay()-1;
+    let arr_month = ['январь', 'февраль', 'март', 'апрель', 'март', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
+    let table = '<h3>'+ arr_month[user_date.getMonth()]+' '+ year +'</h3>';
+    table += '<table><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
+    for (let i = 0; i < day; i++) {
+      table += '<td></td>';
+    }
+    while (user_date.getMonth() == month) {
+      table += '<td>' + user_date.getDate() + '</td>';
+      if (user_date.getDay() == 0) { // вс, последний день - перевод строки
+        console.log(user_date.getDay());
+        table += '</tr><tr>';
+      }
+      user_date.setDate(user_date.getDate() + 1);
+    }
+    table += '</tr></table>';
+    return table;
+  }
 
-   
+  function generationCalendar() {
+    out4301.innerHTML = calendar();
+  }
+  click4301.addEventListener('click', generationCalendar);
+
   }
