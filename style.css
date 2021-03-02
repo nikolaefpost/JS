@@ -394,3 +394,74 @@
      top: -40px;
 
    }
+
+  .carousel {
+    position: relative;
+    width: 264px;
+    padding: 10px 40px;
+    border: 1px solid #CCC;
+    border-radius: 15px;
+    background: #eee;
+    box-shadow: 10px 5px 5px grey;
+  }
+
+  .carousel img {
+    width: 256px;
+    height: 256px;
+    display: block;
+  }
+
+  .pointer {
+    position: absolute;
+    top: 125px;
+    padding: 0;
+    background: #4682B4;
+    border-radius: 15px;
+    border: 1px solid gray;
+    font-size: 24px;
+    line-height: 24px;
+    color: white;
+    display: block;
+  }
+
+  .pointer:focus {
+    outline: none;
+  }
+
+  .pointer:hover {
+    background: #b8d5e3;
+    cursor: pointer;
+  }
+
+  .hovered{
+    background: red;
+    cursor: pointer;
+  }
+
+  .left {
+    left: 7px;
+  }
+
+  .right {
+    right: 7px;
+  }
+
+  .gallery {
+    width: 256px;
+    overflow: hidden;
+  }
+
+  .gallery ul {
+    height: 256px;
+    width: 9999px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transition: margin-left 250ms;
+    font-size: 0;
+  }
+
+  .gallery li {
+    display: inline-block;
+    position: relative;
+  }
