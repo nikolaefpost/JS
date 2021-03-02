@@ -81,7 +81,7 @@
     let year = Number(input4302.value);
     let user_date = new Date(year, month);
     let day = (user_date.getDay()==0)? 6: user_date.getDay()-1;
-    let arr_month = ['январь', 'февраль', 'март', 'апрель', 'март', 'июнь', 'июль', 'август', 'сентябрь', 'октябрь', 'ноябрь', 'декабрь']
+    let arr_month = ['Январь', 'Февраль', 'Март', 'Апрель', 'Март', 'Июнь', 'Июль', 'Август', 'Сентябрь', 'Октябрь', 'Ноябрь', 'Декабрь']
     let table = '<h3>'+ arr_month[user_date.getMonth()]+' '+ year +'</h3>';
     table += '<table><tr><th>пн</th><th>вт</th><th>ср</th><th>чт</th><th>пт</th><th>сб</th><th>вс</th></tr><tr>';
     for (let i = 0; i < day; i++) {
