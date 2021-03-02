@@ -62,7 +62,7 @@
   galleryCarousel(arrImg);
 
   function galleryCarousel(arrImg) {
-    const width = 256;
+    const width = 256;                                                          // берется из css размеров соответствующих классов
     let list = carousel.querySelector('ul');
     for (let i = 0; i < arrImg.length; i++) {
       let li = document.createElement('li');
@@ -77,16 +77,16 @@
     let position = 0;
 
     left.onclick = function() {
-      if(right.classList.contains('hovered')) right.classList.remove('hovered');
+      if(right.classList.contains('hovered_btn')) right.classList.remove('hovered_btn');
       position += width;
-      if (position >= 0) { position = 0; left.classList.add('hovered'); }
+      if (position >= 0) { position = 0; left.classList.add('hovered_btn'); }
       list.style.marginLeft = position + 'px';
     }
 
     right.onclick = function() {
-      if(left.classList.contains('hovered')) left.classList.remove('hovered');
+      if(left.classList.contains('hovered_btn')) left.classList.remove('hovered_btn');
       position -= width;
-      if (position <= -width * (listElems.length - 1)) { position = -width * (listElems.length - 1); right.classList.add('hovered'); }
+      if (position <= -width * (listElems.length - 1)) { position = -width * (listElems.length - 1); right.classList.add('hovered_btn'); }
       list.style.marginLeft = position + 'px';
     }
   }
