@@ -575,8 +575,7 @@
   }
 
   .test{
-    width: 30%
-
+    width: 40%;
   }
 
   .test p{
@@ -594,4 +593,13 @@
   .btn_test:hover {
     background: #bdbdbd;
     cursor: pointer;
+  }
+
+  #out5012{
+    width: 40%;
+  }
+
+  .test_div{
+    display: flex;
+    justify-content: center;
   }

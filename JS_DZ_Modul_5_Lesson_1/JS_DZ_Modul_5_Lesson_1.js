@@ -18,6 +18,7 @@ window.onload = function () {
   document.onclick = function () { if (event.target.classList.contains("x"))  event.target.parentElement.remove();}
   button.onclick = addMessage('.container');
 
-
+let question_form = document.forms[1];
+console.log(question_form);
 
 }
