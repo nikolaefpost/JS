@@ -544,13 +544,18 @@
     background: #e6e7e8;
   }
 
+  form button:hover {
+    background: #bdbdbd;
+    cursor: pointer;
+  }
+
   .container{
     padding: 10px 20px;
     box-shadow: 10px 5px 5px grey;
-    background: #e6e7e8;
     border-radius: 10px;
-    border-bottom-left-radius: 0;
     margin-bottom: 1em;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
   }
 
   .border_bottom{
@@ -558,8 +563,35 @@
     padding: 10px 0;
   }
 
-  #x{
+  .x{
     float: right;
     border: 1px solid grey;
     padding:0 3px;
+  }
+
+  .x:hover {
+    background: #bdbdbd;
+    cursor: pointer;
+  }
+
+  .test{
+    width: 30%
+
+  }
+
+  .test p{
+    display: block;
+  }
+
+  .btn_test{
+    padding: 5px 20px;
+    box-shadow: 10px 5px 5px grey;
+    background: #e6e7e8;
+    border: none;
+    border-radius: 10px;
+  }
+
+  .btn_test:hover {
+    background: #bdbdbd;
+    cursor: pointer;
   }
