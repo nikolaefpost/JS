@@ -596,6 +596,12 @@
     cursor: pointer;
   }
 
+  .question input:hover {
+    cursor: pointer;
+  }
+
+
+
   #out5012{
     width: 40%;
   }
