@@ -29,21 +29,37 @@
         </p>
         <button type="button" name="button" id='button'>Send</button>
       </form><br><br>
-			<div class="test_div" >
-				<form class="test">
-					<p><b>Сколько планет в солнечной системе?</b></p>
-					<p><input name="dzen" type="radio" value="nedzen">8</p>
-					<p><input name="dzen" type="radio" value="dzen">9</p>
-					<p><input type="button" value="next" class="btn_test"></p>
-				</form>
-				<div class="" id="out5012">
-					After more than a month of unsuccessful attempts to contact Telegram support, the scam warning
-						label was not removed. This channel never violated Telegram rules and will continue broadcasting
-						Donald Trump's statements. Stay tuned and spread the link to the channel.  :warning: Warning:
-						Many users report that this account impersonates a famous person or organisation.
-				</div>
-			</div>
 
+
+			<h2 style="text-align: center;">Knowledge Quiz: Play 'Who Wants to Be a Millionaire?'</h2>
+			<div class="test_div" >
+				<button type="button"  id="btn0" class="pr_button">Play</button>
+				<form class="test" hidden>
+					<p><b>How many planets are there in the solar system?</b></p>
+					<div class="question">
+						<p><input name="planet" type="radio" value="0">8</p>
+						<p class="second"><input name="planet" type="radio" value="1">9</p>
+					</div>
+					<div class="question">
+						<p><input name="planet" type="radio" value="2">7</p>
+						<p class="second"><input name="planet" type="radio" value="3">11</p>
+					</div>
+					<p><input type="button" value="next" class="btn_test" id="btn1"></p>
+				</form>
+				<form class="test" hidden>
+					<p><b>Country with the most English speaking people?</b></p>
+					<div class="question">
+						<p><input name="language" type="radio" value="0">USA</p>
+						<p class="second"><input name="language" type="radio" value="1">China</p>
+					</div>
+					<div class="question" >
+						<p><input name="language" type="radio" value="2">Russia</p>
+						<p class="second"><input name="language" type="radio" value="3">Burkina Faso</p>
+					</div>
+					<p><input type="button" value="next" class="btn_test" id="btn2"></p>
+				</form>
+			</div>
+			<div class="congr" id="out512" ></div>
 		</div>
 	</body>
 </html>
