@@ -569,10 +569,12 @@
     padding:0 3px;
   }
 
-  .x:hover {
+  .x:hover{
     background: #bdbdbd;
     cursor: pointer;
   }
+
+
 
   .test{
     width: 30%;
@@ -599,8 +601,6 @@
   .question input:hover {
     cursor: pointer;
   }
-
-
 
   #out5012{
     width: 40%;
@@ -631,4 +631,8 @@
     padding: 5px 0 5px 0;
     text-align: center;
     color: red;
+  }
+
+  .t_area{
+    display: inline-block;
   }

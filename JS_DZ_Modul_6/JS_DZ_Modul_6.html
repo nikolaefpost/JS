@@ -1,0 +1,66 @@
+<html >
+	<head>
+		<meta charset="utf-8">
+		<title>JS_DZ_Modul_4_Lesson_3</title>
+		<script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
+		<script src="JS_DZ_Modul_6.js"></script>
+		<link rel="stylesheet" media="screen" href="JS_DZ_Modul_6.css">
+		<style media="screen"></style>
+    <style>
+
+ </style>
+	</head>
+	<body>
+		<div class="main" id="main">
+	    <div class="area_div" id='area_div'>
+	      <form class="t_area" >
+	        <div class="radio_div">
+	          <p><input name="bold" type="checkbox" value="bold">Bold</p>
+	          <p><input name="underline" type="checkbox" value="underline">Underline</p>
+	          <p><input name="italic" type="checkbox" value="italic">Italic</p>
+	          <p><input name="font_align" type="radio" value="left">Left</p>
+	          <p><input name="font_align" type="radio" value="right">Right</p>
+	          <p><input name="font_align" type="radio" value="justify">Justify</p><br>
+	        </div>
+	        <textarea name="text_" rows="8" ></textarea>
+	        <button type="button" name="button" id='button' class="btn_area" hidden>Send</button>
+	      </form>
+	    </div><br><br>
+
+			<div class="by_books">
+				<article class="book">
+					<img src="JS_Object.jpg" alt="JS Object" width="100%">
+					<p>JavaScript Object Programming by Rinehart, Martin
+						<br><b>25$</b>
+					</p>
+					<button type="button" name="button" id="button1">Select</button>
+				</article>
+				<article class="book">
+					<img src="JS_Recipes.jpg" alt="JS_Recipes" width="100%">
+					<p>JavaScript Recipes A Problem-Solution Approach Russ Ferguson Keith Cirkel
+						<br><b>15$</b>
+					</p>
+					<button type="button" name="button" id="button2">Select</button>
+				</article>
+				<article class="book">
+					<img src="JavaScript.jpg" alt="JavaScript" width="100%">
+					<p>JavaScript. Подробное руководство, Флэнаган Д.
+						<br><b>35$</b>
+					</p>
+					<button type="button" name="button" id="button3">Select</button>
+				</article>
+				<form class="buy_form" action="index.html" method="post">
+					<p><span>Book:</span><input type="text" name="book" value="" class="" required></p>
+					<p><span>Quantity:</span><input type="" name="quantity" placeholder="1-..." class="" required pattern="^[0-9]+$"></p>
+					<p><span>Name:</span><input type="text" name="name" value="" class="" required pattern="^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$"></p>
+					<p><span>Delivery address:</span><textarea name="address" rows="6"  class=""  placeholder="Город улица дом квартира" required></textarea></p>
+					<p><span>Delivery date:</span><input type="date" name="date_" value="" class="" required></p>
+					<p><span>Comment:</span><textarea name="message" rows="6"  class=""  placeholder="Как мне нравится ваш магазин..."></textarea></p>
+					<button type="submit" name="button_buy" id="button_buy" class="btn_area" style="width:100%">Select</button>
+				</form>
+			</div>
+
+
+		</div>
+	</body>
+</html>

@@ -1,0 +1,128 @@
+
+  .main{
+    background:#b8d5e3;
+    padding:2% 1%;
+    width:70%;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top:5vh;
+  }
+
+  .t_area{
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+  }
+
+  .t_area p{
+    display: inline-block;
+  }
+
+  input:hover{
+    background: #bdbdbd;
+    cursor: pointer;
+  }
+
+  .t_area textarea{
+    width: 100%;
+    box-shadow: 10px 5px 5px grey;
+    border-radius: 10px;
+    border: none;
+    margin-bottom: 20px;
+  }
+
+  .radio_div{
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .btn_area{
+    padding: 5px 20px;
+    box-shadow: 10px 5px 5px grey;
+    background: #e6e7e8;
+    border: none;
+    border-radius: 10px;
+    width: 70%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  button:hover {
+    background: #bdbdbd;
+    cursor: pointer;
+  }
+
+  .rezult_div{
+    width: 94%;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 10px 5px 5px grey;
+    border-radius: 10px;
+    min-height: 100px;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    padding: 20px 3%;
+  }
+
+  .by_books{
+    display: flex;
+    width: 100%;
+  }
+
+  .book{
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 18%;
+    margin: 1%;
+    padding:20px 10px ;
+    box-shadow: 10px 5px 5px grey;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-radius: 5px;
+    justify-content:space-between;
+  }
+
+  .buy_form{
+    flex: 0 0 32%;
+    box-shadow: 10px 5px 5px grey;
+    margin: 1%;
+    padding: 20px 10px;
+    border-left: 1px solid grey;
+    border-top: 1px solid grey;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+  }
+
+  article b{
+    float: right;
+  }
+
+  article button{
+    box-shadow: 5px 3px 3px grey;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 0;
+  }
+
+  .buy_form textarea{
+    width: 100%;
+  }
+
+  .buy_form p{
+    display: flex;
+    justify-content:space-between;
+  }
+
+  .buy_form p input, .buy_form p textarea{
+    width: 70%;
+    box-shadow: 5px 3px 3px grey;
+    border-radius: 5px;
+    border: none;
+    padding: 5px 5px;
+  }
