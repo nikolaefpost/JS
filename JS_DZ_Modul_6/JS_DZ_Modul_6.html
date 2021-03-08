@@ -22,7 +22,7 @@
 	          <p><input name="font_align" type="radio" value="right">Right</p>
 	          <p><input name="font_align" type="radio" value="justify">Justify</p><br>
 	        </div>
-	        <textarea name="text_" rows="8" ></textarea>
+	        <textarea name="text_" id="text_" rows="8" ></textarea>
 	        <button type="button" name="button" id='button' class="btn_area" hidden>Send</button>
 	      </form>
 	    </div><br><br>
@@ -49,14 +49,46 @@
 					</p>
 					<button type="button" name="button" id="button3">Select</button>
 				</article>
-				<form class="buy_form" action="index.html" method="post">
+				<form class="buy_form" action="index.html" method="get" name="buy_form">
 					<p><span>Book:</span><input type="text" name="book" value="" class="" required></p>
-					<p><span>Quantity:</span><input type="" name="quantity" placeholder="1-..." class="" required pattern="^[0-9]+$"></p>
+					<p><span>Quantity:</span><input type="" name="quantity" placeholder="" class="" required pattern="^[0-9]+$"></p>
 					<p><span>Name:</span><input type="text" name="name" value="" class="" required pattern="^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$"></p>
-					<p><span>Delivery address:</span><textarea name="address" rows="6"  class=""  placeholder="Город улица дом квартира" required></textarea></p>
+					<p><span>Delivery address:</span><textarea name="address" rows="6"  class=""   placeholder="" required></textarea></p>
 					<p><span>Delivery date:</span><input type="date" name="date_" value="" class="" required></p>
-					<p><span>Comment:</span><textarea name="message" rows="6"  class=""  placeholder="Как мне нравится ваш магазин..."></textarea></p>
-					<button type="submit" name="button_buy" id="button_buy" class="btn_area" style="width:100%">Select</button>
+					<p><span>Comment:*</span><textarea name="message" rows="6"  class=""  placeholder=""></textarea></p>
+					<button type="submit" name="button_buy" id="button_buy" class="btn_area" style="width:100%">BUY</button>
+					<kbd>*-необязательное к заполнению поле</kbd>
+				</form>
+			</div><br><br>
+
+			<div class="" id="journal">
+				<form class="is_present" name="is_present">
+					<p>
+						<span>Group:</span>
+						<select name="group">
+						  <option value="0">Group 1</option>
+						  <option value="1">Group 2</option>
+						</select>
+					</p>
+					<p>
+						<span>Lesson:</span>
+						<select name="lesson">
+							<option value="0">1</option>
+							<option value="1">2</option>
+							<option value="2">3</option>
+						</select>
+					</p>
+					<button type="button" name="" id="group_selection" class="" style="">Select</button>
+				</form>
+				<form class="select_is" name="select_is" hidden>
+					<p><span>Topic:</span><input type="text" name="topic" value="" class="" required></p>
+					<table cellspacing="1" id="table">
+						<tr><th>Name</th><th>Is present</th></tr>
+						<tr><td class="st">Student 1</td><td><input name="check1" type="checkbox" value="1"></td></tr>
+						<tr><td class="st">Student 2</td><td><input name="check2" type="checkbox" value="2"></td></tr>
+						<tr><td class="st">Student 3</td><td><input name="check3" type="checkbox" value="3"></td></tr>
+					</table>
+						<button type="button" name="button_is" id="button_is" class="btn_area" >Save</button>
 				</form>
 			</div>
 

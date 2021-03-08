@@ -49,6 +49,7 @@
     width: 70%;
     margin-left:auto;
     margin-right:auto;
+    margin-bottom: 10px;
   }
 
   button:hover {
@@ -86,6 +87,11 @@
     justify-content:space-between;
   }
 
+  .book p{
+    font: bold italic 120% serif;
+    text-align: left;
+  }
+
   .buy_form{
     flex: 0 0 32%;
     box-shadow: 10px 5px 5px grey;
@@ -117,6 +123,7 @@
   .buy_form p{
     display: flex;
     justify-content:space-between;
+
   }
 
   .buy_form p input, .buy_form p textarea{
@@ -125,4 +132,90 @@
     border-radius: 5px;
     border: none;
     padding: 5px 5px;
+  }
+
+  .buy_form p input::placeholder,
+  .buy_form p textarea::placeholder{
+    color: red;
+  }
+
+  .is_present{
+    border-bottom: 1px solid grey;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  .is_present p{
+    display: inline-block;
+    margin: 20px;
+  }
+
+  .is_present select{
+    width: 200px;
+    padding: 5px;
+    margin-left: 10px;
+    box-shadow: 10px 5px 5px grey;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .is_present button{
+    padding: 5px 20px;
+    box-shadow: 10px 5px 5px grey;
+    background: #e6e7e8;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    margin: 20px 50px;
+  }
+
+  .select_is{
+    padding: 0 20%;
+    margin-top: 40px;
+    /* display: flex;
+    flex-direction: column;
+    align-items: flex-start; */
+  }
+  .select_is p{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* width: 100%; */
+  }
+
+  .select_is p input{
+    width: 80%;
+    padding: 10px;
+    margin-left: 10px;
+    box-shadow: 10px 5px 5px grey;
+    border-radius: 5px;
+    border: none;
+  }
+
+  .select_is p span{
+    font-size: 120%
+  }
+
+  .select_is table{
+    width: 90%;
+    margin: 40px 0 20px 0;
+    m
+  }
+
+  .select_is td{
+    border-bottom: 1px dotted grey;
+
+  }
+
+  .select_is th{
+  text-align: left;
+  padding-bottom: 10px;
+  }
+
+  .select_is button{
+    border-radius: 5px;
+    padding: 10px;
+    width: 90%;
   }
