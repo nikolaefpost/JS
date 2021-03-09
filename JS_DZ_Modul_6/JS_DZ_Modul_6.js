@@ -54,55 +54,55 @@
     document.querySelector('.by_books').remove();
   }
   //------------------------------------------------------------------------------2е задание --------------------------------------------------------------------
-  group_selection.addEventListener('click', createELesson);
-  button_is.addEventListener('click', saveLesson);
-  let students = [['Иванов И.', 'Петров П.', 'Сидоров С.'], ['Трампов Т.', 'Псаки П', 'Байденович Б']];
-  let lessons = new Map();
-  let i;
-  let form1 = document.forms.is_present;
-  function createELesson() {
+  let students = [['Иванов И.', 'Петров П.', 'Сидоров С.','Емельянов Э.'], ['Трампов Т.', 'Псаки П', 'Байденович Б']];
+  document.body.addEventListener('click', createLesson(students));
 
-    i = document.forms.is_present.group.value + '-' + document.forms.is_present.lesson.value;
 
-    // console.log(lessons.has(i));
-    // console.log(i);
-    if (lessons.has(i)) {
-       if (document.forms.saved) document.forms.saved.remove();
-      console.log(i);
-      console.log(lessons.has(i));
-      document.forms.select_is.hidden = true;
-      is_present.after(lessons.get(i));
-      return;
+  function createLesson(arrHuman) {                                             // ФУНКЦИЯ ПРИНИМАЕТ МАССИВ СТУДЕНТОВ
+    let lessons = new Map();                                                    // Map ДЛЯ ХРАНЕНИЯ СОХРАНЕНИЙ ЖУРНАЛА
+    let group;
+    for (var g = 1; g < arrHuman.length+1; g++) {                               // ФОРМИРОВАНИЕ СПИСКА ГРУПП СОГЛАСНО МАССИВА СТУДЕНТОВ
+      group += '<option value="'+(g-1)+'">Group '+ g +'</option>';
     }
-    if (document.forms.saved) document.forms.saved.remove();
-    let group = students[document.forms.is_present.group.value];
+    document.forms.is_present.group.innerHTML = group;
+    return  function () {
+      let form1 = document.forms.is_present;
+      let form2 = document.forms.select_is;
+      let i = form1.group.value + '-' + form1.lesson.value;                     // КЛЮЧ Map СОХРАНЕНИЯ
 
-    let td_st = document.getElementsByClassName('st');
-    for (var i = 0; i < td_st.length; i++) {
-      td_st[i].innerText = group[i];
+      if (event.target == form1.group_selection) {
+        if (lessons.has(i)) {
+          if (document.forms.saved) document.forms.saved.remove();
+          form2.hidden = true;
+          form1.after(lessons.get(i));
+          return;
+        }
+        if (document.forms.saved) document.forms.saved.remove();
+        let group = arrHuman[form1.group.value];
+        let tab_str = '<tr><th>Name</th><th>Is present</th></tr>';
+        for (var k = 0; k < group.length; k++) {
+          tab_str +='<tr><td>'+ group[k] + '</td><td><input type="checkbox"></td></tr>';
+        }
+        form2.children[1].innerHTML = tab_str;
+        if (form2.hidden) form2.hidden = false;
+        form2.reset();
+      }
+
+      if (event.target == form2.button_is) {
+        let temp = form2.cloneNode(true);
+        temp.name = 'saved';
+        let topic = temp.topic.value;
+        temp.topic.remove();
+        temp.button_is.remove();
+        let span = document.createElement('span');
+        span.innerText = topic;
+        temp.children[0].append(span);
+        for (var j = 1; j < temp.children[1].rows.length; j++) {
+          temp.children[1].rows[j].cells[1].innerHTML = (form2.children[1].rows[j].cells[1].children[0].checked)?'present':'';
+        }
+        lessons.set(i, temp)
+      }
     }
-    document.forms.select_is.hidden = false;
-    document.forms.select_is.reset();
-    // console.log(td_st);
   }
-  function saveLesson() {
-    i = document.forms.is_present.group.value + '-' + document.forms.is_present.lesson.value;
-    let temp = document.forms.select_is.cloneNode(true);
-    console.log(temp.name);
-    temp.name = 'saved';
-    console.log(temp);
-    let topic = temp.topic.value;
-    let is = [((temp.check1.checked)?'present':''), ((temp.check2.checked)?'present':''), ((temp.check3.checked)?'present':'')];
-    task = {'topic':topic, 'is':is };
-    temp.topic.remove();
-    let span = document.createElement('span');
-    span.innerText = topic;
-    temp.children[0].append(span);
-    for (var j = 1; j < 4; j++) {
-      temp.children[1].rows[j].cells[1].innerHTML = is[j-1];
-       }
-       console.log(temp);
-    lessons.set(i, temp)
-    console.log(lessons);
-  }
+
 }
