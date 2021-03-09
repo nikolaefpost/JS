@@ -67,6 +67,7 @@
     // console.log(lessons.has(i));
     // console.log(i);
     if (lessons.has(i)) {
+       if (document.forms.saved) document.forms.saved.remove();
       console.log(i);
       console.log(lessons.has(i));
       document.forms.select_is.hidden = true;
