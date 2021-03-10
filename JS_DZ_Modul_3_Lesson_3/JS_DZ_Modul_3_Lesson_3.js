@@ -14,8 +14,9 @@
     //   if (e.target.style) {  e.target.style = null; }
     // }
 //------------------------------------------------------------------------------2е задание --------------------------------------------------------------------
-    let hint;
+
     div_button.onmouseover = function (e) {
+      let hint;
       let target = e.target;
       let hintText = target.dataset.tooltip;                                    // сохраняем текст подсказки
       if (!hintText) return;                                                    //если у элемента нет подсказки
@@ -33,14 +34,15 @@
 
       hint.style.left = left + 'px';
       hint.style.top = top + 'px';
-    }
-
-    div_button.onmouseout = function () {
-      if (hint) {
-        hint.remove();
-        hint = null;
+      div_button.onmouseout = function () {
+        if (hint) {
+          hint.remove();
+          hint = null;
+        }
       }
     }
+
+
   }
 
 // function sum() {

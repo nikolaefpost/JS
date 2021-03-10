@@ -50,11 +50,11 @@
 					<button type="button" name="button" id="button3">Select</button>
 				</article>
 				<form class="buy_form" action="index.html" method="get" name="buy_form">
-					<p><span>Book:</span><input type="text" name="book" value="" class="" required></p>
-					<p><span>Quantity:</span><input type="" name="quantity" placeholder="" class="" required pattern="^[0-9]+$"></p>
-					<p><span>Name:</span><input type="text" name="name" value="" class="" required pattern="^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$"></p>
-					<p><span>Delivery address:</span><textarea name="address" rows="6"  class=""   placeholder="" required></textarea></p>
-					<p><span>Delivery date:</span><input type="date" name="date_" value="" class="" required></p>
+					<p><span>Book:</span><input type="text" name="book" value="" class="in_book" data-tooltip="выберите книгу!" required></p>
+					<p><span>Quantity:</span><input type="" name="quantity" placeholder="" class="in_quantity" data-tooltip="введите количество книг!" required pattern="^[0-9]+$"></p>
+					<p><span>Name:</span><input type="text" name="name" value="" class="in_name" data-tooltip="введите Имя и Фамилию!" required pattern="^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$"></p>
+					<p><span>Delivery address:</span><textarea name="address" rows="6"  class="in_address" data-tooltip="введите адрес!"   placeholder="" required></textarea></p>
+					<p><span>Delivery date:</span><input type="date" name="date_" value="" class="in_date" data-tooltip="выберите дату!" required></p>
 					<p><span>Comment:*</span><textarea name="message" rows="6"  class=""  placeholder=""></textarea></p>
 					<button type="submit" name="button_buy" id="button_buy" class="btn_area" style="width:100%">BUY</button>
 					<kbd>*-необязательное к заполнению поле</kbd>
@@ -65,9 +65,7 @@
 				<form class="is_present" name="is_present">
 					<p>
 						<span>Group:</span>
-						<select name="group">
-						  
-						</select>
+						<select name="group"></select>
 					</p>
 					<p>
 						<span>Lesson:</span>
@@ -84,7 +82,33 @@
 					<table cellspacing="1"></table>
 					<button type="button" name="button_is"  class="btn_area" >Save</button>
 				</form>
+			</div><br><br>
+
+			<div class="tickets">
+				<form class="is_present" name="option_tickets">
+					<p>
+						<span>Direction:</span>
+						<select name="direction_">
+							<option value="0">Nikolaev-Moscow</option>
+							<option value="1">Moscow-Nikolaev</option>
+						</select>
+					</p>
+					<p>
+						<span>Date:</span>
+						<select name="date_">
+							<option value="0">10.03.2012</option>
+							<option value="1">11.03.2012</option>
+							<option value="2">12.03.2012</option>
+						</select>
+					</p>
+					<button type="button" name="target_selection"  class="" style="">Search</button>
+				</form>
+				<table cellspacing="1" class="train">
+					<tr><td>1<input type="checkbox"></td><td>3<input type="checkbox"></td><td>5<input type="checkbox"></td><td>7<input type="checkbox"></td><td>9<input type="checkbox"></td><td>11<input type="checkbox"></td><td>13<input type="checkbox"></td><td>15<input type="checkbox"></td><td>17<input type="checkbox"></td><td>19<input type="checkbox"></td><td>21<input type="checkbox"></td><td>23<input type="checkbox"></td><td>25<input type="checkbox"></td><td>27<input type="checkbox"></td></tr>
+					<tr><td>2<input type="checkbox"></td><td>4<input type="checkbox"></td><td>6<input type="checkbox"></td><td>8<input type="checkbox"></td><td>10<input type="checkbox"></td><td>12<input type="checkbox"></td><td>14<input type="checkbox"></td><td>16<input type="checkbox"></td><td>18<input type="checkbox"></td><td>20<input type="checkbox"></td><td>22<input type="checkbox"></td><td>24<input type="checkbox"></td><td>26<input type="checkbox"></td><td>28<input type="checkbox"></td></tr>
+				</table>
 			</div>
+
 
 
 		</div>

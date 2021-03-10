@@ -34,13 +34,13 @@
   function buyBook() {
     event.preventDefault();
 //------------------------------------------------------------------------------ блок проверок
-    if (!document.forms.buy_form.book.value) {document.forms.buy_form.book.placeholder = 'выберите книгу, пожайлуста!'; return;}
+    if (!document.forms.buy_form.book.value) {toolTip('.in_book') ; return;}
     let n = document.forms.buy_form.quantity.value;
-    if (!/^[0-9]+$/.test(n)) {document.forms.buy_form.quantity.placeholder = 'введите количество книг, пожайлуста!'; return;}
+    if (!/^[0-9]+$/.test(n)) {toolTip('.in_quantity'); return;}
     let name = document.forms.buy_form.name.value;
-    if (!/^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/.test(name)) {name =''; document.forms.buy_form.name.placeholder = 'введите Имя и Фамилию, пожайлуста!'; return;}
-    if (!document.forms.buy_form.address.value) {document.forms.buy_form.address.placeholder = 'введите адрес, пожайлуста!'; return;}
-    if (!document.forms.buy_form.date_.value) {alert('выберите дату, пожайлуста!'); return;}
+    if (!/^[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{0,}\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,}(\s[А-ЯA-Z][а-яa-zА-ЯA-Z\-]{1,})?$/.test(name)) {toolTip('.in_name'); return;}
+    if (!document.forms.buy_form.address.value) {toolTip('.in_address'); return;}
+    if (!document.forms.buy_form.date_.value) {toolTip('.in_date'); return;}
 
     let div = document.createElement('div');
     div.classList.add('rezult_div');
@@ -48,12 +48,49 @@
     div.innerHTML += text;
     let rezult = document.createElement('h3');
     rezult.innerHTML = 'Rezult:';
-    main.append(div);
+    document.querySelector('.by_books').after(div);
     div.before(rezult);
     // document.forms.buy_form.submit();                                        // пока некуда отправлять)
     document.querySelector('.by_books').remove();
   }
-  //------------------------------------------------------------------------------2е задание --------------------------------------------------------------------
+
+   function toolTip(class_) {                                                   // ОТОБРАЖЕНИЕ РЕЗУЛЬТАТОВ ПРОВЕРКИ
+    let hint;
+    let target = document.querySelector(class_);
+    let form = document.querySelector('.buy_form');
+    let hintText = target.dataset.tooltip;
+    if (!hintText) return;
+
+    hint = document.createElement('div');
+    hint.className = 'tooltip';
+    hint.innerHTML = hintText;
+    form.append(hint);
+
+    let coords = target.getBoundingClientRect();
+    let left = coords.left + (target.offsetWidth - hint.offsetWidth) / 2;
+
+    let top = coords.top - hint.offsetHeight - 5;
+    if (top < 0) {top = coords.top + target.offsetHeight + 5;}
+
+    hint.style.left = left + 'px';
+    hint.style.top = top + 'px';
+    console.log(target.className);
+    if (target.className == 'in_book'){
+      form.onmouseout = function () {
+        if (hint) {
+          hint.remove();
+          hint = null;
+        }
+      }
+    }
+    target.onmouseover = function () {
+      if (hint) {
+        hint.remove();
+        hint = null;
+      }
+    }
+  }
+  //------------------------------------------------------------------------------3е задание --------------------------------------------------------------------
   let students = [['Иванов И.', 'Петров П.', 'Сидоров С.','Емельянов Э.'], ['Трампов Т.', 'Псаки П', 'Байденович Б']];
   document.body.addEventListener('click', createLesson(students));
 
@@ -68,9 +105,9 @@
     return  function () {
       let form1 = document.forms.is_present;
       let form2 = document.forms.select_is;
-      let i = form1.group.value + '-' + form1.lesson.value;                     // КЛЮЧ Map СОХРАНЕНИЯ
+      let i = form1.group.value + '-' + form1.lesson.value;                     // i - КЛЮЧ Map СОХРАНЕНИЯ
 
-      if (event.target == form1.group_selection) {
+      if (event.target == form1.group_selection) {                              // ПРОВЕРКА НА СОХРАНЕННЫЕ УРОКИ(КЭШ)
         if (lessons.has(i)) {
           if (document.forms.saved) document.forms.saved.remove();
           form2.hidden = true;
@@ -78,7 +115,7 @@
           return;
         }
         if (document.forms.saved) document.forms.saved.remove();
-        let group = arrHuman[form1.group.value];
+        let group = arrHuman[form1.group.value];                                // ФОРМИРОВАНИЕ СПИСКА  СТУДЕНТОВ
         let tab_str = '<tr><th>Name</th><th>Is present</th></tr>';
         for (var k = 0; k < group.length; k++) {
           tab_str +='<tr><td>'+ group[k] + '</td><td><input type="checkbox"></td></tr>';
@@ -88,7 +125,7 @@
         form2.reset();
       }
 
-      if (event.target == form2.button_is) {
+      if (event.target == form2.button_is) {                                    // СОХРАНЕНИЕ УРОКА
         let temp = form2.cloneNode(true);
         temp.name = 'saved';
         let topic = temp.topic.value;
@@ -104,5 +141,25 @@
       }
     }
   }
+
+//------------------------------------------------------------------------------4е задание --------------------------------------------------------------------
+
+  function byTickets() {
+    let arr_seats = [[new Array(true, true), new Array(28), new Array(28)], [new Array(28), new Array(28), new Array(28)]]
+
+
+    let form = document.forms.option_tickets;
+    let target_date = form.date_.value;
+    let target_direction = form.direction_.value;
+    console.log(target_date);
+    let target_train = arr_seats[target_direction][target_date];
+    console.log(target_train);
+    let table = document.querySelector('.train');
+    for (var i = 0; i < target_train.length; i++) {
+      i = Math.floor(i);
+      (i%2==0) ? table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i] : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
+    }
+  }
+  document.forms.option_tickets.target_selection.addEventListener('click', byTickets);
 
 }
