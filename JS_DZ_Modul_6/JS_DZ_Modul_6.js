@@ -145,7 +145,7 @@
 //------------------------------------------------------------------------------4е задание --------------------------------------------------------------------
 
   function byTickets() {
-    let arr_seats = [[new Array(true, true), new Array(28), new Array(28)], [new Array(28), new Array(28), new Array(28)]]
+    let arr_seats = [[new Array(28), new Array(28), new Array(28)], [new Array(28), new Array(28), new Array(28)]]
 
 
     let form = document.forms.option_tickets;
@@ -155,10 +155,24 @@
     let target_train = arr_seats[target_direction][target_date];
     console.log(target_train);
     let table = document.querySelector('.train');
-    for (var i = 0; i < target_train.length; i++) {
-      i = Math.floor(i);
-      (i%2==0) ? table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i] : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
+    // for (let i = 0; i < target_train.length; i++) {
+    //   i = Math.floor(i);
+    //   (i%2==0) ? table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i] : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
+    //
+    // }
+    let seats=[];
+    for (let i = 0, j=0 ; i < 14; i++) {
+      console.log(table.rows[j].cells[i].innerText);
+      if (table.rows[j].cells[i].children[0].checked) seats.push([table.rows[j].cells[i].innerText, target_date, target_direction]);
+      if (i==13 && j!=1) {i=0; j=1;}
     }
+
+    let table_str ='<table><tr><th>Direction</th><th>Date</th><th>Seats</th</tr>';
+    for (var i = 0; i < seats.length; i++) {
+    table_str += '<tr><td>' +seats[i][2]+ '</td><td>' +seats[i][1] +'</td><td>'+seats[i][0]+'</td></tr>'
+    }
+
+    console.log(seats);
   }
   document.forms.option_tickets.target_selection.addEventListener('click', byTickets);
 
