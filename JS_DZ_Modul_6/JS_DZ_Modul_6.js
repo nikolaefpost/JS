@@ -146,34 +146,91 @@
 
   function byTickets() {
     let arr_seats = [[new Array(28), new Array(28), new Array(28)], [new Array(28), new Array(28), new Array(28)]]
-
-
-    let form = document.forms.option_tickets;
-    let target_date = form.date_.value;
-    let target_direction = form.direction_.value;
-    console.log(target_date);
-    let target_train = arr_seats[target_direction][target_date];
-    console.log(target_train);
-    let table = document.querySelector('.train');
-    // for (let i = 0; i < target_train.length; i++) {
-    //   i = Math.floor(i);
-    //   (i%2==0) ? table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i] : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
-    //
-    // }
+    let arr_train = ['Nikolaev-Moscow', 'Moscow-Nikolaev'];
+    let arr_date = ['10.03.2012', '11.03.2012', '12.03.2012'];
+    let button_buy = document.querySelector('.button_buy');
+    let button_tickets = document.querySelector('.button_tickets');
     let seats=[];
-    for (let i = 0, j=0 ; i < 14; i++) {
-      console.log(table.rows[j].cells[i].innerText);
-      if (table.rows[j].cells[i].children[0].checked) seats.push([table.rows[j].cells[i].innerText, target_date, target_direction]);
-      if (i==13 && j!=1) {i=0; j=1;}
+    let table = document.querySelector('.train');
+    let form = document.forms.option_tickets;
+    const RATE = 300;
+    let target_date;
+    let target_direction;
+    let target_train;
+console.log(button_buy);
+
+
+
+
+
+
+    document.forms.option_tickets.target_selection.addEventListener('click', functionName);
+     function functionName() {
+      target_date = form.date_.value;
+      target_direction = form.direction_.value;
+      target_train = arr_seats[target_direction][target_date];
+
+      console.log(arr_seats[0][0], arr_seats[0][1], arr_seats[0][2]);
+      for (let i = 0; i < target_train.length; i++) {
+
+        if (target_train[i]=='&#10004') {
+
+          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = '&#10004';}
+          else {
+            table.rows[1].cells[Math.floor(i/2)].innerHTML = '&#10004';
+          }
+        }else{
+          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = i+ ' <input type="checkbox">';}
+          else {
+            table.rows[1].cells[Math.floor(i/2)].innerHTML = i+  ' <input type="checkbox">';
+          }
+        }
+        // i = Math.floor(i);
+        // if(i%2==0)  {
+        //   if table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i]}
+        //
+        //
+        //  : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
+        //
+      }
     }
 
-    let table_str ='<table><tr><th>Direction</th><th>Date</th><th>Seats</th</tr>';
-    for (var i = 0; i < seats.length; i++) {
-    table_str += '<tr><td>' +seats[i][2]+ '</td><td>' +seats[i][1] +'</td><td>'+seats[i][0]+'</td></tr>'
+    button_buy.onclick = function () {
+
+      for (let i = 0, j=0 ; i < 14; i++) {
+        console.log(table.rows[j].cells[i].children[0]);
+        if (table.rows[j].cells[i].children[0] && table.rows[j].cells[i].children[0].checked) seats.push([table.rows[j].cells[i].innerText, target_date, target_direction]);
+        if (i==13 && j!=1) {i=0; j=1;}
+      }
+
+
+
+      for (let i = 0; i < target_train.length; i++) {
+        i = Math.floor(i);
+        if (i%2==0){
+          if (table.rows[0].cells[Math.floor(i/2)].children[0] && table.rows[0].cells[Math.floor(i/2)].children[0].checked) target_train[i] = '&#10004';
+        }else {
+          if (table.rows[1].cells[Math.floor(i/2)].children[0] && table.rows[1].cells[Math.floor(i/2)].children[0].checked) target_train[i] = '&#10004';
+        }
+      }
+        console.log(target_train);
+      out_prise.innerText = 'Total prise: '+seats.length*RATE+' $';
+      functionName();
     }
 
-    console.log(seats);
+    button_tickets.onclick = function (){
+      if (seats.length==0) return;
+      let table_str ='<table class="out"><tr><th>Direction</th><th>Date</th><th>Seats</th</tr>';
+      for (var i = 0; i < seats.length; i++) {
+      table_str += '<tr><td>' + arr_train[seats[i][2]]+ '</td><td>' +arr_date[seats[i][1]] +'</td><td>'+seats[i][0]+'</td></tr>'
+      }
+      table_str += '</table>';
+      out_tickets.innerHTML = table_str;
+    }
+
+
+
   }
-  document.forms.option_tickets.target_selection.addEventListener('click', byTickets);
-
+  // document.forms.option_tickets.target_selection.addEventListener('click', byTickets);
+  byTickets();
 }

@@ -241,3 +241,27 @@
     border: 1px solid grey;
     text-align: center;
   }
+
+  .out{
+    width: 70%;
+    margin: 20px auto;
+  }
+
+  .out td{
+    text-align: center;
+    border: 1px solid grey;
+  }
+
+  #out_prise{
+    display: inline-block;
+  }
+
+  .button_buy, .button_tickets{
+    padding: 5px 20px;
+    box-shadow: 10px 5px 5px grey;
+    background: #e6e7e8;
+    border: none;
+    border-radius: 5px;
+    width: 20%;
+    margin: 20px 50px;
+  }
