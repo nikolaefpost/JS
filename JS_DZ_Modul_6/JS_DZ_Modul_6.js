@@ -2,7 +2,7 @@
   window.onload = function () {
   //------------------------------------------------------------------------------1е задание --------------------------------------------------------------------
   let text_default ='Viverra suspendisse potenti nullam ac. Eget mauris pharetra et ultrices. Elementum nibh tellus molestie nunc non blandit massa enim. Dapibus ultrices in iaculis nunc sed augue lacus viverra vitae. Nam aliquam sem et tortor. Viverra adipiscing at in tellus integer feugiat scelerisque varius morbi. At in tellus integer feugiat. Nisl tincidunt eget nullam non nisi est sit. Tempor orci eu lobortis elementum nibh. Nunc consequat interdum varius sit amet.';
-  text_.addEventListener('focus', function() {console.log(text_); document.forms[0].button.hidden = false; document.querySelector('textarea').value = text_default});
+  text_.addEventListener('focus', function() {document.forms[0].button.hidden = false; document.querySelector('textarea').value = text_default});
   button.addEventListener('click', editText);
   function editText() {
     let text_area = document.querySelector('textarea');
@@ -26,7 +26,6 @@
   function selectBook() {
     if (event.target.name=='button') {
     let book = event.target.parentElement.children[1].firstChild.data;
-    console.log(document.forms.buy_form);
     document.forms.buy_form.book.value = book;
     }
   }
@@ -74,7 +73,6 @@
 
     hint.style.left = left + 'px';
     hint.style.top = top + 'px';
-    console.log(target.className);
     if (target.className == 'in_book'){
       form.onmouseout = function () {
         if (hint) {
