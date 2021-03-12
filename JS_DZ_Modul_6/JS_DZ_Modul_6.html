@@ -84,7 +84,7 @@
 				</form>
 			</div><br><br>
 
-			<div class="tickets">
+			<div class="tickets" style="margin-bottom:40vh;">
 				<form class="is_present" name="option_tickets">
 					<p>
 						<span>Direction:</span>
@@ -102,18 +102,16 @@
 						</select>
 					</p>
 					<button type="button" name="target_selection"  class="" style="">Search</button>
-
 				</form>
-				<table cellspacing="1" class="train">
-					<tr><td>1<input type="checkbox"></td><td>3<input type="checkbox"></td><td>5<input type="checkbox"></td><td>7<input type="checkbox"></td><td>9<input type="checkbox"></td><td>11<input type="checkbox"></td><td>13<input type="checkbox"></td><td>15<input type="checkbox"></td><td>17<input type="checkbox"></td><td>19<input type="checkbox"></td><td>21<input type="checkbox"></td><td>23<input type="checkbox"></td><td>25<input type="checkbox"></td><td>27<input type="checkbox"></td></tr>
-					<tr><td>2<input type="checkbox"></td><td>4<input type="checkbox"></td><td>6<input type="checkbox"></td><td>8<input type="checkbox"></td><td>10<input type="checkbox"></td><td>12<input type="checkbox"></td><td>14<input type="checkbox"></td><td>16<input type="checkbox"></td><td>18<input type="checkbox"></td><td>20<input type="checkbox"></td><td>22<input type="checkbox"></td><td>24<input type="checkbox"></td><td>26<input type="checkbox"></td><td>28<input type="checkbox"></td></tr>
-				</table>
-				<div style="text-align: right"><div id="out_prise">ffffffffffffffffffffff</div><button type="button" name=""  class="button_buy">Book</button><button type="button" name=""  class="button_tickets" >Show tickets</button></div>
-				<div id="out_tickets"></div>
+				<div class="table_select" hidden>
+					<table cellspacing="1" class="train">
+						<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>></td><td></td><td></td><td></td><td></td><td></td></tr>
+						<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>></td></tr>
+					</table>
+					<div style="text-align: right"><div id="out_prise"></div><button type="button" name=""  class="button_buy">Book</button></div>
+					<div id="out_tickets"></div>
+				</div>
 			</div>
-
-
-
 		</div>
 	</body>
 </html>

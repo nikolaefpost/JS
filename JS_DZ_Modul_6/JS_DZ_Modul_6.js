@@ -150,87 +150,66 @@
     let arr_date = ['10.03.2012', '11.03.2012', '12.03.2012'];
     let button_buy = document.querySelector('.button_buy');
     let button_tickets = document.querySelector('.button_tickets');
-    let seats=[];
+    let table_selects = document.querySelector('.table_select');
+    let seats=[];                                                               // МАССИВ ДЛЯ ХРАНЕНИЯ БИЛЕТОВ
     let table = document.querySelector('.train');
     let form = document.forms.option_tickets;
     const RATE = 300;
     let target_date;
     let target_direction;
     let target_train;
-console.log(button_buy);
+
+    form.target_selection.addEventListener('click', selectTrain);
+    form.date_.addEventListener('change', selectTrain);
+    form.direction_.addEventListener('change', selectTrain);
+    button_buy.addEventListener('click', bookTickets);
 
 
-
-
-
-
-    document.forms.option_tickets.target_selection.addEventListener('click', functionName);
-     function functionName() {
+    function selectTrain() {
+      table_selects.hidden = false;
       target_date = form.date_.value;
       target_direction = form.direction_.value;
       target_train = arr_seats[target_direction][target_date];
 
-      console.log(arr_seats[0][0], arr_seats[0][1], arr_seats[0][2]);
       for (let i = 0; i < target_train.length; i++) {
-
         if (target_train[i]=='&#10004') {
-
-          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = '&#10004';}
-          else {
-            table.rows[1].cells[Math.floor(i/2)].innerHTML = '&#10004';
-          }
+          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = (i+2) + '&#10004';}
+          else { table.rows[1].cells[Math.floor(i/2)].innerHTML =i+ '&#10004';}
         }else{
-          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = i+ ' <input type="checkbox">';}
-          else {
-            table.rows[1].cells[Math.floor(i/2)].innerHTML = i+  ' <input type="checkbox">';
-          }
+          if (i%2==0) {table.rows[0].cells[Math.floor(i/2)].innerHTML = (i+2) + ' <input type="checkbox">';}
+          else { table.rows[1].cells[Math.floor(i/2)].innerHTML = i + ' <input type="checkbox">'; }
         }
-        // i = Math.floor(i);
-        // if(i%2==0)  {
-        //   if table.rows[0].cells[Math.floor(i/2)].children[0].checked = target_train[i]}
-        //
-        //
-        //  : table.rows[1].cells[Math.floor(i/2)].children[0].checked = target_train[i];
-        //
       }
     }
 
-    button_buy.onclick = function () {
-
-      for (let i = 0, j=0 ; i < 14; i++) {
-        console.log(table.rows[j].cells[i].children[0]);
-        if (table.rows[j].cells[i].children[0] && table.rows[j].cells[i].children[0].checked) seats.push([table.rows[j].cells[i].innerText, target_date, target_direction]);
-        if (i==13 && j!=1) {i=0; j=1;}
-      }
-
-
-
+    function bookTickets() {
       for (let i = 0; i < target_train.length; i++) {
         i = Math.floor(i);
         if (i%2==0){
-          if (table.rows[0].cells[Math.floor(i/2)].children[0] && table.rows[0].cells[Math.floor(i/2)].children[0].checked) target_train[i] = '&#10004';
-        }else {
-          if (table.rows[1].cells[Math.floor(i/2)].children[0] && table.rows[1].cells[Math.floor(i/2)].children[0].checked) target_train[i] = '&#10004';
+          if (table.rows[0].cells[Math.floor(i/2)].children[0] && table.rows[0].cells[Math.floor(i/2)].children[0].checked) {
+            target_train[i] = '&#10004';
+            seats.push([table.rows[0].cells[Math.floor(i/2)].innerText, target_date, target_direction]);}
+          }else {
+            if (table.rows[1].cells[Math.floor(i/2)].children[0] && table.rows[1].cells[Math.floor(i/2)].children[0].checked) {
+              target_train[i] = '&#10004';
+              seats.push([table.rows[1].cells[Math.floor(i/2)].innerText, target_date, target_direction]);
+            }
+          }
         }
+        out_prise.innerText = 'Total prise: '+seats.length*RATE+' $';
+        selectTrain();
+        showTickets();
       }
-        console.log(target_train);
-      out_prise.innerText = 'Total prise: '+seats.length*RATE+' $';
-      functionName();
-    }
 
-    button_tickets.onclick = function (){
-      if (seats.length==0) return;
-      let table_str ='<table class="out"><tr><th>Direction</th><th>Date</th><th>Seats</th</tr>';
-      for (var i = 0; i < seats.length; i++) {
-      table_str += '<tr><td>' + arr_train[seats[i][2]]+ '</td><td>' +arr_date[seats[i][1]] +'</td><td>'+seats[i][0]+'</td></tr>'
+      function showTickets (){
+        if (seats.length==0) return;
+        let table_str ='<table class="out"><tr><th>Direction</th><th>Date</th><th>Seats</th</tr>';
+        for (var i = 0; i < seats.length; i++) {
+          table_str += '<tr><td>' + arr_train[seats[i][2]]+ '</td><td>' +arr_date[seats[i][1]] +'</td><td>'+seats[i][0]+'</td></tr>'
+        }
+        table_str += '</table>';
+        out_tickets.innerHTML = table_str;
       }
-      table_str += '</table>';
-      out_tickets.innerHTML = table_str;
-    }
-
-
-
   }
-  // document.forms.option_tickets.target_selection.addEventListener('click', byTickets);
   byTickets();
 }
