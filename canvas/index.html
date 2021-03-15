@@ -1,0 +1,152 @@
+<canvas id="canvas1" width="800" height="600"/>
+<img id="enemy_sprite" src="enemy_sprite.png" style="display:none"/>
+<img id="player_sprite" src="pl_sprite.webp" style="display:none"/>
+<script>
+    let canvas = document.getElementById('canvas1');
+    let ctx = canvas.getContext('2d');
+    
+    let gameObjects = {
+        enemy : {
+            x: 0,
+            y: 0,
+            direction: -1,
+            width: 0,
+            height: 0,
+            speed: 0,
+            img: null,
+            cutWidth: 255,
+            cutHeight: 255,
+            frames : null,
+            curFrame: 0,
+            curFrame2: 0,
+            animate: true,
+            init: function(x, y, width, height, speed, img, frames) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.speed = speed;
+                this.img = img;
+                this.frames = frames;
+            }
+        },
+        player : {
+            x: 0,
+            y: 0,
+            direction: 1,
+            width: 0,
+            height: 0,
+            speed: 0,
+            img: null,
+            cutWidth: 120,
+            cutHeight: 150,
+            frames : null,
+            curFrame: 0,
+            curFrame2: 0,
+            animate: true,
+            init: function(x, y, width, height, speed, img, frames) {
+                this.x = x;
+                this.y = y;
+                this.width = width;
+                this.height = height;
+                this.speed = speed;
+                this.img = img;
+                this.frames = frames;
+            }
+        }
+    }
+
+    ////////////////////////////////////
+    //Start game
+    ////////////////////////////////
+    let fps = 120;
+    init();
+    setInterval(gameLoop, 1000/fps);
+
+    //drawRect(square.x, square.y, square.width, square.height, 'red');
+    //drawRect(square.x + 100, square.y + 100, square.width, square.height, 'red');
+    
+    ////////////////////////////////////
+    //Game engine functions
+    ////////////////////////////////
+    function init() {
+        gameObjects.enemy.init(0, canvas.offsetHeight - 50, 50, 50, 2, document.getElementById('enemy_sprite'), [
+            {x: 0, y: 0},
+            {x: 260, y: 0},
+            {x: 0, y: 260},
+            {x: 260, y: 260}
+        ]);
+        gameObjects.player.init(50, canvas.offsetHeight - 90, 70, 90, 2, document.getElementById('player_sprite'), [
+            {x: -50, y: 0},
+            {x: 70, y: 0},
+            {x: 200, y: 0},
+            {x: 310, y: 0},
+            {x: 410, y: 0},
+            {x: 510, y: 0},
+        ]);
+    }
+
+    function gameLoop() {
+        updateModel();
+        draw();
+    }
+    
+    function updateModel() {
+        moveAround(gameObjects.enemy);
+        //moveAround(gameObjects.player);
+    }
+    
+    function draw() {
+        clear();
+        drawImg(gameObjects.enemy);
+        //drawImg(gameObjects.player);
+    }
+    
+    ////////////////////////////////////
+    //Draw functions
+    ////////////////////////////////
+    function clear() {
+        ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+    }
+    
+    function drawRect(x, y, width, height, color) {
+        ctx.fillStyle = color;
+        ctx.beginPath();
+        ctx.rect(x, y, width, height);
+        ctx.closePath();
+        ctx.fill();
+        //ctx.fillRect(x, y, width, height);
+    }
+
+    function drawImg(creature) {
+        if (creature.direction > 0) ctx.transform(1, 0, 0, 1, 0, 0);
+        else ctx.transform(-1, 0, 0, 1, creature.width, 0);
+        if (creature.animate) {
+            creature.curFrame2++;
+            if (creature.curFrame2 == 121) {
+                creature.curFrame2 = 0;
+                creature.curFrame = 0;
+            }
+            if (creature.curFrame2 % (fps/(creature.frames.length * creature.speed)) == 0)
+                creature.curFrame = creature.curFrame + 1 != creature.frames.length ? creature.curFrame + 1 : 0;
+        }
+        ctx.beginPath();
+        ctx.drawImage(creature.img,
+            creature.frames[creature.curFrame].x,
+            creature.frames[creature.curFrame].y,
+            creature.cutWidth, creature.cutHeight, creature.x * creature.direction, creature.y, creature.width, creature.height);
+        ctx.fill();
+    }
+
+    ////////////////////////////////////
+    //Game logic functions
+    ////////////////////////////////
+    function moveAround(creature) {
+        creature.x+=creature.speed;
+        if(creature.x >= canvas.offsetWidth - creature.width || creature.x <= 0) {
+            creature.speed *= -1;
+            creature.direction *= -1;
+            if (creature.direction < 0) creature.x += creature.width;
+        }
+    }
+</script>
