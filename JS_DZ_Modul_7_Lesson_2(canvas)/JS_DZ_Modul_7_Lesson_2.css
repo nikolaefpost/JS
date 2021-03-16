@@ -12,6 +12,8 @@
     margin-left:auto;
     margin-right:auto;
     display: block;
+    border-radius: 10px;
+    box-shadow: 10px 5px 5px grey;
   }
 
   .figure_color{
@@ -23,6 +25,8 @@
     justify-content: center;
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
+    border-radius: 7px;
+    box-shadow: 10px 5px 5px grey;
   }
 
   .figure_color p{
@@ -90,7 +94,7 @@
     border: 1px solid grey;
   } */
 
-  #black{background: black;}
+  /* #black{background: black;}
   #gray{background: gray;}
   #white{background: white;}
   #purple{background: purple;}
@@ -103,4 +107,4 @@
   #aqua{background: aqua;}
   #teal{background: teal;}
   #blue{background: blue;}
-  #navy{background: navy;}
+  #navy{background: navy;} */

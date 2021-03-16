@@ -3,14 +3,43 @@
 		<meta charset="utf-8">
 		<title>JS_DZ_Modul_4_Lesson_3</title>
 		<script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
-		<style media="screen"></style>
+		<style media="screen">
+		.main{
+	    background:#b8d5e3;
+	    padding:2% 1%;
+	    width:70%;
+	    margin-left:auto;
+	    margin-right:auto;
+	    margin-top:5vh;
+	  }
+		span{
+			width: 200px;
+			display: inline-block;
+			text-align: left;
+		}
+		form{
+			text-align: center;
+		}
+		</style>
     <style>
 
  </style>
 	</head>
 	<body>
 		<div class="main" id="main">
-	    <button type="button" name="button_is"  class="btn_area" >Save</button>
+			<form class="buy_form" action="index.html" method="get" name="buy_form">
+				<p><span>First name:</span><input type="text" name="book" value="" class="in_book"  required></p>
+				<p><span>Last name:</span><input type="" name="quantity" placeholder="" class="in_quantity"  required ></p>
+				<p><span>login:</span><input type="text" name="name" value="" class="in_name"  required ></p>
+				<p><span>Password:</span><input name="address" rows="6"  class="in_address"  required></p>
+				<p><span>Confirm password:</span><input name="address" rows="6"  class="in_address"  required></p>
+				<p><span>Email:</span><input name="address" rows="6"  class="in_address"  required></p>
+				<p><span>Phone number:</span><input type="text" name="date_" value="" class="in_date"  required></p>
+				<p><span>Code:</span><input name="message" rows="6"  class=""  ></p>
+				<p><input name="bold" type="checkbox" value="bold"> I accept the rules</p>
+				<button type="submit" name="button_buy" id="button_buy" class="btn_area" >Registred</button>
+
+			</form>
 		</div>
 	</body>
 </html>
