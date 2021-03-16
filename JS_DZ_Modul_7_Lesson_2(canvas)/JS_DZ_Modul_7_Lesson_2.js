@@ -3,11 +3,11 @@ window.onload = function () {
   document.forms.figure_color.onchange = start;
   function start() {
     let dx,dy,width,height;
-    canvas1.onmouseup = selectFigure;
-    canvas1.onmousedown = selectFigure;
+    canvas1.onmouseup = selectFigPlacement;
+    canvas1.onmousedown = selectFigPlacement;
   }
 
-  function selectFigure() {
+  function selectFigPlacement() {
     let canvas = document.getElementById('canvas1');
     let canvas_size = canvas.getBoundingClientRect();
     let figure = document.forms.figure_color.figure.value;
