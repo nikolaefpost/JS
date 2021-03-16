@@ -1,99 +1,58 @@
 
 window.onload = function () {
-
-  canvas1.onmouseup = selectFigure();
-  canvas1.onmousedown = selectFigure();
-  let tx,ty,width,height;
+  document.forms.figure_color.onchange = start;
+  function start() {
+    let dx,dy,width,height;
+    canvas1.onmouseup = selectFigure;
+    canvas1.onmousedown = selectFigure;
+  }
 
   function selectFigure() {
-    let canvas = canvas1.getBoundingClientRect();
+    let canvas = document.getElementById('canvas1');
+    let canvas_size = canvas.getBoundingClientRect();
+    let figure = document.forms.figure_color.figure.value;
+    if(!figure) return;
+    let color = document.forms.figure_color.color.value;
 
-    return function () {
-
-      let figure = document.forms.figure_color.figure.value;
-      let color = document.forms.figure_color.color.value;
-      if(event.type=='mousedown') {
-        tx =event.clientX- canvas.x;
-        ty =event.clientY- canvas.y;
-        console.log(tx,ty);
-      }
-
-      if(event.type=='mouseup') {
-        console.log(tx,ty);
-        width =event.clientX- canvas.x - tx;
-        height =event.clientY- canvas.y- ty;
-        console.log(tx,ty,width,height);
-        drawRect({x:tx, y:ty, width:width, height:height, fillStyle:color, canvasId:'canvas1'});
-      }
+    if(event.type=='mousedown') {
+      dx =event.clientX- canvas_size.x;
+      dy =event.clientY- canvas_size.y;
     }
 
-    function drawRect({x=0, y=0, width=0, height=0, fillStyle='white', canvasId='canvas1'} = null) {
-      let ctx = document.getElementById(canvasId).getContext('2d');
-      ctx.fillStyle = fillStyle;
-      ctx.beginPath();
-      ctx.rect(x, y, width, height);
-      ctx.closePath();
-      ctx.fill();
-      // ctx.stroke();
-      console.log(x);
+    if(event.type=='mouseup') {
+      width =event.clientX- canvas_size.x - dx;
+      height =event.clientY- canvas_size.y- dy;
+      drawFigure({x:dx, y:dy, width:width, height:height, figure:figure, fillStyle:color, canvas:canvas});
     }
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  function drawFigure({x=0, y=0, width=0, height=0, figure=0, fillStyle='white', canvas=''} = null) {
+    let ctx = canvas.getContext('2d');
+    ctx.fillStyle = fillStyle;
+    ctx.beginPath();
+    switch (figure) {
+      case '0':
+      ctx.rect(x, y, width, height);
+      break;
+      case '1':
+      let d =  (width>height) ? width : height;
+      ctx.arc(x+width/2, y+height/2, d/2, 0, 2 * Math.PI);
+      break;
+      case '2':
+      ctx.moveTo(x, y+height/2);
+      ctx.lineTo(x+width/2, y);
+      ctx.lineTo(x+width, y+height/2);
+      ctx.lineTo(x+width/2, y+height);
+      break;
+      case '3':
+      ctx.moveTo(x, y);
+      ctx.lineTo(x, y+height);
+      ctx.lineTo(x+width, y+height);
+      break;
+    }
+    ctx.closePath();
+    ctx.fill();
+  }
   // function drawRect({x=0, y=0, width=0, height=0, fillStyle='white', strokeStyle='white', lineWidth=0, canvasId='canvas1'} = null) {
   //   console.log(document.getElementById(canvasId));
   //   let ctx = document.getElementById(canvasId).getContext('2d');
