@@ -20,26 +20,101 @@
 		form{
 			text-align: center;
 		}
-		</style>
-    <style>
 
- </style>
+		.tooltip {
+	    position: fixed;
+	    padding: 10px 20px;
+	    border-radius: 5px;
+	    text-align: center;
+	    font: italic 12px sans-serif;
+	    color: white;
+	    background: rgb(223, 184, 227);
+	    box-shadow: 3px 3px 3px rgba(0, 0, 0, .3);
+	  }
+		</style>
+
 	</head>
 	<body>
 		<div class="main" id="main">
-			<form class="buy_form" action="index.html" method="get" name="buy_form">
-				<p><span>First name:</span><input type="text" name="book" value="" class="in_book"  required></p>
-				<p><span>Last name:</span><input type="" name="quantity" placeholder="" class="in_quantity"  required ></p>
-				<p><span>login:</span><input type="text" name="name" value="" class="in_name"  required ></p>
-				<p><span>Password:</span><input name="address" rows="6"  class="in_address"  required></p>
-				<p><span>Confirm password:</span><input name="address" rows="6"  class="in_address"  required></p>
-				<p><span>Email:</span><input name="address" rows="6"  class="in_address"  required></p>
-				<p><span>Phone number:</span><input type="text" name="date_" value="" class="in_date"  required></p>
-				<p><span>Code:</span><input name="message" rows="6"  class=""  ></p>
-				<p><input name="bold" type="checkbox" value="bold"> I accept the rules</p>
-				<button type="submit" name="button_buy" id="button_buy" class="btn_area" >Registred</button>
+			<form class="coocies_form" action="index.html" method="get" name="coocies_form">
+				<p><span>First name:</span><input type="text" name="f_name" value="" class="in_f_name" data-tooltip="введите корректно Имя!"  required></p>
+				<p><span>Last name:</span><input type="text" name="s_name" class="in_s_name" data-tooltip="введите корректно Фамилию!"  required ></p>
+				<p><span>login:</span><input type="text" name="login"  class="in_login" data-tooltip="такой логин уже существует!"  required ></p>
+				<p><span>Password:</span><input type="password" name="password1"   class="in_password1" data-tooltip="пароль должен содержать 4 символа (буква или цифра)"  required></p>
+				<p><span>Confirm password:</span><input type="password" name="password2"   class="in_password2" data-tooltip="пароли не совпадают!"  required></p>
+				<p><span>Email:</span><input type="email" name="email"  class="in_email" data-tooltip="введен некоректный email!"  required></p>
+				<p><span>Phone number:</span><input type="tel" name="tel" value="" class="in_tel" data-tooltip="Некорректно введен номер телефона!" required></p>
+				<p><input name="rule" type="checkbox" value="1"> I accept the rules</p>
+				<button type="submit" name="button_submit" id="button_submit" class="button_submit"  onsubmit="return usingCookie()">Registred</button>
 
 			</form>
 		</div>
+		<script type="text/javascript">
+		button_submit.onclick = usingCookie;
+    	function usingCookie() {
+				// event.preventDefault();
+				let coocie_ = document.cookie;
+
+    		let user_f_name = document.forms.coocies_form.f_name.value;
+				if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user_f_name)) {toolTip('.in_f_name'); return false;}
+				let user_s_name = document.forms.coocies_form.s_name.value;
+				if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user_s_name)) {toolTip('.in_s_name'); return false;}
+				let user_login = document.forms.coocies_form.login.value;
+				if (coocie_.indexOf('user_login='+user_login)!=-1) {toolTip('.in_login'); return false;}
+				let user_password1 = document.forms.coocies_form.password1.value;
+				if (!/^[A-ZА-Яa-zа-я0-9]{4}$/.test(user_password1)) {toolTip('.in_password1'); return false;}
+				let user_password2 = document.forms.coocies_form.password2.value;
+				console.log(user_password1 != user_password2);
+				if (user_password1 != user_password2) {toolTip('.in_password2'); return false;}
+				let email = document.forms.coocies_form.email.value;
+				if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(email) ) {toolTip('.in_email'); return false;}
+				let tel = document.forms.coocies_form.tel.value;
+				if (!/^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/ .test(tel) ) {toolTip('.in_tel'); return false;}
+				if(!document.forms.coocies_form.rule.checked) return false;
+				console.log('All');
+    	}
+
+
+
+
+
+
+			function toolTip(class_) {                                                   // ОТОБРАЖЕНИЕ РЕЗУЛЬТАТОВ ПРОВЕРКИ
+	     let hint;
+	     let target = document.querySelector(class_);
+	     let form = document.querySelector('.coocies_form');
+	     let hintText = target.dataset.tooltip;
+			 console.log(hintText);
+	     if (!hintText) return;
+
+	     hint = document.createElement('div');
+	     hint.className = 'tooltip';
+	     hint.innerHTML = hintText;
+	     form.append(hint);
+
+	     let coords = target.getBoundingClientRect();
+	     let left = coords.left + (target.offsetWidth - hint.offsetWidth) / 2;
+
+	     let top = coords.top - hint.offsetHeight - 5;
+	     if (top < 0) {top = coords.top + target.offsetHeight + 5;}
+
+	     hint.style.left = left + 'px';
+	     hint.style.top = top + 'px';
+	     if (target.className == 'in_book'){
+	       form.onmouseout = function () {
+	         if (hint) {
+	           hint.remove();
+	           hint = null;
+	         }
+	       }
+	     }
+	     target.onmouseover = function () {
+	       if (hint) {
+	         hint.remove();
+	         hint = null;
+	       }
+	     }
+	   }
+    </script>
 	</body>
 </html>
