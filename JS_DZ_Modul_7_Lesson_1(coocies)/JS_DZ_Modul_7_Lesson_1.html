@@ -46,7 +46,6 @@
 				<p><span>Phone number:</span><input type="tel" name="tel" value="0000000007" class="in_tel" data-tooltip="Некорректно введен номер телефона!" required></p>
 				<p><input name="rule" type="checkbox" value="1"> I accept the rules</p>
 				<button type="submit" name="button_submit" id="button_submit" class="button_submit"  onsubmit="return usingCookie()">Registred</button>
-
 			</form>
 			<div id="out"></div>
 		</div>
@@ -54,66 +53,55 @@
 		button_submit.onclick = usingCookie;
 		let coocie_ = document.cookie;
 		function checkReg(){
-
 			let arr_coocie = coocie_.split('; ');
-			console.log(arr_coocie);
 			let object_cookie = {};
 			let j;
 			for (let i=0; i < arr_coocie.length-1; i++){
 				j = arr_coocie[i].split('=');
-				console.log(j);
 				object_cookie[j[0]] = j[1];
 			}
-			console.log(object_cookie);
 			if('login' in object_cookie){
 				out.innerHTML = "Hello, " +
 				object_cookie['login'];
 				document.forms.coocies_form.hidden = true;
 			}
-			 else document.forms.coocies_form.hidden = false;
-		 }
+			else document.forms.coocies_form.hidden = false;
+		}
 
-    	function usingCookie() {
-				event.preventDefault();
-				// let coocie_ = document.cookie;
-				let user = {
-					f_name:'',
-					login:'',
-					password:'',
-					email:'',
-					tel:''
-				}
+		function usingCookie() {
+			event.preventDefault();
+			let user = {
+				f_name:'',
+				login:'',
+				password:'',
+				email:'',
+				tel:''
+			}
 
-    		user.f_name = document.forms.coocies_form.f_name.value;
-				if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user.f_name)) {toolTip('.in_f_name'); return false;}
-				user.s_name = document.forms.coocies_form.s_name.value;
-				if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user.s_name)) {toolTip('.in_s_name'); return false;}
-				user.login = document.forms.coocies_form.login.value;
-				if (document.cookie.indexOf('login='+user.login)!=-1) {toolTip('.in_login'); return false;}
-				user.password = document.forms.coocies_form.password1.value;
-				if (!/^[A-ZА-Яa-zа-я0-9]{4}$/.test(user.password)) {toolTip('.in_password1'); return false;}
-				let user_password2 = document.forms.coocies_form.password2.value;
-				if (user.password != user_password2) {toolTip('.in_password2'); return false;}
-				user.email = document.forms.coocies_form.email.value;
-				if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(user.email) ) {toolTip('.in_email'); return false;}
-				user.tel = document.forms.coocies_form.tel.value;
-				if (!/^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/ .test(user.tel) ) {toolTip('.in_tel'); return false;}
-				if(!document.forms.coocies_form.rule.checked) return false;
+			user.f_name = document.forms.coocies_form.f_name.value;
+			if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user.f_name)) {toolTip('.in_f_name'); return false;}
+			user.s_name = document.forms.coocies_form.s_name.value;
+			if (!/^[А-ЯA-Z][a-zа-я ,.'-]+$/.test(user.s_name)) {toolTip('.in_s_name'); return false;}
+			user.login = document.forms.coocies_form.login.value;
+			if (document.cookie.indexOf('login='+user.login)!=-1) {toolTip('.in_login'); return false;}
+			user.password = document.forms.coocies_form.password1.value;
+			if (!/^[A-ZА-Яa-zа-я0-9]{4}$/.test(user.password)) {toolTip('.in_password1'); return false;}
+			let user_password2 = document.forms.coocies_form.password2.value;
+			if (user.password != user_password2) {toolTip('.in_password2'); return false;}
+			user.email = document.forms.coocies_form.email.value;
+			if (!/[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}/igm.test(user.email) ) {toolTip('.in_email'); return false;}
+			user.tel = document.forms.coocies_form.tel.value;
+			if (!/^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/ .test(user.tel) ) {toolTip('.in_tel'); return false;}
+			if(!document.forms.coocies_form.rule.checked) return false;
 
-				let expDate = new Date;
-				expDate.setTime((new Date).getTime() + 7260*1000);
-				let str='';
-				for (var cooc in user) {
-					document.cookie = cooc +'='+ user[cooc]+';expires='+ expDate.toGMTString()+';path=/;';
-				}
-				console.log(coocie_);
-				checkReg();
-    	}
-
-
-
-
-
+			let expDate = new Date;
+			expDate.setTime((new Date).getTime() + 7260*1000);
+			let str='';
+			for (var cooc in user) {
+				document.cookie = cooc +'='+ user[cooc]+';expires='+ expDate.toGMTString()+';path=/;';
+			}
+			checkReg();
+		}
 
 			function toolTip(class_) {                                                   // ОТОБРАЖЕНИЕ РЕЗУЛЬТАТОВ ПРОВЕРКИ
 	     let hint;
