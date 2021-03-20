@@ -45,7 +45,7 @@
 				<p><span>Email:</span><input type="email" name="email"  class="in_email" value="bond.james@gmail.com" data-tooltip="введен некоректный email!"  required></p>
 				<p><span>Phone number:</span><input type="tel" name="tel" value="0000000007" class="in_tel" data-tooltip="Некорректно введен номер телефона!" required></p>
 				<p><input name="rule" type="checkbox" value="1"> I accept the rules</p>
-				<button type="submit" name="button_submit" id="button_submit" class="button_submit"  onsubmit="return usingCookie()">Registred</button>
+				<button type="submit" name="button_submit" id="button_submit" class="button_submit"  onsubmit="return saveStorage()">Registred</button>
 
 			</form>
 			<div id="out" >
@@ -53,20 +53,12 @@
 
 		</div>
 		<script type="text/javascript">
-		button_submit.onclick = usingCookie;
+		button_submit.onclick = saveStorage;
 
-
+    myStorage = window.localStorage;
 		function checkReg(){
-			let coocie_ = document.cookie;
-			let arr_coocie = coocie_.split('; ');
-			let object_cookie = {};
-			let j;
-			for (let i=0; i < arr_coocie.length-1; i++){
-				j = arr_coocie[i].split('=');
-				object_cookie[j[0]] = j[1];
-			}
-			if('login' in object_cookie){
-				out.innerHTML = "Hello, " + object_cookie['login']+'<br><button class="button_submit"  onclick="deleteCoocie()">Sign out</button>';
+			if(myStorage.getItem('login')){
+				out.innerHTML = "Hello, " + myStorage.getItem('login')+'<br><button class="button_submit"  onclick="deleteStorage()">Sign out</button>';
 				document.forms.coocies_form.hidden = true;
 			}
 			else {
@@ -74,7 +66,7 @@
 				out.hidden = true;}
 		}
 
-		function usingCookie() {
+		function saveStorage() {
 			event.preventDefault();
 			let user = {
 				f_name:'',
@@ -100,22 +92,13 @@
 			if (!/^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$/ .test(user.tel) ) {toolTip('.in_tel'); return false;}
 			if(!document.forms.coocies_form.rule.checked) return false;
 
-			let expDate = new Date;
-			expDate.setTime((new Date).getTime() + 60*1000);
-			let str='';
-			for (var cooc in user) {
-				document.cookie = cooc +'='+ user[cooc]+';expires='+ expDate.toGMTString()+';path=/;';
-			}
+			for (var cooc in user) myStorage.setItem(cooc, user[cooc]);;
 			out.hidden = false;
 			checkReg();
-
 		}
 
-		function deleteCoocie() {
-			let expDate = new Date;
-			expDate.setTime((new Date).getTime() -1);
-			document.cookie = document.cookie+' ;expires='+ expDate.toGMTString()+';path=/;';
-	    if (document.cookie) deleteCoocie();
+		function deleteStorage() {
+			myStorage.clear()
 	    document.forms.coocies_form.hidden = false;
 			out.hidden = true;
 		}
