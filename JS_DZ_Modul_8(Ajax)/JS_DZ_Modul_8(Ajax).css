@@ -101,22 +101,49 @@
 
   .example{
     display: flex;
-    width: 30%;
-    border: 1px solid grey;
+    width: 18%;
+    height: 230px;
+
+    border-right: 1px dotted grey;
+    border-bottom: 1px dotted grey;
     padding: 10px;
     justify-content: space-between;
+  }
 
+  .film_details{
+    display: flex;
+    width: 80%;
+    /* height: 250px; */
+    /* border: 1px solid grey; */
+    padding: 10px;
+    justify-content: space-between;
+    margin: 0 auto;
+    box-shadow: 10px 5px 5px grey;
+    background: #FF7519;
+    color: white;
   }
 
   .poster{
     width: 45%;
   }
 
-  .description{
+  .poster1{
+    width: 30%;
+
+  }
+
+  .description, .description1{
     display: flex;
     flex-direction: column;
     width: 50%;
     padding: 10px;
+    justify-content: flex-end;
+  }
+
+  .description1{
+
+    width: 78%;
+
   }
 
   .example span{
@@ -140,4 +167,37 @@
   .hidden{
     visibility: hidden;
     position: absolute;
+  }
+
+  #out2 li{
+    display: inline-block;
+    border: 1px solid grey;
+    padding: 10px 20px;
+  }
+
+  #out2 li:hover{
+  background: #FF7519;
+  color: white;
+  }
+
+  .properties{
+    display: inline-block;
+    flex: 20% 0 0;
+    font-weight: bold;
+    padding-left: 20px;
+  }
+
+  .details{
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .value{
+    flex: 80% 0 0;
+    font: 130% lighter serif;
+    text-overflow: clip;
+  }
+
+  #id_title{
+    font: 170% bold sans-serif;
   }
