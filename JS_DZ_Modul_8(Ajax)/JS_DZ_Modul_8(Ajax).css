@@ -105,6 +105,7 @@
     border: 1px solid grey;
     padding: 10px;
     justify-content: space-between;
+
   }
 
   .poster{
@@ -134,4 +135,9 @@
   #out1{
     display: flex;
     justify-content: space-between;
+  }
+
+  .hidden{
+    visibility: hidden;
+    position: absolute;
   }
