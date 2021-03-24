@@ -76,8 +76,9 @@ window.onload = function () {
 		let start = (pageNum - 1) * filmsOnPage;
 		let end = start + filmsOnPage;
     let notes = search.slice(start, end);
+    console.log(zag.children.length>0);
     if (zag.children) zag.innerHTML ='';
-    zag.innerHTML+='<h3 style="text-align:center;">Films:</h3>';
+     zag.innerHTML+='<h3 style="text-align:center;">Films:</h3>';
 
     for (var film of notes) {
       let clone = document.querySelector('.example').cloneNode(true);
