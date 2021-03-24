@@ -1,19 +1,20 @@
 window.onload = function () {
-  button.addEventListener('click', searchMedia);
-  let movie;
-  let arrFilms =[];
-  let filmsOnPage = 5;
-  let page_search = 1;
-  let page = 1;
-  let temp='';
-  let id_films;
-  let films;
-  function searchMedia() {
 
+
+  (function () {
+    button.addEventListener('click', mediaQuery);
+
+    let filmsOnPage = 5;
+    let page_search = 1;
+    let page = 1;
+    let arrFilms =[];
+
+  function mediaQuery() {
+    let movie;
+    let temp='';
     let form = document.forms.media_content;
     let title = form.title.value;
     let type = form.type.value;
-
     let request = new XMLHttpRequest();
     let str = "http://www.omdbapi.com/?s="+ title +"&plot=full&page="+page_search+"&type="+type+"&apikey=ab776285";
     if (str!=temp) {
@@ -21,89 +22,62 @@ window.onload = function () {
       request.open("GET", str);
       request.onload = function(){
         if(request.status === 200){
-
           movie = JSON.parse(request.response).Search;
-          prepeaList(movie)
+          prepeaPagination(movie)
         }
       }
       request.send(movie);
     }
-
   }
 
-  function prepeaList(search) {
-
+  function prepeaPagination(search) {
     arrFilms =arrFilms.concat(search)
-
-    let show_div = document.querySelector('#out1');
-    let pagination = document.querySelector('#out2');
     let countOfFilms = arrFilms.length / filmsOnPage;
     let items = [];
 
-    if (out2.children) {
-      out2.innerHTML ='';
-    }
+    if (out2.children) out2.innerHTML ='';
     for (let i = 0; i <= countOfFilms+1; i++) {
       let li = document.createElement('li');
-      if(i==0) li.innerHTML = '&laquo';
-      else if(i==countOfFilms+1) li.innerHTML = '&raquo';
-      else li.innerHTML = i;
-      pagination.appendChild(li);
-      items.push(li);
-    }
-
-
-    for (let item of items) {
-
-      if(item.innerHTML == '»' ) {
-
-        item.addEventListener('click', function() {
-          console.log(page/2-page_search==0);
-          if (page/2-page_search==0) {
+      if (i==0) {
+        li.innerHTML = '&laquo';
+        li.addEventListener('click', function() {
+          if (page>1) {
+            page--;
+            showFilms(items[page], arrFilms);}
+          });
+        } else if(i==countOfFilms+1) {
+          li.innerHTML = '&raquo';
+          li.addEventListener('click', function() {
+            if (page/2-page_search==0) {
               page++;
               page_search++;
-              searchMedia();
-            }
-          else {page++;  showFilms(items[page], arrFilms);}
-        });
+              mediaQuery();
+            } else {
+              page++;
+              showFilms(items[page], arrFilms);}
+            });
+          } else {
+            li.innerHTML = i;
+            li.addEventListener('click', function() {
+              showFilms(this, arrFilms);
+            });
+          }
+          out2.appendChild(li);
+          items.push(li);
       }
-
-      if(item.innerHTML == '«' ) {
-
-        item.addEventListener('click', function() {
-
-        if (page>1) {page--;
-
-        showFilms(items[page], arrFilms);}
-        });
-      }
-
-      item.addEventListener('click', function() {
-        showFilms(this, arrFilms);
-      });
-    }
-
-    showFilms(items[page], arrFilms);
+      showFilms(items[page], arrFilms);
   }
 
   function showFilms(elem, search) {
-    let count = out1.children.length;
-    if (out1.children) {
-      out1.innerHTML ='';
-    }
-
+    if (out1.children) out1.innerHTML ='';
     let pageNum = elem.innerHTML;
-    console.log(elem.innerHTML);
     if (pageNum=='»' || pageNum=='«') pageNum =page;
     else page=pageNum;
-    console.log(pageNum);
 		let start = (pageNum - 1) * filmsOnPage;
 		let end = start + filmsOnPage;
     let notes = search.slice(start, end);
 
-
     for (var film of notes) {
-      console.log(film);
       let clone = document.querySelector('.example').cloneNode(true);
       clone.classList.remove('hidden');
       let img = clone.getElementsByClassName('poster')[0];
@@ -122,18 +96,13 @@ window.onload = function () {
 
   function showDetails() {
     let request = new XMLHttpRequest();
-    console.log(event.target);
     let imbd_id = event.target.parentElement.getElementsByClassName('imbd_id')[0];
-
-    let s = "http://www.omdbapi.com/?i="+ imbd_id.innerText+"&plot=full&apikey=ab776285";
-    console.log(s);
-    request.open("GET", s);
+    let str = "http://www.omdbapi.com/?i="+ imbd_id.innerText+"&plot=full&apikey=ab776285";
+    request.open("GET", str);
     let film;
     request.onload = function(){
       if(request.status === 200){
-
         film = JSON.parse(request.response);
-        console.log(film);
         showFilmDetails(film)
       }
     }
@@ -153,4 +122,6 @@ window.onload = function () {
     awards.innerText = film.Awards;
     poster.src = film.Poster;
   }
+})();
+
 }
