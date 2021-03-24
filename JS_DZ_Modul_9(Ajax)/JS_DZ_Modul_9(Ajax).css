@@ -21,7 +21,9 @@
     border-left: 1px solid grey;
     /* border-radius: 7px; */
     box-shadow: 10px 5px 5px grey;
-
+    /* display: flex;
+    flex-direction: column;
+    align-items: center; */
   }
 
   .media_content input,
@@ -41,7 +43,7 @@
 
   .media_content button{
     width: 100%;
-    /* padding: 5px 10px; */
+    margin: 0;
     font: 170% bold serif;
     /* background: #E7E2D0;
     border: none; */

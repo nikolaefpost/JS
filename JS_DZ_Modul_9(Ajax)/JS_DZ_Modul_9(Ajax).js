@@ -124,6 +124,21 @@ window.onload = function () {
     awards.innerText = film.Awards;
     poster.src = film.Poster;
   }
-
   })();
+
+  class MediaQuery {
+    constructor() {
+
+      }
+    method1() {  }
+    method2() {  }
+    method3() {  }
+
+  }
+
+
+
+
+
+
 }
