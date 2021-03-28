@@ -8,21 +8,26 @@ window.onload = function () {
     let page_search = 1;
     let page = 1;
     let arrFilms =[];
+    let temp='';
 
   function mediaQuery() {
     let movie;
-    let temp='';
+
     let form = document.forms.media_content;
     let title = form.title.value;
+    console.log(title);
     let type = form.type.value;
     let request = new XMLHttpRequest();
     let str = "http://www.omdbapi.com/?s="+ title +"&plot=full&page="+page_search+"&type="+type+"&apikey=ab776285";
+    console.log(str);
     if (str!=temp) {
+      console.log(temp);
       temp = str;
       request.open("GET", str);
       request.onload = function(){
         if(request.status === 200){
           movie = JSON.parse(request.response).Search;
+          console.log(movie);
           prepeaPagination(movie)
         }
       }
