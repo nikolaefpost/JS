@@ -7,6 +7,25 @@
 		<style media="screen"></style>
 	</head>
 	<body>
+		<div class="film_details hidden" id="film_details">
+			<img src="Preloader.gif" alt="" id="preload2" hidden>
+
+			<img src="" alt="" class="poster1" id="poster">
+			<div class="description1" id="text">
+				<p class="details"><span class="properties">Title:</span><span id="id_title" class="value"></span></p>
+				<p class="details"><span class="properties">Released:</span><span id="released" class="value"></span></p>
+				<p class="details"><span class="properties">Genre:</span><span id="genre" class="value"></span></p>
+				<p class="details"><span class="properties">Country:</span><span id="country" class="value"></span></p>
+				<p class="details"><span class="properties">Director:</span><span id="director" class="value"></span></p>
+				<p class="details"><span class="properties">Writer:</span><span id="writer" class="value"></span></p>
+				<p class="details"><span class="properties">Actors:</span><span id="actors" class="value"></span></p>
+				<p class="details"><span class="properties">Awards:</span><span id="awards" class="value"></span></p>
+			</div>
+			<div class="">
+				<button type="button" name="button2" id='modal_button'>X</button>
+			</div>
+
+		</div>
 		<div class="main" id='area_div'>
 			<h1 style="text-align:center; color: #FF6600;">Search:</h1>
 			<form class="media_content" name="media_content" >
@@ -20,24 +39,12 @@
       </p>
         <button type="button" name="button1" id='button' class="border-button" >Search</button>
 			</form>
+			<div id="preload1" hidden><img src="Preloader.gif" alt=""></div> <img src="" alt="">
 			<div id="zag"></div>
 			<div class="films">
 				<!-- <h3 style="text-align:center;">Films:</h3> -->
 				<div id="out1"></div>
-				<div><button type="button" name="button2" id='more' class="button_details"  hidden>More</button></div>
-			</div>
-			<div class="film_details hidden" id="film_details">
-				<img src="" alt="" class="poster1" id="poster">
-				<div class="description1">
-					<p class="details"><span class="properties">Title:</span><span id="id_title" class="value"></span></p>
-					<p class="details"><span class="properties">Released:</span><span id="released" class="value"></span></p>
-					<p class="details"><span class="properties">Genre:</span><span id="genre" class="value"></span></p>
-					<p class="details"><span class="properties">Country:</span><span id="country" class="value"></span></p>
-					<p class="details"><span class="properties">Director:</span><span id="director" class="value"></span></p>
-					<p class="details"><span class="properties">Writer:</span><span id="writer" class="value"></span></p>
-					<p class="details"><span class="properties">Actors:</span><span id="actors" class="value"></span></p>
-					<p class="details"><span class="properties">Awards:</span><span id="awards" class="value"></span></p>
-				</div>
+				<div class="div_more"><button type="button" name="button2" id='more'   hidden>More</button></div>
 			</div>
 		</div>
 		<div class="example hidden" >
@@ -50,6 +57,8 @@
 				<button type="button" name="details"  class="button_details" >Details</button>
 			</p>
 		</div>
+
+
 
 	</body>
 </html>

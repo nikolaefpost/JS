@@ -10,20 +10,15 @@
   .media_content{
     background: #FF7519;
     width: 30%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 20px auto;
+    /* margin-left: auto;
+    margin-right: auto; */
     padding: 20px 30px;
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
     border-top: 1px solid grey;
     border-bottom: 1px solid grey;
     border-left: 1px solid grey;
-    /* border-radius: 7px; */
+
     box-shadow: 10px 5px 5px grey;
-    /* display: flex;
-    flex-direction: column;
-    align-items: center; */
   }
 
   .media_content input,
@@ -109,25 +104,41 @@
     padding: 10px;
     justify-content: space-between;
     border-radius: 10px;
+    margin-bottom: 20px;
   }
 
   .film_details{
     display: flex;
-    width: 80%;
     padding: 10px;
     justify-content: space-between;
     margin: 0 auto;
     box-shadow: 10px 5px 5px grey;
     background: #FF7519;
     color: white;
+    opacity: 1;
+    position: absolute;
+    top: 20%;
+    left: 25vw;
+    width: 50vw;
+    height: 50vh;
+    z-index: 100;
   }
+
+  .hystmodal__opened {
+    position: fixed;
+    right: 0;
+    left: 0;
+    opacity: 0.5;
+    filter: blur(8px);
+    overflow: hidden;
+}
 
   .poster{
     width: 45%;
   }
 
   .poster1{
-    width: 30%;
+    /* width: 30%; */
 
   }
 
@@ -205,3 +216,38 @@
   #id_title{
     font: 170% bold sans-serif;
   }
+
+  #modal_button{
+    background: none;
+    border: 1px solid white;
+    color: white;
+    border-radius: 25%;
+  }
+
+  #preload1, #preload2{
+    text-align: center;
+  }
+
+  #preload2 {
+    width: 60%;
+    margin: 0 auto;
+
+  }
+
+  #more{
+    width: 30%;
+    background: #FF7519;
+    color: white;
+    padding: 10px 30px;
+    margin: 10px 20px;
+    font-weight: 300;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 140%;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 10px 5px 5px grey;
+  }
+
+  .div_more{
+  text-align: center;
+}
