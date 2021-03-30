@@ -9,7 +9,6 @@
 	<body>
 		<div class="film_details hidden" id="film_details">
 			<img src="Preloader.gif" alt="" id="preload2" hidden>
-
 			<img src="" alt="" class="poster1" id="poster">
 			<div class="description1" id="text">
 				<p class="details"><span class="properties">Title:</span><span id="id_title" class="value"></span></p>
@@ -21,42 +20,37 @@
 				<p class="details"><span class="properties">Actors:</span><span id="actors" class="value"></span></p>
 				<p class="details"><span class="properties">Awards:</span><span id="awards" class="value"></span></p>
 			</div>
-			<div class="">
-				<button type="button" name="button2" id='modal_button'>X</button>
-			</div>
-
+			<div><button type="button" name="button2" id='modal_button'>X</button></div>
 		</div>
 		<div class="main" id='area_div'>
 			<h1 style="text-align:center; color: #FF6600;">Search:</h1>
 			<form class="media_content" name="media_content" >
 				<p>Title:<input name="title" type="text" value="world"></p>
-        <p>Type:
-          <select name="type">
-          <option value="movie">movie</option>
-          <option value="series">series</option>
-          <option value="episode">episode</option>
-        </select>
-      </p>
-        <button type="button" name="button1" id='button' class="border-button" >Search</button>
+				<p>Type:
+					<select name="type">
+						<option value="movie">movie</option>
+						<option value="series">series</option>
+						<option value="episode">episode</option>
+					</select>
+				</p>
+				<button type="button" name="button1" id='button' class="border-button" >Search</button>
 			</form>
 			<div id="preload1" hidden><img src="Preloader.gif" alt=""></div> <img src="" alt="">
 			<div id="zag"></div>
-			<div class="films">
-				<!-- <h3 style="text-align:center;">Films:</h3> -->
-				<div id="out1"></div>
-				<div class="div_more"><button type="button" name="button2" id='more'   hidden>More</button></div>
-			</div>
+			<div id="out1"></div>
+			<div class="div_more"><button type="button" name="button2" id='more'   hidden>More</button></div>
 		</div>
-		<div class="example hidden" >
-			<img src="" alt="" class="poster">
-			<p class="description">
-				<span>movie</span>
-				<span class="name"></span>
-				<span class="year"></span>
-				<span class="imbd_id" hidden></span>
-				<button type="button" name="details"  class="button_details" >Details</button>
-			</p>
-		</div>
+	</div>
+	<div class="example hidden" >
+		<img src="" alt="" class="poster">
+		<p class="description">
+			<span>movie</span>
+			<span class="name"></span>
+			<span class="year"></span>
+			<span class="imbd_id" hidden></span>
+			<button type="button" name="details"  class="button_details" >Details</button>
+		</p>
+	</div>
 
 
 
