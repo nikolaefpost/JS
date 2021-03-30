@@ -8,14 +8,30 @@ window.onload = function () {
     }
 
     async search (title, type, page_search) {
-      let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
-      let json = await request.json();
-      return json.Search;
+      let json;
+      try {
+        let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
+        json = await request.json();
+
+      } catch (e) {                                                             // ошибки в процессе исполнения
+        zag.innerHTML+=`<h3 class="error">Server response: ${e}</h3><br>`;
+        preload1.hidden = true;
+      }
+      if (!json) return;
+      if (json.Error) return json.Error;                                        // отрицательные резульаты поиска на сервере
+      else return json.Search;
     }
 
     async searchDetails (imbd_id) {
-      let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
-      let json = await request.json();
+      let json, err_;
+      try {
+        let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
+        json = await request.json();
+      } catch (e) {
+        text.innerHTML+=`<h3 class="error">Server response: ${e}</h3><br>`;
+        err_ = e;
+      }
+      if(err_) return;
       return json;
     }
   }
@@ -37,6 +53,13 @@ window.onload = function () {
       this.type = document.forms.media_content.type.value;
       this.temp = [this.title, this.type, this.page_search];
       let films = await requestT.search(this.title, this.type, this.page_search);
+      if ((typeof films)=='string'){
+        zag.innerHTML+=`<h3 class="error">Server response: ${films}</h3><br>`;
+        preload1.hidden = true;
+
+        return;
+      }
+        if ((typeof films)=='undefined') return;
       this.arrFilms = this.arrFilms.concat(films);
       this.addFilm();
       more.hidden = false;
@@ -65,7 +88,7 @@ window.onload = function () {
         let imbd_id = clone.getElementsByClassName('imbd_id')[0];
         imbd_id.innerText = this.arrFilms[i].imdbID;
         let button_details = clone.getElementsByClassName('button_details')[0];
-        button_details.addEventListener('click', ()=>this.showFilmDetails(imbd_id.innerText));
+        clone.addEventListener('click', ()=>this.showFilmDetails(imbd_id.innerText));
 
         out1.appendChild(clone);
         clone.scrollIntoView(top)
@@ -76,12 +99,17 @@ window.onload = function () {
       preload2.hidden = false;
       poster.hidden = true;
       text.style.display = 'none';
+      area_div.classList.add('hystmodal__opened');
+      film_details.classList.remove('hidden');
       let film = await requestT.searchDetails(id);
+      if (!film) {
+        preload2.hidden = true;
+        text.style.display = '';
+        return;
+      }
       preload2.hidden = true;
       poster.hidden = false;
       text.style.display = '';
-      area_div.classList.add('hystmodal__opened');
-      film_details.classList.remove('hidden');
       id_title.innerText = film.Title;
       released.innerText = film.Released;
       genre.innerText = film.Genre;

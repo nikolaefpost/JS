@@ -137,23 +137,17 @@
     width: 45%;
   }
 
-  .poster1{
-    /* width: 30%; */
-
-  }
-
   .description, .description1{
     display: flex;
     flex-direction: column;
     width: 50%;
     padding: 10px;
     justify-content: flex-end;
+    padding-right: 0;
   }
 
   .description1{
-
     width: 78%;
-
   }
 
   .example span{
@@ -161,7 +155,7 @@
   }
 
   .name{
-    font-size: 150%;
+    font-size: 130%;
     font-weight: 800;
   }
 
@@ -209,12 +203,12 @@
 
   .value{
     flex: 80% 0 0;
-    font: 130% lighter serif;
+    font: 140% lighter serif;
     text-overflow: clip;
   }
 
   #id_title{
-    font: 170% bold sans-serif;
+    font: 190% bold sans-serif;
   }
 
   #modal_button{
@@ -229,8 +223,9 @@
   }
 
   #preload2 {
-    width: 60%;
-    margin: 0 auto;
+    width: 30%;
+    height: 30vh;
+    margin: auto auto;
 
   }
 
@@ -250,4 +245,10 @@
 
   .div_more{
   text-align: center;
-}
+  }
+
+  .error{
+    color: red;
+    display: block;
+    margin: 0 auto;
+  }
