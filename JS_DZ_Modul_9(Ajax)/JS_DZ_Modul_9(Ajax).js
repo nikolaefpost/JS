@@ -13,9 +13,29 @@ window.onload = function () {
         let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
         json = await request.json();
         if (json.Error) throw new Error(json.Error);                   // отрицательные резульаты поиска на сервере
-      } catch (e) {                                                             // ошибки в процессе исполнения
-        json = e;
-        preload1.hidden = true;
+      } catch (err) {
+
+        if (err instanceof SyntaxError) {
+          throw new ReadError("Синтаксическая ошибка", err);
+        } else {
+          preload1.hidden = true;
+          throw err;
+        }
+        try {
+          checkResponse(json);
+        } catch (err) {
+
+          if (err instanceof ErrorData) {
+            json = err;
+            preload1.hidden = true;
+            throw new ReadError("Ошибка валидации", err);
+          } else {
+            console.log(err);
+            json = err;
+            preload1.hidden = true;
+            throw err;
+          }
+        }                                                            // ошибки в процессе исполнения
       }
       if (json.Response) return json.Search;
       else return json.message
@@ -84,7 +104,6 @@ window.onload = function () {
         imbd_id.innerText = this.arrFilms[i].imdbID;
         let button_details = clone.getElementsByClassName('button_details')[0];
         clone.addEventListener('click', ()=>this.showFilmDetails(imbd_id.innerText));
-
         out1.appendChild(clone);
         clone.scrollIntoView(top)
       }
@@ -130,6 +149,56 @@ window.onload = function () {
 
     }
   }
+
+  class ReadError extends Error {
+    constructor(message, err_) {
+      super(message);
+      this.err_ = err_;
+      this.name = 'ReadError';
+    }
+  }
+
+  class ErrorData extends Error {
+    constructor(message) {
+      super(message);
+      this.name = "ErrorData";
+    }
+  }
+
+  class PropertyDataError extends ErrorData {
+    constructor(property) {
+      super("Нет свойства: " + property);
+      this.name = "PropertyDataError";
+      this.property = property;
+    }
+  }
+
+function checkResponse(json) {
+  if (!json.Response) {
+    throw new PropertyRequiredError("Response");
+  }
+
+  if (!user.Search) {
+    throw new PropertyRequiredError("Search");
+  }
+}
+
+function readResponse(json) {
+  let response;
+
+  try {
+    user = JSON.parse(json);
+  } catch (err) {
+    if (err instanceof SyntaxError) {
+      throw new ReadError("Синтаксическая ошибка", err);
+    } else {
+      throw err;
+    }
+  }
+
+
+
+}
 
 
   let requestT = new MediaQuery1('http://www.omdbapi.com/','ab776285');
