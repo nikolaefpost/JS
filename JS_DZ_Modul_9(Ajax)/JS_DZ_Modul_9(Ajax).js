@@ -12,14 +12,13 @@ window.onload = function () {
       try {
         let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
         json = await request.json();
-
+        if (json.Error) throw new Error(json.Error);                   // отрицательные резульаты поиска на сервере
       } catch (e) {                                                             // ошибки в процессе исполнения
-        zag.innerHTML+=`<h3 class="error">Server response: ${e}</h3><br>`;
+        json = e;
         preload1.hidden = true;
       }
-      if (!json) return;
-      if (json.Error) return json.Error;                                        // отрицательные резульаты поиска на сервере
-      else return json.Search;
+      if (json.Response) return json.Search;
+      else return json.message
     }
 
     async searchDetails (imbd_id) {
@@ -28,14 +27,12 @@ window.onload = function () {
         let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
         json = await request.json();
       } catch (e) {
-        text.innerHTML+=`<h3 class="error">Server response: ${e}</h3><br>`;
-        err_ = e;
+        json = e;
       }
-      if(err_) return;
-      return json;
+      if (json.Title) return json;
+      else return json.message;
     }
   }
-
 
   class ShowFilm {
     constructor() {
@@ -46,20 +43,18 @@ window.onload = function () {
     }
 
     async  prepeaFilm (request) {
-
-      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) return;
       preload1.hidden = false;
       this.title = document.forms.media_content.title.value;
       this.type = document.forms.media_content.type.value;
+      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) return;
       this.temp = [this.title, this.type, this.page_search];
       let films = await requestT.search(this.title, this.type, this.page_search);
       if ((typeof films)=='string'){
         zag.innerHTML+=`<h3 class="error">Server response: ${films}</h3><br>`;
         preload1.hidden = true;
-
         return;
       }
-        if ((typeof films)=='undefined') return;
+      if ((typeof films)=='undefined') throw new Error('undefined error');
       this.arrFilms = this.arrFilms.concat(films);
       this.addFilm();
       more.hidden = false;
@@ -102,11 +97,15 @@ window.onload = function () {
       area_div.classList.add('hystmodal__opened');
       film_details.classList.remove('hidden');
       let film = await requestT.searchDetails(id);
-      if (!film) {
-        preload2.hidden = true;
+      if ((typeof film)=='string'){
         text.style.display = '';
+        text.innerHTML+=`<h3 class="error">Server response: ${film}</h3><br>`;
+        preload2.hidden = true;
+        modal_button.addEventListener('click', ()=>this.closeFilmDetails());
+        document.body.addEventListener('keydown', ()=>this.closeFilmDetails());
         return;
       }
+      if ((typeof film)=='undefined') throw new Error('undefined error');
       preload2.hidden = true;
       poster.hidden = false;
       text.style.display = '';
