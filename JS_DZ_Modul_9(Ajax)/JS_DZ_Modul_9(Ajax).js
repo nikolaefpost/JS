@@ -12,45 +12,61 @@ window.onload = function () {
       try {
         let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
         json = await request.json();
-        if (json.Error) throw new Error(json.Error);                   // отрицательные резульаты поиска на сервере
       } catch (err) {
-
+        json = err;                                                       // ошибки в процессе исполнения
         if (err instanceof SyntaxError) {
+          showError(err.message, zag);
           throw new ReadError("Синтаксическая ошибка", err);
         } else {
-          preload1.hidden = true;
+          showError(err.message, zag);
           throw err;
         }
-        try {
-          checkResponse(json);
-        } catch (err) {
-
-          if (err instanceof ErrorData) {
-            json = err;
-            preload1.hidden = true;
-            throw new ReadError("Ошибка валидации", err);
-          } else {
-            console.log(err);
-            json = err;
-            preload1.hidden = true;
-            throw err;
-          }
-        }                                                            // ошибки в процессе исполнения
+      } finally {
+        preload1.hidden = true;
       }
-      if (json.Response) return json.Search;
-      else return json.message
+      try {
+        checkResponse(json);
+      } catch (err) {
+        showError(err.message, zag);                                                         // отрицательные резульаты поиска на сервере
+        if (err instanceof ErrorData) {
+          throw new ReadError("Ошибка данных", err);
+        } else {
+          showError(json.message, zag)
+          throw err;
+        }
+      } finally {
+        preload1.hidden = true;
+      }
+      return json.Search;
     }
 
     async searchDetails (imbd_id) {
-      let json, err_;
+      let json;
       try {
         let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
         json = await request.json();
-      } catch (e) {
-        json = e;
+        checkResponse(json);                                           //checkResponse({Error:'sss'}); для проверки отлова ошибок
+      } catch (err) {
+        json = err;
+        if (err instanceof SyntaxError) {
+          showError(err, text);
+          throw new ReadError("Синтаксическая ошибка", err);
+        }
+        if (err instanceof ErrorData) {
+          showError(err, text);
+          throw new ReadError("Ошибка данных", err);
+        } else {
+          showError(err, text);
+          throw err;
+        }
+      } finally {
+        text.style.display = '';
+        preload2.hidden = true;
+        modal_button.addEventListener('click', ()=>object.closeFilmDetails());  //  хардкод))
+        document.body.addEventListener('keydown', ()=>object.closeFilmDetails());
+
       }
-      if (json.Title) return json;
-      else return json.message;
+      return json;
     }
   }
 
@@ -66,15 +82,9 @@ window.onload = function () {
       preload1.hidden = false;
       this.title = document.forms.media_content.title.value;
       this.type = document.forms.media_content.type.value;
-      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) return;
+      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) {preload1.hidden = true; return };
       this.temp = [this.title, this.type, this.page_search];
       let films = await requestT.search(this.title, this.type, this.page_search);
-      if ((typeof films)=='string'){
-        zag.innerHTML+=`<h3 class="error">Server response: ${films}</h3><br>`;
-        preload1.hidden = true;
-        return;
-      }
-      if ((typeof films)=='undefined') throw new Error('undefined error');
       this.arrFilms = this.arrFilms.concat(films);
       this.addFilm();
       more.hidden = false;
@@ -116,15 +126,6 @@ window.onload = function () {
       area_div.classList.add('hystmodal__opened');
       film_details.classList.remove('hidden');
       let film = await requestT.searchDetails(id);
-      if ((typeof film)=='string'){
-        text.style.display = '';
-        text.innerHTML+=`<h3 class="error">Server response: ${film}</h3><br>`;
-        preload2.hidden = true;
-        modal_button.addEventListener('click', ()=>this.closeFilmDetails());
-        document.body.addEventListener('keydown', ()=>this.closeFilmDetails());
-        return;
-      }
-      if ((typeof film)=='undefined') throw new Error('undefined error');
       preload2.hidden = true;
       poster.hidden = false;
       text.style.display = '';
@@ -146,8 +147,14 @@ window.onload = function () {
         area_div.classList.remove('hystmodal__opened');
         film_details.classList.add('hidden');
       }
-
     }
+
+
+  }
+
+  function showError(err_str, outObj){
+    outObj.innerHTML+=`<h3 class="error">Server response: ${err_str}</h3><br>`;
+    preload1.hidden = true;
   }
 
   class ReadError extends Error {
@@ -167,38 +174,18 @@ window.onload = function () {
 
   class PropertyDataError extends ErrorData {
     constructor(property) {
-      super("Нет свойства: " + property);
+      super("Данные отсутствуют: " + property);
       this.name = "PropertyDataError";
       this.property = property;
     }
   }
 
 function checkResponse(json) {
-  if (!json.Response) {
-    throw new PropertyRequiredError("Response");
-  }
-
-  if (!user.Search) {
-    throw new PropertyRequiredError("Search");
+  if (json.Error) {
+    throw new PropertyDataError(json.Error);
   }
 }
 
-function readResponse(json) {
-  let response;
-
-  try {
-    user = JSON.parse(json);
-  } catch (err) {
-    if (err instanceof SyntaxError) {
-      throw new ReadError("Синтаксическая ошибка", err);
-    } else {
-      throw err;
-    }
-  }
-
-
-
-}
 
 
   let requestT = new MediaQuery1('http://www.omdbapi.com/','ab776285');
