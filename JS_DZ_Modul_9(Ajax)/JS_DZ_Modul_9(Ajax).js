@@ -9,64 +9,73 @@ window.onload = function () {
 
     async search (title, type, page_search) {
       let json;
+
       try {
-        let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
-        json = await request.json();
-      } catch (err) {
-        json = err;                                                       // ошибки в процессе исполнения
-        if (err instanceof SyntaxError) {
-          showError(err.message, zag);
-          throw new ReadError("Синтаксическая ошибка", err);
-        } else {
-          showError(err.message, zag);
-          throw err;
+        try {
+          let request = await fetch(this.url + '?s=' + title + '&plot=full&page=' + page_search + '&type=' + type + '&apikey=' + this.apikey);
+          json = await request.json();
+        } catch (err) {
+          json = err;                                                       // ошибки в процессе исполнения
+          if (err instanceof SyntaxError) {
+            showError(err.message, zag);
+            throw new ReadError("Синтаксическая ошибка", err);
+          } else {
+            showError(err.message, zag);
+            throw err;
+          }
+        } finally {
+          preload1.hidden = true;
         }
-      } finally {
-        preload1.hidden = true;
-      }
-      try {
-        checkResponse(json);
-      } catch (err) {
-        showError(err.message, zag);                                                         // отрицательные резульаты поиска на сервере
-        if (err instanceof ErrorData) {
-          throw new ReadError("Ошибка данных", err);
-        } else {
-          showError(json.message, zag)
-          throw err;
+
+        try {
+          checkResponse(json);
+        } catch (err) {
+          showError(err.message, zag);                                                         // отрицательные резульаты поиска на сервере
+          if (err instanceof ErrorData) {
+            throw new ReadError("Ошибка данных", err);
+          } else {
+            showError(json.message, zag)
+            throw err;
+          }
+        } finally {
+          preload1.hidden = true;
         }
+      } catch (err) {
+        json = err.message;
       } finally {
-        preload1.hidden = true;
+        if (typeof json == 'string') return json;
+        else return json.Search;
       }
-      return json.Search;
+
     }
 
     async searchDetails (imbd_id) {
       let json;
-      try {
-        let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
-        json = await request.json();
-        checkResponse(json);                                           //checkResponse({Error:'sss'}); для проверки отлова ошибок
-      } catch (err) {
-        json = err;
-        if (err instanceof SyntaxError) {
-          showError(err, text);
-          throw new ReadError("Синтаксическая ошибка", err);
-        }
-        if (err instanceof ErrorData) {
-          showError(err, text);
-          throw new ReadError("Ошибка данных", err);
-        } else {
-          showError(err, text);
-          throw err;
-        }
-      } finally {
-        text.style.display = '';
-        preload2.hidden = true;
-        modal_button.addEventListener('click', ()=>object.closeFilmDetails());  //  хардкод))
-        document.body.addEventListener('keydown', ()=>object.closeFilmDetails());
 
+      try {
+        try {
+          let request = await fetch(`http:www.omdbapi.com/?i=${imbd_id}&plot=full&apikey=${this.apikey}`)
+          json = await request.json();
+          checkResponse(json);                                           //checkResponse({Error:'sss'}); для проверки отлова ошибок
+        } catch (err) {
+          json = err;
+          if (err instanceof SyntaxError) {
+            showError(err, text);
+            throw new ReadError("Синтаксическая ошибка", err);
+          }
+          if (err instanceof ErrorData) {
+            showError(err, text);
+            throw new ReadError("Ошибка данных", err);
+          } else {
+            showError(err, text);
+            throw err;
+          }
+        }
+      } catch (err) {
+        json = err.message;
+      } finally {
+        return json;
       }
-      return json;
     }
   }
 
@@ -82,9 +91,11 @@ window.onload = function () {
       preload1.hidden = false;
       this.title = document.forms.media_content.title.value;
       this.type = document.forms.media_content.type.value;
-      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) {preload1.hidden = true; return };
+      if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) { preload1.hidden = true; return };
+      if (this.temp[0] != this.title) { this.arrFilms =[]; out1.innerHTML ='';}
       this.temp = [this.title, this.type, this.page_search];
       let films = await requestT.search(this.title, this.type, this.page_search);
+      if (typeof films == 'string') return;
       this.arrFilms = this.arrFilms.concat(films);
       this.addFilm();
       more.hidden = false;
@@ -92,16 +103,13 @@ window.onload = function () {
     }
 
     addFilm(){
-      if (out1.children) out1.innerHTML ='';
       if (this.arrFilms.length/5 < this.page) {
         this.page_search++;
-        this.prepeaFilm (requestT)
+        this.prepeaFilm(requestT);
         return;
       }
-      if (zag.children) zag.innerHTML ='';
-      zag.innerHTML+='<h3 style="text-align:center;">Films:</h3>';
-
-      for (let i = 0; i < this.page*5; i++) {
+      if (zag.children.length == 0) zag.innerHTML+='<h3 style="text-align:center;">Films:</h3>';
+      for (let i = (this.page-1)*5; i < this.page*5; i++) {
         let clone = document.querySelector('.example').cloneNode(true);
         clone.classList.remove('hidden');
         let img = clone.getElementsByClassName('poster')[0];
@@ -126,6 +134,7 @@ window.onload = function () {
       area_div.classList.add('hystmodal__opened');
       film_details.classList.remove('hidden');
       let film = await requestT.searchDetails(id);
+      if (typeof film == 'string') return;
       preload2.hidden = true;
       poster.hidden = false;
       text.style.display = '';
@@ -155,6 +164,10 @@ window.onload = function () {
   function showError(err_str, outObj){
     outObj.innerHTML+=`<h3 class="error">Server response: ${err_str}</h3><br>`;
     preload1.hidden = true;
+    text.style.display = '';
+    preload2.hidden = true;
+    modal_button.addEventListener('click', ()=>object.closeFilmDetails());
+    document.body.addEventListener('keydown', ()=>object.closeFilmDetails());
   }
 
   class ReadError extends Error {
