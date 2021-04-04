@@ -92,7 +92,7 @@ window.onload = function () {
       this.title = document.forms.media_content.title.value;
       this.type = document.forms.media_content.type.value;
       if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search) { preload1.hidden = true; return };
-      if (this.temp[0] != this.title) { this.arrFilms =[]; out1.innerHTML ='';}
+      if (this.temp[0] != this.title || this.temp[1] != this.type) { this.arrFilms =[]; out1.innerHTML ='';}
       this.temp = [this.title, this.type, this.page_search];
       let films = await requestT.search(this.title, this.type, this.page_search);
       if (typeof films == 'string') return;
@@ -157,8 +157,6 @@ window.onload = function () {
         film_details.classList.add('hidden');
       }
     }
-
-
   }
 
   function showError(err_str, outObj){
