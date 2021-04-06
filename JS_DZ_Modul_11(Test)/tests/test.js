@@ -39,18 +39,18 @@ describe("MyDate", function() {
     assert.equal(new MyDate(21, 1, 1990).showDate(), ' двадцатое первое января');
   });
   it("check: future date or past", function() {
-    assert.equal(new MyDate(20, 5, 2056).isFuture(), 'true');
-    assert.equal(new MyDate(20, 6, 1990).isFuture(), 'false')
+    assert.equal(new MyDate(20, 5, 2056).isFuture(), true);
+    assert.equal(new MyDate(20, 6, 1990).isFuture(), false)
   });
   it("check: leap year or not", function() {
-    assert.equal(new MyDate(20, 6, 1990).isLeapYear(), 'false');
-    assert.equal(new MyDate(20, 6, 2020).isLeapYear(), 'true');
+    assert.equal(new MyDate(20, 6, 1990).isLeapYear(), false);
+    assert.equal(new MyDate(20, 6, 2020).isLeapYear(), true);
   });
   it("date of next day", function() {
     assert.equal(new MyDate(20, 6, 2020).nextDay(), '21/6/2020');
     assert.equal(new MyDate(31, 1, 2020).nextDay(), '1/2/2020');
     assert.equal(new MyDate(28, 2, 2020).nextDay(), '29/2/2020');
-    assert.equal(new MyDate(28, 6, 2019).nextDay(), '1/3/2020');
+    assert.equal(new MyDate(28, 6, 2019).nextDay(), '29/6/2019');
     assert.equal(new MyDate(31, 12, 2020).nextDay(), '1/1/2021');
   });
 

@@ -13,17 +13,17 @@
         return this.slice(0,index)+sign+this.slice(index+1, this.length);
       }
 
-      trimSign(){
-        let str = this[0];
-        let temp = this[0];
-        for (var i = 1; i < this.length; i++) {
-          if (this[i]!=temp) {
-            temp = this[i];
-            str+=this[i];
-          }
-        }
-        return str
-      }
+      // trimSign(){
+      //   let str = this[0];
+      //   let temp = this[0];
+      //   for (var i = 1; i < this.length; i++) {
+      //     if (this[i]!=temp) {
+      //       temp = this[i];
+      //       str+=this[i];
+      //     }
+      //   }
+      //   return str
+      // }
 
       toggle(){
         let str = '';
@@ -48,49 +48,52 @@
             k++
         }
       }
-      // trimSign(){
-      //   let arr = this.split('');
-      //   arr = arr.filter((i)=>{
-      //     let temp;
-      //     if (i!=temp) {
-      //     console.log(i);
-      //      temp = i;
-      //      return i;}
-      //   }).join('')
-      //   return arr
-      // }
+      trimSign(){
+        let temp;
+        let arr = this.split('').filter((i)=>{
+
+          if (i!=temp) {
+           temp = i;
+           return i;}
+        }).join('')
+        return arr
+      }
     }
 
     class MyDate extends Date{
-      constructor(){
-        super();
+      constructor(day, month, year){
+        super(year, month-1, day);
       }
       showDate(){
-        let s = new Date(20, 1, 1990)
-        console.log(s);
-        this.str=[];
-        this.str.push(this.getDate().toString(), this.getMonth());
-        if (this.str[0].length==1) this.str[0] ='0'+ this.str[0];
+        let user_date = [this.getDate().toString(), this.getMonth()];
+        if (user_date[0].length==1) user_date[0] ='0'+ s[0];
         let units1 = [
           ['',' первое',' второе',' третье',' четвертое',' пятое',' шестое',' семдьмое',' восьмое',' девятое'],
           [' десятое',' одиннадцатое',' двенадцатое',' тринадцатое',' четырнадцатое',' пятнадцатое',' шестнадцатое',' семнадцатое',' восемнадцатое',' девятнадцатое'],
-          ['','',' двадцать(oe)',' тридцать(oe)']
+          ['','',' двадцатое',' тридцатoe']
         ];
         let units2 = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября', 'ноября', 'декабря'];
-         (9 < (this.str[0] % 100) && (this.str[0] % 100) < 20) ? this.rezalt = units1[1][this.str[0][1]] : this.rezalt = units1[2][this.str[0][0]] + units1[0][this.str[0][1]];
-         this.rezalt+=' '+units2[this.str[1]];
+         (9 < (user_date[0] % 100) && (user_date[0] % 100) < 20) ? this.rezalt = units1[1][user_date[0][1]] : this.rezalt = units1[2][user_date[0][0]] + units1[0][user_date[0][1]];
+         this.rezalt+=' '+units2[user_date[1]];
         return this.rezalt;
       }
 
       isFuture(){
-
+        return (this.getTime() > new Date().getTime());
       }
 
       isLeapYear(){
-
+        this.userYear = this.getFullYear();
+        return (( this.userYear % 4 == 0  && this.userYear % 100 == 0 && this.userYear % 400 == 0) || (this.userYear % 4 == 0  && this.userYear % 100 != 0));
       }
 
       nextDay(){
-
+        this.setDate(this.getDate()+1);
+        this.rezalt = this.toLocaleDateString().split('.').map((i)=>{
+          i=i.split('');
+          if (i[0]==0) i.shift();
+          return i.join('');
+        }).join('/');
+        return this.rezalt
       }
     }
