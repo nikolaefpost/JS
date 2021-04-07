@@ -7,6 +7,7 @@
     }
 
     insert(index, sign){
+      if(typeof index != 'number' ) return this;
       if (index<0) return sign+this;
       if (index>this.length-1) return this+sign;
       return this.slice(0,index)+sign+this.slice(index+1, this.length);
@@ -36,16 +37,15 @@
       for (var i = 0; i < this.length; i++) {
         if (this.charCodeAt(i)>64&&this.charCodeAt(i)<91 || this.charCodeAt(i)>1039 &&this.charCodeAt(i)<1104 || this.charCodeAt(i)==1025){
           str+=this[i].toLowerCase();
-        } else {
-          if (this.charCodeAt(i)>96 && this.charCodeAt(i)<123 || this.charCodeAt(i)>1071 && this.charCodeAt(i)<1104 || this.charCodeAt(i)==1105) {
+        } else if (this.charCodeAt(i)>96 && this.charCodeAt(i)<123 || this.charCodeAt(i)>1071 && this.charCodeAt(i)<1104 || this.charCodeAt(i)==1105) {
             str+=this[i].toUpperCase();
-          }
-        }
+          } else str+=this[i];
       }
       return str;
     }
 
     counter(sign){
+      if (sign == '' || sign == null || sign == undefined) return 0;
       let i=-1;
       let k =0;
       while (true) {
@@ -59,31 +59,38 @@
   class MyDate extends Date{
     constructor(day, month, year){
       super(year, month-1, day);
+      this.day = day;
+      this.month = month;
+      this.user_date = [this.getDate().toString(), this.getMonth()];
     }
     showDate(){
-      let user_date = [this.getDate().toString(), this.getMonth()];
-      if (user_date[0].length==1) user_date[0] ='0'+ s[0];
+
+      if(+this.user_date[0] != this.day || this.user_date[1]+1 != this.month) return 'You entered a date that does not exist!'
+      if (this.user_date[0].length==1) this.user_date[0] ='0'+ this.user_date[0];
       let units1 = [
         ['',' первое',' второе',' третье',' четвертое',' пятое',' шестое',' семдьмое',' восьмое',' девятое'],
         [' десятое',' одиннадцатое',' двенадцатое',' тринадцатое',' четырнадцатое',' пятнадцатое',' шестнадцатое',' семнадцатое',' восемнадцатое',' девятнадцатое'],
-        ['','',' двадцатое',' тридцатoe']
+        ['','',' двадцать(ое)',' тридцатoe']
       ];
       let units2 = ['января','февраля','марта','апреля','мая','июня','июля','августа','сентября','октября', 'ноября', 'декабря'];
-      (9 < (user_date[0] % 100) && (user_date[0] % 100) < 20) ? this.rezalt = units1[1][user_date[0][1]] : this.rezalt = units1[2][user_date[0][0]] + units1[0][user_date[0][1]];
-      this.rezalt+=' '+units2[user_date[1]];
+      (9 < (this.user_date[0] % 100) && (this.user_date[0] % 100) < 20) ? this.rezalt = units1[1][this.user_date[0][1]] : this.rezalt = units1[2][this.user_date[0][0]] + units1[0][this.user_date[0][1]];
+      this.rezalt+=' '+units2[this.user_date[1]];
       return this.rezalt;
     }
 
     isFuture(){
+      if(+this.user_date[0] != this.day || this.user_date[1]+1 != this.month) return 'You entered a date that does not exist!'
       return (this.getTime() > new Date().getTime());
     }
 
     isLeapYear(){
+      if(+this.user_date[0] != this.day || this.user_date[1]+1 != this.month) return 'You entered a date that does not exist!'
       this.userYear = this.getFullYear();
       return (( this.userYear % 4 == 0  && this.userYear % 100 == 0 && this.userYear % 400 == 0) || (this.userYear % 4 == 0  && this.userYear % 100 != 0));
     }
 
     nextDay(){
+      if(+this.user_date[0] != this.day || this.user_date[1]+1 != this.month) return 'You entered a date that does not exist!'
       this.setDate(this.getDate()+1);
       this.rezalt = this.toLocaleDateString().split('.').map((i)=>{
         i=i.split('');
@@ -92,4 +99,9 @@
       }).join('/');
       return this.rezalt
     }
+  }
+
+  function sum(a, b) {
+    if (a== undefined || b== undefined || a== null || b== null || isNaN(a) || isNaN(b)) throw new SyntaxError();
+    return +a + +b;
   }

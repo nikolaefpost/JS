@@ -11,27 +11,19 @@
    <!-- настраиваем Mocha: предстоит BDD-тестирование -->
    <script>
      mocha.setup('bdd');
+     mocha.checkLeaks();
    </script>
 
    <!-- подключаем chai -->
    <script src="https://cdnjs.cloudflare.com/ajax/libs/chai/2.0.0/chai.js"></script>
    <!-- в chai есть много всего, выносим assert в глобальную область -->
    <script>
-     var assert = chai.assert;
+     let assert = chai.assert;
    </script>
  </head>
 
  <body>
-   <!-- <script>
-     class MyString extends String {
-       remove(index){
-         if (index>=0 && index<this.length-1) {
-           return this.slice(0,index)+this.slice(index+1, this.length);
-         } else   return this;
 
-       }
-     }
-  </script> -->
    <!-- в этом скрипте находятся спеки -->
    <script src="test.js"></script>
    <!-- в элементе с id="mocha" будут результаты тестов -->
