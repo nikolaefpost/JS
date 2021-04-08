@@ -77,49 +77,60 @@
   }
 
   describe ('MyString', ()=>{
-    describe('Positive test', ()=>{
-      createTestRemove('qwerty', 0, 'werty');
-      createTestRemove('qwerty', 2, 'qwrty');
-    });
-    describe('Negative test', ()=>{
-      createTestRemove('qwerty', undefined, 'qwerty');
-      createTestRemove('qwerty', 'string', 'qwerty');
+
+    describe ('Tested method - .remove()', ()=>{
+      describe('positive test', ()=>{
+        createTestRemove('qwerty', 0, 'werty');
+        createTestRemove('qwerty', 2, 'qwrty');
+      });
+      describe('negative test', ()=>{
+        createTestRemove('qwerty', undefined, 'qwerty');
+        createTestRemove('qwerty', 'string', 'qwerty');
+      });
     });
 
-    describe('Positive test', ()=>{
-      createTestInsert('qwerty', 0, 'X', 'Xwerty');
-      createTestInsert('qwerty', 2, 'X', 'qwXrty');
-    });
-    describe('Negative test', ()=>{
-      createTestInsert('qwerty', {x:5}, 'X', 'qwerty');
-      createTestInsert('qwerty', undefined, 'X', 'qwerty');
-    });
-
-    describe('Positive test', ()=>{
-      createTestTrimSign('qwerty', 'qwerty');
-      createTestTrimSign('qweeeerty', 'qwerty');
-    });
-    describe('Negative test', ()=>{
-      createTestTrimSign('q.....weeertttty', 'q.werty');
-      createTestTrimSign('qwe  .-.  -.rty', 'qwe .-. -.rty');
+    describe ('Tested method - .insert()', ()=>{
+      describe('positive test', ()=>{
+        createTestInsert('qwerty', 0, 'X', 'Xwerty');
+        createTestInsert('qwerty', 2, 'X', 'qwXrty');
+      });
+      describe('negative test', ()=>{
+        createTestInsert('qwerty', {x:5}, 'X', 'qwerty');
+        createTestInsert('qwerty', undefined, 'X', 'qwerty');
+      });
     });
 
-    describe('Positive test', ()=>{
-      createTestToggle('qwerty', 'QWERTY');
-      createTestToggle('qweRTY', 'QWErty');
-    });
-    describe('Negative test', ()=>{
-      createTestToggle('Q_WE.RTY', 'q_we.rty');
-      createTestToggle('5', '5');
+    describe ('Tested method - .trimSign()', ()=>{
+      describe('positive test', ()=>{
+        createTestTrimSign('qwerty', 'qwerty');
+        createTestTrimSign('qweeeerty', 'qwerty');
+      });
+      describe('negative test', ()=>{
+        createTestTrimSign('q.....weeertttty', 'q.werty');
+        createTestTrimSign('qwe  .-.  -.rty', 'qwe .-. -.rty');
+      });
     });
 
-    describe('Positive test', ()=>{
-      createTestCounter('qwerty', 'e', 1);
-      createTestCounter('avokado', 'a', 2);
+    describe ('Tested method - .toggle()', ()=>{
+      describe('positive test', ()=>{
+        createTestToggle('qwerty', 'QWERTY');
+        createTestToggle('qweRTY', 'QWErty');
+      });
+      describe('negative test', ()=>{
+        createTestToggle('Q_WE.RTY', 'q_we.rty');
+        createTestToggle('5', '5');
+      });
     });
-    describe('Negative test', ()=>{
-      createTestCounter('qwerty', {x:'q'}, 0);
-      createTestCounter('qwerty', undefined, 0);
+
+    describe ('Tested method - .counter()', ()=>{
+      describe('positive test', ()=>{
+        createTestCounter('qwerty', 'e', 1);
+        createTestCounter('avokado', 'a', 2);
+      });
+      describe('negative test', ()=>{
+        createTestCounter('qwerty', {x:'q'}, 0);
+        createTestCounter('qwerty', undefined, 0);
+      });
     });
   })
 
@@ -142,44 +153,44 @@
 
   describe('MyDate', ()=>{
     describe ('Tested method - .showDate()', ()=>{
-      describe('Positive test', ()=>{
+      describe('positive test', ()=>{
         createTestShowDate(20, 1, 2020, ' двадцать(ое) января');
         createTestShowDate(21, 1, 1990, ' двадцать(ое) первое января');
       });
-      describe('Negative test', ()=>{
+      describe('negative test', ()=>{
         createTestShowDate(30, 2, 2020, 'You entered a date that does not exist!');
         createTestShowDate(29, 2, 2020, ' двадцать(ое) девятое февраля');
       });
     });
 
     describe ('Tested method - .isFuture()', ()=>{
-      describe('Positive test', ()=>{
+      describe('positive test', ()=>{
         createTestIsFuture(20, 5, 2056, true);
         createTestIsFuture(20, 6, 1990, false);
       });
-      describe('Negative test', ()=>{
+      describe('negative test', ()=>{
         createTestIsFuture(7, 4, 2021, false);                                  // если подставить сегодняшнюю дату
         createTestIsFuture(49, 4, 2021, 'You entered a date that does not exist!');
       });
     });
 
     describe ('Tested method - .isLeapYear()', ()=>{
-      describe('Positive test', ()=>{
+      describe('positive test', ()=>{
         createTestIsLeapYear(20, 5, 2056, true);
         createTestIsLeapYear(20, 6, 1990, false);
       });
-      describe('Negative test', ()=>{
+      describe('negative test', ()=>{
         createTestIsLeapYear(7, 4, 0, false);
         createTestIsLeapYear(49, 4, 2021, 'You entered a date that does not exist!');
       });
     });
 
     describe ('Tested method - .nextDay()', ()=>{
-      describe('Positive test', ()=>{
+      describe('positive test', ()=>{
         createTestNextDay(31, 1, 2020, '1/2/2020');
         createTestNextDay(28, 2, 2020, '29/2/2020');
       });
-      describe('Negative test', ()=>{
+      describe('negative test', ()=>{
         createTestNextDay(28, 2, 2019, '1/3/2019');
         createTestNextDay(49, 4, 2021, 'You entered a date that does not exist!');
       });
