@@ -24,7 +24,9 @@ window.onload = function () {
       console.log(temp);
       temp = str;
       request.open("GET", str);
-      request.onload = function(){
+      request.onload = function(e){
+        console.log(e.currentTarget.responseText);
+            console.log(request);
         if(request.status === 200){
           movie = JSON.parse(request.response).Search;
           console.log(movie);
