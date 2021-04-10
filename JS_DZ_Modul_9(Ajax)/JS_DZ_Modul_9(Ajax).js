@@ -69,7 +69,6 @@ window.onload = function () {
 
     class InteractionDOM {
       constructor(dom_obj) {
-        console.log(dom_obj);
         this.button_search = dom_obj.button_search;
         this.form_title = dom_obj.form_title;
         this.form_type = dom_obj.form_type;
@@ -102,7 +101,6 @@ window.onload = function () {
     }
 
     InteractionDOM.prototype.render = function  render(arrFilms, page){
-      console.log(page);
       if (this.zag.children.length == 0) zag.innerHTML+='<h3 style="text-align:center;">Films:</h3>';
       for (let i = (page-1)*5; i < page*5; i++) {
         let clone = document.querySelector(this.clone_class).cloneNode(true);
@@ -123,8 +121,7 @@ window.onload = function () {
     }
 
 
-
-    InteractionDOM.prototype.renderDetails = function  renderDetails(film) {                                               // ghjdthrf
+    InteractionDOM.prototype.renderDetails = function  renderDetails(film) {
       this.preload2.hidden = false;
       this.poster.hidden = true;
       this.text.style.display = 'none';
@@ -188,7 +185,4 @@ window.onload = function () {
   let mediaQuery = new MediaQuery('http://www.omdbapi.com/','ab776285');
   let interactionDOM = new InteractionDOM(dom_obj);
   let controller = new Controler(mediaQuery, interactionDOM);
-  // button.addEventListener('click', ()=>controller.search());
-
-
 }
