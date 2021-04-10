@@ -7,6 +7,7 @@ window.onload = function () {
       var oReq = new this.XMLHttpRequest();
 
       oReq.onload = function onLoad(e) {
+        console.log(e);
 
         var ajaxResponse = JSON.parse(e.currentTarget.responseText).Search;
 
@@ -29,7 +30,7 @@ window.onload = function () {
     };
 
     PenguinView.prototype.render = function render(viewModel) {
-      console.log(this.element);
+      console.log(this);
       this.element.innerHTML = '<h3>' + viewModel.name + '</h3>' +
         '<img class="penguin-image" src="' + viewModel.imageUrl +
           '" alt="' + viewModel.name + '" />' +
@@ -42,6 +43,7 @@ window.onload = function () {
 
       this.previousIndex = viewModel.previousIndex;
       this.nextIndex = viewModel.nextIndex;
+      console.log(this);
 
       var previousPenguin = this.element.querySelector('#previousPenguin');
       previousPenguin.addEventListener('click', this.onClickGetPenguin);
@@ -62,9 +64,8 @@ window.onload = function () {
 
     PenguinController.prototype.onClickGetPenguin = function onClickGetPenguin(e) {
       var target = e.currentTarget;
-      console.log(target.dataset.penguinIndex);
       var index = parseInt(target.dataset.penguinIndex, 10);
-      console.log(this);
+      console.log(this.penguinModel);
       this.penguinModel.getPenguin(index, this.showPenguin.bind(this));
     };
 
@@ -91,7 +92,7 @@ window.onload = function () {
     };
 
     var penguinModel = new PenguinModel(XMLHttpRequest);
-    console.dir(penguinModel);
+    console.dir(XMLHttpRequest);
 
     var targetElement = document.getElementById('listOfPenguins');
     var penguinView = new PenguinView(targetElement);
