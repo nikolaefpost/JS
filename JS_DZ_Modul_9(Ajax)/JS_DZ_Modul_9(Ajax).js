@@ -44,7 +44,7 @@ window.onload = function () {
     this.mediaQuery.dataRequestDetails(imbd_id, this.prepeaFilmDetails.bind(this))
   }
 
-  Controler.prototype.prepeaFilm = async function  prepeaFilm(request) {
+  Controler.prototype.prepeaFilm = function  prepeaFilm(request) {
       this.interactionDOM.preload1.hidden = false;
       if (this.temp[0] == this.title && this.temp[1] == this.type && this.temp[2] == this.page_search && this.temp[3] == this.page) { this.interactionDOM.preload1.hidden = true; return };
       if (this.temp[0] != this.title || this.temp[1] != this.type) { this.arrFilms =[]; this.interactionDOM.out1.innerHTML ='';}
@@ -62,7 +62,7 @@ window.onload = function () {
       this.interactionDOM.preload1.hidden = true;
     }
 
-    Controler.prototype.prepeaFilmDetails = async function  prepeaFilmDetails(film){
+    Controler.prototype.prepeaFilmDetails = function  prepeaFilmDetails(film){
       this.interactionDOM.renderDetails(film);
     }
 
