@@ -1,0 +1,42 @@
+<html >
+	<head>
+		<meta charset="utf-8">
+		<title>JS_DZ_Modul_13(SOLID)</title>
+		<script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
+		<script src="JS_DZ_Modul_13(SOLID).js"></script>
+		<link rel="stylesheet" media="screen" href="style.css">
+		<style media="screen"></style>
+    <style>
+
+ </style>
+	</head>
+	<body>
+<div class="main">
+  <form class="buy_form" action="index.html" method="get" name="form" >
+    <p><span>Name:</span><input type="text" name="_name" value="Василий" class="" data-tooltip="введите корректно Имя!"  required></p>
+    <p><span>Year of birth:</span><input type="text" name="year" value="2000" class="" data-tooltip="введите корректно возраст!"  required></p>
+    <p><span>Eye color:</span>
+      <select name="eye" id="type">
+        <option value="brown">brown</option>
+        <option value="green">green</option>
+        <option value="gray">gray</option>
+        <option value="blue">blue</option>
+      </select>
+    </p>
+    <p><span>Hair color:</span>
+      <select name="hair" id="type">
+        <option value="black">black</option>
+        <option value="brown">brown</option>
+        <option value="white">white</option>
+        <option value="red">red</option>
+        <option value="other">other</option>
+      </select>
+    </p>
+    <p><span>Height:</span><input type="text" name="height"  class="" value="1.85" data-tooltip="введите корректно рост!"  required ></p>
+    <p><span>Weight:</span><input type="text" name="weight"   class="" value="350" data-tooltip="пароль должен содержать 4 символа (буква или цифра)"  required></p>
+    <button type="submit" name="button_submit" id="button_submit" class="button_submit"  onsubmit="">Registred</button>
+  </form>
+  <div id="out"></div>
+</div>
+	</body>
+</html>

@@ -1,0 +1,51 @@
+
+.main{
+  background:#b8d5e3;
+  padding:2% 1%;
+  width:50%;
+  margin-left:auto;
+  margin-right:auto;
+  margin-top:5vh;
+}
+
+.buy_form{
+  flex: 0 0 32%;
+  box-shadow: 10px 5px 5px grey;
+  margin: 1%;
+  padding: 20px 10px;
+  border-left: 1px solid grey;
+  border-top: 1px solid grey;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content:space-between;
+}
+
+
+
+.buy_form p{
+  display: flex;
+  justify-content:space-between;
+
+}
+
+.buy_form p input, .buy_form p select{
+  width: 70%;
+  box-shadow: 5px 3px 3px grey;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 5px;
+}
+
+.buy_form p input::placeholder{
+  color: red;
+}
+
+#out{
+  margin-top: 20px;
+  color: red;
+  box-shadow: 10px 5px 5px grey;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
