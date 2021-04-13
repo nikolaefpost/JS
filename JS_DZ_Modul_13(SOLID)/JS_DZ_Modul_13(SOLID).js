@@ -1,5 +1,16 @@
 window.onload = function () {
 
+
+  function outInfo(formSelector, out_block) {
+    let str='';
+    console.log(formSelector.elements);
+    for (var i = 0; i < formSelector.elements.length; i++) {
+      if (formSelector.elements[i].value) str+=`${formSelector.elements[i].name} = ${formSelector.elements[i].value} <br>`;
+    }
+    out_block.innerHTML=str;
+  }
+
+
   class Rule {
     constructor(input_name) {
       this._name = input_name;
@@ -13,7 +24,7 @@ window.onload = function () {
     isValid(){
       if (/^[а-яa-zА-ЯA-Z]{5,15}$/.test(this.element.value)) return true;
       else {
-        this.errorText = (this.element.value<5) ? 'name cannot be less than 5 letters!' :'the name cannot be more than 15 letters!';
+        this.errorText = (this.element.value.length<5) ? 'name cannot be less than 5 letters!' :'the name cannot be more than 15 letters!';
         return false;
       }
     }
@@ -83,38 +94,51 @@ window.onload = function () {
     constructor(logger, arrRules, form) {
       this.logger = logger;
       this.arrRules = arrRules;
-      this.form = document.forms.form;
+      this.form = form;
     }
-    validate(){
+    validate(out_block){
 
-      let pass1 = new this.arrRules[0]('_name')
-      console.log(this.form.elements[0]);
+
       for (var i = 0; i < this.form.elements.length; i++) {
         let name_input = this.form.elements[i].name
         if (name_input=='_name'){
           let rule = new this.arrRules[0]('_name');
-          if (!rule.isValid()) { new logger(rule, out).log(); return;}
+          if (!rule.isValid()) { new this.logger(rule, out_block).log(); return false;}
         }
         if (name_input=='year'){
           let rule = new this.arrRules[1]('year');
-          if (!rule.isValid()) { new this.logger(rule, out).log(); return;}
+          if (!rule.isValid()) { new this.logger(rule, out_block).log(); return false;}
         }
         if (name_input=='height'){
           let rule = new this.arrRules[2]('height');
-          if (!rule.isValid()) { new this.logger(rule, out).log(); return;}
+          if (!rule.isValid()) { new this.logger(rule, out_block).log(); return false;}
         }
         if (name_input=='weight'){
           let rule = new this.arrRules[3]('weight');
-          if (!rule.isValid()) { new this.logger(rule, out).log(); return;}
+          if (!rule.isValid()) { new this.logger(rule, out_block).log(); return false;}
         }
       }
+      return true;
     }
   }
 
-let q = new Validator (DomLogger, [RuleName, RuleYear, RuleHeight, RuleWeight], form)
-q.validate();
-  // let a = new RuleWeight("weight",);
-  //
-  // let b = new DomLogger(a, out);
-  // b.log();
+  class Processor  {
+    constructor(validator, success) {
+      this.validator = validator;
+      this.success = success;
+    }
+
+    attach(formSelector, out_block){
+      let validator = this.validator;
+      console.log(validator);
+      formSelector.onsubmit = function(){
+        event.preventDefault();
+        if (validator.validate(out_block)) outInfo(formSelector, out_block);
+       };
+    }
+  }
+
+  let domValidator = new Validator (DomLogger, [RuleName, RuleYear, RuleHeight, RuleWeight], form)
+  let processor = new Processor(domValidator, 0).attach(form, out);
+
 }
