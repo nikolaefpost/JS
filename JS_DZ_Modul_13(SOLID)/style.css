@@ -1,15 +1,18 @@
 
+body{
+  background: black;
+}
+
 .main{
   background:#b8d5e3;
   padding:2% 1%;
-  width:50%;
+  width:40%;
   margin-left:auto;
   margin-right:auto;
   margin-top:5vh;
 }
 
 .buy_form{
-  flex: 0 0 32%;
   box-shadow: 10px 5px 5px grey;
   margin: 1%;
   padding: 20px 10px;
@@ -25,20 +28,30 @@
 
 .buy_form p{
   display: flex;
-  justify-content:space-between;
+  justify-content: space-around;
 
 }
 
 .buy_form p input, .buy_form p select{
-  width: 70%;
+  width: 50%;
   box-shadow: 5px 3px 3px grey;
   border-radius: 5px;
   border: none;
   padding: 5px 5px;
 }
 
-.buy_form p input::placeholder{
-  color: red;
+.buy_form button{
+  width: 30%;
+  box-shadow: 5px 3px 3px grey;
+  border-radius: 5px;
+  border: none;
+  padding: 10px 5px;
+  display: inline-block;
+  margin: 30px auto ;
+}
+
+.buy_form p span{
+  width: 100px;
 }
 
 #out{
