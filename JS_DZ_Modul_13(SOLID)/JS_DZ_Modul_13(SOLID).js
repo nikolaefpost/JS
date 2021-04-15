@@ -142,7 +142,7 @@ window.onload = function () {
     }
   }
 
-  let domValidator = new Validator (DomLogger, [RuleName, RuleYear, RuleHeight, RuleWeight], form)
+  let domValidator = new Validator (ConsoleLogger, [RuleName, RuleYear, RuleHeight, RuleWeight], form)
   let processor = new Processor(domValidator, 0).attach(form, out);
 
 }
