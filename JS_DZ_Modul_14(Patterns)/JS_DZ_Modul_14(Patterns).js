@@ -14,7 +14,7 @@
         this.element.innerHTML += text;
       }
       addChild(child) {
-        this.element.append(child);
+        this.element.append(child.result.element);
       }
       print() {
         // this.str = `<`;
@@ -46,8 +46,9 @@
       }
     }
 
-    let q1 = new DomBuilder().create('span').withClass('red');
-    let q = new DomBuilder().create('p').withClass('main').withId('idName').withChild(q1.result.element).withContent('text');
+    let q1 = new DomBuilder().create('span').withClass('red').withContent('1-span');
+    let q2 = new DomBuilder().create('span').withClass('red').withContent('2-span');
+    let q = new DomBuilder().create('p').withClass('main').withId('idName').withChild(q1).withChild(q2);
 
     console.log(q.result.print());
     out.append(q.result.element)
