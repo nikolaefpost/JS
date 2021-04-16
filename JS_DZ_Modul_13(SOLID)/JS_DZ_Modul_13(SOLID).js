@@ -135,14 +135,15 @@ window.onload = function () {
 
     attach(formSelector, out_block){
       let validator = this.validator;
+      let info = this.success;
       formSelector.onsubmit = function(){
         event.preventDefault();
-        if (validator.validate(out_block)) outInfo(formSelector, out_block);
+        if (validator.validate(out_block)) info(formSelector, out_block);
       };
     }
   }
 
   let domValidator = new Validator (ConsoleLogger, [RuleName, RuleYear, RuleHeight, RuleWeight], form)
-  let processor = new Processor(domValidator, 0).attach(form, out);
+  let processor = new Processor(domValidator, outInfo).attach(form, out);
 
 }

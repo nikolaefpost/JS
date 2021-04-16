@@ -23,9 +23,7 @@
     }
 
     class DomBuilder {
-      constructor() {
-
-      }
+      constructor() {}
       create(tagName){
         this.result = new Element(tagName);
         return this;
