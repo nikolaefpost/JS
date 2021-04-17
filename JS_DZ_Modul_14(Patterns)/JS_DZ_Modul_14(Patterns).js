@@ -12,26 +12,28 @@
         this.element.classList.add(cssClass);
       }
       setContent(text){
-        this.element.innerHTML += text;
+        let textNode = document.createTextNode(text);
+        this.element.append(textNode);
+        // this.element.innerHTML += text;
       }
       addChild(child) {
         this.element.append(child.result.element);
         this.child.push(child.result)
       }
       print() {
-        return this.element.outerHTML;
-        // let str = '<'+this.element.localName;
-        // if(this.element.id) str+= ' id="'+this.element.id+'" ';
-        // if(this.element.classList) str+= ' class="'+this.element.className+'">';
-        // for (var i = 0; i < this.element.childNodes.length; i++) {
-        //   if(typeof this.element.childNodes[i].data == 'string') str+=this.element.childNodes[i].data;
-        // }
-        // if (this.child.length>0){
-        //   for (var i = 0; i < this.child.length; i++) {
-        //     str+=this.child[i].print();
-        //   }
-        // }
-        // str += '</'+this.element.localName+'>';
+        // return this.element.outerHTML;
+        let str = '<'+this.element.localName;
+        if(this.element.id) str+= ' id="'+this.element.id+'" ';
+        if(this.element.classList) str+= ' class="'+this.element.className+'">';
+        for (var i = 0; i < this.element.childNodes.length; i++) {
+          if(typeof this.element.childNodes[i].data == 'string') str+=this.element.childNodes[i].data;
+        }
+        if (this.child.length>0){
+          for (var i = 0; i < this.child.length; i++) {
+            str+=this.child[i].print();
+          }
+        }
+        str += '</'+this.element.localName+'>';
         return str;
       }
     }
