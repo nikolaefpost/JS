@@ -17,8 +17,8 @@
         this.element.append(child.result.element);
       }
       print() {
-        // this.str = `<`;
-        return this.element;
+
+        return this.element.outerHTML;
       }
     }
 
