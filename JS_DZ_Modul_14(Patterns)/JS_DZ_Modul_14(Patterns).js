@@ -15,6 +15,12 @@
         this.element.append(document.createTextNode(text));
         // this.element.innerHTML += text;
       }
+      setStyle(style_name, value){
+        this.element.style[style_name] = value;
+      }
+      setHasAttribute(name, value){
+        this.element.setAttribute(name, value)
+      }
       addChild(child) {
         this.element.append(child.result.element);
         this.child.push(child.result)
@@ -38,17 +44,27 @@
     }
 
     class DomBuilder {
-      constructor() {}
-      create(tagName){
+      constructor(tagName) {
         this.result = new Element(tagName);
-        return this;
       }
+      // create(){
+      //   this.result = new Element(tagName);
+      //   return this;
+      // }
       withClass(className) {
         this.result.addClass(className)
         return this;
       }
       withId(idName){
         this.result.setId(idName)
+        return this;
+      }
+      withStyle(style, value){
+        this.result.setStyle(style, value);
+        return this;
+      }
+      withAttribute(name, value){
+        this.result.setHasAttribute(name, value);
         return this;
       }
       withChild(childElem){
@@ -60,12 +76,14 @@
         return this;
       }
     }
+//------------------------------------------------------------ clients code -----------------------------------------------------------------------------
+    let q1 = new DomBuilder('span').withClass('red').withContent('1-span');
+    let q2 = new DomBuilder('span').withClass('red').withContent('2-span');
+    let img = new DomBuilder('img').withAttribute('src', '54501-ferrari_krasnyj_sportkar_vid_szadi.jpg').withStyle('float', 'left');
+    let q = new DomBuilder('p').withClass('main').withClass('red1').withId('idName').withStyle('color', 'blue')
+    .withAttribute('data-number', 1).withContent('some text').withChild(q1).withChild(q2).withChild(img).result;
+    out.append(q.element);
+    console.log(q.print());
 
-    let q1 = new DomBuilder().create('span').withClass('red').withContent('1-span');
-    let q2 = new DomBuilder().create('span').withClass('red').withContent('2-span');
-    let q = new DomBuilder().create('p').withClass('main').withClass('red1').withId('idName').withContent('some text').withChild(q1).withChild(q2);
-
-    console.log(q.result.print());
-    out.append(q.result.element)
 
   }
