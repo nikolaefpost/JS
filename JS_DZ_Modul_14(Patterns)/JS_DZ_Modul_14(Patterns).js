@@ -79,8 +79,7 @@
     let p = new DomBuilder('p').withClass('text').withContent(text);
     let h2 = new DomBuilder('h2').withClass('red').withContent('Ferrari');
     let img = new DomBuilder('img').withAttribute('src', '54501-ferrari_krasnyj_sportkar_vid_szadi.jpg').withStyle('float', 'left').withStyle('margin-right', '30px').withAttribute('width', '250px');
-    let div = new DomBuilder('div').withClass('main').withClass('shadow').withId('idName')
-    .withAttribute('data-number', 1).withChild(img).withChild(h2).withChild(p).result;
+    let div = new DomBuilder('div').withClass('main').withClass('shadow').withId('idName').withAttribute('data-number', 1).withChild(img).withChild(h2).withChild(p).result;
     document.body.append(div.element);
     console.log(div.print());
   }
