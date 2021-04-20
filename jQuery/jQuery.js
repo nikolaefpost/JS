@@ -1,23 +1,23 @@
-  jQuery(function() {
-    // $(':button[name="ww"]').on('mouseenter', function functionName() {
-    //   $(this).fadeOut(3000);
-    //   $(this).delay(3000)
-    //   $(this).fadeIn(3000)
-    //   $(this).animate({'width': '200px'}, 2000);
-    //    console.log($(this).attr('name'));
-    // })
-    // $(window).resize(function () {
-    //   let width = $(this).width();
-    //   console.log(width);
-    // })
-
-    $('.your-class').slick({
-    setting-name: setting-value
-  });
-  })
-// window.onload=function () {
-//   $('div').css({'color':'red'});
-// }
+//   jQuery(function() {
+//     // $(':button[name="ww"]').on('mouseenter', function functionName() {
+//     //   $(this).fadeOut(3000);
+//     //   $(this).delay(3000)
+//     //   $(this).fadeIn(3000)
+//     //   $(this).animate({'width': '200px'}, 2000);
+//     //    console.log($(this).attr('name'));
+//     // })
+//     // $(window).resize(function () {
+//     //   let width = $(this).width();
+//     //   console.log(width);
+//     // })
+//
+//     $('.your-class').slick({
+//     setting-name: setting-value
+//   });
+//   })
+// // window.onload=function () {
+// //   $('div').css({'color':'red'});
+// // }
 
 
 class CharactersState {
@@ -25,6 +25,7 @@ class CharactersState {
     this.characters = [];
   }
   change(info) {
+    console.log(info);
     this.characters.push(...info.results);
   }
 }
@@ -116,15 +117,24 @@ class CharactersUpdateController {
       this.charactersState.change(await this.charactersModel.next());
       this.charactersListView.update(this.charactersState);
     })();
-    this.charactersListView.result.addEventListener("scroll", async (e) => {
-      if (
-        this.charactersListView.result.scrollTop >
-        this.charactersState.characters.length * 80
-      ) {
-        this.charactersState.change(await this.charactersModel.next());
-        this.charactersListView.update(this.charactersState);
-      }
-    });
+    let contr = this;
+    $(this.charactersListView.result).scroll(contr,  function () {
+    if  ($(this).scrollTop()>1500) {contr.scroll_= true; }});
+
+    if(contr.scroll_== true) {
+      this.charactersState.change(await this.charactersModel.next());
+      this.charactersListView.update(this.charactersState);
+    }
+
+    // this.charactersListView.result.addEventListener("scroll", async (e) => {
+    //   if (
+    //     this.charactersListView.result.scrollTop >
+    //     this.charactersState.characters.length * 80
+    //   ) {
+    //     this.charactersState.change(await this.charactersModel.next());
+    //     this.charactersListView.update(this.charactersState);
+    //   }
+    // });
   }
 }
 
@@ -134,4 +144,4 @@ let cm = new CharactersModel();
 let clv = new CharactersListView();
 let cuc = new CharactersUpdateController(clv, cm, cs);
 
-document.body.append(clv.result);
+$(document.body).append(clv.result);

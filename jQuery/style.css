@@ -1,0 +1,48 @@
+.card-1 {
+box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card-1:hover {
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.info {
+margin-left: 20px;
+}
+
+.card {
+background: #fff;
+border-radius: 25px;
+display: flex;
+height: 100px;
+position: relative;
+width: 300px;
+margin: 7px;
+}
+
+.image {
+width: 100px;
+border-radius: 25px;
+margin: 5px;
+}
+
+.name {
+font-size: 15pt;
+margin-top: 10px;
+}
+
+.status {
+margin-top: -20px;
+}
+
+.species {
+margin-top: -20px;
+}
+
+.list {
+border: 1px solid black;
+width: 331px;
+height: 500px;
+overflow: scroll;
+}
