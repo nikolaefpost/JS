@@ -1,54 +1,50 @@
-//   jQuery(function() {
-//     // $(':button[name="ww"]').on('mouseenter', function functionName() {
-//     //   $(this).fadeOut(3000);
-//     //   $(this).delay(3000)
-//     //   $(this).fadeIn(3000)
-//     //   $(this).animate({'width': '200px'}, 2000);
-//     //    console.log($(this).attr('name'));
-//     // })
-//     // $(window).resize(function () {
-//     //   let width = $(this).width();
-//     //   console.log(width);
-//     // })
-//
-//     $('.your-class').slick({
-//     setting-name: setting-value
-//   });
-//   })
-// // window.onload=function () {
-// //   $('div').css({'color':'red'});
-// // }
+  jQuery(function() {
+    // $(':button[name="ww"]').on('mouseenter', function functionName() {
+    //   $(this).fadeOut(3000);
+    //   $(this).delay(3000)
+    //   $(this).fadeIn(3000)
+    //   $(this).animate({'width': '200px'}, 2000);
+    //    console.log($(this).attr('name'));
+    // })
+    // $(window).resize(function () {
+    //   let width = $(this).width();
+    //   console.log(width);
+    // })
+
+
+  })
+// window.onload=function () {
+//   $('div').css({'color':'red'});
+// }
 
 
 class CharactersState {
   constructor() {
-    this.characters = [];
+    this.characters;
   }
   change(info) {
     console.log(info);
-    this.characters.push(...info.results);
+    this.characters = info;
   }
 }
 
 class CharactersModel {
-  constructor(page = 1) {
+  constructor(page = 0) {
     this.page = page;
-    this.initPage = page;
-    this.url = `https://rickandmortyapi.com/api/character/?page=`;
+    this.url = `https://itunes.apple.com/search?term=marilyn+manson`;
     this.currentInfo = null;
     this.isEnd = false;
-    this.countPages = 1;
   }
   async next() {
     if (!this.isEnd) {
-      let result = await fetch(this.url + this.page);
+      let result = await fetch(this.url);
       this.currentInfo = await result.json();
-      if (this.page === this.initPage)
-        this.countPages = this.currentInfo.info.pages;
+      this.isEnd = true;
+      }
       this.page++;
-    }
-    if (this.page === this.countPages + 1) this.isEnd = true;
-    return this.currentInfo;
+
+    let i = (this.page*20>this.currentInfo.results.length)? this.currentInfo.results.length-1 :this.page*20;
+    return this.currentInfo.results.slice(0, i);
   }
 }
 ///////////////////////////////////////////////////////////////////////
@@ -68,6 +64,7 @@ class CharactersListView {
   print() {
     return this.result;
   }
+
 }
 
 class CharactersItemListView {
@@ -77,24 +74,24 @@ class CharactersItemListView {
     characterContainer.classList.add("card-1");
 
     let imageContainer = document.createElement("img");
-    imageContainer.src = character.image;
+    imageContainer.src = character.artworkUrl100;
     imageContainer.classList.add("image");
 
     let infoContainer = document.createElement("div");
     infoContainer.classList.add("info");
 
     let nameContainer = document.createElement("p");
-    nameContainer.innerText = character.name;
+    nameContainer.innerText = character.artistName;
     nameContainer.classList.add("name");
 
     let statusContainer = document.createElement("p");
-    statusContainer.innerHTML = `Status: <span style=color:${
+    statusContainer.innerHTML = `Album: <span style=color:${
       character.status === "Alive" ? "green" : "red"
-    }>${character.status}</span>`;
+    }>${character.collectionName}</span>`;
     statusContainer.classList.add("status");
 
     let speciesContainer = document.createElement("p");
-    speciesContainer.innerText = "Species: " + character.species;
+    speciesContainer.innerText = "Track name: " + character.trackName;
     speciesContainer.classList.add("species");
 
     infoContainer.append(nameContainer, statusContainer, speciesContainer);
@@ -104,6 +101,12 @@ class CharactersItemListView {
   }
   print() {
     return this.result;
+  }
+}
+
+class DetailsView {
+  constructor(character) {
+
   }
 }
 
@@ -118,23 +121,14 @@ class CharactersUpdateController {
       this.charactersListView.update(this.charactersState);
     })();
     let contr = this;
-    $(this.charactersListView.result).scroll(contr,  function () {
-    if  ($(this).scrollTop()>1500) {contr.scroll_= true; }});
-
-    if(contr.scroll_== true) {
-      this.charactersState.change(await this.charactersModel.next());
-      this.charactersListView.update(this.charactersState);
-    }
-
-    // this.charactersListView.result.addEventListener("scroll", async (e) => {
-    //   if (
-    //     this.charactersListView.result.scrollTop >
-    //     this.charactersState.characters.length * 80
-    //   ) {
-    //     this.charactersState.change(await this.charactersModel.next());
-    //     this.charactersListView.update(this.charactersState);
-    //   }
-    // });
+    $(this.charactersListView.result).scroll(contr, async  function () {
+    if  ($(this).scrollTop()>(contr.charactersState.characters.length-1)*
+    contr.charactersListView.result.firstChild.clientHeight-
+    contr.charactersListView.result.clientHeight) {
+      contr.charactersState.change(await contr.charactersModel.next());
+      contr.charactersListView.update(contr.charactersState);
+    }});
+    console.log();
   }
 }
 

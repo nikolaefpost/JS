@@ -17,7 +17,7 @@ border-radius: 25px;
 display: flex;
 height: 100px;
 position: relative;
-width: 300px;
+width: 600px;
 margin: 7px;
 }
 
@@ -42,7 +42,7 @@ margin-top: -20px;
 
 .list {
 border: 1px solid black;
-width: 331px;
+width: 631px;
 height: 500px;
 overflow: scroll;
 }
