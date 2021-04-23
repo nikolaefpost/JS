@@ -47,6 +47,8 @@ class CharactersModel {
     return this.currentInfo.results.slice(0, i);
   }
 }
+
+
 ///////////////////////////////////////////////////////////////////////
 
 class CharactersListView {
