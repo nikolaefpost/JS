@@ -23,7 +23,7 @@ class ClipsState {
     this.clips;
   }
   change(info) {
-    this.clips = info; console.log(this.clips);
+    this.clips = info;
   }
 }
 
