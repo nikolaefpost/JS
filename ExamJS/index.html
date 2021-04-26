@@ -1,18 +1,27 @@
   <html >
     <head>
       <meta charset="utf-8">
-      <title>jQuery</title>
+      <title>Exam</title>
       <script src="https://cdn.jsdelivr.net/lodash/4.10.0/lodash.js"></script>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
       <script src="YemelyanovExam.js"></script>
       <link rel="stylesheet" media="screen" href="style.css">
+      <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
       <style media="screen">
       </style>
       <style></style>
     </head>
     <body>
 <div class="main">
-  
+  <div class="flex flex-row justify-between px-4 pt-1 pb-6 bg-gray-100">
+    <h1 class="text-blue-500 font-medium">MY WEATHER</h1>
+    <form>
+     <input type="search" name="city" placeholder="Odesa, UA           &#128269">
+    </form>
+  </div>
+  <div class="bg-gray-800 text-white px-8">
+    <p class="py-3 px-8 inline-block border-gray-100 border" >Today</p><p class="py-3 px-8 inline-block">5-day forecast</p>
+  </div>
 </div>
     </body>
   </html>
