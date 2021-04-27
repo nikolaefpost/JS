@@ -27,34 +27,43 @@ class WeatherState {
 
 class WeathersModel {
   constructor() {
-    this.key = "0cde6e4df2b121c26f6f76f3edd3b7b9";
+    this.key = "";
     this.city_name;
   }
   async search(position) {
-      let result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
-      this.info = await result.json();
-      console.log(this.info);
+      let result = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=&units=metric`);
+      this.change(await result.json());
+      console.log(this.weather);
+      return this.weather
+
   }
 }
 
 class View {
   constructor() {
-
+    this.q;
+  }
+  rendering(s){
+    console.log(s);
   }
 }
 
 class Controller {
-  constructor(weathersModel, service, weatherState) {
+  constructor(weathersModel, service, weatherState, view) {
     this.weatherState = weatherState;
     this.weathersModel = weathersModel;
     this.service = service;
+    this.view = view;
     (async () => {
      this.service.geo(this.weathersModel.search.bind(this.weatherState));
-  // тут будет работа с View
+     let info = await this.weatherState.weather;
+     console.log(info);
+     this.view.rendering(info)
     })();
 }
 }
 let weatherState = new WeatherState();
 let service = new Service()
 let weathersMode = new WeathersModel();
-let controller = new Controller(weathersMode, service, weatherState);
+let view = new View();
+let controller = new Controller(weathersMode, service, weatherState, view);
