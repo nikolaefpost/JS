@@ -8,3 +8,6 @@
 }
 
 input[type="search"]::placeholder { text-align: right;}
+
+img{margin: auto;}
+table {border-spacing: 20px 15px;}
