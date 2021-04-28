@@ -22,91 +22,91 @@
   <div class="bg-gray-800 text-white px-8">
     <p class="py-3 px-8 inline-block border-gray-100 border" id="today">Today</p><p class="py-3 px-8 inline-block" id="day_5">5-day forecast</p>
   </div>
-  <div class="px-8 py-5 bg-gray-200">
-    <div class="bg-white p-6">
+  <div class=" px-8 py-5 bg-gray-200" >
+    <div class="hidden bg-white p-6" id="main_comp">
       <div class="flex flex-row justify-between text-blue-500 font-bold px-5 mb-8 items-center">
         <span class="text-lg">CURRENT WEATHER</span>
-        <span>30.06.2018</span>
+        <span id="now_date">30.06.2018</span>
       </div>
       <div class="flex flex-row justify-around items-center">
         <div class="flex flex-col items-center">
-          <img src="if-weather-3-2682848_90785.png">
-          <span class="text-lg text-gray-500">Sunny</span>
+          <img src="if-weather-3-2682848_90785.png" id="icon_comp">
+          <span class="text-lg text-gray-500" id="text_comp">Sunny</span>
         </div>
         <div class="flex flex-col items-center justify-center">
-          <span class="text-5xl">29C</span>
-          <span class="text-sm text-gray-500">Real Feel 30</span>
+          <span class="text-5xl" id="temp_comp">&degC</span>
+          <span class="text-sm text-gray-500" id="feel_temp_comp">&deg</span>
         </div>
         <div class="flex flex-row justify-between text-gray-500">
           <p class="flex flex-col "><span>Sunrise:</span><span>Sunset:</span><span>Duration:</span></p>
-          <p class="flex flex-col ml-5"><span>7:04 AM</span><span>5:11 PM</span><span>10:07 hr</span></p>
+          <p class="flex flex-col ml-5"><span id="sunrise">7:04 AM</span><span id="sunset">5:11 PM</span><span id="duration">10:07 hr</span></p>
         </div>
       </div>
     </div>
 
-    <div class="bg-white p-6 mt-6">
+    <div class="hidden bg-white p-6 mt-6" id="hourly">
       <div class="text-blue-500 font-bold px-5 mb-8 items-center ">
         <span class="text-lg">HOURLY</span>
       </div>
         <table class="w-full text-center " style="border-collapse: separate;">
           <tr>
             <th>TODAY</th>
-            <th>7pm</th>
-            <th>8pm</th>
-            <th>9pm</th>
-            <th>10pm</th>
-            <th>11pm</th>
-            <th>12pm</th>
+            <th id="hour0">7pm</th>
+            <th id="hour1">8pm</th>
+            <th id="hour2">9pm</th>
+            <th id="hour3">10pm</th>
+            <th id="hour4">11pm</th>
+            <th id="hour5">12pm</th>
           </tr>
           <tr>
             <td></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
-            <td><img src="if-weather-3-2682848_90785.png"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img0"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img1"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img2"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img3"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img4"></td>
+            <td><img src="if-weather-3-2682848_90785.png" id="img5"></td>
           </tr>
           <tr>
             <td class="text-gray-500">Forecast</td>
-            <td>Sunny</td>
-            <td>Sunny</td>
-            <td>Sunny</td>
-            <td>Sunny</td>
-            <td>Sunny</td>
-            <td>Sunny</td>
+            <td id="forecast0">Sunny</td>
+            <td id="forecast1">Sunny</td>
+            <td id="forecast2">Sunny</td>
+            <td id="forecast3">Sunny</td>
+            <td id="forecast4">Sunny</td>
+            <td id="forecast5">Sunny</td>
           </tr>
           <tr>
             <td class="text-gray-500">Temp (C)</td>
-            <td>29</td>
-            <td>29</td>
-            <td>29</td>
-            <td>29</td>
-            <td>29</td>
-            <td>29</td>
+            <td id="temp0">29</td>
+            <td id="temp1">29</td>
+            <td id="temp2">29</td>
+            <td id="temp3">29</td>
+            <td id="temp4">29</td>
+            <td id="temp5">29</td>
           </tr>
           <tr>
             <td class="text-gray-500">RealFeel</td>
-            <td>28</td>
-            <td>28</td>
-            <td>28</td>
-            <td>28</td>
-            <td>28</td>
-            <td>28</td>
+            <td id="feel0">28</td>
+            <td id="feel1">28</td>
+            <td id="feel2">28</td>
+            <td id="feel3">28</td>
+            <td id="feel4">28</td>
+            <td id="feel5">28</td>
           </tr>
           <tr>
             <td class="text-gray-500">Wind (km/h)</td>
-            <td>11 ESE</td>
-            <td>11 ESE</td>
-            <td>11 ESE</td>
-            <td>11 ESE</td>
-            <td>11 ESE</td>
-            <td>11 ESE</td>
+            <td id="wind0">&deg</td>
+            <td id="wind1">&deg</td>
+            <td id="wind2">&deg</td>
+            <td id="wind3">&deg</td>
+            <td id="wind4">&deg</td>
+            <td id="wind5">&deg</td>
           </tr>
         </table>
     </div>
 
-    <div class="bg-white p-6 mt-6 text-lg font-medium">
+    <div class="bg-white p-6 mt-6 text-lg font-medium" id="">
       <div class="text-blue-500 font-bold px-5 mb-8 items-center ">
         <span class="text-lg">NEARBY PLACES</span>
       </div>
