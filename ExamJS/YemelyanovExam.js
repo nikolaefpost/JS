@@ -8,7 +8,7 @@ class Service {
     };
   }
     error_geo(err){
-      console.warn(`ERROR(${err.code}): ${err.message}`);
+      console.warn(`ERRORFuck(${err.code}): ${err.message}`);
     };
 
    geo(f){
@@ -19,15 +19,23 @@ class Service {
 class WeatherState {
   constructor() {
     this.weather;
+    this.coord;
+    this.near_city;
   }
-  change(info) {
+  setWeather(info) {
     this.weather = info;
+  }
+  setPosition(coord) {
+    this.coord = coord;
+  }
+  setNear(info) {
+    this.near_city = info;
   }
 }
 
 class WeathersModel {
   constructor() {
-    this.key ;
+    this.key = "";
     this.city_name;
   }
   async search(position) {
@@ -36,7 +44,12 @@ class WeathersModel {
       let info = await result.json();
       console.log(info);
       return info;
-
+  }
+  async searchNear(position){
+    let result = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=5&appid=&units=metric`);
+    let info = await result.json();
+    console.log(info);
+    return info;
   }
 }
 
@@ -77,6 +90,39 @@ class View {
     }
   }
 
+  renderingNear(w){
+    nearly.classList.remove('hidden');
+    let cityContainer = document.createElement("div");
+    for (var i = 1; i < 5; i++) {
+      cityContainer.innerHTML = document.getElementById('nearly_list').innerHTML
+        .replace(/{{name}}/, w.list[i].name)
+        .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.list[i].weather[0].icon}@2x.png`)
+        .replace(/{{temp}}/, Math.round(w.list[i].main.temp))
+      let result = cityContainer.children[0];
+      result.classList.remove('hidden');
+      nearly_list.append(result);
+    }
+  }
+
+  renderingDaily(w){
+    let arr_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    let day_ = new Date();
+    day_.setDate(day_.getDate() + 1);
+    console.log(arr_week[day_.getDay()]);
+    // let cityContainer = document.createElement("div");
+    // for (var i = 0; i < 5; i++) {
+    //   let day_ = new Date();
+    //   day_.setDate(day_.getDate() + i)
+    //   cityContainer.innerHTML = document.getElementById('nearly').innerHTML
+    //     .replace(/{{day_week}}/, arr_week[day_.getDay()])
+    //     .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.list[i].weather[0].icon}@2x.png`)
+    //     .replace(/{{temp}}/, Math.round(w.list[i].main.temp))
+    //   let result = cityContainer.children[0];
+    //   result.classList.remove('hidden');
+    //   nearly_list.append(result);
+    // }
+  }
+
 }
 
 class Controller {
@@ -87,9 +133,18 @@ class Controller {
     this.view = view;
   }
   async load_servis(position){
+
     let weather = await this.weathersModel.search(position);
+    // let near_city = await this.weathersModel.searchNear(position);
+    // this.weatherState.setWeather(weather);
+    // this.weatherState.setPosition(position);
+    // this.weatherState.setNear(near_city);
+
+
     // this.view.rendering(weather);
-    this.view.renderingHourly(weather);
+    // this.view.renderingHourly(weather);
+    // this.view.renderingNear(near_city);
+    this.view.renderingDaily(weather);
   }
 
   start(){

@@ -96,87 +96,38 @@
           </tr>
           <tr>
             <td class="text-gray-500">Wind (km/h)</td>
-            <td id="wind0">&deg</td>
-            <td id="wind1">&deg</td>
-            <td id="wind2">&deg</td>
-            <td id="wind3">&deg</td>
-            <td id="wind4">&deg</td>
-            <td id="wind5">&deg</td>
+            <td id="wind0"></td>
+            <td id="wind1"></td>
+            <td id="wind2"></td>
+            <td id="wind3"></td>
+            <td id="wind4"></td>
+            <td id="wind5"></td>
           </tr>
         </table>
     </div>
 
-    <div class="bg-white p-6 mt-6 text-lg font-medium" id="">
+    <div class="hidden bg-white p-6 mt-6 text-lg font-medium" id="nearly">
       <div class="text-blue-500 font-bold px-5 mb-8 items-center ">
         <span class="text-lg">NEARBY PLACES</span>
       </div>
-      <div class="flex flex-row flex-wrap justify-center">
-        <div class="flex flex-row items-center  w-2/5 bg-gray-100 m-2 py-1 px-5 justify-around">
-          <span>Odesa</span>
+      <div class="flex flex-row flex-wrap justify-center" id="nearly_list">
+        <div class="hidden flex flex-row items-center  w-2/5 bg-gray-100 m-2 py-1 px-5 justify-around">
+          <span >{{name}}</span>
           <p class="flex flex-row items-center">
-            <span><img src="if-weather-3-2682848_90785.png" class="w-2/4"></span>
-            <span>36C</span>
-          </p>
-        </div>
-        <div class="flex flex-row items-center w-2/5 bg-gray-100 m-2 py-1 px-5 justify-around">
-          <span>Odesa</span>
-          <p class="flex flex-row items-center">
-            <span><img src="if-weather-3-2682848_90785.png" class="w-2/4"></span>
-            <span>36C</span>
-          </p>
-        </div>
-        <div class="flex flex-row items-center w-2/5 bg-gray-100 m-2 py-1 px-5 justify-around">
-          <span>Odesa</span>
-          <p class="flex flex-row items-center">
-            <span><img src="if-weather-3-2682848_90785.png" class="w-2/4"></span>
-            <span>36C</span>
-          </p>
-        </div>
-        <div class="flex flex-row items-center w-2/5 bg-gray-100 m-2 py-1 px-5 justify-around">
-          <span>Odesa</span>
-          <p class="flex flex-row items-center">
-            <span><img src="if-weather-3-2682848_90785.png" class="w-2/4"></span>
-            <span>36C</span>
+            <span><img src="{{image}}" class="w-2/4"></span>
+            <span>{{temp}}</span>
           </p>
         </div>
       </div>
     </div>
 
-    <div class="flex flex-row">
+    <div class="flex flex-row" id="daily">
       <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
-        <span class="text-blue-500 font-bold text-lg my-2">TONIGHT</span>
+        <span class="text-blue-500 font-bold text-lg my-2">{{day_week}}</span>
         <span class="text-gray-500 my-2">JUN 30</span>
         <img src="if-weather-3-2682848_90785.png" class="w-1/2">
         <span class="text-4xl font-medium">25C</span>
         <spanclass="text-gray-500 my-2">Clear, Warm</span>
-      </div>
-      <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
-        <span class="text-blue-500 font-bold text-lg my-2">TONIGHT</span>
-        <span class="text-gray-500">JUN 30</span>
-        <img src="if-weather-3-2682848_90785.png" class="w-1/2">
-        <span class="text-4xl font-medium">25C</span>
-        <spanclass="text-gray-500">Clear, Warm</span>
-      </div>
-      <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
-        <span class="text-blue-500 font-bold text-lg my-2">TONIGHT</span>
-        <span class="text-gray-500">JUN 30</span>
-        <img src="if-weather-3-2682848_90785.png" class="w-1/2">
-        <span class="text-4xl font-medium">25C</span>
-        <spanclass="text-gray-500">Clear, Warm</span>
-      </div>
-      <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
-        <span class="text-blue-500 font-bold text-lg my-2">TONIGHT</span>
-        <span class="text-gray-500">JUN 30</span>
-        <img src="if-weather-3-2682848_90785.png" class="w-1/2">
-        <span class="text-4xl font-medium">25C</span>
-        <spanclass="text-gray-500">Clear, Warm</span>
-      </div>
-      <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
-        <span class="text-blue-500 font-bold text-lg my-2">TONIGHT</span>
-        <span class="text-gray-500">JUN 30</span>
-        <img src="if-weather-3-2682848_90785.png" class="w-1/2">
-        <span class="text-4xl font-medium">25C</span>
-        <spanclass="text-gray-500">Clear, Warm</span>
       </div>
     </div>
 
