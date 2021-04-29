@@ -97,30 +97,34 @@ class View {
       cityContainer.innerHTML = document.getElementById('nearly_list').innerHTML
         .replace(/{{name}}/, w.list[i].name)
         .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.list[i].weather[0].icon}@2x.png`)
-        .replace(/{{temp}}/, Math.round(w.list[i].main.temp))
+        .replace(/{{temp}}/, Math.round(w.list[i].main.temp));
       let result = cityContainer.children[0];
       result.classList.remove('hidden');
-      nearly_list.append(result);
+      nearly_temp.append(result);
     }
   }
 
   renderingDaily(w){
     let arr_week = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-    let day_ = new Date();
-    day_.setDate(day_.getDate() + 1);
-    console.log(arr_week[day_.getDay()]);
-    // let cityContainer = document.createElement("div");
-    // for (var i = 0; i < 5; i++) {
-    //   let day_ = new Date();
-    //   day_.setDate(day_.getDate() + i)
-    //   cityContainer.innerHTML = document.getElementById('nearly').innerHTML
-    //     .replace(/{{day_week}}/, arr_week[day_.getDay()])
-    //     .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.list[i].weather[0].icon}@2x.png`)
-    //     .replace(/{{temp}}/, Math.round(w.list[i].main.temp))
-    //   let result = cityContainer.children[0];
-    //   result.classList.remove('hidden');
-    //   nearly_list.append(result);
-    // }
+    let arr_month = ['JUN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+
+    let cityContainer = document.createElement("div");
+    day_5.classList.add('border-gray-100', 'border');
+    today.classList.remove('border-gray-100', 'border');
+    for (var i = 0; i < 5; i++) {
+      let day_ = new Date();
+      day_.setDate(day_.getDate() + i)
+      cityContainer.innerHTML = document.getElementById('daily_temp').innerHTML
+        .replace(/{{day_week}}/, arr_week[day_.getDay()])
+        .replace(/{{date_}}/, arr_month[day_.getMonth()]+' '+day_.getDate())
+        .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.daily[i].weather[0].icon}@2x.png`)
+        .replace(/{{temp}}/, `${Math.round(w.daily[i].temp.day)}&degC`)
+        .replace(/{{weth}}/, w.daily[i].weather[0].description);
+      let result = cityContainer.children[0];
+      result.classList.remove('hidden');
+      daily.append(result);
+    }
   }
 
 }
@@ -135,20 +139,42 @@ class Controller {
   async load_servis(position){
 
     let weather = await this.weathersModel.search(position);
-    // let near_city = await this.weathersModel.searchNear(position);
-    // this.weatherState.setWeather(weather);
-    // this.weatherState.setPosition(position);
-    // this.weatherState.setNear(near_city);
+    let near_city = await this.weathersModel.searchNear(position);
+    this.weatherState.setWeather(weather);
+    this.weatherState.setPosition(position);
+    this.weatherState.setNear(near_city);
 
 
-    // this.view.rendering(weather);
-    // this.view.renderingHourly(weather);
-    // this.view.renderingNear(near_city);
-    this.view.renderingDaily(weather);
+    this.view.rendering(weather);
+    this.view.renderingHourly(weather);
+    this.view.renderingNear(near_city);
+
+    day_5.addEventListener('click', ()=>this.daily_servis());
+    today.addEventListener('click', ()=>this.main_servis());
+
+
+    // this.view.renderingDaily(weather);
   }
 
   start(){
     this.service.geo(this.load_servis.bind(this));
+  }
+
+  daily_servis(){
+    // day_5.classList.add('border-gray-100 border');
+
+    main_comp.classList.add('hidden');
+    hourly.classList.add('hidden');
+    nearly.classList.add('hidden');
+    if(daily.children.length>0) return;
+    this.view.renderingDaily(this.weatherState.weather);
+  }
+
+  main_servis(){
+    main_comp.classList.remove('hidden');
+    nearly.classList.remove('hidden');
+    hourly.classList.remove('hidden');
+    hourly.classList.add('hidden');
   }
 }
 let weatherState = new WeatherState();

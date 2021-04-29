@@ -30,7 +30,7 @@
       </div>
       <div class="flex flex-row justify-around items-center">
         <div class="flex flex-col items-center">
-          <img src="if-weather-3-2682848_90785.png" id="icon_comp">
+          <img src="" id="icon_comp">
           <span class="text-lg text-gray-500" id="text_comp">Sunny</span>
         </div>
         <div class="flex flex-col items-center justify-center">
@@ -60,12 +60,12 @@
           </tr>
           <tr>
             <td></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img0"></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img1"></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img2"></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img3"></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img4"></td>
-            <td><img src="if-weather-3-2682848_90785.png" id="img5"></td>
+            <td><img src="" id="img0"></td>
+            <td><img src="" id="img1"></td>
+            <td><img src="" id="img2"></td>
+            <td><img src="" id="img3"></td>
+            <td><img src="" id="img4"></td>
+            <td><img src="" id="img5"></td>
           </tr>
           <tr>
             <td class="text-gray-500">Forecast</td>
@@ -119,17 +119,19 @@
           </p>
         </div>
       </div>
+      <div class="flex flex-row flex-wrap justify-center" id="nearly_temp"></div>
     </div>
 
-    <div class="flex flex-row" id="daily">
+    <div class="hidden flex flex-row" id="daily_temp">
       <div class="bg-white m-1 flex flex-col items-center flex-1 py-6">
         <span class="text-blue-500 font-bold text-lg my-2">{{day_week}}</span>
-        <span class="text-gray-500 my-2">JUN 30</span>
-        <img src="if-weather-3-2682848_90785.png" class="w-1/2">
-        <span class="text-4xl font-medium">25C</span>
-        <spanclass="text-gray-500 my-2">Clear, Warm</span>
+        <span class="text-gray-500 my-2">{{date_}}</span>
+        <img src="{{image}}" class="w-1/2">
+        <span class="text-4xl font-medium">{{temp}}</span>
+        <spanclass="text-gray-500 my-2">{{weth}}</span>
       </div>
     </div>
+    <div class="flex flex-row" id="daily"></div>
 
     <div class="bg-white text-center p-10 text-4xl font-medium text-gray-500">
       <img src="404.png" class="w-1/4 mb-8">
