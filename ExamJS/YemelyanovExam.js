@@ -35,17 +35,17 @@ class WeatherState {
 
 class WeathersModel {
   constructor() {
-    this.key = "0cde6e4df2b121c26f6f76f3edd3b7b9";
+    this.key = "";
     this.city_name;
   }
   async search(position) {
-      let result = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
+      let result = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=&units=metric`);
       let info = await result.json();
       console.log(info);
       return info;
   }
   async searchNear(position){
-    let result = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=5&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
+    let result = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=5&appid=&units=metric`);
     let info = await result.json();
     console.log(info);
     return info;
