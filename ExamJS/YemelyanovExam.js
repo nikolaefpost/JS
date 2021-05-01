@@ -35,18 +35,24 @@ class WeatherState {
 
 class WeathersModel {
   constructor() {
-    this.key = "";
+    this.key = "0cde6e4df2b121c26f6f76f3edd3b7b9";
     this.city_name;
   }
   async search(position) {
-    console.log(position);
-      let result = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=&units=metric`);
+      let result = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
       let info = await result.json();
       console.log(info);
       return info;
   }
   async searchNear(position){
-    let result = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=5&appid=&units=metric`);
+    let result = await fetch(`https://api.openweathermap.org/data/2.5/find?lat=${position.coords.latitude}&lon=${position.coords.longitude}&cnt=5&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
+    let info = await result.json();
+    console.log(info);
+    return info;
+  }
+
+  async searchCity(city){
+    let result = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0cde6e4df2b121c26f6f76f3edd3b7b9&units=metric`);
     let info = await result.json();
     console.log(info);
     return info;
@@ -57,21 +63,45 @@ class View {
   constructor() {
     this.q;
   }
+  // rendering(w){
+  //   main_comp.classList.remove('hidden');
+  //   now_date.innerText = new Date().toLocaleDateString();
+  //   icon_comp.src = `http://openweathermap.org/img/wn/${w.current.weather[0].icon}@2x.png`;
+  //   text_comp.innerText = w.current.weather[0].main;
+  //   temp_comp.innerText = Math.round(w.current.temp)+temp_comp.innerText;
+  //   feel_temp_comp.innerText ='Real Feel '+ Math.round(w.current.feels_like)+feel_temp_comp.innerText;
+  //   let time1 = new Date(w.current.sunrise)
+  //   sunrise.innerText = time1.getHours()+':'+time1.getMinutes()+'AM';
+  //   let time2 = new Date(w.current.sunset)
+  //   sunset.innerText = time2.getHours()+':'+time2.getMinutes()+'AM';
+  //   let dur = new Date(w.current.sunset-w.current.sunrise);
+  //   duration.innerText = (dur.getHours()-3)+':'+dur.getMinutes()+' hr';
+  // }
+
   rendering(w){
-    main_comp.classList.remove('hidden');
-    now_date.innerText = new Date().toLocaleDateString();
-    icon_comp.src = `http://openweathermap.org/img/wn/${w.current.weather[0].icon}@2x.png`;
-    text_comp.innerText = w.current.weather[0].main;
-    temp_comp.innerText = Math.round(w.current.temp)+temp_comp.innerText;
-    feel_temp_comp.innerText ='Real Feel '+ Math.round(w.current.feels_like)+feel_temp_comp.innerText;
-    let time1 = new Date(w.current.sunrise)
-    sunrise.innerText = time1.getHours()+':'+time1.getMinutes()+'AM';
-    let time2 = new Date(w.current.sunset)
-    sunset.innerText = time2.getHours()+':'+time2.getMinutes()+'AM';
+    main_temp.innerHTML = '';
+    // main_comp.classList.remove('hidden');
+    let cityContainer = document.createElement("div");
+    let time1 = new Date(w.current.sunrise);
+    let time2 = new Date(w.current.sunset);
     let dur = new Date(w.current.sunset-w.current.sunrise);
-    console.log(new Date(0));
-    duration.innerText = (dur.getHours()-3)+':'+dur.getMinutes()+' hr';
+
+      cityContainer.innerHTML = document.getElementById('main_comp').innerHTML
+        .replace(/{{date_}}/, new Date().toLocaleDateString())
+        .replace(/{{image}}/, `http://openweathermap.org/img/wn/${w.current.weather[0].icon}@2x.png`)
+        .replace(/{{text}}/, w.current.weather[0].main)
+        .replace(/{{temp}}/, `${Math.round(w.current.temp)} &degC`)
+        .replace(/{{temp_feel}}/, `Real Feel ${Math.round(w.current.temp)} &degC`)
+        .replace(/{{sunrise}}/, `Sunrise: ${time1.getHours()}:${time1.getMinutes()} AM`)
+        .replace(/{{sunset}}/, `Sunset: ${time1.getHours()}:${time1.getMinutes()} AM`)
+        .replace(/{{duration}}/, `Duration: ${(dur.getHours()-3)}:${dur.getMinutes()} AM`)
+      let result = cityContainer.children[0];
+      result.classList.remove('hidden');
+      main_temp.append(result);
+
   }
+
+
   renderingHourly(w){
     hourly.classList.remove('hidden');
     let id_hour=[hour0, hour1, hour2, hour3, hour4, hour5]
@@ -91,6 +121,7 @@ class View {
   }
 
   renderingNear(w){
+    nearly_temp.innerHTML = '';
     nearly.classList.remove('hidden');
     let cityContainer = document.createElement("div");
     for (var i = 1; i < 5; i++) {
@@ -143,17 +174,26 @@ class Controller {
     this.weatherState.setWeather(weather);
     this.weatherState.setPosition(position);
     this.weatherState.setNear(near_city);
-
-
-    this.view.rendering(weather);
-    this.view.renderingHourly(weather);
-    this.view.renderingNear(near_city);
+    search_city.value = near_city.list[0].name;
+    this.view.rendering(this.weatherState.weather);
+    this.view.renderingHourly(this.weatherState.weather);
+    this.view.renderingNear(this.weatherState.near_city);
 
     day_5.addEventListener('click', ()=>this.daily_servis());
     today.addEventListener('click', ()=>this.main_servis());
-
+    search_button.addEventListener('click', ()=>this.load_search(search_city.value));
 
     // this.view.renderingDaily(weather);
+  }
+
+  async load_search(city){
+    let coord = await this.weathersModel.searchCity(city);
+    let position = {coords:{
+      latitude: coord.coord.lat,
+      longitude: coord.coord.lon
+    }}
+    console.log(position);
+    this.load_servis(position);
   }
 
   start(){
