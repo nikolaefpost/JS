@@ -50,66 +50,32 @@
       </div>
         <div id="main_temp"></div>
 
-        <div class="hidden bg-white p-6 mt-6" id="hourly">
+        <div class="bg-white p-6 mt-6" id="hourly">
           <div class="text-blue-500 font-bold px-5 mb-8 items-center ">
             <span class="text-lg">HOURLY</span>
           </div>
-          <table class="w-full text-center " style="border-collapse: separate;">
-            <tr>
-              <th>TODAY</th>
-              <th id="hour0">7pm</th>
-              <th id="hour1">8pm</th>
-              <th id="hour2">9pm</th>
-              <th id="hour3">10pm</th>
-              <th id="hour4">11pm</th>
-              <th id="hour5">12pm</th>
-            </tr>
-            <tr>
-              <td></td>
-              <td><img src="" id="img0"></td>
-              <td><img src="" id="img1"></td>
-              <td><img src="" id="img2"></td>
-              <td><img src="" id="img3"></td>
-              <td><img src="" id="img4"></td>
-              <td><img src="" id="img5"></td>
-            </tr>
-            <tr>
-              <td class="text-gray-500">Forecast</td>
-              <td id="forecast0">Sunny</td>
-              <td id="forecast1">Sunny</td>
-              <td id="forecast2">Sunny</td>
-              <td id="forecast3">Sunny</td>
-              <td id="forecast4">Sunny</td>
-              <td id="forecast5">Sunny</td>
-            </tr>
-            <tr>
-              <td class="text-gray-500">Temp (C)</td>
-              <td id="temp0">29</td>
-              <td id="temp1">29</td>
-              <td id="temp2">29</td>
-              <td id="temp3">29</td>
-              <td id="temp4">29</td>
-              <td id="temp5">29</td>
-            </tr>
-            <tr>
-              <td class="text-gray-500">RealFeel</td>
-              <td id="feel0">28</td>
-              <td id="feel1">28</td>
-              <td id="feel2">28</td>
-              <td id="feel3">28</td>
-              <td id="feel4">28</td>
-              <td id="feel5">28</td>
-            </tr>
-            <tr>
-              <td class="text-gray-500">Wind (km/h)</td>
-              <td id="wind0"></td>
-              <td id="wind1"></td>
-              <td id="wind2"></td>
-              <td id="wind3"></td>
-              <td id="wind4"></td>
-              <td id="wind5"></td>
-            </tr>
-          </table>
+          <div  id="head_hourly">
+            <div class="hidden flex flex-col">
+              <span id="today_hourly">{{today}}</span>
+              <img src="" style="visibility: hidden">
+              <span>Forecast</span>
+              <span>Temp (C)</span>
+              <span>RealFeel</span>
+              <span>Wind (km/h)</span>
+            </div>
+          </div>
+
+          <div class=""  id="hourly_temp">
+            <div class="hidden flex flex-col items-center">
+              <span>{{time}}</span>
+              <img src="{{image}}">
+              <span>{{forecast}}t</span>
+              <span>{{temp}}</span>
+              <span>{{temp_feel}}</span>
+              <span>{{wind}}</span>
+            </div>
+          </div>
+          <div class="flex flex-row justify-around" id="hourly_list"></div>
         </div>
 
         <div class="hidden bg-white p-6 mt-6 text-lg font-medium" id="nearly">
