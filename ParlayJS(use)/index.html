@@ -1,0 +1,51 @@
+
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title>ParsleyJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen" href="style.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- CSS only -->
+
+    <script src="parsley.js"></script>
+    <script src="index.js"></script>
+    <style media="screen">
+    </style>
+    <style></style>
+  </head>
+  <body>
+    <div class="w-3/4 mx-auto p-10 text-center bg-blue-400 mt-10">
+      <h2>Registred form</h2>
+      <form class="user_form flex flex-col items-center" data-parsley-validate="">
+        <div class=" m-4 w-auto flex">
+          <label for="username" class="w-20 inline-block ">Firstname:</label>
+          <input type="text" class="username border mx-4" name="username" data-parsley-length="[2, 20]" data-parsley-trigger="focusout" required="" data-tooltip="Username 'admin' or 'user' or 'test' is not allowed">
+        </div>
+
+        <div class="m-4 w-auto flex">
+          <label for="email" class="w-20 inline-block">Email:</label>
+          <input type="email" class="border mx-4" name="email"  data-parsley-trigger="focusout" required="" >
+        </div>
+
+        <div class=" m-4 w-auto flex">
+          <label for="password1" class="w-20 inline-block">Password:</label>
+          <input type="password" class="border mx-4" name="password1" data-parsley-length="[6, 30]" data-parsley-trigger="focusout" required="">
+        </div>
+
+        <div class=" m-4 w-auto flex">
+          <label for="password2" class="w-20 inline-block">Password:</label>
+          <input type="password" class="password border mx-4" name="password2" data-parsley-length="[6, 30]" data-parsley-trigger="focusout" required="" tooltip="The password must match">
+        </div>
+
+        <div class="invalid-form-error-message"></div>
+        <input type="submit" class="w-1/2">
+      </form>
+    </div>
+
+
+    <script type="text/javascript">
+
+</script>
+  </body>
+</html>
