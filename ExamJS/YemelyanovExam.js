@@ -12,7 +12,7 @@ class Service {
     };
 
    geo(f){
-     navigator.geolocation.getCurrentPosition((position)=>f(position), this.error, this.options);
+     navigator.geolocation.getCurrentPosition((position)=>f(position),          this.error, this.options);   // функция callback строка 201 вызов метода строка 197
     }
   }
 
