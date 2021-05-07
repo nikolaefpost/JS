@@ -1,0 +1,12 @@
+
+.tooltip, .parsley-errors-list {
+  font: italic 12px sans-serif;
+  color: red;
+}
+td{
+  padding: 10px 20px;
+}
+
+td:first-child{
+  border-right: 1px solid white;
+}

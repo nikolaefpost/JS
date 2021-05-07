@@ -1,0 +1,123 @@
+
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title>ParsleyJS</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <link rel="stylesheet" media="screen" href="style.css">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <!-- CSS only -->
+
+    <script src="parsley.js"></script>
+    <script src="index.js"></script>
+    <style media="screen">
+    </style>
+    <style></style>
+  </head>
+  <body>
+    <div class="w-3/4 mx-auto p-10 text-center bg-blue-400 mt-10 flex flex-col items-center">
+      <h2>Registred form</h2>
+      <form class="user_form flex flex-col items-center" data-parsley-validate="">
+        <div class=" m-4 w-auto flex">
+          <label for="username" class="w-20 inline-block ">Firstname:</label>
+          <input type="text" class="username border mx-4 px-4 py-1 " name="username" data-parsley-length="[2, 20]" data-parsley-trigger="focusout" required="" data-tooltip="Username 'admin' or 'user' or 'test' is not allowed">
+        </div>
+
+        <div class="m-4 w-auto flex">
+          <label for="email" class="w-20 inline-block">Email:</label>
+          <input type="email" class="email border mx-4 px-4 py-1 " name="email"  data-parsley-trigger="focusout" required="" >
+        </div>
+
+        <div class=" m-4 w-auto flex">
+          <label for="password1" class="w-20 inline-block">Password:</label>
+          <input type="password" class="password1 border mx-4 px-4 py-1 " name="password1" data-parsley-length="[6, 30]" data-parsley-trigger="focusout" required="">
+        </div>
+
+        <div class=" m-4 w-auto flex">
+          <label for="password2" class="w-20 inline-block">Password:</label>
+          <input type="password" class="password2 border mx-4 px-4 py-1 " name="password2" data-parsley-length="[6, 30]" data-parsley-trigger="focusout" required="" data-tooltip="The password must match">
+        </div>
+
+        <div class="invalid-form-error-message"></div>
+        <input type="submit" class="w-full py-1" value="Registrer">
+      </form>
+
+      <div id="rezult" class="w-1/2   mx-auto hidden">
+        <table class="w-auto mx-auto text-left">
+          <caption class="p-3">Rezult</caption>
+          <tr class="border">
+            <td>Username</td>
+            <td>{{username}}</td>
+          </tr>
+          <tr class="border">
+            <td>Email</td>
+            <td>{{email}}</td>
+          </tr>
+          <tr class="border">
+            <td>Password</td>
+            <td>{{complexity}}</td>
+          </tr>
+        </table>
+      </div>
+      <div id="rezult_list"></div>
+
+      <h2 class="mt-20">User info</h2>
+      <form class="user_info_form flex flex-col items-start " data-parsley-validate="">
+        <div class=" m-4 w-auto flex  items-center">
+          <label for="fullname" class="w-20 inline-block ">Full name:</label>
+          <input type="text" class="fullname border mx-4 px-4 py-1 " name="fullname"  data-parsley-trigger="focusout" required="" data-parsley-pattern="/^[a-zA-Zа-яА-Я\-\s]{2,50}$/">
+        </div>
+
+        <div class="m-4 w-auto flex items-center ">
+          <label for="avatar" class=" w-20 inline-block">Avatar:</label>
+          <input type="file" class="avatar border mx-4 px-4 py-1 " name="avatar"   required="" id="avatar" >
+        </div>
+
+        <div class=" m-4 w-auto flex items-center ">
+          <label for="birthday" class="w-20 inline-block">Birthday:</label>
+          <input type="date" class="birthday border mx-4 px-4 py-1" data-tooltip="Min birthday is 01.01.1990" name="birthday"  data-parsley-trigger="focusout" required="">
+        </div>
+
+        <div class=" m-4 w-auto flex items-center ">
+          <label for="gender" class="w-20 inline-block">Gender:</label>
+          <input type="radio" class="border mx-4 px-4 py-1 " name="gender"  data-parsley-trigger="focusout" required value="1"> Male
+          <input type="radio" class="border mx-4 px-4 py-1" name="gender"  data-parsley-trigger="focusout" value="0"> Female
+        </div>
+
+        <div class="m-4 w-auto flex items-center justify-start">
+          <label for="subscribe" class="w-20 inline-block">Subscribe:</label>
+          <input type="checkbox" class="subscribe border mx-4 px-4 py-1 " id="checkbox" name="subscribe" >
+        </div>
+
+        <input type="submit" class="py-1 w-full" value="Save">
+      </form>
+
+      <div id="rezult_info" class="w-1/2   mx-auto hidden">
+        <table class="w-auto mx-auto text-left">
+          <caption class="p-3">Rezult</caption>
+          <tr class="border">
+            <td>Full name</td>
+            <td>{{fullname}}</td>
+          </tr>
+          <tr class="border">
+            <td>Avatar</td>
+            <td>{{avatar}}</td>
+          </tr>
+          <tr class="border">
+            <td>Birthday</td>
+            <td>{{birthday}}</td>
+          </tr>
+          <tr class="border">
+            <td>Gender</td>
+            <td>{{gender}}</td>
+          </tr>
+          <tr class="border">
+            <td>Subscribe</td>
+            <td>{{subscribe}}</td>
+          </tr>
+        </table>
+      </div>
+      <div id="rezult_info_list"></div>
+    </div>
+  </body>
+</html>
