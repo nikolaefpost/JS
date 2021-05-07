@@ -1,7 +1,5 @@
-.parsley-errors-list{
- color: red;
-}
-.tooltip {
+
+.tooltip, .parsley-errors-list {
   font: italic 12px sans-serif;
   color: red;
 }
