@@ -39,7 +39,7 @@ class WeatherState {
 
 class WeathersModel {
   constructor() {
-    this.key = "";
+     this.key = "";
   }
   async search(position) {
       let result = await fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${this.key}&units=metric`);
@@ -264,6 +264,7 @@ class Controller {
     else {i=e.currentTarget.dataset.state; target = e.currentTarget; }
 
     target.classList.add('bg-gray-300');
+    console.log(this.weatherState.weather_hour);
     if (!this.weatherState.weather_hour || search_city.value!=this.weatherState.weather_hour.city.name){
       let weather_hour = await this.weathersModel.searchDailyHourly(search_city.value);
       this.weatherState.setWeatherHour(weather_hour);
